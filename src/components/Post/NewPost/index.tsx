@@ -13,8 +13,6 @@ import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import React, { Fragment } from 'react'
 
-import IssueType from './Type/Issue'
-
 const PostType = dynamic(() => import('./Type/Post'), {
   loading: () => <Loading />
 })
@@ -25,6 +23,9 @@ const TaskType = dynamic(() => import('./Type/Task'), {
   loading: () => <Loading />
 })
 const PollType = dynamic(() => import('./Type/Poll'), {
+  loading: () => <Loading />
+})
+const IssueType = dynamic(() => import('./Type/Issue'), {
   loading: () => <Loading />
 })
 
