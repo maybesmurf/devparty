@@ -53,7 +53,7 @@ const LoginWithWallet: React.FC = () => {
           ])
 
         setLoginButtonMessage('Loggin in...')
-        login({
+        await login({
           variables: { input: { nonce: data?.nonce as string, signature } }
         })
         web3Modal.clearCachedProvider()

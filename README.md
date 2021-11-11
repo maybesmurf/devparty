@@ -11,9 +11,6 @@
     <a href="https://github.com/bigint/party/actions/workflows/ci.yml">
         <img src="https://github.com/bigint/party/actions/workflows/ci.yml/badge.svg" alt="GitHub Actions">
     </a>
-    <a href="https://app.travis-ci.com/gitlab/yo/devparty/builds">
-        <img src="https://app.travis-ci.com/yo/Devparty.svg?branch=main" alt="Travis CI">
-    </a>
     <a href="https://dev.azure.com/yoginth/devparty/_build?definitionId=2">
         <img src="https://dev.azure.com/yoginth/devparty/_apis/build/status/devparty?branchName=main" alt="Azure DevOps CI">
     </a>
