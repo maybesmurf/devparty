@@ -1,10 +1,9 @@
+import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { createSession, resolveSession, sessionOptions } from '@utils/sessions'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSession } from 'next-iron-session'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
-
-import { Session } from '.prisma/client'
 
 interface NextApiRequestWithSession extends NextApiRequest {
   session: Session

@@ -33,6 +33,10 @@ export const MEMBERS_QUERY = gql`
               avatar
               bio
             }
+            status {
+              emoji
+              text
+            }
           }
         }
       }

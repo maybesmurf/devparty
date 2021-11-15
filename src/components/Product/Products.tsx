@@ -30,6 +30,7 @@ export const GET_PRODUCTS_QUERY = gql`
           slug
           avatar
           description
+          hasSubscribed
         }
       }
     }
@@ -87,6 +88,7 @@ const Products: React.FC = () => {
               <ProductProfileLarge
                 key={product?.id}
                 product={product as Product}
+                showSubscribe
               />
             ))}
             {pageInfo?.hasNextPage && (

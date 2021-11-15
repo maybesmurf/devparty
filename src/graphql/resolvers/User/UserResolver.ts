@@ -57,6 +57,7 @@ builder.prismaObject('User', {
     // Relations
     profile: t.relation('profile'),
     tip: t.relation('tip', { nullable: true }),
+    status: t.relation('status', { nullable: true }),
     integrations: t.relation('integrations', { nullable: true }),
     badges: t.relatedConnection('badges', { cursor: 'id', totalCount: true }),
     topics: t.relatedConnection('topics', { cursor: 'id', totalCount: true }),

@@ -1,6 +1,5 @@
+import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
-
-import { Session } from '.prisma/client'
 
 /**
  * Get list of current user's sessions

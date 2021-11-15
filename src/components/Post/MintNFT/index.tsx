@@ -21,9 +21,7 @@ const MintNFT: React.FC<Props> = ({ post }) => {
       <CardBody className="space-y-3">
         {showMint ? (
           <>
-            <div>
-              Mint this post as NFT with very less gas fee in Polygon network
-            </div>
+            <div>Mint this post as NFT in Ethereum or in Polygon network.</div>
             <Button
               icon={<FingerPrintIcon className="h-4 w-4" />}
               onClick={() => {

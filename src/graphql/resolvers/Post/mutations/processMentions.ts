@@ -1,8 +1,7 @@
 import { getMentions } from '@graphql/utils/getMentions'
 import { parseMentions } from '@graphql/utils/parseMentions'
+import { Post, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
-
-import { Post, Session } from '.prisma/client'
 
 /**
  * Process and creates mentions

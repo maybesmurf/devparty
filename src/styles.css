@@ -80,3 +80,18 @@ body {
 .prose img {
   @apply rounded-lg !my-2;
 }
+
+/* Emoji Picker */
+.emoji-mart {
+  font-family: 'Devparty', Helvetica, Arial, sans-serif !important;
+}
+
+.emoji-mart-category-list {
+  @apply !mb-3;
+}
+
+.emoji-mart-anchor,
+.emoji-mart-anchor-selected {
+  display: flex !important;
+  justify-content: center;
+}

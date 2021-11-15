@@ -1,5 +1,6 @@
 import { createLog } from '@graphql/resolvers/Log/mutations/createLog'
 import { getRandomCover } from '@graphql/utils/getRandomCover'
+import { Session } from '@prisma/client'
 import { hashPassword } from '@utils/auth'
 import { db } from '@utils/prisma'
 import { createSession, sessionOptions } from '@utils/sessions'
@@ -8,8 +9,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSession } from 'next-iron-session'
 import { Octokit } from 'octokit'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
-
-import { Session } from '.prisma/client'
 
 interface NextApiRequestWithSession extends NextApiRequest {
   session: Session

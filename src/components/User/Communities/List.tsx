@@ -27,6 +27,7 @@ export const GET_ALL_USER_COMMUNITIES_QUERY = gql`
             name
             description
             avatar
+            hasJoined
           }
         }
       }
@@ -103,7 +104,10 @@ const CommunitiesList: React.FC = () => {
           communities?.map((community) => (
             <Card key={community?.id}>
               <CardBody>
-                <CommunityProfileLarge community={community as Community} />
+                <CommunityProfileLarge
+                  community={community as Community}
+                  showJoin
+                />
               </CardBody>
             </Card>
           ))

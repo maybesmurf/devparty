@@ -6,6 +6,10 @@ module.exports = {
   defaultNetwork: 'hardhat',
   networks: {
     hardhat: { chainId: 1337 },
+    rinkeby: {
+      url: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+      accounts: [privateKey]
+    },
     mumbai: {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [privateKey]

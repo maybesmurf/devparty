@@ -34,6 +34,10 @@ export const GET_PRODUCT_QUERY = gql`
           avatar
           bio
         }
+        status {
+          emoji
+          text
+        }
       }
     }
   }

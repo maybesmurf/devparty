@@ -1,6 +1,5 @@
+import { NotificationType, Post, Session, User } from '@prisma/client'
 import { db } from '@utils/prisma'
-
-import { NotificationType, Post, Session, User } from '.prisma/client'
 
 /**
  * Generated the prisma compatible parsed data to inserted

@@ -82,6 +82,10 @@ export const PostFragment = gql`
         avatar
         bio
       }
+      status {
+        emoji
+        text
+      }
     }
     product {
       id
@@ -99,6 +103,7 @@ export const PostFragment = gql`
       id
       address
       tokenId
+      network
     }
   }
 `

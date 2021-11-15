@@ -1,3 +1,4 @@
+import Subscribe from '@components/Product/Subscribe'
 import { Product } from '@graphql/types.generated'
 import Link from 'next/link'
 import React from 'react'
@@ -6,9 +7,13 @@ import Slug from './Slug'
 
 interface Props {
   product: Product
+  showSubscribe?: boolean
 }
 
-const ProductProfile: React.FC<Props> = ({ product }) => {
+const ProductProfile: React.FC<Props> = ({
+  product,
+  showSubscribe = false
+}) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex space-x-3 items-center">
@@ -31,6 +36,7 @@ const ProductProfile: React.FC<Props> = ({ product }) => {
           <Slug slug={product?.slug} />
         </div>
       </div>
+      {showSubscribe && <Subscribe product={product} showText={false} />}
     </div>
   )
 }

@@ -28,6 +28,10 @@ export const GET_MODERATORS_QUERY = gql`
               avatar
               bio
             }
+            status {
+              emoji
+              text
+            }
           }
         }
       }

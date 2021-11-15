@@ -191,6 +191,15 @@ input EditProductSocialInput {
   website: String
 }
 
+input EditProfileReadmeInput {
+  readme: String!
+}
+
+input EditStatusInput {
+  emoji: String!
+  text: String!
+}
+
 input EditTipsInput {
   bitcoin: String
   buymeacoffee: String
@@ -267,6 +276,7 @@ input LoginWithWalletInput {
 
 input MintNFTInput {
   address: String!
+  network: String!
   postId: ID!
   tokenId: String!
 }
@@ -290,6 +300,7 @@ type Mutation {
   answerPoll(input: AnswerPollInput!): PollAnswer
   attachBadge(input: AttachBadgeToUserInput!): User!
   changePassword(input: ChangePasswordInput!): Result!
+  clearStatus: Result!
   createBadge(input: CreateBadgeInput!): Badge!
   createCommunity(input: CreateCommunityInput!): Community!
   createPost(input: CreatePostInput!): Post!
@@ -303,6 +314,8 @@ type Mutation {
   editPost(input: EditPostInput!): Post!
   editProductProfile(input: EditProductProfileInput!): Product
   editProductSocial(input: EditProductSocialInput!): Product
+  editProfileReadme(input: EditProfileReadmeInput!): User!
+  editStatus(input: EditStatusInput!): Status!
   editTips(input: EditTipsInput!): Tip!
   editUser(input: EditUserInput!): User!
   editUserSocial(input: EditUserSocialInput!): User!
@@ -329,6 +342,7 @@ type Mutation {
 type NFT {
   address: String!
   id: ID!
+  network: String!
   tokenId: String!
 }
 
@@ -476,10 +490,12 @@ type Profile {
   coverBg: String!
   discord: String
   github: String
+  hasReadme: Boolean!
   id: ID!
   location: String
   name: String!
   nftSource: String
+  readme: String
   twitter: String
   website: String
 }
@@ -747,6 +763,12 @@ type Stats {
   users: Int!
 }
 
+type Status {
+  emoji: String!
+  text: String!
+  user: User!
+}
+
 type Tip {
   bitcoin: String
   buymeacoffee: String
@@ -843,6 +865,7 @@ type User {
   posts(after: String, before: String, first: Int, last: Int): UserPostsConnection!
   profile: Profile!
   spammy: Boolean!
+  status: Status
   tip: Tip
   topics(after: String, before: String, first: Int, last: Int): UserTopicsConnection!
   updatedAt: DateTime!

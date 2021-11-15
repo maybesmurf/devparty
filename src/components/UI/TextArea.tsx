@@ -20,8 +20,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           ref={ref}
           {...props}
         />
-
-        <FieldError name={props.name} />
+        {props.name && <FieldError name={props.name} />}
       </label>
     )
   }

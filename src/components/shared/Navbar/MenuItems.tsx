@@ -2,7 +2,12 @@ import AppContext from '@components/utils/AppContext'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { Menu, Transition } from '@headlessui/react'
-import { CogIcon, LogoutIcon, UserIcon } from '@heroicons/react/outline'
+import {
+  CogIcon,
+  EmojiHappyIcon,
+  LogoutIcon,
+  UserIcon
+} from '@heroicons/react/outline'
 import { ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -19,11 +24,13 @@ const NextLink = ({ href, children, ...rest }: Record<string, any>) => (
 
 interface Props {
   currentUser: User
+  setShowStatusModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const MenuItems: React.FC<Props> = ({ currentUser }) => {
+const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
   const { theme, setTheme } = useTheme()
   const { staffMode, setStaffMode } = useContext(AppContext)
+  const status = currentUser?.status
 
   const toggleStaffMode = () => {
     localStorage.setItem('staffMode', String(!staffMode))
@@ -73,6 +80,31 @@ const MenuItems: React.FC<Props> = ({ currentUser }) => {
                   <div className="font-bold">Signed in as</div>
                   <Slug slug={currentUser?.username} prefix="@" />
                 </div>
+              </Menu.Item>
+              <div className="border-b dark:border-gray-800" />
+              <Menu.Item
+                as={'div'}
+                onClick={() => setShowStatusModal(true)}
+                className={({ active }: { active: boolean }) =>
+                  clsx(
+                    { 'bg-gray-100 dark:bg-gray-800': active },
+                    'block px-4 py-1.5 text-sm text-gray-700 dark:text-gray-200 m-2 rounded-lg cursor-pointer border dark:border-gray-700'
+                  )
+                }
+              >
+                {status?.emoji ? (
+                  <div className="flex items-center space-x-1.5">
+                    <div>{status?.emoji}</div>
+                    <div className="truncate" title={status?.text}>
+                      {status?.text}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-1.5 text-gray-500">
+                    <EmojiHappyIcon className="h-5 w-5" />
+                    <div>Set status</div>
+                  </div>
+                )}
               </Menu.Item>
               <div className="border-b dark:border-gray-800" />
               <Menu.Item

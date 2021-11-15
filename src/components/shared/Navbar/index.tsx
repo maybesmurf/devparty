@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import BetaBadge from '../BetaBadge'
 import MenuItems from './MenuItems'
@@ -15,8 +15,10 @@ import Search from './Search'
 const Invite = dynamic(() => import('./Invite'))
 const StaffBar = dynamic(() => import('./StaffBar'))
 const Masquerading = dynamic(() => import('./Masquerading'))
+const SetStatus = dynamic(() => import('./SetStatus'))
 
 const Navbar: React.FC = () => {
+  const [showStatusModal, setShowStatusModal] = useState<boolean>(false)
   const { currentUser, currentUserLoading, staffMode } = useContext(AppContext)
 
   interface NavItemProps {
@@ -107,7 +109,14 @@ const Navbar: React.FC = () => {
                 <div className="hidden md:block">
                   <Notification />
                 </div>
-                <MenuItems currentUser={currentUser} />
+                <MenuItems
+                  setShowStatusModal={setShowStatusModal}
+                  currentUser={currentUser}
+                />
+                <SetStatus
+                  showStatusModal={showStatusModal}
+                  setShowStatusModal={setShowStatusModal}
+                />
               </div>
             ) : (
               <div className="space-x-4 flex">

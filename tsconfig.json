@@ -21,6 +21,6 @@
       "@graphql*": ["src/graphql*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "cypress/integration/pages/landing.spec.js", "test/contract-test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/contract-test.js"],
   "exclude": ["node_modules", "**/schema.generated"]
 }

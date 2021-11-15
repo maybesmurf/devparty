@@ -182,3 +182,5 @@ test('flags should return boolean', async ({ request }) => {
   expect(typeof user.hasSpotifyIntegration).toBe('boolean')
   expect(typeof user.hasWakatimeIntegration).toBe('boolean')
 })
+
+//TODO: user should have status

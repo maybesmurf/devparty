@@ -1,8 +1,7 @@
 import { Result } from '@graphql/resolvers/ResultResolver'
 import { DeleteProductInput } from '@graphql/types.generated'
+import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
-
-import { Session } from '.prisma/client'
 
 /**
  * Delete the product

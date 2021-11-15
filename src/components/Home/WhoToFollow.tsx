@@ -23,6 +23,10 @@ const GET_WHO_TO_FOLLOW_QUERY = gql`
             avatar
             name
           }
+          status {
+            emoji
+            text
+          }
         }
       }
     }

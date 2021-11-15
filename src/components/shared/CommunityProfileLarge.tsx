@@ -1,3 +1,4 @@
+import Join from '@components/Community/Join'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { Community } from '@graphql/types.generated'
 import Link from 'next/link'
@@ -7,9 +8,13 @@ import Slug from './Slug'
 
 interface Props {
   community: Community
+  showJoin?: boolean
 }
 
-const CommunityProfileLarge: React.FC<Props> = ({ community }) => {
+const CommunityProfileLarge: React.FC<Props> = ({
+  community,
+  showJoin = false
+}) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex space-x-4 items-center">
@@ -37,6 +42,7 @@ const CommunityProfileLarge: React.FC<Props> = ({ community }) => {
           )}
         </div>
       </div>
+      {showJoin && <Join community={community} showText={false} />}
     </div>
   )
 }

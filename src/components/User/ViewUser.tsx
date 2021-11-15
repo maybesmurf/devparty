@@ -49,6 +49,10 @@ export const UserFragment = gql`
       github
       discord
     }
+    status {
+      emoji
+      text
+    }
     integrations {
       ethAddress
     }

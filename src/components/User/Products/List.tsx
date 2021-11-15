@@ -27,6 +27,7 @@ export const GET_ALL_USER_PRODUCTS_QUERY = gql`
             name
             description
             avatar
+            hasSubscribed
           }
         }
       }
@@ -105,7 +106,10 @@ const ProductsList: React.FC = () => {
           products?.map((product) => (
             <Card key={product?.id}>
               <CardBody>
-                <ProductProfileLarge product={product as Product} />
+                <ProductProfileLarge
+                  product={product as Product}
+                  showSubscribe
+                />
               </CardBody>
             </Card>
           ))

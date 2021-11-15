@@ -1,10 +1,13 @@
 import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
 import { Checkbox } from '@components/UI/Checkbox'
+import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
+import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
+import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
@@ -18,7 +21,7 @@ import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { IS_PRODUCTION, NFT_CONTRACT_ADDRESS } from 'src/constants'
+import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../data/abi.json'
@@ -45,12 +48,9 @@ interface Props {
 const Mint: React.FC<Props> = ({ post, setShowMint }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const [isMinting, setIsMinting] = useState<boolean>(false)
-  const [mintingStatus, setMintingStatus] = useState<
-    'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED' | 'ERRORED'
-  >('NOT_STARTED')
-  const [mintingStatusText, setMintingStatusText] = useState<string>('')
-  const [mintedAddress, setMintedAddress] = useState<string>('')
-  const [mintedTokenId, setMintedTokenId] = useState<string>('')
+  const [openseaURL, setOpenseaURL] = useState<string>()
+  const [error, setError] = useState<string | undefined>()
+  const [mintingStatus, setMintingStatus] = useState<string>('')
   const [mintNFT] = useMutation<MintNftMutation, MintNftMutationVariables>(
     gql`
       mutation MintNFT($input: MintNFTInput!) {
@@ -60,13 +60,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
           tokenId
         }
       }
-    `,
-    {
-      onCompleted(data) {
-        setMintedAddress(data?.mint?.address)
-        setMintedTokenId(data?.mint?.tokenId)
-      }
-    }
+    `
   )
 
   const form = useZodForm({
@@ -79,15 +73,36 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
 
   const mintToken = async () => {
     try {
-      setMintingStatus('IN_PROGRESS')
+      // Connect to Wallet
+      const web3Modal = getWeb3Modal()
+      const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
+
+      // Get signature from the user
+      const signer = await web3.getSigner()
+      const { name: network } = await web3.getNetwork()
+      const expectedNetwork = IS_PRODUCTION
+        ? ['homestead', 'matic']
+        : ['rinkeby', 'maticmum']
+
+      if (!expectedNetwork.includes(network)) {
+        setIsMinting(false)
+        return IS_PRODUCTION
+          ? setError(
+              'You are in wrong network only Mainet and Polygon matic are allowed!'
+            )
+          : setError(
+              'You are in wrong network only Rinkeby and Polygon mumbai are allowed!'
+            )
+      }
+
       setIsMinting(true)
-      setMintingStatusText('Converting your post as an art')
+      setMintingStatus('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
           `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
         )
       )
-      setMintingStatusText('Uploading metadata to decentralized servers')
+      setMintingStatus('Uploading metadata to decentralized servers')
       const { path } = await client.add(
         JSON.stringify({
           name: form.watch('title'),
@@ -96,33 +111,26 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
       )
       const url = `https://ipfs.infura.io/ipfs/${path}`
 
-      // Get signature from the user
-      const web3Modal = getWeb3Modal()
-      const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
-      const signer = await web3.getSigner()
-      const { name: currentNetworkName } = await web3.getNetwork()
-      // TODO: Change to maticmum
-      const expectedNetworkName = IS_PRODUCTION ? 'maticmum' : 'maticmum'
-
-      if (currentNetworkName !== expectedNetworkName) {
-        setIsMinting(false)
-        return toast.error('You are in wrong network!')
-      }
-
       // Mint the Item
       const contract = new ethers.Contract(
-        NFT_CONTRACT_ADDRESS as string,
+        getContractAddress(network) as string,
         NFT.abi,
         signer
       )
-      setMintingStatusText('Minting NFT in progress')
+      setMintingStatus('Minting NFT in progress')
       const transaction = await contract.issueToken(
         await signer.getAddress(),
         form.watch('quantity'),
         url
       )
-      const finishedTransaction = await transaction.wait()
-      let event = finishedTransaction.events[0]
+      const tx = await transaction.wait()
+      let event = tx.events[0]
+
+      setOpenseaURL(
+        `https://${
+          IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
+        }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
+      )
 
       // Add transaction to the DB
       mintNFT({
@@ -130,41 +138,31 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
           input: {
             postId: post?.id,
             address: transaction.to,
-            tokenId: event.args[3].toString()
+            tokenId: event.args[3].toString(),
+            network
           }
         }
       })
 
       toast.success('Minting has been successfully completed!')
-      setMintingStatus('COMPLETED')
+      setMintingStatus('Minting Completed!')
       setShowMint(false)
-    } catch (error) {
-      console.log(error)
+    } catch {
       setIsMinting(false)
-      setMintingStatus('ERRORED')
-      toast.error('Transaction has been cancelled!')
+      setError('Transaction has been cancelled!')
     }
   }
 
   return (
     <div className="space-y-3">
-      {mintingStatus === 'COMPLETED' ? (
+      {mintingStatus === 'Minting Completed!' ? (
         <div className="p-5 font-bold text-center space-y-4">
           <div className="space-y-2">
             <div className="text-3xl">🎉</div>
             <div>Your NFT has been successfully minted!</div>
           </div>
           <div>
-            {/* TODO: Update URLs */}
-            <a
-              href={`https://${
-                IS_PRODUCTION ? 'testnets.opensea.io' : 'testnets.opensea.io'
-              }/assets/${
-                IS_PRODUCTION ? 'mumbai' : 'mumbai'
-              }/${mintedAddress}/${mintedTokenId}`}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={openseaURL} target="_blank" rel="noreferrer">
               <Button
                 className="mx-auto"
                 icon={<ArrowRightIcon className="h-5 w-5" />}
@@ -178,7 +176,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
       ) : isMinting ? (
         <div className="p-5 font-bold text-center space-y-2">
           <Spinner size="md" className="mx-auto" />
-          <div>{mintingStatusText}</div>
+          <div>{mintingStatus}</div>
         </div>
       ) : (
         <Form form={form} onSubmit={mintToken}>
@@ -235,9 +233,15 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
               <Checkbox id="acceptRights" {...form.register('accept')} />
               <label htmlFor="acceptRights">
                 I have the rights to publish this artwork, and understand it
-                will be minted on the <b>Polygon</b> network.
+                will be minted on the decentralized network.
               </label>
             </div>
+            {error && (
+              <ErrorMessage
+                title={ERROR_MESSAGE}
+                error={{ name: error, message: error }}
+              />
+            )}
           </div>
           <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
             <a

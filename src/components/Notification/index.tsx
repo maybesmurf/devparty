@@ -57,6 +57,7 @@ export const GET_NOTIFICATIONS_QUERY = gql`
             name
             description
             avatar
+            hasSubscribed
           }
         }
       }

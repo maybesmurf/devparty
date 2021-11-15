@@ -5,6 +5,7 @@ builder.prismaObject('NFT', {
   fields: (t) => ({
     id: t.exposeID('id'),
     address: t.exposeString('address'),
-    tokenId: t.exposeString('tokenId')
+    tokenId: t.exposeString('tokenId'),
+    network: t.exposeString('network')
   })
 })

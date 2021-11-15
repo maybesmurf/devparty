@@ -186,7 +186,8 @@ const MintNFTInput = builder.inputType('MintNFTInput', {
   fields: (t) => ({
     postId: t.id({ validate: { uuid: true } }),
     address: t.string(),
-    tokenId: t.string()
+    tokenId: t.string(),
+    network: t.string()
   })
 })
 

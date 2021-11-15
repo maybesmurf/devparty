@@ -33,6 +33,10 @@ export const GET_FOLLOWING_QUERY = gql`
               avatar
               bio
             }
+            status {
+              emoji
+              text
+            }
           }
         }
       }

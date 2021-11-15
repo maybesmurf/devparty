@@ -30,7 +30,8 @@ export const mintNFT = async (
 
   const nftData = {
     address: input?.address as string,
-    tokenId: input?.tokenId as string
+    tokenId: input?.tokenId as string,
+    network: input?.network as string
   }
 
   return await db.nFT.upsert({

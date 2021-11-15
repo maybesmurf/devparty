@@ -4,6 +4,7 @@ import {
   BookmarkIcon,
   CollectionIcon,
   CubeIcon,
+  DocumentTextIcon,
   UsersIcon
 } from '@heroicons/react/outline'
 import clsx from 'clsx'
@@ -99,6 +100,19 @@ const PageType: React.FC<Props> = ({ user }) => {
           </div>
         </Tab>
       )}
+      <Tab
+        current={router.pathname == '/u/[username]/readme'}
+        url={`/u/${user?.username}/readme`}
+      >
+        <DocumentTextIcon className="h-4 w-4" />
+        <div
+          className={
+            router.pathname == '/u/[username]/readme' ? '' : `hidden sm:block`
+          }
+        >
+          Readme
+        </div>
+      </Tab>
     </div>
   )
 }

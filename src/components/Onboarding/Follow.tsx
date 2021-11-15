@@ -31,6 +31,10 @@ export const GET_ONBOARDING_USERS_QUERY = gql`
             avatar
             bio
           }
+          status {
+            emoji
+            text
+          }
         }
       }
     }

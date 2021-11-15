@@ -16,6 +16,7 @@ export const GET_RECENT_PRODUCTS_QUERY = gql`
           name
           slug
           avatar
+          hasSubscribed
         }
       }
     }
@@ -60,7 +61,11 @@ const RecentProducts: React.FC = () => {
       <ErrorMessage title="Failed to load products" error={error} />
       <div className="space-y-3">
         {products?.map((product) => (
-          <ProductProfile key={product?.id} product={product as Product} />
+          <ProductProfile
+            key={product?.id}
+            product={product as Product}
+            showSubscribe
+          />
         ))}
       </div>
     </RecentProductsCard>

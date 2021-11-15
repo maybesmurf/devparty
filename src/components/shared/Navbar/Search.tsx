@@ -20,6 +20,10 @@ const SEARCH_USERS_QUERY = gql`
             name
             avatar
           }
+          status {
+            emoji
+            text
+          }
         }
       }
     }

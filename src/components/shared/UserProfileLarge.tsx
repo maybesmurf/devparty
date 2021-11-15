@@ -44,6 +44,11 @@ const UserProfileLarge: React.FC<Props> = ({
                       <BadgeCheckIcon className="h-4 w-4 text-brand-500" />
                     </Tooltip>
                   )}
+                  {user?.status?.emoji && (
+                    <Tooltip content={user?.status?.text}>
+                      <div className="text-xs">{user?.status?.emoji}</div>
+                    </Tooltip>
+                  )}
                 </a>
               </Link>
             </div>

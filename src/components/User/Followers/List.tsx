@@ -33,6 +33,10 @@ export const GET_FOLLOWERS_QUERY = gql`
               avatar
               bio
             }
+            status {
+              emoji
+              text
+            }
           }
         }
       }

@@ -1,10 +1,10 @@
 import { createNotification } from '@graphql/resolvers/Notification/mutations/createNotification'
 import { Prisma } from '@prisma/client'
+import { User } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 import { hasFollowed } from '../queries/hasFollowed'
-import { User } from '.prisma/client'
 
 /**
  * Follow the give user

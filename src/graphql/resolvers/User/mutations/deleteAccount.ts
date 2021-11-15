@@ -1,7 +1,6 @@
 import { Result } from '@graphql/resolvers/ResultResolver'
+import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
-
-import { Session } from '.prisma/client'
 
 /**
  * Delete the user

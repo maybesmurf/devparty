@@ -98,10 +98,11 @@ const Details: React.FC<Props> = ({ user }) => {
                   toast.success('ENS name copied!')
                 }}
               >
-                <div className="flex items-center space-x-1.5 bg-white shadown-sm rounded-full border text-xs px-3 py-0.5 w-max cursor-pointer">
+                <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-0.5 w-max cursor-pointer">
                   <img
                     className="h-3 w-3"
                     src="https://assets.devparty.io/images/brands/ens.svg"
+                    alt="ENS logo"
                   />
                   <div>{ensName}</div>
                 </div>
@@ -109,6 +110,12 @@ const Details: React.FC<Props> = ({ user }) => {
             )}
           </div>
         </div>
+        {user?.status?.emoji && (
+          <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-lg border dark:border-gray-700 text-sm px-3 py-1 w-max">
+            <div>{user?.status?.emoji}</div>
+            <div>{user?.status?.text}</div>
+          </div>
+        )}
         <Followerings user={user} />
         {currentUserLoading ? (
           <div className="shimmer rounded-lg h-7 w-20" />

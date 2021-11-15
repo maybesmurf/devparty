@@ -57,6 +57,10 @@ export const GET_STAFF_USERS_QUERY = gql`
             bio
             avatar
           }
+          status {
+            emoji
+            text
+          }
           integrations {
             githubId
             ethAddress

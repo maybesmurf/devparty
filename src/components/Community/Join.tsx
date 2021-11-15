@@ -18,10 +18,10 @@ interface Props {
   showText: boolean
 }
 
-const Subscribe: React.FC<Props> = ({ community, showText }) => {
+const Join: React.FC<Props> = ({ community, showText }) => {
   const { currentUser } = useContext(AppContext)
   const router = useRouter()
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
+  const [isJoined, setIsJoined] = useState<boolean>(false)
   const [toggleCommunityJoin] = useMutation<
     ToggleCommunityJoinMutation,
     ToggleCommunityJoinMutationVariables
@@ -42,19 +42,17 @@ const Subscribe: React.FC<Props> = ({ community, showText }) => {
       onCompleted(data) {
         if (data?.toggleCommunityJoin?.hasJoined) {
           toast.success(
-            `Successfully subscribed to ${data?.toggleCommunityJoin?.slug}`
+            `Successfully joined to ${data?.toggleCommunityJoin?.slug}`
           )
         } else {
-          toast.success(
-            `Successfully unsubscribed to ${data?.toggleCommunityJoin?.slug}`
-          )
+          toast.success(`Successfully left ${data?.toggleCommunityJoin?.slug}`)
         }
       }
     }
   )
 
   useEffect(() => {
-    if (community?.hasJoined) setIsSubscribed(community?.hasJoined)
+    if (community?.hasJoined) setIsJoined(community?.hasJoined)
   }, [community])
 
   const handleToggleSubscribe = () => {
@@ -73,14 +71,14 @@ const Subscribe: React.FC<Props> = ({ community, showText }) => {
   return (
     <Switch
       as={Button}
-      checked={isSubscribed}
+      checked={isJoined}
       onChange={() => {
-        setIsSubscribed(!isSubscribed)
+        setIsJoined(!isJoined)
         handleToggleSubscribe()
       }}
-      variant={isSubscribed ? 'danger' : 'success'}
+      variant={isJoined ? 'danger' : 'success'}
       icon={
-        isSubscribed ? (
+        isJoined ? (
           <MinusIcon className="h-4 w-4" />
         ) : (
           <PlusIcon className="h-4 w-4" />
@@ -88,9 +86,9 @@ const Subscribe: React.FC<Props> = ({ community, showText }) => {
       }
       outline
     >
-      {isSubscribed ? showText && 'Leave' : showText && 'Join'}
+      {isJoined ? showText && 'Leave' : showText && 'Join'}
     </Switch>
   )
 }
 
-export default Subscribe
+export default Join

@@ -37,7 +37,10 @@ const ProductSubscribe: React.FC<Props> = ({ notification }) => {
             </Link>
           </div>
         </div>
-        <ProductProfileLarge product={notification?.product as Product} />
+        <ProductProfileLarge
+          product={notification?.product as Product}
+          showSubscribe
+        />
       </CardBody>
     </Card>
   )

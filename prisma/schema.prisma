@@ -45,6 +45,7 @@ model User {
   profile                Profile?
   tip                    Tip?
   invite                 Invite?
+  status                 Status?
   integrations           Integration?
   likes                  Like[]
   badges                 Badge[]
@@ -94,6 +95,7 @@ model Profile {
   discord   String? @db.VarChar(32)
   github    String? @db.VarChar(32)
   twitter   String? @db.VarChar(32)
+  readme    String? @db.Text
 
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -101,6 +103,19 @@ model Profile {
 
   // Attributes
   @@map("profiles")
+}
+
+model Status {
+  id    String @id @default(uuid())
+  emoji String
+  text  String @db.VarChar(64)
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  // Attributes
+  @@map("status")
 }
 
 model Invite {
@@ -187,6 +202,7 @@ model NFT {
   id      String @id @default(uuid())
   tokenId String
   address String
+  network String
 
   // Relations
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)

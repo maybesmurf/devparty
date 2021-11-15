@@ -3,10 +3,15 @@ import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
+import { Tooltip } from '@components/UI/Tooltip'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetExploreUserQuery } from '@graphql/types.generated'
-import { LoginIcon, UserAddIcon } from '@heroicons/react/outline'
+import {
+  BadgeCheckIcon,
+  LoginIcon,
+  UserAddIcon
+} from '@heroicons/react/outline'
 import Link from 'next/link'
 import React from 'react'
 
@@ -15,10 +20,15 @@ export const GET_EXPLORE_USER_QUERY = gql`
     me {
       id
       username
+      isVerified
       profile {
         id
         name
         avatar
+      }
+      status {
+        emoji
+        text
       }
       topics(first: 5) {
         totalCount
@@ -65,7 +75,24 @@ const Topics: React.FC = () => {
               alt={`@${user?.username}`}
             />
             <div>
-              <div className="font-bold text-lg">{user?.profile?.name}</div>
+              <Link href={`/u/${user?.username}`} passHref>
+                <a
+                  href={`/u/${user?.username}`}
+                  className="font-bold cursor-pointer flex items-center space-x-1 justify-center"
+                >
+                  <div className="font-bold text-lg">{user?.profile?.name}</div>
+                  {user?.isVerified && (
+                    <Tooltip content={'Verified'}>
+                      <BadgeCheckIcon className="h-4 w-4 text-brand-500" />
+                    </Tooltip>
+                  )}
+                  {user?.status?.emoji && (
+                    <Tooltip content={user?.status?.text}>
+                      <div className="text-xs">{user?.status?.emoji}</div>
+                    </Tooltip>
+                  )}
+                </a>
+              </Link>
               <Slug slug={user?.username} prefix="@" />
             </div>
           </div>

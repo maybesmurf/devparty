@@ -23,6 +23,10 @@ const GET_FEATURED_USERS_QUERY = gql`
             avatar
             name
           }
+          status {
+            emoji
+            text
+          }
         }
       }
     }

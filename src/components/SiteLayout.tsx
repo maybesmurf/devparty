@@ -21,6 +21,10 @@ export const CURRENT_USER_QUERY = gql`
         id
         avatar
       }
+      status {
+        emoji
+        text
+      }
     }
   }
 `

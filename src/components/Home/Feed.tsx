@@ -35,10 +35,7 @@ const HomeFeed: React.FC<Props> = ({ feedType }) => {
   const { data, loading, error, fetchMore } = useQuery<GetHomeFeedQuery>(
     GET_HOME_FEED_QUERY,
     {
-      variables: {
-        after: null,
-        type: feedType
-      },
+      variables: { after: null, type: feedType },
       pollInterval: POLLING_INTERVAL
     }
   )
