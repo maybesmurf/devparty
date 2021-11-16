@@ -19,6 +19,11 @@ type Attachment {
   url: String!
 }
 
+input AuthWithWalletInput {
+  nonce: String!
+  signature: String!
+}
+
 type Badge {
   description: String
   id: ID!
@@ -269,11 +274,6 @@ input LoginInput {
   password: String!
 }
 
-input LoginWithWalletInput {
-  nonce: String!
-  signature: String!
-}
-
 input MintNFTInput {
   address: String!
   network: String!
@@ -299,6 +299,7 @@ type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
   answerPoll(input: AnswerPollInput!): PollAnswer
   attachBadge(input: AttachBadgeToUserInput!): User!
+  authWithWallet(input: AuthWithWalletInput!): User
   changePassword(input: ChangePasswordInput!): Result!
   clearStatus: Result!
   createBadge(input: CreateBadgeInput!): Badge!
@@ -321,7 +322,6 @@ type Mutation {
   editUserSocial(input: EditUserSocialInput!): User!
   joinWaitlist(input: JoinWaitlistInput!): User!
   login(input: LoginInput!): User
-  loginWithWallet(input: LoginWithWalletInput!): User
   mint(input: MintNFTInput!): NFT!
   modTopic(input: ModTopicInput!): Topic
   modUser(input: ModUserInput!): User

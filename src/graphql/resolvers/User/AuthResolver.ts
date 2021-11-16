@@ -77,21 +77,21 @@ builder.mutationField('login', (t) =>
   })
 )
 
-const LoginWithWalletInput = builder.inputType('LoginWithWalletInput', {
+const AuthWithWalletInput = builder.inputType('AuthWithWalletInput', {
   fields: (t) => ({
     nonce: t.string(),
     signature: t.string()
   })
 })
 
-builder.mutationField('loginWithWallet', (t) =>
+builder.mutationField('authWithWallet', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
     authScopes: {
       unauthenticated: false
     },
-    args: { input: t.arg({ type: LoginWithWalletInput }) },
+    args: { input: t.arg({ type: AuthWithWalletInput }) },
     nullable: true,
     resolve: async (_query, parent, { input }, { req }) => {
       try {

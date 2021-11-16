@@ -41,6 +41,11 @@ export type Attachment = {
   url: Scalars['String']
 }
 
+export type AuthWithWalletInput = {
+  nonce: Scalars['String']
+  signature: Scalars['String']
+}
+
 export type Badge = {
   __typename?: 'Badge'
   description?: Maybe<Scalars['String']>
@@ -341,11 +346,6 @@ export type LoginInput = {
   password: Scalars['String']
 }
 
-export type LoginWithWalletInput = {
-  nonce: Scalars['String']
-  signature: Scalars['String']
-}
-
 export type MintNftInput = {
   address: Scalars['String']
   network: Scalars['String']
@@ -372,6 +372,7 @@ export type Mutation = {
   acceptCocAndTos: User
   answerPoll?: Maybe<PollAnswer>
   attachBadge: User
+  authWithWallet?: Maybe<User>
   changePassword: Result
   clearStatus: Result
   createBadge: Badge
@@ -394,7 +395,6 @@ export type Mutation = {
   editUserSocial: User
   joinWaitlist: User
   login?: Maybe<User>
-  loginWithWallet?: Maybe<User>
   mint: Nft
   modTopic?: Maybe<Topic>
   modUser?: Maybe<User>
@@ -422,6 +422,10 @@ export type MutationAnswerPollArgs = {
 
 export type MutationAttachBadgeArgs = {
   input: AttachBadgeToUserInput
+}
+
+export type MutationAuthWithWalletArgs = {
+  input: AuthWithWalletInput
 }
 
 export type MutationChangePasswordArgs = {
@@ -502,10 +506,6 @@ export type MutationJoinWaitlistArgs = {
 
 export type MutationLoginArgs = {
   input: LoginInput
-}
-
-export type MutationLoginWithWalletArgs = {
-  input: LoginWithWalletInput
 }
 
 export type MutationMintArgs = {
@@ -1559,13 +1559,13 @@ export type GetInviteQuery = {
   waitlistCount: { __typename?: 'WaitlistCount'; count: number }
 }
 
-export type LoginWithWalletMutationVariables = Exact<{
-  input: LoginWithWalletInput
+export type AuthWithWalletMutationVariables = Exact<{
+  input: AuthWithWalletInput
 }>
 
-export type LoginWithWalletMutation = {
+export type AuthWithWalletMutation = {
   __typename?: 'Mutation'
-  loginWithWallet?: { __typename?: 'User'; id: string } | null | undefined
+  authWithWallet?: { __typename?: 'User'; id: string } | null | undefined
 }
 
 export type LoginMutationVariables = Exact<{
