@@ -9,9 +9,17 @@ import {
   JoinWaitlistFormMutationVariables
 } from '@graphql/types.generated'
 import { CollectionIcon } from '@heroicons/react/outline'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { object, string } from 'zod'
+
+const AuthWithWallet = dynamic(() => import('../Login/AuthWithWallet'), {
+  loading: () => <div className="w-full h-10 rounded-lg shimmer" />
+})
+const AuthWithGitHub = dynamic(() => import('../Login/AuthWithGitHub'), {
+  loading: () => <div className="w-full h-10 rounded-lg shimmer" />
+})
 
 export const signUpSchema = object({
   username: string()
@@ -108,6 +116,10 @@ const SignupForm: React.FC = () => {
         >
           Join Waitlist
         </Button>
+        <div className="grid grid-cols-2 gap-2">
+          <AuthWithWallet />
+          <AuthWithGitHub />
+        </div>
       </div>
     </Form>
   )
