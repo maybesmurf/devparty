@@ -28,29 +28,30 @@ export const authWithWallet = async (
   })
 
   let ens
-  try {
-    const response = await fetch(
-      `https://api.thegraph.com/subgraphs/name/ensdomains/${
-        IS_PRODUCTION ? 'ensrinkeby' : 'ensrinkeby'
-      }`,
-      {
-        body: JSON.stringify({
-          operationName: 'getNamesFromSubgraph',
-          query: `
+  const response = await fetch(
+    `https://api.thegraph.com/subgraphs/name/ensdomains/${
+      IS_PRODUCTION ? 'ensrinkeby' : 'ensrinkeby'
+    }`,
+    {
+      body: JSON.stringify({
+        operationName: 'getNamesFromSubgraph',
+        query: `
             query getNamesFromSubgraph($address: String!) {
               domains(first: 1, where: {resolvedAddress: $address}) {
                 name
               }
             }
           `,
-          variables: { address: address.toString().toLowerCase() }
-        }),
-        method: 'POST'
-      }
-    )
-    const result = await response.json()
+        variables: { address: address.toString().toLowerCase() }
+      }),
+      method: 'POST'
+    }
+  )
+  const result = await response.json()
+  const domains = result?.data?.domains
+  if (domains.length > 0) {
     ens = result?.data?.domains[0]?.name
-  } catch {
+  } else {
     ens = address
   }
 
