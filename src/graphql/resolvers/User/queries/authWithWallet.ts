@@ -27,18 +27,30 @@ export const authWithWallet = async (
     where: { integrations: { ethAddress: address } }
   })
 
+  let ens
+  try {
+    const response = await fetch(`/api/uti;s/getENS?address=${address}`)
+    const result = await response.json()
+    ens = result?.name
+  } catch {
+    ens = address
+  }
+
   if (user) {
-    return user
+    return await db.user.update({
+      where: { id: user?.id },
+      data: { integrations: { update: { ensAddress: ens } } }
+    })
   } else {
     return await db.user.create({
       ...query,
       data: {
-        username: address,
+        username: ens,
         inWaitlist: false,
         profile: {
           create: {
-            name: formatUsername(address),
-            avatar: `https://avatar.tobi.sh/${await md5(address)}.svg`,
+            name: formatUsername(ens),
+            avatar: `https://avatar.tobi.sh/${await md5(ens)}.svg`,
             cover: getRandomCover().image,
             coverBg: getRandomCover().color
           }
@@ -46,6 +58,7 @@ export const authWithWallet = async (
         integrations: {
           create: {
             ethAddress: address,
+            ensAddress: ens,
             ethNonce: nonce
           }
         }
