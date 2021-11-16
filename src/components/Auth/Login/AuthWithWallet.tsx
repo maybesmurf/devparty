@@ -14,7 +14,7 @@ import { PUBLIC_SIGNING_MESSAGE, STATIC_ASSETS } from 'src/constants'
 const AuthWithWallet: React.FC = () => {
   const authRedirect = useAuthRedirect()
   const [loginButtonMessage, setLoginButtonMessage] = useState<string>('Wallet')
-  const [login] = useMutation<
+  const [authWithWallet] = useMutation<
     AuthWithWalletMutation,
     AuthWithWalletMutationVariables
   >(
@@ -53,7 +53,7 @@ const AuthWithWallet: React.FC = () => {
           ])
 
         setLoginButtonMessage('Loggin in...')
-        await login({
+        await authWithWallet({
           variables: { input: { nonce: data?.nonce as string, signature } }
         })
         web3Modal.clearCachedProvider()

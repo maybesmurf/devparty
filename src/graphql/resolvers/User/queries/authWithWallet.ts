@@ -22,6 +22,7 @@ export const authWithWallet = async (
   )
 
   const user = await db.user.findFirst({
+    ...query,
     where: { integrations: { ethAddress: address } }
   })
 

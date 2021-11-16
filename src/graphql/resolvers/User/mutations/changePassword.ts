@@ -18,7 +18,7 @@ export const changePassword = async (
   const user = await db.user.findUnique({ where: { id: session!.userId } })
 
   const passwordValid = await verifyPassword(
-    user!.hashedPassword,
+    user?.hashedPassword as string,
     input.currentPassword
   )
 
