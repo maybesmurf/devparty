@@ -80,6 +80,11 @@ Special thanks to these amazing projects which help power Devparty:
 - [Upstash](https://upstash.com)
 - [IPFS](https://ipfs.io)
 
+## 🤝 Supporting Repos
+
+- [Devparty Assets](https://gitlab.com/yo/dp-assets) - Static assets hosted in Vercel edge CDN
+- [Devparty Contracts](https://gitlab.com/yo/dp-contracts) - Ethereum contracts for NFTs
+
 ## ⚖️ License
 
 Devparty is open-sourced software licensed under the © [MIT license](LICENSE).
