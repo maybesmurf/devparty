@@ -3,7 +3,7 @@ import { useTheme } from 'next-themes'
 import React from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 
-const LoginWithGitHub: React.FC = () => {
+const AuthWithGitHub: React.FC = () => {
   const { resolvedTheme } = useTheme()
 
   return (
@@ -30,4 +30,4 @@ const LoginWithGitHub: React.FC = () => {
   )
 }
 
-export default LoginWithGitHub
+export default AuthWithGitHub

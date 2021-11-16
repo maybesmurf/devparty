@@ -12,10 +12,10 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { object, string } from 'zod'
 
-const LoginWithWallet = dynamic(() => import('./LoginWithWallet'), {
+const AuthWithWallet = dynamic(() => import('./AuthWithWallet'), {
   loading: () => <div className="w-full h-10 rounded-lg shimmer" />
 })
-const LoginWithGitHub = dynamic(() => import('./LoginWithGitHub'), {
+const AuthWithGitHub = dynamic(() => import('./AuthWithGitHub'), {
   loading: () => <div className="w-full h-10 rounded-lg shimmer" />
 })
 
@@ -102,8 +102,8 @@ const LoginForm: React.FC = () => {
           Login
         </Button>
         <div className="grid grid-cols-2 gap-2">
-          <LoginWithWallet />
-          <LoginWithGitHub />
+          <AuthWithWallet />
+          <AuthWithGitHub />
         </div>
       </div>
     </Form>

@@ -1559,6 +1559,15 @@ export type GetInviteQuery = {
   waitlistCount: { __typename?: 'WaitlistCount'; count: number }
 }
 
+export type LoginWithWalletMutationVariables = Exact<{
+  input: LoginWithWalletInput
+}>
+
+export type LoginWithWalletMutation = {
+  __typename?: 'Mutation'
+  loginWithWallet?: { __typename?: 'User'; id: string } | null | undefined
+}
+
 export type LoginMutationVariables = Exact<{
   input: LoginInput
 }>
@@ -1569,15 +1578,6 @@ export type LoginMutation = {
     | { __typename?: 'User'; id: string; inWaitlist: boolean }
     | null
     | undefined
-}
-
-export type LoginWithWalletMutationVariables = Exact<{
-  input: LoginWithWalletInput
-}>
-
-export type LoginWithWalletMutation = {
-  __typename?: 'Mutation'
-  loginWithWallet?: { __typename?: 'User'; id: string } | null | undefined
 }
 
 export type JoinWaitlistFormMutationVariables = Exact<{
