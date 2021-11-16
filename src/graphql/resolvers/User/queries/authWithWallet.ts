@@ -17,10 +17,10 @@ export const authWithWallet = async (
   nonce: string,
   signature: string
 ) => {
-  const address = ethers.utils.verifyMessage(
-    `${PUBLIC_SIGNING_MESSAGE} ${nonce}`,
-    signature
-  )
+  const address = ethers.utils
+    .verifyMessage(`${PUBLIC_SIGNING_MESSAGE} ${nonce}`, signature)
+    .toString()
+    .toLowerCase()
 
   const user = await db.user.findFirst({
     ...query,
@@ -42,7 +42,7 @@ export const authWithWallet = async (
               }
             }
           `,
-        variables: { address: address.toString().toLowerCase() }
+        variables: { address }
       }),
       method: 'POST'
     }

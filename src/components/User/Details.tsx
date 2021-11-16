@@ -12,6 +12,7 @@ import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
 import {
   ClockIcon,
+  DuplicateIcon,
   FireIcon,
   LocationMarkerIcon,
   PencilIcon,
@@ -101,13 +102,9 @@ const Details: React.FC<Props> = ({ user }) => {
                   toast.success('Ethereum address copied!')
                 }}
               >
-                <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-0.5 w-max cursor-pointer">
-                  <img
-                    className="h-3 w-3"
-                    src="https://assets.devparty.io/images/brands/ens.svg"
-                    alt="ENS logo"
-                  />
+                <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-1 w-max cursor-pointer">
                   <div>{formatUsername(user?.integrations?.ensAddress)}</div>
+                  <DuplicateIcon className="h-4 w-4" />
                 </div>
               </CopyToClipboard>
             )}
