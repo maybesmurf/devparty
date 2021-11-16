@@ -15,6 +15,7 @@ import {
   User
 } from '@graphql/types.generated'
 import { DocumentTextIcon, PencilIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Markdown from 'markdown-to-jsx'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
@@ -105,7 +106,9 @@ const Readme: React.FC = () => {
                 <EmptyState
                   message={
                     <div className="text-center">
-                      <span className="font-bold mr-1">@{user.username}</span>
+                      <span className="font-bold mr-1">
+                        @{formatUsername(user.username)}
+                      </span>
                       <span>has no README!</span>
                       {user?.id === currentUser?.id && (
                         <div className="mt-4">
