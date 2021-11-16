@@ -3,6 +3,7 @@ import Hero from '@components/shared/Hero'
 import Slug from '@components/shared/Slug'
 import { humanize } from '@components/utils/humanize'
 import { GetInviteQuery } from '@graphql/types.generated'
+import { formatUsername } from '@lib/utilities'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -59,7 +60,12 @@ const InviteSignup: React.FC = () => {
                   <div className="text-xl space-y-2">
                     <Link href={`/u/${invite?.user?.username}`} passHref>
                       <a className="font-bold">
-                        <Slug slug={invite?.user?.username} prefix="@" />{' '}
+                        <Slug
+                          slug={formatUsername(
+                            invite?.user?.username as string
+                          )}
+                          prefix="@"
+                        />{' '}
                         invited you to the party
                       </a>
                     </Link>

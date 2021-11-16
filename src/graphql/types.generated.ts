@@ -1543,22 +1543,6 @@ export type SignupMutation = {
   signUp: { __typename?: 'User'; id: string }
 }
 
-export type GetInviteQueryVariables = Exact<{
-  code: Scalars['String']
-}>
-
-export type GetInviteQuery = {
-  __typename?: 'Query'
-  invite?:
-    | {
-        __typename?: 'Invite'
-        user: { __typename?: 'User'; id: string; username: string }
-      }
-    | null
-    | undefined
-  waitlistCount: { __typename?: 'WaitlistCount'; count: number }
-}
-
 export type AuthWithWalletMutationVariables = Exact<{
   input: AuthWithWalletInput
 }>
