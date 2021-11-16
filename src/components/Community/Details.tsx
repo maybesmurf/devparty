@@ -82,9 +82,7 @@ const Details: React.FC<Props> = ({ community }) => {
                     <Link href={`/u/${community?.owner?.username}`} passHref>
                       <a href={`/u/${community?.owner?.username}`}>
                         <Slug
-                          slug={formatUsername(
-                            community?.owner?.username as string
-                          )}
+                          slug={formatUsername(community?.owner?.username)}
                           prefix="@"
                         />
                       </a>

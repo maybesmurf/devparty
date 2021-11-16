@@ -12,6 +12,7 @@ import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Community, GetCommunityQuery } from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -73,7 +74,10 @@ const About: React.FC = () => {
                       </div>
                       <Link href={`/u/${community?.owner?.username}`} passHref>
                         <a href={`/u/${community?.owner?.username}`}>
-                          <Slug slug={community?.owner?.username} prefix="@" />
+                          <Slug
+                            slug={formatUsername(community?.owner?.username)}
+                            prefix="@"
+                          />
                         </a>
                       </Link>
                     </div>

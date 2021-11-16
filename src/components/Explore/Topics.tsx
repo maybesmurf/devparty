@@ -12,6 +12,7 @@ import {
   LoginIcon,
   UserAddIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React from 'react'
 
@@ -93,7 +94,7 @@ const Topics: React.FC = () => {
                   )}
                 </a>
               </Link>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           </div>
           <div className="border-b dark:border-gray-800" />
