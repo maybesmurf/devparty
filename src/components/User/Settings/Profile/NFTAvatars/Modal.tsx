@@ -12,10 +12,7 @@ import useSWR from 'swr'
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: {
-      'X-API-KEY': process.env.OPENSEA_API_KEY as string,
-      Accept: 'application/json'
-    }
+    headers: { Accept: 'application/json' }
   }).then((r) => r.json())
 
 interface Props {
