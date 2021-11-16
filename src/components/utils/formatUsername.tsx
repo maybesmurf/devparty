@@ -4,8 +4,9 @@
  * @returns normal or eth username
  */
 export const formatUsername = (username: string) => {
-  let regex = /^0x[a-fA-F0-9]{40}$/g
+  if (!username) return ''
 
+  let regex = /^0x[a-fA-F0-9]{40}$/g
   if (username.match(regex)) {
     // Skip over ENS names
     if (username.includes('.')) return username

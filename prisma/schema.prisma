@@ -416,6 +416,7 @@ model Integration {
   spotifyRefreshToken String?
   githubId            String? @unique @db.VarChar(64)
   ethAddress          String? @unique @db.VarChar(64)
+  ensAddress          String?
   ethNonce            String? @db.VarChar(6)
 
   // Relations

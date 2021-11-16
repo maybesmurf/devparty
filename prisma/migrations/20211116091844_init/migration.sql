@@ -277,6 +277,7 @@ CREATE TABLE `integrations` (
     `spotifyRefreshToken` VARCHAR(191) NULL,
     `githubId` VARCHAR(64) NULL,
     `ethAddress` VARCHAR(64) NULL,
+    `ensAddress` VARCHAR(191) NULL,
     `ethNonce` VARCHAR(6) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
