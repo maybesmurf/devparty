@@ -36,7 +36,10 @@ export const authWithWallet = async (
         inWaitlist: false,
         profile: {
           create: {
-            name: address,
+            name: `${address.slice(0, 4)}…${address.slice(
+              address.length - 4,
+              address.length
+            )}`,
             avatar: `https://avatar.tobi.sh/${await md5(address)}.svg`,
             cover: getRandomCover().image,
             coverBg: getRandomCover().color
