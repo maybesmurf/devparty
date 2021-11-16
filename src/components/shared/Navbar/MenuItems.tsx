@@ -9,6 +9,7 @@ import {
   UserIcon
 } from '@heroicons/react/outline'
 import { ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/react/solid'
+import { formatAddressShort, isEthereumAddress } from '@lib/utilities'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
@@ -79,7 +80,14 @@ const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
                 <div>
                   <div className="font-bold">Signed in as</div>
                   <div className="truncate">
-                    <Slug slug={currentUser?.username} prefix="@" />
+                    <Slug
+                      slug={
+                        isEthereumAddress(currentUser?.username)
+                          ? formatAddressShort(currentUser?.username)
+                          : currentUser?.username
+                      }
+                      prefix="@"
+                    />
                   </div>
                 </div>
               </Menu.Item>
