@@ -10,6 +10,7 @@ import {
   AcceptCocAndTosMutationVariables
 } from '@graphql/types.generated'
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import toast from 'react-hot-toast'
@@ -55,10 +56,7 @@ const Onboarding: React.FC = () => {
           <img className="h-10 w-10" src="/white.svg" alt="Logo" />
           <div className="text-3xl font-bold space-y-1.5">
             <div className="truncate">
-              @
-              {isEthereumAddress(currentUser?.username)
-                ? formatAddressShort(currentUser?.username)
-                : currentUser?.username}
+              @{formatUsername(currentUser?.username as string)}
             </div>
             <div>Welcome to Devparty!</div>
           </div>

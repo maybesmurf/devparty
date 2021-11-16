@@ -18,7 +18,7 @@ import {
   SupportIcon
 } from '@heroicons/react/outline'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
-import { formatAddressShort, isEthereumAddress } from '@lib/utilities'
+import { formatUsername } from '@lib/utilities'
 import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -87,11 +87,7 @@ const Details: React.FC<Props> = ({ user }) => {
           </div>
           <div className="flex items-center space-x-2">
             <Slug
-              slug={
-                isEthereumAddress(user?.username)
-                  ? formatAddressShort(user?.username)
-                  : user?.username
-              }
+              slug={formatUsername(user?.username)}
               prefix="@"
               className="text-xl truncate"
             />

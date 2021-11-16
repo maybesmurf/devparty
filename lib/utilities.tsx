@@ -1,11 +1,15 @@
-export const formatAddressShort = (address: string) => {
-  // Skip over ENS names
-  if (address.includes('.')) return address
+export const formatUsername = (username: string) => {
+  if (isEthereumAddress(username)) {
+    // Skip over ENS names
+    if (username.includes('.')) return username
 
-  return `${address.slice(0, 4)}…${address.slice(
-    address.length - 4,
-    address.length
-  )}`
+    return `${username.slice(0, 4)}…${username.slice(
+      username.length - 4,
+      username.length
+    )}`
+  } else {
+    return username
+  }
 }
 
 export const isEthereumAddress = (address: string) => {
