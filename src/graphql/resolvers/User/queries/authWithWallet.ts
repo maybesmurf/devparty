@@ -1,4 +1,5 @@
 import { getRandomCover } from '@graphql/utils/getRandomCover'
+import { formatAddressShort } from '@lib/utilities'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
@@ -36,10 +37,7 @@ export const authWithWallet = async (
         inWaitlist: false,
         profile: {
           create: {
-            name: `${address.slice(0, 4)}…${address.slice(
-              address.length - 4,
-              address.length
-            )}`,
+            name: formatAddressShort(address),
             avatar: `https://avatar.tobi.sh/${await md5(address)}.svg`,
             cover: getRandomCover().image,
             coverBg: getRandomCover().color
