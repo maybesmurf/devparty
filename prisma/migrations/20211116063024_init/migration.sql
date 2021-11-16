@@ -1,9 +1,9 @@
 -- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
-    `username` VARCHAR(32) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
-    `hashedPassword` VARCHAR(191) NOT NULL,
+    `username` VARCHAR(64) NOT NULL,
+    `email` VARCHAR(191) NULL,
+    `hashedPassword` VARCHAR(191) NULL,
     `spammy` BOOLEAN NOT NULL DEFAULT false,
     `isVerified` BOOLEAN NOT NULL DEFAULT false,
     `isStaff` BOOLEAN NOT NULL DEFAULT false,
