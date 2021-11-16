@@ -67,7 +67,7 @@ const Details: React.FC<Props> = ({ user }) => {
         </div>
         <div>
           <div className="text-2xl font-bold flex items-center gap-1.5">
-            {user?.profile?.name}
+            <div className="truncate">{user?.profile?.name}</div>
             {user?.isVerified && (
               <Tooltip content={'Verified'}>
                 <BadgeCheckIcon className="h-6 w-6 text-brand-500" />
@@ -85,7 +85,11 @@ const Details: React.FC<Props> = ({ user }) => {
             )}
           </div>
           <div className="flex items-center space-x-2">
-            <Slug slug={user?.username} prefix="@" className="text-xl" />
+            <Slug
+              slug={user?.username}
+              prefix="@"
+              className="text-xl truncate"
+            />
             {user?.isFollowing && (
               <span className="text-xs bg-gray-200 dark:bg-gray-800 border py-0.5 px-1.5 rounded-md">
                 Follows you
