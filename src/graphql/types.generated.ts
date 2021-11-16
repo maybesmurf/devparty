@@ -302,6 +302,7 @@ export type EditUserSocialInput = {
 
 export type Integration = {
   __typename?: 'Integration'
+  ensAddress?: Maybe<Scalars['String']>
   ethAddress?: Maybe<Scalars['String']>
   githubId?: Maybe<Scalars['String']>
   id: Scalars['ID']
@@ -4874,7 +4875,11 @@ export type UserFragmentFragment = {
     | null
     | undefined
   integrations?:
-    | { __typename?: 'Integration'; ethAddress?: string | null | undefined }
+    | {
+        __typename?: 'Integration'
+        ethAddress?: string | null | undefined
+        ensAddress?: string | null | undefined
+      }
     | null
     | undefined
   tip?: { __typename?: 'Tip'; id: string } | null | undefined
@@ -4932,6 +4937,7 @@ export type GetUserQuery = {
           | {
               __typename?: 'Integration'
               ethAddress?: string | null | undefined
+              ensAddress?: string | null | undefined
             }
           | null
           | undefined

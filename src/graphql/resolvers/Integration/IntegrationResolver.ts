@@ -35,6 +35,7 @@ builder.prismaObject('Integration', {
     }),
     githubId: t.exposeString('githubId', { nullable: true }),
     ethAddress: t.exposeString('ethAddress', { nullable: true }),
+    ensAddress: t.exposeString('ensAddress', { nullable: true }),
 
     // Relations
     user: t.relation('user')

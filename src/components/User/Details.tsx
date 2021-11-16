@@ -7,7 +7,6 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Tooltip } from '@components/UI/Tooltip'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
-import { useENS } from '@components/utils/hooks/useENS'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
@@ -45,7 +44,6 @@ interface Props {
 
 const Details: React.FC<Props> = ({ user }) => {
   const { currentUser, currentUserLoading, staffMode } = useContext(AppContext)
-  const { name: ensName } = useENS(user)
 
   return (
     <div className="mb-4">
@@ -96,11 +94,11 @@ const Details: React.FC<Props> = ({ user }) => {
                 Follows you
               </span>
             )}
-            {ensName && (
+            {user?.integrations?.ensAddress && (
               <CopyToClipboard
-                text={ensName}
+                text={user?.integrations?.ethAddress as string}
                 onCopy={() => {
-                  toast.success('ENS name copied!')
+                  toast.success('Ethereum address copied!')
                 }}
               >
                 <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-0.5 w-max cursor-pointer">
@@ -109,7 +107,7 @@ const Details: React.FC<Props> = ({ user }) => {
                     src="https://assets.devparty.io/images/brands/ens.svg"
                     alt="ENS logo"
                   />
-                  <div>{ensName}</div>
+                  <div>{formatUsername(user?.integrations?.ensAddress)}</div>
                 </div>
               </CopyToClipboard>
             )}
