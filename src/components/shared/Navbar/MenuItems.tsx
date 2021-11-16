@@ -100,8 +100,8 @@ const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-1.5 text-gray-500">
-                    <EmojiHappyIcon className="h-5 w-5" />
+                  <div className="flex items-center space-x-1.5">
+                    <EmojiHappyIcon className="h-4 w-4" />
                     <div>Set status</div>
                   </div>
                 )}
