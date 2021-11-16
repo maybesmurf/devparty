@@ -8,6 +8,7 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { Tooltip } from '@components/UI/Tooltip'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   GetStaffReportsQuery,
   ResolveReportMutation,
@@ -19,7 +20,6 @@ import {
   ShieldCheckIcon,
   UserIcon
 } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React from 'react'
 import useInView from 'react-cool-inview'

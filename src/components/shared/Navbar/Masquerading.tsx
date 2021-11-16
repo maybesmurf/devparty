@@ -1,6 +1,6 @@
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { SwitchHorizontalIcon } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import React, { useContext } from 'react'
 
 import Slug from '../Slug'

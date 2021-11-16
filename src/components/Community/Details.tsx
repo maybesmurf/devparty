@@ -6,6 +6,7 @@ import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
@@ -16,7 +17,6 @@ import {
   ShieldCheckIcon,
   UsersIcon
 } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import Linkify from 'linkify-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

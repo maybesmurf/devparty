@@ -1,10 +1,10 @@
 import { Tooltip } from '@components/UI/Tooltip'
 import Follow from '@components/User/Follow'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
-import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 

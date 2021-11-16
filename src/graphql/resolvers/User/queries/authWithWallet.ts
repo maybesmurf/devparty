@@ -1,5 +1,5 @@
+import { formatUsername } from '@components/utils/formatUsername'
 import { getRandomCover } from '@graphql/utils/getRandomCover'
-import { formatUsername } from '@lib/utilities'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'

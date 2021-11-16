@@ -1,5 +1,12 @@
+/**
+ * Resolves normal and eth username
+ * @param username - User's username
+ * @returns normal or eth username
+ */
 export const formatUsername = (username: string) => {
-  if (isEthereumAddress(username)) {
+  let regex = /^0x[a-fA-F0-9]{40}$/g
+
+  if (username.match(regex)) {
     // Skip over ENS names
     if (username.includes('.')) return username
 
@@ -10,9 +17,4 @@ export const formatUsername = (username: string) => {
   } else {
     return username
   }
-}
-
-export const isEthereumAddress = (address: string) => {
-  let regex = /^0x[a-fA-F0-9]{40}$/g
-  return address.match(regex) ? true : false
 }

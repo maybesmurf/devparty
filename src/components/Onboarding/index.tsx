@@ -5,12 +5,12 @@ import { Checkbox } from '@components/UI/Checkbox'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   AcceptCocAndTosMutation,
   AcceptCocAndTosMutationVariables
 } from '@graphql/types.generated'
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import toast from 'react-hot-toast'

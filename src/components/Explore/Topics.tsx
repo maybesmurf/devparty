@@ -4,6 +4,7 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Tooltip } from '@components/UI/Tooltip'
+import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetExploreUserQuery } from '@graphql/types.generated'
@@ -12,7 +13,6 @@ import {
   LoginIcon,
   UserAddIcon
 } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React from 'react'
 

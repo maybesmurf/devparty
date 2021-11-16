@@ -4,6 +4,7 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Modal } from '@components/UI/Modal'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   ModUserMutation,
   ModUserMutationVariables,
@@ -15,7 +16,6 @@ import {
   ShieldCheckIcon,
   SwitchHorizontalIcon
 } from '@heroicons/react/outline'
-import { formatUsername } from '@lib/utilities'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE } from 'src/constants'

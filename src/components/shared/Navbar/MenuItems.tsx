@@ -1,4 +1,5 @@
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { Menu, Transition } from '@headlessui/react'
@@ -9,7 +10,6 @@ import {
   UserIcon
 } from '@heroicons/react/outline'
 import { ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/react/solid'
-import { formatUsername } from '@lib/utilities'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
