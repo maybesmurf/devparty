@@ -78,7 +78,9 @@ const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
               >
                 <div>
                   <div className="font-bold">Signed in as</div>
-                  <Slug slug={currentUser?.username} prefix="@" />
+                  <div className="truncate">
+                    <Slug slug={currentUser?.username} prefix="@" />
+                  </div>
                 </div>
               </Menu.Item>
               <div className="border-b dark:border-gray-800" />
