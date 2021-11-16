@@ -1,9 +1,6 @@
-import { formatUsername } from '@components/utils/formatUsername'
-import { getRandomCover } from '@graphql/utils/getRandomCover'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
-import { md5 } from 'hash-wasm'
-import { PUBLIC_SIGNING_MESSAGE } from 'src/constants'
+import { IS_PRODUCTION, PUBLIC_SIGNING_MESSAGE } from 'src/constants'
 
 /**
  * Authenticate a user with Wallet
@@ -29,9 +26,27 @@ export const authWithWallet = async (
 
   let ens
   try {
-    const response = await fetch(`/api/uti;s/getENS?address=${address}`)
+    const response = await fetch(
+      `https://api.thegraph.com/subgraphs/name/ensdomains/${
+        IS_PRODUCTION ? 'ensrinkeby' : 'ensrinkeby'
+      }`,
+      {
+        body: JSON.stringify({
+          operationName: 'getNamesFromSubgraph',
+          query: `
+            query getNamesFromSubgraph($address: String!) {
+              domains(first: 1, where: {resolvedAddress: $address}) {
+                name
+              }
+            }
+          `,
+          variables: { address: address.toString().toLowerCase() }
+        }),
+        method: 'POST'
+      }
+    )
     const result = await response.json()
-    ens = result?.name
+    ens = result?.data?.domains[0]?.name
   } catch {
     ens = address
   }
