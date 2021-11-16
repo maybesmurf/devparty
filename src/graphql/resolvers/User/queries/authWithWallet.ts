@@ -41,6 +41,12 @@ export const authWithWallet = async (
             cover: getRandomCover().image,
             coverBg: getRandomCover().color
           }
+        },
+        integrations: {
+          create: {
+            ethAddress: address,
+            ethNonce: nonce
+          }
         }
       }
     })

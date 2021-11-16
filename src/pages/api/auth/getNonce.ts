@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.json({ nonce: updatedIntegration?.ethNonce })
     } else {
-      return res.json({ nonce })
+      return res.json({ nonce: nonce.toString() })
     }
   } else {
     return res.json({
