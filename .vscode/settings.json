@@ -9,12 +9,8 @@
   "git.enableSmartCommit": true,
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.gpuAcceleration": "canvas",
-  "solidity.linter": "solhint",
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  },
-  "[solidity]": {
-    "editor.defaultFormatter": "JuanBlanco.solidity"
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
