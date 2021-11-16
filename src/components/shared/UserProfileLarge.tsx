@@ -4,6 +4,7 @@ import AppContext from '@components/utils/AppContext'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
+import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
@@ -53,7 +54,7 @@ const UserProfileLarge: React.FC<Props> = ({
               </Link>
             </div>
             <div className="flex items-center space-x-2">
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
               {user?.isFollowing && (
                 <span className="text-xs bg-gray-200 dark:bg-gray-800 border py-0.5 px-1.5 rounded-md">
                   Follows you
