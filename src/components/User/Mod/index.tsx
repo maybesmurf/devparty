@@ -15,6 +15,7 @@ import {
   ShieldCheckIcon,
   SwitchHorizontalIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE } from 'src/constants'
@@ -172,7 +173,7 @@ const UserMod: React.FC<Props> = ({ user }) => {
           title={
             <div className="flex items-center space-x-1.5">
               <div>Update badges for</div>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           }
           show={showUpdateBadgesModal}

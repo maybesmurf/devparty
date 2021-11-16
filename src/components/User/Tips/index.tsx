@@ -3,6 +3,7 @@ import { Button } from '@components/UI/Button'
 import { Modal } from '@components/UI/Modal'
 import { User } from '@graphql/types.generated'
 import { CashIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import { useState } from 'react'
 
 import TipsDetails from './TipsDetails'
@@ -30,7 +31,7 @@ const Tips: React.FC<Props> = ({ user }) => {
           title={
             <div className="flex items-center space-x-1.5">
               <div>Send dev tips to</div>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           }
           show={showModal}
