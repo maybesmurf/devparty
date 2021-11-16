@@ -33,7 +33,6 @@ export const authWithWallet = async (
       ...query,
       data: {
         username: address,
-        inWaitlist: true,
         profile: {
           create: {
             name: address,
