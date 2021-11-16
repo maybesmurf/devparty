@@ -88,14 +88,12 @@ builder.mutationField('authWithWallet', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: false
-    },
+    authScopes: { unauthenticated: false },
     args: { input: t.arg({ type: AuthWithWalletInput }) },
     nullable: true,
-    resolve: async (_query, parent, { input }, { req }) => {
+    resolve: async (query, parent, { input }, { req }) => {
       try {
-        const user = await authWithWallet(input.nonce, input.signature)
+        const user = await authWithWallet(query, input.nonce, input.signature)
         createLog(user?.id, user?.id, 'LOGIN')
         await createSession(req, user, false)
 

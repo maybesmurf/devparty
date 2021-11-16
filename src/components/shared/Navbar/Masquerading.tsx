@@ -1,5 +1,6 @@
 import AppContext from '@components/utils/AppContext'
 import { SwitchHorizontalIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import React, { useContext } from 'react'
 
 import Slug from '../Slug'
@@ -12,7 +13,10 @@ const Masquerading: React.FC = () => {
         <SwitchHorizontalIcon className="h-5 w-5" />
         <div>
           You are masquerading into{' '}
-          <Slug slug={currentUser?.username} prefix="@" />
+          <Slug
+            slug={formatUsername(currentUser?.username as string)}
+            prefix="@"
+          />
           's account
         </div>
       </div>

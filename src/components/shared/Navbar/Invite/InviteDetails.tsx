@@ -8,6 +8,7 @@ import {
   RegenerateInviteMutationVariables
 } from '@graphql/types.generated'
 import { CursorClickIcon, RefreshIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 import { STATIC_ASSETS } from 'src/constants'
@@ -76,9 +77,15 @@ const InviteDetails: React.FC = () => {
             Invite your friends & colleagues to Devparty
           </div>
           <div>
-            Hey {<Slug slug={user?.username} prefix="@" />} 👋 You can either
-            share your personalized invite link or your unique invite code with
-            friends!
+            Hey{' '}
+            {
+              <Slug
+                slug={formatUsername(user?.username as string)}
+                prefix="@"
+              />
+            }{' '}
+            👋 You can either share your personalized invite link or your unique
+            invite code with friends!
           </div>
         </div>
         {user?.invite ? (

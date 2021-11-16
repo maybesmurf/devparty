@@ -3,6 +3,7 @@ import Slug from '@components/shared/Slug'
 import { Card, CardBody } from '@components/UI/Card'
 import { Notification, Post } from '@graphql/types.generated'
 import { AtSymbolIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React from 'react'
 import * as timeago from 'timeago.js'
@@ -21,7 +22,10 @@ const UserMention: React.FC<Props> = ({ notification }) => {
           <div className="flex items-center linkify space-x-1">
             <div className="flex items-center space-x-3">
               <AtSymbolIcon className="h-6 w-6 text-blue-500" />
-              <Slug slug={notification?.dispatcher?.username} prefix="@" />
+              <Slug
+                slug={formatUsername(notification?.dispatcher?.username)}
+                prefix="@"
+              />
             </div>
             <div>mentioned you in the</div>
             <Link href={`/posts/${notification?.post?.id}`} passHref>

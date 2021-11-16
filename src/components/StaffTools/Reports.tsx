@@ -19,6 +19,7 @@ import {
   ShieldCheckIcon,
   UserIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Link from 'next/link'
 import React from 'react'
 import useInView from 'react-cool-inview'
@@ -122,7 +123,10 @@ const StaffToolsReports: React.FC = () => {
                         </Tooltip>
                         <Link href={`/u/${report?.user?.username}`} passHref>
                           <a href={`/u/${report?.user?.username}`}>
-                            <Slug slug={report?.user?.username} prefix="@" />
+                            <Slug
+                              slug={formatUsername(report?.user?.username)}
+                              prefix="@"
+                            />
                           </a>
                         </Link>
                       </div>

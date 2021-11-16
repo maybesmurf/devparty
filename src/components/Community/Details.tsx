@@ -16,6 +16,7 @@ import {
   ShieldCheckIcon,
   UsersIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/utilities'
 import Linkify from 'linkify-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -80,7 +81,10 @@ const Details: React.FC<Props> = ({ community }) => {
                     />
                     <Link href={`/u/${community?.owner?.username}`} passHref>
                       <a href={`/u/${community?.owner?.username}`}>
-                        <Slug slug={community?.owner?.username} prefix="@" />
+                        <Slug
+                          slug={formatUsername(community?.owner?.username)}
+                          prefix="@"
+                        />
                       </a>
                     </Link>
                     {community?.members?.totalCount - 1 > 0 && (

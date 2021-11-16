@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         const response = await fetch(
           `https://api.thegraph.com/subgraphs/name/ensdomains/${
-            IS_PRODUCTION ? 'ens' : 'ensrinkeby'
+            IS_PRODUCTION ? 'ensrinkeby' : 'ensrinkeby'
           }`,
           {
             body: JSON.stringify({
