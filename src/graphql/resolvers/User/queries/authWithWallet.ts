@@ -26,8 +26,6 @@ export const authWithWallet = async (
     where: { integrations: { ethAddress: address } }
   })
 
-  console.log(user)
-
   if (user) {
     return user
   } else {

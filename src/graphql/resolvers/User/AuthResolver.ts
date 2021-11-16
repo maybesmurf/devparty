@@ -92,7 +92,6 @@ builder.mutationField('authWithWallet', (t) =>
     args: { input: t.arg({ type: AuthWithWalletInput }) },
     nullable: true,
     resolve: async (query, parent, { input }, { req }) => {
-      console.log('Hell')
       try {
         const user = await authWithWallet(query, input.nonce, input.signature)
         createLog(user?.id, user?.id, 'LOGIN')
