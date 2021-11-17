@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import ProductProfileLarge from '@components/shared/ProductProfileLarge'
-import ProductProfileShimmer from '@components/shared/Shimmer/ProductProfileShimmer'
+import ProductProfileLargeShimmer from '@components/shared/Shimmer/ProductProfileLargeShimmer'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
@@ -73,17 +73,17 @@ const ProductsList: React.FC = () => {
       <div className="space-y-3">
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
       </div>
