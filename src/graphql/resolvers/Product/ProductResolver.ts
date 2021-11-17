@@ -105,8 +105,8 @@ builder.mutationField('createProduct', (t) =>
   t.prismaField({
     type: 'Product',
     args: { input: t.arg({ type: CreateProductInput }) },
-    nullable: true,
     authScopes: { user: true },
+    nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await createProduct(query, input, session)
     }
@@ -197,8 +197,8 @@ builder.mutationField('toggleProductSubscribe', (t) =>
   t.prismaField({
     type: 'Product',
     args: { input: t.arg({ type: ToggleProductSubscribeInput }) },
-    nullable: true,
     authScopes: { user: true },
+    nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleSubscribe(session?.userId as string, input.id)
     }
