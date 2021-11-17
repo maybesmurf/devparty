@@ -89,6 +89,7 @@ builder.mutationField('createCommunity', (t) =>
   t.prismaField({
     type: 'Community',
     args: { input: t.arg({ type: CreateCommunityInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await createCommunity(query, input, session)
     }
