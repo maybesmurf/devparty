@@ -43,8 +43,8 @@ builder.mutationField('login', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: { unauthenticated: false },
     args: { input: t.arg({ type: LoginInput }) },
+    authScopes: { unauthenticated: false },
     nullable: true,
     resolve: async (_query, parent, { input }, { req }) => {
       try {
@@ -86,8 +86,8 @@ builder.mutationField('authWithWallet', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: { unauthenticated: false },
     args: { input: t.arg({ type: AuthWithWalletInput }) },
+    authScopes: { unauthenticated: false },
     nullable: true,
     resolve: async (query, parent, { input }, { req }) => {
       try {
@@ -123,8 +123,8 @@ builder.mutationField('joinWaitlist', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: { unauthenticated: true },
     args: { input: t.arg({ type: JoinWaitlistInput }) },
+    authScopes: { unauthenticated: true },
     resolve: async (query, parent, { input }) => {
       return joinWaitlist(query, input)
     }
@@ -150,8 +150,8 @@ builder.mutationField('signUp', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: { unauthenticated: true },
     args: { input: t.arg({ type: SignupInput }) },
+    authScopes: { unauthenticated: true },
     resolve: async (query, parent, { input }, { req }) => {
       return signUp(query, input, req)
     }
