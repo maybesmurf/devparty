@@ -402,7 +402,7 @@ export type Mutation = {
   onboardUser?: Maybe<User>
   readNotification: Result
   regenerateInvite: Invite
-  removeCommunityUser?: Maybe<Community>
+  removeCommunityUser?: Maybe<Result>
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
@@ -1167,7 +1167,8 @@ export type ReadNotificationInput = {
 }
 
 export type RemoveCommunityUserInput = {
-  id: Scalars['ID']
+  communityId: Scalars['ID']
+  userId: Scalars['ID']
 }
 
 export type Report = {
@@ -1820,6 +1821,7 @@ export type MembersQuery = {
   __typename?: 'Query'
   community: {
     __typename?: 'Community'
+    id: string
     owner: { __typename?: 'User'; id: string }
     members: {
       __typename?: 'CommunityMembersConnection'
@@ -1857,6 +1859,15 @@ export type MembersQuery = {
       >
     }
   }
+}
+
+export type RemoveCommunityUserMutationVariables = Exact<{
+  input: RemoveCommunityUserInput
+}>
+
+export type RemoveCommunityUserMutation = {
+  __typename?: 'Mutation'
+  removeCommunityUser?: Result | null | undefined
 }
 
 export type CreateCommunityMutationVariables = Exact<{
