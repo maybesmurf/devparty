@@ -292,8 +292,8 @@ builder.mutationField('modUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: ModUserInput }) },
-    nullable: true,
     authScopes: { staff: true },
+    nullable: true,
     resolve: async (query, parent, { input }) => {
       return modUser(query, input)
     }
@@ -310,8 +310,8 @@ builder.mutationField('onboardUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: OnboardUserInput }) },
-    nullable: true,
     authScopes: { staff: true },
+    nullable: true,
     resolve: async (query, parent, { input }) => {
       return await db.user.update({
         where: { id: input.userId },
