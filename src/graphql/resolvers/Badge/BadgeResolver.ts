@@ -63,6 +63,7 @@ builder.mutationField('attachBadge', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: AttachBadgeToUserInput }) },
+    authScopes: { staff: true },
     resolve: async (query, parent, { input }) => {
       return await db.user.update({
         ...query,

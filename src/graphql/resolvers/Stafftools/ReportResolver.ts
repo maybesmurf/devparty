@@ -27,7 +27,7 @@ builder.queryField('reports', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
-    authScopes: { isStaff: true },
+    authScopes: { staff: true },
     resolve: async (query) => {
       return await getReports(query)
     }
@@ -61,7 +61,7 @@ builder.mutationField('resolveReport', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: ResolveReportInput }) },
-    authScopes: { isStaff: true },
+    authScopes: { staff: true },
     nullable: true,
     resolve: async (parent, { input }) => {
       return await resolveReport(input.id)

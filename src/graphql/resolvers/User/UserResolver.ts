@@ -26,7 +26,7 @@ builder.prismaObject('User', {
     inWaitlist: t.exposeBoolean('inWaitlist'),
     email: t.exposeString('email', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     hasFollowed: t.field({
       type: 'Boolean',
@@ -117,7 +117,7 @@ builder.prismaObject('User', {
     }),
     invite: t.relation('invite', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     ownedProducts: t.relatedConnection('ownedProducts', {
       cursor: 'id',
@@ -292,9 +292,7 @@ builder.mutationField('modUser', (t) =>
     type: 'User',
     args: { input: t.arg({ type: ModUserInput }) },
     nullable: true,
-    authScopes: {
-      isStaff: true
-    },
+    authScopes: { staff: true },
     resolve: async (query, parent, { input }) => {
       return modUser(query, input)
     }

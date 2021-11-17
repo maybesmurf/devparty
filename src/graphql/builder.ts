@@ -40,7 +40,7 @@ export const builder = new SchemaBuilder<{
     public: boolean
     user: boolean
     unauthenticated: boolean
-    isStaff: boolean
+    staff: boolean
   }
 }>({
   defaultInputFieldRequiredness: true,
@@ -58,7 +58,7 @@ export const builder = new SchemaBuilder<{
     public: true,
     user: !!session,
     unauthenticated: !session,
-    isStaff: !!session?.isStaff
+    staff: !!session?.isStaff
   }),
   relayOptions: {
     clientMutationId: 'omit',
