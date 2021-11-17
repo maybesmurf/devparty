@@ -44,6 +44,7 @@ const InviteDetails: React.FC = () => {
       }
     `,
     {
+      refetchQueries: [{ query: GET_INVITE_CODE_QUERY }],
       onError(error) {
         toast.error(error.message)
       },
