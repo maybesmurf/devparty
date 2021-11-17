@@ -1,19 +1,31 @@
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import UserProfileLargeShimmer from '@components/shared/Shimmer/UserProfileLargeShimmer'
 import UserProfileLarge from '@components/shared/UserProfileLarge'
+import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Spinner } from '@components/UI/Spinner'
-import { MembersQuery, User } from '@graphql/types.generated'
-import { UsersIcon } from '@heroicons/react/outline'
+import AppContext from '@components/utils/AppContext'
+import {
+  MembersQuery,
+  RemoveCommunityUserMutation,
+  RemoveCommunityUserMutationVariables,
+  User
+} from '@graphql/types.generated'
+import { UserRemoveIcon, UsersIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
 import useInView from 'react-cool-inview'
+import toast from 'react-hot-toast'
 
 export const MEMBERS_QUERY = gql`
   query Members($after: String, $slug: String!) {
     community(slug: $slug) {
+      id
+      owner {
+        id
+      }
       members(first: 10, after: $after) {
         totalCount
         pageInfo {
@@ -46,6 +58,7 @@ export const MEMBERS_QUERY = gql`
 
 const MembersList: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading, error, fetchMore } = useQuery<MembersQuery>(
     MEMBERS_QUERY,
     {
@@ -56,6 +69,30 @@ const MembersList: React.FC = () => {
       skip: !router.isReady
     }
   )
+  const [removeCommunityUser] = useMutation<
+    RemoveCommunityUserMutation,
+    RemoveCommunityUserMutationVariables
+  >(
+    gql`
+      mutation RemoveCommunityUser($input: RemoveCommunityUserInput!) {
+        removeCommunityUser(input: $input) {
+          id
+        }
+      }
+    `,
+    {
+      refetchQueries: [
+        { query: MEMBERS_QUERY, variables: { slug: router.query.slug } }
+      ],
+      onError(error) {
+        toast.error(error.message)
+      },
+      onCompleted() {
+        toast.success('User has been removed successfully')
+      }
+    }
+  )
+
   const members = data?.community?.members?.edges?.map((edge) => edge?.node)
   const pageInfo = data?.community?.members?.pageInfo
 
@@ -75,6 +112,28 @@ const MembersList: React.FC = () => {
       }
     }
   })
+
+  const renderAction = (userId: string) => {
+    return (
+      currentUser?.id === data?.community?.owner?.id && (
+        <Button
+          variant="danger"
+          size="sm"
+          outline
+          icon={<UserRemoveIcon className="h-4 w-4" />}
+          onClick={() =>
+            removeCommunityUser({
+              variables: {
+                input: { userId, communityId: data?.community?.id as string }
+              }
+            })
+          }
+        >
+          Remove
+        </Button>
+      )
+    )
+  }
 
   if (loading)
     return (
@@ -115,7 +174,11 @@ const MembersList: React.FC = () => {
           members?.map((user) => (
             <Card key={user?.id}>
               <CardBody>
-                <UserProfileLarge user={user as User} showFollow />
+                <UserProfileLarge
+                  action={renderAction(user?.id as string)}
+                  user={user as User}
+                  showFollow
+                />
               </CardBody>
             </Card>
           ))

@@ -264,13 +264,12 @@ const ToggleFollowInput = builder.inputType('ToggleFollowInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('toggleFollow', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: ToggleFollowInput }) },
-    nullable: true,
     authScopes: { user: true },
+    nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleFollow(session?.userId as string, input?.userId)
     }

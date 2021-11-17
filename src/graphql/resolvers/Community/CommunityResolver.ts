@@ -3,6 +3,7 @@ import { db } from '@utils/prisma'
 import { BASE_URL } from 'src/constants'
 
 import { createCommunity } from './mutations/createCommunity'
+import { removeCommunityUser } from './mutations/removeCommunityUser'
 import { toggleJoin } from './mutations/toggleJoin'
 import { hasJoined } from './queries/hasJoined'
 
@@ -110,6 +111,25 @@ builder.mutationField('toggleCommunityJoin', (t) =>
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleJoin(session?.userId as string, input.id)
+    }
+  })
+)
+
+const RemoveCommunityUserInput = builder.inputType('RemoveCommunityUserInput', {
+  fields: (t) => ({
+    userId: t.id({ validate: { uuid: true } }),
+    communityId: t.id({ validate: { uuid: true } })
+  })
+})
+
+builder.mutationField('removeCommunityUser', (t) =>
+  t.prismaField({
+    type: 'Community',
+    args: { input: t.arg({ type: RemoveCommunityUserInput }) },
+    authScopes: { user: true },
+    nullable: true,
+    resolve: async (query, parent, { input }, { session }) => {
+      return await removeCommunityUser(query, input, session)
     }
   })
 )
