@@ -219,7 +219,7 @@ input EditUserInput {
   avatar: String!
   bio: String
   cover: String!
-  email: String!
+  email: String
   location: String
   name: String!
   username: String!

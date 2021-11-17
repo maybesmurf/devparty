@@ -287,7 +287,7 @@ export type EditUserInput = {
   avatar: Scalars['String']
   bio?: InputMaybe<Scalars['String']>
   cover: Scalars['String']
-  email: Scalars['String']
+  email?: InputMaybe<Scalars['String']>
   location?: InputMaybe<Scalars['String']>
   name: Scalars['String']
   username: Scalars['String']

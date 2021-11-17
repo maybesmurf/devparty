@@ -207,7 +207,7 @@ const EditUserInput = builder.inputType('EditUserInput', {
       required: true,
       validate: { minLength: 2, maxLength: 50 }
     }),
-    email: t.string({ required: true, validate: { email: true } }),
+    email: t.string({ required: false, validate: { email: true } }),
     name: t.string({
       required: true,
       validate: { minLength: 2, maxLength: 50 }
