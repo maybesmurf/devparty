@@ -12,7 +12,6 @@ import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
 import {
   ClockIcon,
-  DuplicateIcon,
   FireIcon,
   LocationMarkerIcon,
   PencilIcon,
@@ -23,8 +22,6 @@ import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useContext } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
-import toast from 'react-hot-toast'
 import { STATIC_ASSETS } from 'src/constants'
 import * as timeago from 'timeago.js'
 
@@ -38,6 +35,7 @@ import Social from './Social'
 import Tips from './Tips'
 
 const UserMod = dynamic(() => import('./Mod'))
+const ETHAddress = dynamic(() => import('./ETHAddress'))
 
 interface Props {
   user: User
@@ -95,19 +93,7 @@ const Details: React.FC<Props> = ({ user }) => {
                 Follows you
               </span>
             )}
-            {user?.integrations?.ensAddress && (
-              <CopyToClipboard
-                text={user?.integrations?.ethAddress as string}
-                onCopy={() => {
-                  toast.success('Ethereum address copied!')
-                }}
-              >
-                <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-1 w-max cursor-pointer">
-                  <div>{formatUsername(user?.integrations?.ensAddress)}</div>
-                  <DuplicateIcon className="h-4 w-4" />
-                </div>
-              </CopyToClipboard>
-            )}
+            {user?.integrations?.ensAddress && <ETHAddress user={user} />}
           </div>
         </div>
         {user?.status?.emoji && (
