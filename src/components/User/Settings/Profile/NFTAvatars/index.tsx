@@ -1,7 +1,6 @@
 import { Button } from '@components/UI/Button'
 import { Modal } from '@components/UI/Modal'
 import { useState } from 'react'
-import { IS_DEVELOPMENT } from 'src/constants'
 
 import NFTAvatarsModal from './Modal'
 
@@ -23,12 +22,7 @@ const NFTAvatars: React.FC<Props> = ({ ethAddress }) => {
       </Button>
       <Modal
         onClose={() => setShowNFTModal(!showNFTModal)}
-        title={
-          <div>
-            Pick avatar from OpenSea{' '}
-            {IS_DEVELOPMENT && <span className="text-red-500">(Testnet)</span>}
-          </div>
-        }
+        title="Pick avatar from OpenSea"
         show={showNFTModal}
       >
         <NFTAvatarsModal ethAddress={ethAddress as string} />
