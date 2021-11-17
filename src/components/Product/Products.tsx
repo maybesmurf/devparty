@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import ProductProfileLarge from '@components/shared/ProductProfileLarge'
 import PostShimmer from '@components/shared/Shimmer/PostShimmer'
-import UserProfileShimmer from '@components/shared/Shimmer/UserProfileShimmer'
+import ProductProfileLargeShimmer from '@components/shared/Shimmer/ProductProfileLargeShimmer'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
@@ -71,7 +71,7 @@ const Products: React.FC = () => {
         <GridItemFour>
           <Card>
             <CardBody>
-              <UserProfileShimmer showFollow />
+              <ProductProfileLargeShimmer showSubscribe />
             </CardBody>
           </Card>
         </GridItemFour>

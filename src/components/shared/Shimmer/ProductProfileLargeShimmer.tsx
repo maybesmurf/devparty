@@ -1,9 +1,9 @@
 interface Props {
-  showJoin?: boolean
+  showSubscribe?: boolean
 }
 
-const CommunityProfileLargeShimmer: React.FC<Props> = ({
-  showJoin = false
+const ProductProfileLargeShimmer: React.FC<Props> = ({
+  showSubscribe = false
 }) => {
   return (
     <div className="flex justify-between items-center">
@@ -17,9 +17,9 @@ const CommunityProfileLargeShimmer: React.FC<Props> = ({
           </div>
         </div>
       </div>
-      {showJoin && <div className="shimmer h-8 w-24 rounded-md" />}
+      {showSubscribe && <div className="shimmer h-8 w-24 rounded-md" />}
     </div>
   )
 }
 
-export default CommunityProfileLargeShimmer
+export default ProductProfileLargeShimmer
