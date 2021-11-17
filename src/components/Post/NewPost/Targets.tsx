@@ -90,6 +90,9 @@ const Targets: React.FC<Props> = ({
           My Products
         </div>
         <div className="space-y-2">
+          {products?.length === 0 && (
+            <div className="text-gray-500">You dont have any products!</div>
+          )}
           {products?.map((product: any) => (
             <div key={product?.name}>
               <button
@@ -119,6 +122,9 @@ const Targets: React.FC<Props> = ({
           My Communities
         </div>
         <div className="space-y-2">
+          {communities?.length === 0 && (
+            <div className="text-gray-500">You dont have any communities!</div>
+          )}
           {communities?.map((community: any) => (
             <div key={community?.name}>
               <button
