@@ -100,8 +100,8 @@ builder.queryField('homeFeed', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
-    authScopes: { user: true },
     args: { type: t.arg.string({ defaultValue: 'ALL' }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { type }, { session }) => {
       return await homeFeed(query, type, session)
     }
