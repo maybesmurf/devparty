@@ -27,7 +27,7 @@ builder.mutationField('toggleBookmark', (t) =>
     type: 'Post',
     args: { input: t.arg({ type: ToggleBookmarkInput }) },
     nullable: true,
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleBookmark(session?.userId as string, input.id)
     }

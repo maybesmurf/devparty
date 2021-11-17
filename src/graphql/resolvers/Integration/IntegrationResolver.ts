@@ -67,7 +67,7 @@ builder.mutationField('editIntegration', (t) =>
   t.prismaField({
     type: 'Integration',
     args: { input: t.arg({ type: EditIntegrationInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await editIntegration(query, input, session)
     }

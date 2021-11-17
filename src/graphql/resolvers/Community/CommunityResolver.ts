@@ -106,7 +106,7 @@ builder.mutationField('toggleCommunityJoin', (t) =>
   t.prismaField({
     type: 'Community',
     args: { input: t.arg({ type: ToggleCommunityJoinInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleJoin(session?.userId as string, input.id)
