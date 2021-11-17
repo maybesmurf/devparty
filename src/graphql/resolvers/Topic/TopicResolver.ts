@@ -91,8 +91,8 @@ builder.mutationField('toggleTopicStar', (t) =>
   t.prismaField({
     type: 'Topic',
     args: { input: t.arg({ type: ToggleTopicStarInput }) },
-    nullable: true,
     authScopes: { user: true },
+    nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleStar(session?.userId as string, input.id)
     }
@@ -111,8 +111,8 @@ builder.mutationField('modTopic', (t) =>
   t.prismaField({
     type: 'Topic',
     args: { input: t.arg({ type: ModTopicInput }) },
-    nullable: true,
     authScopes: { staff: true },
+    nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await modTopic(query, input, session)
     }
