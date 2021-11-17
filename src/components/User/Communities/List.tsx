@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import CommunityProfileLarge from '@components/shared/CommunityProfileLarge'
-import CommunityProfileLargeShimmer from '@components/shared/Shimmer/CommunityProfileShimmer'
+import CommunityProfileLargeShimmer from '@components/shared/Shimmer/CommunityProfileLargeShimmer'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
