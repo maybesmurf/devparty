@@ -28,7 +28,7 @@
     "@giraphql/plugin-relay": "^2.17.0",
     "@giraphql/plugin-scope-auth": "^2.13.1",
     "@giraphql/plugin-simple-objects": "^2.10.0",
-    "@giraphql/plugin-validation": "^2.14.1",
+    "@giraphql/plugin-validation": "^2.15.0",
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
     "@hookform/resolvers": "^2.8.3",
