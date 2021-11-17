@@ -198,6 +198,7 @@ builder.mutationField('toggleProductSubscribe', (t) =>
     type: 'Product',
     args: { input: t.arg({ type: ToggleProductSubscribeInput }) },
     nullable: true,
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleSubscribe(session?.userId as string, input.id)
     }
