@@ -158,6 +158,7 @@ builder.mutationField('createPost', (t) =>
   t.prismaField({
     type: 'Post',
     args: { input: t.arg({ type: CreatePostInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await createPost(query, input, session)
     }
