@@ -75,11 +75,15 @@ const MembersList: React.FC = () => {
   >(
     gql`
       mutation RemoveCommunityUser($input: RemoveCommunityUserInput!) {
-        removeCommunityUser(input: $input)
+        removeCommunityUser(input: $input) {
+          id
+        }
       }
     `,
     {
-      refetchQueries: [{ query: MEMBERS_QUERY }],
+      refetchQueries: [
+        { query: MEMBERS_QUERY, variables: { slug: router.query.slug } }
+      ],
       onError(error) {
         toast.error(error.message)
       },

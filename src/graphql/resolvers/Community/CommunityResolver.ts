@@ -2,7 +2,6 @@ import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 import { BASE_URL } from 'src/constants'
 
-import { Result } from '../ResultResolver'
 import { createCommunity } from './mutations/createCommunity'
 import { removeCommunityUser } from './mutations/removeCommunityUser'
 import { toggleJoin } from './mutations/toggleJoin'
@@ -124,13 +123,13 @@ const RemoveCommunityUserInput = builder.inputType('RemoveCommunityUserInput', {
 })
 
 builder.mutationField('removeCommunityUser', (t) =>
-  t.field({
-    type: Result,
+  t.prismaField({
+    type: 'Community',
     args: { input: t.arg({ type: RemoveCommunityUserInput }) },
     authScopes: { user: true },
     nullable: true,
-    resolve: async (parent, { input }, { session }) => {
-      return await removeCommunityUser(input, session)
+    resolve: async (query, parent, { input }, { session }) => {
+      return await removeCommunityUser(query, input, session)
     }
   })
 )

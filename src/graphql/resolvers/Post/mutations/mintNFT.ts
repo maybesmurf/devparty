@@ -25,7 +25,7 @@ export const mintNFT = async (
   })
 
   if (post?.userId !== session?.userId) {
-    throw new Error("You can't ming other users post!")
+    throw new Error("You can't mint other users post!")
   }
 
   const nftData = {

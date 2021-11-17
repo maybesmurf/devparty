@@ -402,7 +402,7 @@ export type Mutation = {
   onboardUser?: Maybe<User>
   readNotification: Result
   regenerateInvite: Invite
-  removeCommunityUser?: Maybe<Result>
+  removeCommunityUser?: Maybe<Community>
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
@@ -1867,7 +1867,10 @@ export type RemoveCommunityUserMutationVariables = Exact<{
 
 export type RemoveCommunityUserMutation = {
   __typename?: 'Mutation'
-  removeCommunityUser?: Result | null | undefined
+  removeCommunityUser?:
+    | { __typename?: 'Community'; id: string }
+    | null
+    | undefined
 }
 
 export type CreateCommunityMutationVariables = Exact<{
