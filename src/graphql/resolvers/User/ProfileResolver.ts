@@ -84,7 +84,7 @@ builder.mutationField('editProfileReadme', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditProfileReadmeInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await db.user.update({
         ...query,
