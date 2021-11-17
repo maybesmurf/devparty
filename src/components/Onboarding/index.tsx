@@ -70,13 +70,13 @@ const Onboarding: React.FC = () => {
             }
           >
             <div className="flex items-center space-x-2">
-              <Checkbox {...form.register('coc')} />
+              <Checkbox id="acceptCOC" {...form.register('coc')} />
               <label htmlFor="acceptCOC">
                 You agree to uphold our <a href="/">Code of Conduct</a>
               </label>
             </div>
             <div className="flex items-center space-x-2">
-              <Checkbox {...form.register('tos')} />
+              <Checkbox id="acceptTOS" {...form.register('tos')} />
               <label htmlFor="acceptTOS">
                 You agree to our <a href="/">Terms and Conditions</a>
               </label>
