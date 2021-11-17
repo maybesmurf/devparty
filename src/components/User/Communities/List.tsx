@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import CommunityProfileLarge from '@components/shared/CommunityProfileLarge'
-import UserProfileLargeShimmer from '@components/shared/Shimmer/UserProfileLargeShimmer'
+import CommunityProfileLargeShimmer from '@components/shared/Shimmer/CommunityProfileLargeShimmer'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
@@ -71,17 +71,17 @@ const CommunitiesList: React.FC = () => {
       <div className="space-y-3">
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
       </div>
