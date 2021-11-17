@@ -4592,7 +4592,6 @@ export type EditProfileMutation = {
     __typename?: 'User'
     id: string
     username: string
-    email?: string | null | undefined
     profile: {
       __typename?: 'Profile'
       id: string

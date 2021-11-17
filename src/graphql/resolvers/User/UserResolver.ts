@@ -203,15 +203,9 @@ builder.queryField('featuredUsers', (t) =>
 
 const EditUserInput = builder.inputType('EditUserInput', {
   fields: (t) => ({
-    username: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
+    username: t.string({ validate: { minLength: 2, maxLength: 50 } }),
     email: t.string({ required: false, validate: { email: true } }),
-    name: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
+    name: t.string({ validate: { minLength: 2, maxLength: 50 } }),
     bio: t.string({ required: false, validate: { maxLength: 190 } }),
     location: t.string({ required: false, validate: { maxLength: 100 } }),
     avatar: t.string(),
@@ -223,7 +217,7 @@ builder.mutationField('editUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditUserInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await editUser(query, input, session)
     }
@@ -232,8 +226,8 @@ builder.mutationField('editUser', (t) =>
 
 const EditNFTAvatarInput = builder.inputType('EditNFTAvatarInput', {
   fields: (t) => ({
-    avatar: t.string({ required: true }),
-    nftSource: t.string({ required: true })
+    avatar: t.string(),
+    nftSource: t.string()
   })
 })
 

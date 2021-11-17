@@ -115,14 +115,8 @@ builder.mutationField('createProduct', (t) =>
 const EditProductProfileInput = builder.inputType('EditProductProfileInput', {
   fields: (t) => ({
     id: t.id({ validate: { uuid: true } }),
-    slug: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
-    name: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
+    slug: t.string({ validate: { minLength: 2, maxLength: 50 } }),
+    name: t.string({ validate: { minLength: 2, maxLength: 50 } }),
     description: t.string({ required: false, validate: { maxLength: 255 } }),
     avatar: t.string({ required: false })
   })

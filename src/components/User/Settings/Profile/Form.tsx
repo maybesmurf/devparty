@@ -59,7 +59,6 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
         editUser(input: $input) {
           id
           username
-          email
           profile {
             id
             name
