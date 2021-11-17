@@ -4,10 +4,10 @@ import { db } from '@utils/prisma'
 builder.queryField('searchTopics', (t) =>
   t.prismaConnection({
     type: 'Topic',
-    args: { keyword: t.arg.string() },
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
+    args: { keyword: t.arg.string() },
     resolve: async (query, parent, { keyword }) => {
       return await db.topic.findMany({
         ...query,
@@ -20,10 +20,10 @@ builder.queryField('searchTopics', (t) =>
 builder.queryField('searchUsers', (t) =>
   t.prismaConnection({
     type: 'User',
-    args: { keyword: t.arg.string() },
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
+    args: { keyword: t.arg.string() },
     resolve: async (query, parent, { keyword }) => {
       return await db.user.findMany({
         ...query,

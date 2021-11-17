@@ -26,7 +26,7 @@ builder.mutationField('editStatus', (t) =>
   t.prismaField({
     type: 'Status',
     args: { input: t.arg({ type: EditStatusInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       const data = {
         emoji: input.emoji,
@@ -49,7 +49,7 @@ builder.mutationField('editStatus', (t) =>
 builder.mutationField('clearStatus', (t) =>
   t.field({
     type: Result,
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, args, { session }) => {
       await db.status.deleteMany({ where: { userId: session!.userId } })
 

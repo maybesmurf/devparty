@@ -26,7 +26,7 @@ builder.prismaObject('User', {
     inWaitlist: t.exposeBoolean('inWaitlist'),
     email: t.exposeString('email', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     hasFollowed: t.field({
       type: 'Boolean',
@@ -117,7 +117,7 @@ builder.prismaObject('User', {
     }),
     invite: t.relation('invite', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     ownedProducts: t.relatedConnection('ownedProducts', {
       cursor: 'id',
@@ -236,7 +236,7 @@ builder.mutationField('editNFTAvatar', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditNFTAvatarInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       try {
@@ -270,6 +270,7 @@ builder.mutationField('toggleFollow', (t) =>
     type: 'User',
     args: { input: t.arg({ type: ToggleFollowInput }) },
     nullable: true,
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleFollow(session?.userId as string, input?.userId)
     }
@@ -291,10 +292,8 @@ builder.mutationField('modUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: ModUserInput }) },
+    authScopes: { staff: true },
     nullable: true,
-    authScopes: {
-      isStaff: true
-    },
     resolve: async (query, parent, { input }) => {
       return modUser(query, input)
     }
@@ -311,6 +310,7 @@ builder.mutationField('onboardUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: OnboardUserInput }) },
+    authScopes: { staff: true },
     nullable: true,
     resolve: async (query, parent, { input }) => {
       return await db.user.update({
@@ -332,6 +332,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: AcceptCOCAndTOSInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       if (input.coc && input.tos) {
         return await db.user.update({
@@ -348,6 +349,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
 builder.mutationField('deleteAccount', (t) =>
   t.field({
     type: Result,
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, args, { session }) => {
       return await deleteAccount(session)
     }
