@@ -83,7 +83,11 @@ const EditReadme: React.FC<Props> = ({
         }}
       >
         <div className="px-5 py-3.5">
-          <TextArea rows={17} {...form.register('readme')} />
+          <TextArea
+            placeholder="Say somethin' about you!"
+            rows={17}
+            {...form.register('readme')}
+          />
         </div>
         <div className="px-5 py-3.5 flex space-x-3 border-t">
           <Button
