@@ -236,7 +236,7 @@ builder.mutationField('editNFTAvatar', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditNFTAvatarInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       try {
@@ -270,6 +270,7 @@ builder.mutationField('toggleFollow', (t) =>
     type: 'User',
     args: { input: t.arg({ type: ToggleFollowInput }) },
     nullable: true,
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleFollow(session?.userId as string, input?.userId)
     }
@@ -310,6 +311,7 @@ builder.mutationField('onboardUser', (t) =>
     type: 'User',
     args: { input: t.arg({ type: OnboardUserInput }) },
     nullable: true,
+    authScopes: { staff: true },
     resolve: async (query, parent, { input }) => {
       return await db.user.update({
         where: { id: input.userId },
