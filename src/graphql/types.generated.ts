@@ -402,6 +402,7 @@ export type Mutation = {
   onboardUser?: Maybe<User>
   readNotification: Result
   regenerateInvite: Invite
+  removeCommunityUser?: Maybe<Community>
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
@@ -527,6 +528,10 @@ export type MutationOnboardUserArgs = {
 
 export type MutationReadNotificationArgs = {
   input: ReadNotificationInput
+}
+
+export type MutationRemoveCommunityUserArgs = {
+  input: RemoveCommunityUserInput
 }
 
 export type MutationResolveReportArgs = {
@@ -1158,6 +1163,10 @@ export type QueryWhoToFollowConnectionEdge = {
 }
 
 export type ReadNotificationInput = {
+  id: Scalars['ID']
+}
+
+export type RemoveCommunityUserInput = {
   id: Scalars['ID']
 }
 
