@@ -79,6 +79,7 @@ const MembersList: React.FC = () => {
       }
     `,
     {
+      refetchQueries: [{ query: MEMBERS_QUERY }],
       onError(error) {
         toast.error(error.message)
       },
