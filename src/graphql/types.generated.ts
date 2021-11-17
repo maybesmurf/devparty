@@ -1811,6 +1811,7 @@ export type MembersQuery = {
   __typename?: 'Query'
   community: {
     __typename?: 'Community'
+    owner: { __typename?: 'User'; id: string }
     members: {
       __typename?: 'CommunityMembersConnection'
       totalCount: number

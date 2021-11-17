@@ -12,12 +12,14 @@ import Slug from './Slug'
 
 interface Props {
   user: User
+  action?: React.ReactNode
   showFollow?: boolean
   showToast?: boolean
 }
 
 const UserProfileLarge: React.FC<Props> = ({
   user,
+  action,
   showFollow = false,
   showToast = true
 }) => {
@@ -65,9 +67,12 @@ const UserProfileLarge: React.FC<Props> = ({
           <div>{user?.profile?.bio}</div>
         </div>
       </div>
-      {currentUser && showFollow && (
-        <Follow user={user} showText showToast={showToast} />
-      )}
+      <div className="flex items-center space-x-2">
+        {action && action}
+        {currentUser && showFollow && (
+          <Follow user={user} showText showToast={showToast} />
+        )}
+      </div>
     </div>
   )
 }
