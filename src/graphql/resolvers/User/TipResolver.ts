@@ -35,6 +35,7 @@ builder.mutationField('editTips', (t) =>
   t.prismaField({
     type: 'Tip',
     args: { input: t.arg({ type: EditTipsInput }) },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       const data = {
         cash: input.cash,
