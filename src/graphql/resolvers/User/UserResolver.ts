@@ -3,9 +3,9 @@ import { Prisma } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { BASE_URL, ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
-import { createLog } from '../Log/mutations/createLog'
 import { Result } from '../ResultResolver'
 import { deleteAccount } from './mutations/deleteAccount'
+import { editUser } from './mutations/editUser'
 import { modUser } from './mutations/modUser'
 import { toggleFollow } from './mutations/toggleFollow'
 import { getFeaturedUsers } from './queries/getFeaturedUsers'
@@ -219,48 +219,13 @@ const EditUserInput = builder.inputType('EditUserInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditUserInput }) },
     authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
-      try {
-        const user = await db.user.update({
-          ...query,
-          where: { id: session!.userId },
-          data: {
-            username: input.username,
-            email: input.email,
-            profile: {
-              update: {
-                name: input.name,
-                bio: input.bio,
-                location: input.location,
-                avatar: input.avatar,
-                cover: input.cover
-              }
-            }
-          }
-        })
-        createLog(session!.userId, user?.id, 'SETTINGS_UPDATE')
-
-        return user
-      } catch (error: any) {
-        if (
-          error.code === 'P2002' &&
-          error.meta.target === 'users_username_key'
-        ) {
-          throw new Error('Username is already taken!')
-        }
-
-        if (error.code === 'P2002' && error.meta.target === 'users_email_key') {
-          throw new Error('Email is already taken!')
-        }
-
-        throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-      }
+      return await editUser(query, input, session)
     }
   })
 )
