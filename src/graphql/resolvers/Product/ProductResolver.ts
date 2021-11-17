@@ -106,6 +106,7 @@ builder.mutationField('createProduct', (t) =>
     type: 'Product',
     args: { input: t.arg({ type: CreateProductInput }) },
     nullable: true,
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await createProduct(query, input, session)
     }
