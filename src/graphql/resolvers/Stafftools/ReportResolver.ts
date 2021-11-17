@@ -45,6 +45,7 @@ builder.mutationField('createReport', (t) =>
   t.prismaField({
     type: 'Report',
     args: { input: t.arg({ type: CreateReportInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await createReport(query, input, session)
     }
