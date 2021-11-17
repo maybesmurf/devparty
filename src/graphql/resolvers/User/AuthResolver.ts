@@ -43,9 +43,7 @@ builder.mutationField('login', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: false
-    },
+    authScopes: { unauthenticated: false },
     args: { input: t.arg({ type: LoginInput }) },
     nullable: true,
     resolve: async (_query, parent, { input }, { req }) => {
@@ -125,9 +123,7 @@ builder.mutationField('joinWaitlist', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: true
-    },
+    authScopes: { unauthenticated: true },
     args: { input: t.arg({ type: JoinWaitlistInput }) },
     resolve: async (query, parent, { input }) => {
       return joinWaitlist(query, input)
@@ -154,9 +150,7 @@ builder.mutationField('signUp', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: true
-    },
+    authScopes: { unauthenticated: true },
     args: { input: t.arg({ type: SignupInput }) },
     resolve: async (query, parent, { input }, { req }) => {
       return signUp(query, input, req)
@@ -175,6 +169,7 @@ builder.mutationField('changePassword', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: ChangePasswordInput }) },
+    authScopes: { user: true },
     resolve: async (parent, { input }, { session }) => {
       return changePassword(input, session)
     }
