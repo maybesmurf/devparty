@@ -332,6 +332,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: AcceptCOCAndTOSInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       if (input.coc && input.tos) {
         return await db.user.update({
@@ -348,6 +349,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
 builder.mutationField('deleteAccount', (t) =>
   t.field({
     type: Result,
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, args, { session }) => {
       return await deleteAccount(session)
     }
