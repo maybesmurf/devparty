@@ -169,7 +169,7 @@ builder.mutationField('changePassword', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: ChangePasswordInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, { input }, { session }) => {
       return changePassword(input, session)
     }

@@ -48,7 +48,7 @@ builder.mutationField('editUserSocial', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditUserSocialInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       const user = await db.user.update({
         ...query,
