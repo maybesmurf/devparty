@@ -24,7 +24,7 @@
     "@apollo/client": "^3.4.17",
     "@giraphql/core": "^2.18.1",
     "@giraphql/plugin-directives": "^2.9.0",
-    "@giraphql/plugin-prisma": "^0.11.1",
+    "@giraphql/plugin-prisma": "^0.12.1",
     "@giraphql/plugin-relay": "^2.17.0",
     "@giraphql/plugin-scope-auth": "^2.13.1",
     "@giraphql/plugin-simple-objects": "^2.10.0",
