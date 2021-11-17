@@ -92,6 +92,7 @@ builder.mutationField('toggleTopicStar', (t) =>
     type: 'Topic',
     args: { input: t.arg({ type: ToggleTopicStarInput }) },
     nullable: true,
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleStar(session?.userId as string, input.id)
     }
