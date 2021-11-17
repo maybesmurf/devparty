@@ -215,6 +215,7 @@ builder.mutationField('deleteProduct', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeleteProductInput }) },
+    authScopes: { user: true },
     resolve: async (parent, { input }, { session }) => {
       return await deleteProduct(input, session)
     }

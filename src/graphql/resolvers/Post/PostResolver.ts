@@ -214,7 +214,7 @@ builder.mutationField('deletePost', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeletePostInput }) },
-    authScopes: { user: true, $granted: 'currentUser' },
+    authScopes: { user: true },
     resolve: async (parent, { input }, { session }) => {
       return await deletePost(input, session)
     }
