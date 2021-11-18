@@ -3,15 +3,17 @@ import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
+import { Modal } from '@components/UI/Modal'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetStaffBadgesQuery } from '@graphql/types.generated'
 import { PlusCircleIcon } from '@heroicons/react/outline'
-import React from 'react'
+import React, { useState } from 'react'
 import useInView from 'react-cool-inview'
 
 import Sidebar from '../Sidebar'
+import NewBadge from './NewBadge'
 
 export const GET_STAFF_BADGES_QUERY = gql`
   query GetStaffBadges($after: String) {
@@ -45,6 +47,7 @@ export const GET_STAFF_BADGES_QUERY = gql`
 `
 
 const StaffToolsBadges: React.FC = () => {
+  const [showNewBadgeModal, setShowNewBadgeModal] = useState<boolean>(false)
   const { data, loading, error, fetchMore } = useQuery<GetStaffBadgesQuery>(
     GET_STAFF_BADGES_QUERY,
     { variables: { after: null } }
@@ -81,9 +84,19 @@ const StaffToolsBadges: React.FC = () => {
           <CardBody>
             <div className="flex items-center justify-between">
               <div className="text-xl font-bold">Badges</div>
-              <Button icon={<PlusCircleIcon className="h-5 w-5" />}>
+              <Button
+                icon={<PlusCircleIcon className="h-5 w-5" />}
+                onClick={() => setShowNewBadgeModal(!showNewBadgeModal)}
+              >
                 New Badge
               </Button>
+              <Modal
+                onClose={() => setShowNewBadgeModal(!showNewBadgeModal)}
+                title="New Badge"
+                show={showNewBadgeModal}
+              >
+                <NewBadge />
+              </Modal>
             </div>
             <div className="divide-y">
               <ErrorMessage title="Failed to load badges" error={error} />
