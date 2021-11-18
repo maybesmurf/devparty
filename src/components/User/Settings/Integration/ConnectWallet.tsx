@@ -8,6 +8,7 @@ import {
   WalletSettingsMutationVariables
 } from '@graphql/types.generated'
 import { ethers } from 'ethers'
+import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const ConnectWallet: React.FC<Props> = ({ integration }) => {
+  const { resolvedTheme } = useTheme()
   const [error, setError] = useState<boolean>(false)
   const [editWallet] = useMutation<
     WalletSettingsMutation,
@@ -43,7 +45,7 @@ const ConnectWallet: React.FC<Props> = ({ integration }) => {
   )
 
   const connectWallet = async () => {
-    const web3Modal = getWeb3Modal()
+    const web3Modal = getWeb3Modal(resolvedTheme || 'light')
     const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
     const address = await web3.getSigner().getAddress()
 

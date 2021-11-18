@@ -19,6 +19,7 @@ import { ArrowRightIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
+import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
@@ -47,6 +48,7 @@ interface Props {
 
 const Mint: React.FC<Props> = ({ post, setShowMint }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
+  const { resolvedTheme } = useTheme()
   const [isMinting, setIsMinting] = useState<boolean>(false)
   const [openseaURL, setOpenseaURL] = useState<string>()
   const [error, setError] = useState<string | undefined>()
@@ -74,7 +76,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
   const mintToken = async () => {
     try {
       // Connect to Wallet
-      const web3Modal = getWeb3Modal()
+      const web3Modal = getWeb3Modal(resolvedTheme || 'light')
       const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
 
       // Get signature from the user
