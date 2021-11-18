@@ -43,6 +43,7 @@ builder.mutationField('createBadge', (t) =>
     args: { input: t.arg({ type: CreateBadgeInput }) },
     resolve: async (query, parent, { input }) => {
       return await db.badge.create({
+        ...query,
         data: {
           name: input.name,
           image: input.image,
