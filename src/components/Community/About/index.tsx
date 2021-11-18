@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import Details from '@components/Community/Details'
 import {
   GridItemEight,
@@ -6,34 +6,71 @@ import {
   GridItemTwelve,
   GridLayout
 } from '@components/GridLayout'
+import SearchUsers from '@components/shared/SearchUsers'
 import DevpartySEO from '@components/shared/SEO'
 import Slug from '@components/shared/Slug'
 import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
-import { Community, GetCommunityQuery } from '@graphql/types.generated'
+import {
+  AddCommunityModeratorMutation,
+  AddCommunityModeratorMutationVariables,
+  Community,
+  GetCommunityQuery,
+  User
+} from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
+import toast from 'react-hot-toast'
 import Custom404 from 'src/pages/404'
 import * as timeago from 'timeago.js'
 
 import Rules from '../Rules'
 import { GET_COMMUNITY_QUERY } from '../ViewCommunity'
-import ModeratorsList from './Moderators'
+import ModeratorsList, { GET_MODERATORS_QUERY } from './Moderators'
 
 const About: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading } = useQuery<GetCommunityQuery>(GET_COMMUNITY_QUERY, {
     variables: { slug: router.query.slug },
     skip: !router.isReady
   })
+  const [addCommunityModerator] = useMutation<
+    AddCommunityModeratorMutation,
+    AddCommunityModeratorMutationVariables
+  >(
+    gql`
+      mutation addCommunityModerator($input: AddCommunityModeratorInput!) {
+        addCommunityModerator(input: $input)
+      }
+    `,
+    {
+      refetchQueries: [
+        { query: GET_MODERATORS_QUERY, variables: { slug: router.query.slug } }
+      ],
+      onError(error) {
+        toast.error(error.message)
+      },
+      onCompleted() {
+        toast.success('Moderator added successfully!')
+      }
+    }
+  )
   const community = data?.community
 
   if (!router.isReady || loading) return <PageLoading message="Loading about" />
 
   if (!community) return <Custom404 />
+
+  const handleAdd = (user: User) => {
+    addCommunityModerator({
+      variables: { input: { userId: user?.id, communityId: community?.id } }
+    })
+  }
 
   return (
     <>
@@ -84,9 +121,20 @@ const About: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="space-y-2 p-5">
-                <div className="text-lg font-bold">Moderators</div>
-                <ModeratorsList />
+              <div className="space-y-5 p-5">
+                {currentUser?.id === community?.owner?.id && (
+                  <div className="space-y-2">
+                    <div className="text-lg font-bold">Add Moderators</div>
+                    <SearchUsers
+                      placeholder="Search by username"
+                      onClick={(user) => handleAdd(user)}
+                    />
+                  </div>
+                )}
+                <div className="space-y-2">
+                  <div className="text-lg font-bold">Moderators</div>
+                  <ModeratorsList />
+                </div>
               </div>
               <div>
                 <div className="space-y-2 p-5">

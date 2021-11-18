@@ -1,17 +1,17 @@
 import { Result } from '@graphql/resolvers/ResultResolver'
-import { RemoveCommunityUserInput } from '@graphql/types.generated'
+import { AddCommunityModeratorInput } from '@graphql/types.generated'
 import { Prisma, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
- * Remove user from the community
- * @param input - RemoveCommunityUserInput
+ * Add moderator to the community
+ * @param input - AddCommunityModeratorInput
  * @param session - Current user's session
  * @returns RESULT
  */
-export const removeCommunityUser = async (
-  input: RemoveCommunityUserInput,
+export const addCommunityModerator = async (
+  input: AddCommunityModeratorInput,
   session: Session | null | undefined
 ) => {
   const community = await db.community.findUnique({
@@ -21,19 +21,19 @@ export const removeCommunityUser = async (
   })
 
   if (community?.owner?.id === input.userId) {
-    throw new Error("Owner can't be removed from the community!")
+    throw new Error('Only owner can add mods to community!')
   }
 
   try {
     if (community?.owner?.id === session?.userId) {
       await db.community.update({
         where: { id: community?.id },
-        data: { members: { disconnect: { id: input.userId } } }
+        data: { moderators: { connect: { id: input.userId } } }
       })
 
       return Result.SUCCESS
     } else {
-      throw new Error('You dont have permission to remove the user!')
+      throw new Error('You dont have permission to add the user!')
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

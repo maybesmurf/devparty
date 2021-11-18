@@ -2,6 +2,8 @@ import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 import { BASE_URL } from 'src/constants'
 
+import { Result } from '../ResultResolver'
+import { addCommunityModerator } from './mutations/addCommunityModerator'
 import { createCommunity } from './mutations/createCommunity'
 import { removeCommunityUser } from './mutations/removeCommunityUser'
 import { toggleJoin } from './mutations/toggleJoin'
@@ -123,13 +125,35 @@ const RemoveCommunityUserInput = builder.inputType('RemoveCommunityUserInput', {
 })
 
 builder.mutationField('removeCommunityUser', (t) =>
-  t.prismaField({
-    type: 'Community',
+  t.field({
+    type: Result,
     args: { input: t.arg({ type: RemoveCommunityUserInput }) },
     authScopes: { user: true },
     nullable: true,
-    resolve: async (query, parent, { input }, { session }) => {
-      return await removeCommunityUser(query, input, session)
+    resolve: async (parent, { input }, { session }) => {
+      return await removeCommunityUser(input, session)
+    }
+  })
+)
+
+const AddCommunityModeratorInput = builder.inputType(
+  'AddCommunityModeratorInput',
+  {
+    fields: (t) => ({
+      userId: t.id({ validate: { uuid: true } }),
+      communityId: t.id({ validate: { uuid: true } })
+    })
+  }
+)
+
+builder.mutationField('addCommunityModerator', (t) =>
+  t.field({
+    type: Result,
+    args: { input: t.arg({ type: AddCommunityModeratorInput }) },
+    authScopes: { user: true },
+    nullable: true,
+    resolve: async (parent, { input }, { session }) => {
+      return await addCommunityModerator(input, session)
     }
   })
 )

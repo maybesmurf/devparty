@@ -3,6 +3,11 @@ input AcceptCOCAndTOSInput {
   tos: Boolean!
 }
 
+input AddCommunityModeratorInput {
+  communityId: ID!
+  userId: ID!
+}
+
 input AnswerPollInput {
   id: ID!
 }
@@ -298,6 +303,7 @@ input ModUserInput {
 
 type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
+  addCommunityModerator(input: AddCommunityModeratorInput!): Result
   answerPoll(input: AnswerPollInput!): PollAnswer
   attachBadge(input: AttachBadgeToUserInput!): User!
   authWithWallet(input: AuthWithWalletInput!): User
@@ -329,7 +335,7 @@ type Mutation {
   onboardUser(input: OnboardUserInput!): User
   readNotification(input: ReadNotificationInput!): Result!
   regenerateInvite: Invite!
-  removeCommunityUser(input: RemoveCommunityUserInput!): Community
+  removeCommunityUser(input: RemoveCommunityUserInput!): Result
   resolveReport(input: ResolveReportInput!): Result
   revokeSession(input: RevokeSessionInput!): Result!
   signUp(input: SignupInput!): User!

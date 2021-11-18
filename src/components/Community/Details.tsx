@@ -87,9 +87,9 @@ const Details: React.FC<Props> = ({ community }) => {
                         />
                       </a>
                     </Link>
-                    {community?.members?.totalCount - 1 > 0 && (
+                    {community?.moderators?.totalCount - 1 > 0 && (
                       <div className="text-gray-500">
-                        and {humanize(community?.members?.totalCount)} others
+                        and {humanize(community?.moderators?.totalCount)} others
                       </div>
                     )}
                   </div>
