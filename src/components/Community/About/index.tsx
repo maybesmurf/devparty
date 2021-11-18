@@ -6,16 +6,18 @@ import {
   GridItemTwelve,
   GridLayout
 } from '@components/GridLayout'
+import SearchUsers from '@components/shared/SearchUsers'
 import DevpartySEO from '@components/shared/SEO'
 import Slug from '@components/shared/Slug'
 import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
 import { Community, GetCommunityQuery } from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
 import Custom404 from 'src/pages/404'
 import * as timeago from 'timeago.js'
 
@@ -25,11 +27,16 @@ import ModeratorsList from './Moderators'
 
 const About: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading } = useQuery<GetCommunityQuery>(GET_COMMUNITY_QUERY, {
     variables: { slug: router.query.slug },
     skip: !router.isReady
   })
   const community = data?.community
+
+  const handleAdd = () => {
+    alert('yo')
+  }
 
   if (!router.isReady || loading) return <PageLoading message="Loading about" />
 
@@ -84,9 +91,20 @@ const About: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="space-y-2 p-5">
-                <div className="text-lg font-bold">Moderators</div>
-                <ModeratorsList />
+              <div className="space-y-5 p-5">
+                {currentUser?.id === community?.owner?.id && (
+                  <div className="space-y-2">
+                    <div className="text-lg font-bold">Add Moderators</div>
+                    <SearchUsers
+                      placeholder="Search by username"
+                      onClick={() => handleAdd()}
+                    />
+                  </div>
+                )}
+                <div className="space-y-2">
+                  <div className="text-lg font-bold">Moderators</div>
+                  <ModeratorsList />
+                </div>
               </div>
               <div>
                 <div className="space-y-2 p-5">

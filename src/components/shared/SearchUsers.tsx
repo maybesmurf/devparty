@@ -1,49 +1,20 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { Card } from '@components/UI/Card'
 import { Spinner } from '@components/UI/Spinner'
 import useOnClickOutside from '@components/utils/hooks/useOnClickOutside'
-import { SearchTopicsQuery, SearchUsersQuery } from '@graphql/types.generated'
+import { imagekitURL } from '@components/utils/imagekitURL'
+import { SearchUsersQuery } from '@graphql/types.generated'
 import React, { useRef, useState } from 'react'
 
-import UserProfile from '../UserProfile'
+import { SEARCH_USERS_QUERY } from './Navbar/Search'
+import Slug from './Slug'
 
-export const SEARCH_USERS_QUERY = gql`
-  query SearchUsers($keyword: String!) {
-    searchUsers(first: 10, keyword: $keyword) {
-      edges {
-        node {
-          id
-          username
-          isVerified
-          profile {
-            id
-            name
-            avatar
-          }
-          status {
-            emoji
-            text
-          }
-        }
-      }
-    }
-  }
-`
+interface Props {
+  placeholder?: string
+  onClick: () => void
+}
 
-const SEARCH_TOPICS_QUERY = gql`
-  query SearchTopics($keyword: String!) {
-    searchTopics(first: 5, keyword: $keyword) {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-`
-
-const Search: React.FC = () => {
+const SearchUsers: React.FC<Props> = ({ placeholder, onClick }) => {
   const [searchText, setSearchText] = useState<string>('')
   const dropdownRef = useRef(null)
 
@@ -51,14 +22,11 @@ const Search: React.FC = () => {
 
   const [searchUsers, { data: searchUsersData, loading: searchUsersLoading }] =
     useLazyQuery<SearchUsersQuery>(SEARCH_USERS_QUERY)
-  const [searchTopics, { data: searchTopicsData }] =
-    useLazyQuery<SearchTopicsQuery>(SEARCH_TOPICS_QUERY)
 
   const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
     let keyword = evt.target.value
     setSearchText(keyword)
     searchUsers({ variables: { keyword } })
-    searchTopics({ variables: { keyword } })
   }
 
   return (
@@ -66,26 +34,16 @@ const Search: React.FC = () => {
       <input
         className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:border-brand-500 focus:ring-brand-400 outline-none rounded-lg shadow-sm w-full py-1.5"
         type="text"
-        placeholder="Search Devparty..."
+        placeholder={placeholder}
         value={searchText}
         onChange={handleSearch}
       />
       {searchText.length > 0 && (
         <div
-          className="flex flex-col w-full sm:max-w-md absolute mt-2"
+          className="flex flex-col w-full sm:max-w-md absolute mt-2 z-10"
           ref={dropdownRef}
         >
           <Card className="py-2 max-h-[80vh] overflow-y-auto">
-            {searchTopicsData?.searchTopics?.edges?.map((topic: any) => (
-              <div key={topic?.node?.id} className="px-4 py-2">
-                <a className="w-full" href={`/topics/${topic?.node?.name}`}>
-                  #{topic?.node?.name}
-                </a>
-              </div>
-            ))}
-            {(searchTopicsData?.searchTopics?.edges?.length as number) > 0 && (
-              <div className="border-t dark:border-gray-800 my-2" />
-            )}
             {searchUsersLoading ? (
               <div className="px-4 py-2 font-bold text-center space-y-2 text-sm">
                 <Spinner size="sm" className="mx-auto" />
@@ -96,11 +54,20 @@ const Search: React.FC = () => {
                 {searchUsersData?.searchUsers?.edges?.map((user: any) => (
                   <div
                     key={user?.node?.id}
-                    className="hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2"
+                    className="hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 flex items-center text-sm space-x-2 cursor-pointer"
+                    onClick={onClick}
                   >
-                    <a href={`/u/${user?.node?.username}`}>
-                      <UserProfile user={user?.node} />
-                    </a>
+                    <img
+                      src={imagekitURL(
+                        user?.node?.profile?.avatar as string,
+                        50,
+                        50
+                      )}
+                      className="h-6 w-6 rounded-full bg-gray-200"
+                      alt={`@${user?.node?.username}`}
+                    />
+                    <div>{user?.node?.profile?.name}</div>
+                    <Slug slug={user?.node?.username} prefix="@" />
                   </div>
                 ))}
                 {searchUsersData?.searchUsers?.edges?.length === 0 && (
@@ -115,4 +82,4 @@ const Search: React.FC = () => {
   )
 }
 
-export default Search
+export default SearchUsers
