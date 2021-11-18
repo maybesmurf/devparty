@@ -2,6 +2,7 @@ import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 import { BASE_URL } from 'src/constants'
 
+import { Result } from '../ResultResolver'
 import { addCommunityModerator } from './mutations/addCommunityModerator'
 import { createCommunity } from './mutations/createCommunity'
 import { removeCommunityUser } from './mutations/removeCommunityUser'
@@ -146,13 +147,13 @@ const AddCommunityModeratorInput = builder.inputType(
 )
 
 builder.mutationField('addCommunityModerator', (t) =>
-  t.prismaField({
-    type: 'Community',
+  t.field({
+    type: Result,
     args: { input: t.arg({ type: AddCommunityModeratorInput }) },
     authScopes: { user: true },
     nullable: true,
-    resolve: async (query, parent, { input }, { session }) => {
-      return await addCommunityModerator(query, input, session)
+    resolve: async (parent, { input }, { session }) => {
+      return await addCommunityModerator(input, session)
     }
   })
 )

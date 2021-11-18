@@ -1,3 +1,4 @@
+import { Result } from '@graphql/resolvers/ResultResolver'
 import { AddCommunityModeratorInput } from '@graphql/types.generated'
 import { Prisma, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
@@ -5,18 +6,15 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
  * Add moderator to the community
- * @param query - Contains an include object to pre-load data needed to resolve nested parts.
  * @param input - AddCommunityModeratorInput
  * @param session - Current user's session
  * @returns RESULT
  */
 export const addCommunityModerator = async (
-  query: Record<string, unknown>,
   input: AddCommunityModeratorInput,
   session: Session | null | undefined
 ) => {
   const community = await db.community.findUnique({
-    ...query,
     where: { id: input.communityId },
     select: { id: true, owner: { select: { id: true } } },
     rejectOnNotFound: true
@@ -28,11 +26,12 @@ export const addCommunityModerator = async (
 
   try {
     if (community?.owner?.id === session?.userId) {
-      return await db.community.update({
-        ...query,
+      await db.community.update({
         where: { id: community?.id },
-        data: { members: { connect: { id: input.userId } } }
+        data: { moderators: { connect: { id: input.userId } } }
       })
+
+      return Result.SUCCESS
     } else {
       throw new Error('You dont have permission to add the user!')
     }
