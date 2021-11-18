@@ -14,27 +14,33 @@ export const toggleJoin = async (
   currentUserId: string,
   communityId: string
 ) => {
-  try {
-    // Leave
-    if (await hasJoined(currentUserId, communityId)) {
-      const community = await db.community.findFirst({
-        where: { id: communityId },
-        select: { ownerId: true }
-      })
+  // Leave
+  if (await hasJoined(currentUserId, communityId)) {
+    const community = await db.community.findFirst({
+      where: { id: communityId },
+      select: { ownerId: true }
+    })
 
-      if (community?.ownerId === currentUserId) {
-        throw new Error('You cannot leave the community you owned!')
-      } else {
+    if (community?.ownerId === currentUserId) {
+      throw new Error('You cannot leave the community you owned!')
+    } else {
+      try {
         const updatedCommunity = await db.community.update({
           where: { id: communityId },
           data: { members: { disconnect: { id: currentUserId } } }
         })
 
         return updatedCommunity
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
+        }
       }
     }
+  }
 
-    // Join
+  // Join
+  try {
     const community = await db.community.update({
       where: { id: communityId },
       data: { members: { connect: { id: currentUserId } } }

@@ -1,6 +1,7 @@
 import SinglePost from '@components/Post/SinglePost'
 import Slug from '@components/shared/Slug'
 import { Card, CardBody } from '@components/UI/Card'
+import { formatUsername } from '@components/utils/formatUsername'
 import { Notification, Post } from '@graphql/types.generated'
 import { ReplyIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
@@ -21,7 +22,10 @@ const PostReply: React.FC<Props> = ({ notification }) => {
           <div className="flex items-center linkify space-x-1">
             <div className="flex items-center space-x-3">
               <ReplyIcon className="h-6 w-6 text-purple-500" />
-              <Slug slug={notification?.dispatcher?.username} prefix="@" />
+              <Slug
+                slug={formatUsername(notification?.dispatcher?.username)}
+                prefix="@"
+              />
             </div>
             <div>replied to your</div>
             <Link href={`/posts/${notification?.post?.id}`} passHref>

@@ -3,24 +3,24 @@ import { Button } from '@components/UI/Button'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import { useAuthRedirect } from '@components/utils/hooks/useAuthRedirect'
 import {
-  LoginWithWalletMutation,
-  LoginWithWalletMutationVariables
+  AuthWithWalletMutation,
+  AuthWithWalletMutationVariables
 } from '@graphql/types.generated'
 import { ethers } from 'ethers'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { PUBLIC_SIGNING_MESSAGE, STATIC_ASSETS } from 'src/constants'
 
-const LoginWithWallet: React.FC = () => {
+const AuthWithWallet: React.FC = () => {
   const authRedirect = useAuthRedirect()
   const [loginButtonMessage, setLoginButtonMessage] = useState<string>('Wallet')
-  const [login] = useMutation<
-    LoginWithWalletMutation,
-    LoginWithWalletMutationVariables
+  const [authWithWallet] = useMutation<
+    AuthWithWalletMutation,
+    AuthWithWalletMutationVariables
   >(
     gql`
-      mutation LoginWithWallet($input: LoginWithWalletInput!) {
-        loginWithWallet(input: $input) {
+      mutation AuthWithWallet($input: AuthWithWalletInput!) {
+        authWithWallet(input: $input) {
           id
         }
       }
@@ -53,7 +53,7 @@ const LoginWithWallet: React.FC = () => {
           ])
 
         setLoginButtonMessage('Loggin in...')
-        await login({
+        await authWithWallet({
           variables: { input: { nonce: data?.nonce as string, signature } }
         })
         web3Modal.clearCachedProvider()
@@ -85,4 +85,4 @@ const LoginWithWallet: React.FC = () => {
   )
 }
 
-export default LoginWithWallet
+export default AuthWithWallet

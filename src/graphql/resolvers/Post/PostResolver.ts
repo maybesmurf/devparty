@@ -100,8 +100,8 @@ builder.queryField('homeFeed', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
-    authScopes: { user: true },
     args: { type: t.arg.string({ defaultValue: 'ALL' }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { type }, { session }) => {
       return await homeFeed(query, type, session)
     }
@@ -158,6 +158,7 @@ builder.mutationField('createPost', (t) =>
   t.prismaField({
     type: 'Post',
     args: { input: t.arg({ type: CreatePostInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await createPost(query, input, session)
     }
@@ -176,6 +177,7 @@ builder.mutationField('editPost', (t) =>
   t.prismaField({
     type: 'Post',
     args: { input: t.arg({ type: EditPostInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       return await editPost(query, input, session)
     }
@@ -195,7 +197,7 @@ builder.mutationField('mint', (t) =>
   t.prismaField({
     type: 'NFT',
     args: { input: t.arg({ type: MintNFTInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await mintNFT(query, input, session)
     }
@@ -212,6 +214,7 @@ builder.mutationField('deletePost', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeletePostInput }) },
+    authScopes: { user: true },
     resolve: async (parent, { input }, { session }) => {
       return await deletePost(input, session)
     }

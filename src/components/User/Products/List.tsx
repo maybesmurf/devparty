@@ -1,10 +1,11 @@
 import { gql, useQuery } from '@apollo/client'
 import ProductProfileLarge from '@components/shared/ProductProfileLarge'
-import ProductProfileShimmer from '@components/shared/Shimmer/ProductProfileShimmer'
+import ProductProfileLargeShimmer from '@components/shared/Shimmer/ProductProfileLargeShimmer'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Spinner } from '@components/UI/Spinner'
+import { formatUsername } from '@components/utils/formatUsername'
 import { GetAllUserProductsQuery, Product } from '@graphql/types.generated'
 import { UsersIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
@@ -72,17 +73,17 @@ const ProductsList: React.FC = () => {
       <div className="space-y-3">
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <ProductProfileShimmer />
+            <ProductProfileLargeShimmer showSubscribe />
           </CardBody>
         </Card>
       </div>
@@ -96,7 +97,9 @@ const ProductsList: React.FC = () => {
           <EmptyState
             message={
               <div>
-                <span className="font-bold mr-1">@{router.query.username}</span>
+                <span className="font-bold mr-1">
+                  @{formatUsername(router.query.username as string)}
+                </span>
                 <span>doesn’t have any products yet.</span>
               </div>
             }

@@ -8,7 +8,6 @@
     "wix.vscode-import-cost",
     "formulahendry.auto-close-tag",
     "bradlc.vscode-tailwindcss",
-    "pkief.material-icon-theme",
-    "juanblanco.solidity"
+    "pkief.material-icon-theme"
   ]
 }

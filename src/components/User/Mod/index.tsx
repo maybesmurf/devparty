@@ -4,6 +4,7 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Modal } from '@components/UI/Modal'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   ModUserMutation,
   ModUserMutationVariables,
@@ -172,7 +173,7 @@ const UserMod: React.FC<Props> = ({ user }) => {
           title={
             <div className="flex items-center space-x-1.5">
               <div>Update badges for</div>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           }
           show={showUpdateBadgesModal}

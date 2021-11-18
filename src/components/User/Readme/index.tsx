@@ -8,6 +8,7 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import Details from '@components/User/Details'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import {
   GetProfileReadmeQuery,
@@ -105,7 +106,9 @@ const Readme: React.FC = () => {
                 <EmptyState
                   message={
                     <div className="text-center">
-                      <span className="font-bold mr-1">@{user.username}</span>
+                      <span className="font-bold mr-1">
+                        @{formatUsername(user.username)}
+                      </span>
                       <span>has no README!</span>
                       {user?.id === currentUser?.id && (
                         <div className="mt-4">

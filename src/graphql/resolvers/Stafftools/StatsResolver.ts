@@ -57,7 +57,7 @@ builder.queryField('stats', (t) =>
   t.field({
     type: StatsObject,
     nullable: true,
-    authScopes: { isStaff: true },
+    authScopes: { staff: true },
     resolve: async () => {
       const users = await db.user.count()
       const products = await db.product.count()

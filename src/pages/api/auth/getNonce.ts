@@ -12,19 +12,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       where: { integrations: { ethAddress: address as string } }
     })
 
-    if (!user) {
-      return res.status(400).send({
-        status: 'error',
-        message: 'This address is not associated with any user.'
-      })
-    }
     const nonce = crypto.randomInt(111111, 999999)
-    const updatedIntegration = await db.integration.update({
-      where: { userId: user.id },
-      data: { ethNonce: nonce.toString() }
-    })
+    if (user) {
+      const updatedIntegration = await db.integration.update({
+        where: { userId: user.id },
+        data: { ethNonce: nonce.toString() }
+      })
 
-    return res.json({ nonce: updatedIntegration?.ethNonce })
+      return res.json({ nonce: updatedIntegration?.ethNonce })
+    } else {
+      return res.json({ nonce: nonce.toString() })
+    }
   } else {
     return res.json({
       status: 'error',

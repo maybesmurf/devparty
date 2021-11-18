@@ -4,6 +4,7 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Tooltip } from '@components/UI/Tooltip'
+import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetExploreUserQuery } from '@graphql/types.generated'
@@ -93,7 +94,7 @@ const Topics: React.FC = () => {
                   )}
                 </a>
               </Link>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           </div>
           <div className="border-b dark:border-gray-800" />

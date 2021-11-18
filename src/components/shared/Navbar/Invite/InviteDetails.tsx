@@ -2,6 +2,7 @@ import { gql, useMutation, useQuery } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Spinner } from '@components/UI/Spinner'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   GetInviteCodeQuery,
   RegenerateInviteMutation,
@@ -43,6 +44,7 @@ const InviteDetails: React.FC = () => {
       }
     `,
     {
+      refetchQueries: [{ query: GET_INVITE_CODE_QUERY }],
       onError(error) {
         toast.error(error.message)
       },
@@ -76,9 +78,15 @@ const InviteDetails: React.FC = () => {
             Invite your friends & colleagues to Devparty
           </div>
           <div>
-            Hey {<Slug slug={user?.username} prefix="@" />} 👋 You can either
-            share your personalized invite link or your unique invite code with
-            friends!
+            Hey{' '}
+            {
+              <Slug
+                slug={formatUsername(user?.username as string)}
+                prefix="@"
+              />
+            }{' '}
+            👋 You can either share your personalized invite link or your unique
+            invite code with friends!
           </div>
         </div>
         {user?.invite ? (

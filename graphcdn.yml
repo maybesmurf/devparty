@@ -15,12 +15,6 @@ rules:
     swr: 0
     description: Skip spotify query
   - types:
-      - Session
-    maxAge: 0
-    swr: 0
-    scope: AUTHENTICATED
-    description: Skip session query
-  - types:
       User:
         - invite
         - notificationsCount
@@ -29,3 +23,7 @@ rules:
     scope: AUTHENTICATED
     description: Skip user notificationsCount and invite fields
 schema: 'https://devparty.io/api/graphql'
+passThroughOnly: false
+rootTypeNames:
+  query: Query
+  mutation: Mutation

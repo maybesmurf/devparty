@@ -1,6 +1,7 @@
 import { Tooltip } from '@components/UI/Tooltip'
 import Follow from '@components/User/Follow'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
@@ -46,7 +47,7 @@ const UserProfile: React.FC<Props> = ({ user, showFollow = false }) => {
               </a>
             </Link>
           </div>
-          <Slug slug={user?.username} prefix="@" />
+          <Slug slug={formatUsername(user?.username)} prefix="@" />
         </div>
       </div>
       {currentUser && showFollow && <Follow user={user} showText={false} />}

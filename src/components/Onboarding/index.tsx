@@ -5,6 +5,7 @@ import { Checkbox } from '@components/UI/Checkbox'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   AcceptCocAndTosMutation,
   AcceptCocAndTosMutationVariables
@@ -54,8 +55,10 @@ const Onboarding: React.FC = () => {
         <div className="bg-black rounded-t-none sm:rounded-t-lg py-8 px-5 text-white space-y-5">
           <img className="h-10 w-10" src="/white.svg" alt="Logo" />
           <div className="text-3xl font-bold space-y-1.5">
-            <div>@{currentUser?.username} — welcome to</div>
-            <div>Devparty!</div>
+            <div className="truncate">
+              @{formatUsername(currentUser?.username as string)}
+            </div>
+            <div>Welcome to Devparty!</div>
           </div>
           <div>A social network for developers and creators.</div>
         </div>
@@ -67,13 +70,13 @@ const Onboarding: React.FC = () => {
             }
           >
             <div className="flex items-center space-x-2">
-              <Checkbox {...form.register('coc')} />
+              <Checkbox id="acceptCOC" {...form.register('coc')} />
               <label htmlFor="acceptCOC">
                 You agree to uphold our <a href="/">Code of Conduct</a>
               </label>
             </div>
             <div className="flex items-center space-x-2">
-              <Checkbox {...form.register('tos')} />
+              <Checkbox id="acceptTOS" {...form.register('tos')} />
               <label htmlFor="acceptTOS">
                 You agree to our <a href="/">Terms and Conditions</a>
               </label>

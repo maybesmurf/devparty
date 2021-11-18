@@ -2,6 +2,7 @@ import { gql, useMutation } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/UI/Card'
+import { formatUsername } from '@components/utils/formatUsername'
 import { useOembed } from '@components/utils/hooks/useOembed'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
@@ -165,7 +166,10 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
             </Link>
             <Link href={`/u/${post?.parent?.user?.username}`} passHref>
               <a href={`/u/${post?.parent?.user?.username}`}>
-                <Slug slug={post?.parent?.user?.username} prefix="@" />
+                <Slug
+                  slug={formatUsername(post?.parent?.user?.username)}
+                  prefix="@"
+                />
               </a>
             </Link>
           </div>

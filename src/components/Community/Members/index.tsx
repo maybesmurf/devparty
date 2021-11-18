@@ -15,7 +15,7 @@ import Custom404 from 'src/pages/404'
 
 import Rules from '../Rules'
 import { GET_COMMUNITY_QUERY } from '../ViewCommunity'
-import MembersList from './list'
+import MembersList from './List'
 
 const Members: React.FC = () => {
   const router = useRouter()

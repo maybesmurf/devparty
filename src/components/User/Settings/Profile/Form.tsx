@@ -28,7 +28,7 @@ const editProfileSchema = object({
     .min(2, { message: '👤 Username should atleast have 2 characters' })
     .max(50, { message: '👤 Useranme should be within 50 characters' })
     .regex(/^[a-z0-9_\.]+$/, { message: '👤 Invalid username' }),
-  email: string().email({ message: '📧 Invalid email' }),
+  email: string().email({ message: '📧 Invalid email' }).nullable(),
   name: string()
     .min(2, { message: '👤 Name should atleast have 2 characters' })
     .max(50, { message: '👤 Name should be within 50 characters' }),
@@ -59,7 +59,6 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
         editUser(input: $input) {
           id
           username
-          email
           profile {
             id
             name
@@ -126,8 +125,8 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
                   variables: {
                     input: {
                       username,
-                      email,
                       name,
+                      email: email as string,
                       bio: bio as string,
                       location: location as string,
                       avatar: avatar as string,

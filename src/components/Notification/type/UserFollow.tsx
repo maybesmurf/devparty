@@ -1,6 +1,7 @@
 import Slug from '@components/shared/Slug'
 import UserProfileLarge from '@components/shared/UserProfileLarge'
 import { Card, CardBody } from '@components/UI/Card'
+import { formatUsername } from '@components/utils/formatUsername'
 import { Notification } from '@graphql/types.generated'
 import { UserAddIcon } from '@heroicons/react/outline'
 import React from 'react'
@@ -21,7 +22,10 @@ const UserFollow: React.FC<Props> = ({ notification, followedVia }) => {
           <div className="flex items-center space-x-1">
             <div className="flex items-center space-x-3">
               <UserAddIcon className="h-6 w-6 text-green-500" />
-              <Slug slug={notification?.dispatcher?.username} prefix="@" />
+              <Slug
+                slug={formatUsername(notification?.dispatcher?.username)}
+                prefix="@"
+              />
             </div>
             {followedVia === 'INVITE' ? (
               <div>used your invite and automatically followed you 🎉</div>

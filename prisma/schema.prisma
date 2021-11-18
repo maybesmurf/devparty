@@ -17,10 +17,10 @@ generator giraphql {
 }
 
 model User {
-  id             String @id @default(uuid())
-  username       String @unique @db.VarChar(32)
-  email          String @unique
-  hashedPassword String
+  id             String  @id @default(uuid())
+  username       String  @unique @db.VarChar(64)
+  email          String? @unique
+  hashedPassword String?
 
   // Flags
   spammy     Boolean @default(false)
@@ -40,7 +40,7 @@ model User {
   subscribedProducts     Product[]
   ownedCommunities       Community[]    @relation("communityOwner")
   moderatedCommunities   Community[]    @relation("communityModerator")
-  joinedCommunities      Community[]
+  joinedCommunities      Community[]    @relation("communityMember")
   sessions               Session[]
   profile                Profile?
   tip                    Tip?
@@ -348,7 +348,7 @@ model Community {
   owner      User   @relation("communityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId    String
   moderators User[] @relation("communityModerator")
-  members    User[]
+  members    User[] @relation("communityMember")
   posts      Post[]
   rules      Rule[]
 
@@ -416,6 +416,7 @@ model Integration {
   spotifyRefreshToken String?
   githubId            String? @unique @db.VarChar(64)
   ethAddress          String? @unique @db.VarChar(64)
+  ensAddress          String?
   ethNonce            String? @db.VarChar(6)
 
   // Relations

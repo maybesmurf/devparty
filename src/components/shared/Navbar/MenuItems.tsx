@@ -1,4 +1,5 @@
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { Menu, Transition } from '@headlessui/react'
@@ -78,7 +79,12 @@ const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
               >
                 <div>
                   <div className="font-bold">Signed in as</div>
-                  <Slug slug={currentUser?.username} prefix="@" />
+                  <div className="truncate">
+                    <Slug
+                      slug={formatUsername(currentUser?.username)}
+                      prefix="@"
+                    />
+                  </div>
                 </div>
               </Menu.Item>
               <div className="border-b dark:border-gray-800" />
@@ -100,8 +106,8 @@ const MenuItems: React.FC<Props> = ({ currentUser, setShowStatusModal }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-1.5 text-gray-500">
-                    <EmojiHappyIcon className="h-5 w-5" />
+                  <div className="flex items-center space-x-1.5">
+                    <EmojiHappyIcon className="h-4 w-4" />
                     <div>Set status</div>
                   </div>
                 )}

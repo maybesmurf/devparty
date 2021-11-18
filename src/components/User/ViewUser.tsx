@@ -55,6 +55,7 @@ export const UserFragment = gql`
     }
     integrations {
       ethAddress
+      ensAddress
     }
     tip {
       id

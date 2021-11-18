@@ -6,6 +6,7 @@ import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
@@ -80,12 +81,15 @@ const Details: React.FC<Props> = ({ community }) => {
                     />
                     <Link href={`/u/${community?.owner?.username}`} passHref>
                       <a href={`/u/${community?.owner?.username}`}>
-                        <Slug slug={community?.owner?.username} prefix="@" />
+                        <Slug
+                          slug={formatUsername(community?.owner?.username)}
+                          prefix="@"
+                        />
                       </a>
                     </Link>
-                    {community?.members?.totalCount - 1 > 0 && (
+                    {community?.moderators?.totalCount - 1 > 0 && (
                       <div className="text-gray-500">
-                        and {humanize(community?.members?.totalCount)} others
+                        and {humanize(community?.moderators?.totalCount)} others
                       </div>
                     )}
                   </div>

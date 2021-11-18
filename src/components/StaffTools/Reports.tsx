@@ -8,6 +8,7 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { Tooltip } from '@components/UI/Tooltip'
+import { formatUsername } from '@components/utils/formatUsername'
 import {
   GetStaffReportsQuery,
   ResolveReportMutation,
@@ -122,7 +123,10 @@ const StaffToolsReports: React.FC = () => {
                         </Tooltip>
                         <Link href={`/u/${report?.user?.username}`} passHref>
                           <a href={`/u/${report?.user?.username}`}>
-                            <Slug slug={report?.user?.username} prefix="@" />
+                            <Slug
+                              slug={formatUsername(report?.user?.username)}
+                              prefix="@"
+                            />
                           </a>
                         </Link>
                       </div>

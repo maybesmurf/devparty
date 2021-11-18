@@ -26,6 +26,7 @@ builder.mutationField('toggleBookmark', (t) =>
   t.prismaField({
     type: 'Post',
     args: { input: t.arg({ type: ToggleBookmarkInput }) },
+    authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleBookmark(session?.userId as string, input.id)

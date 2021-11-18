@@ -6,7 +6,7 @@ import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Tooltip } from '@components/UI/Tooltip'
 import AppContext from '@components/utils/AppContext'
-import { useENS } from '@components/utils/hooks/useENS'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
@@ -22,8 +22,6 @@ import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useContext } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
-import toast from 'react-hot-toast'
 import { STATIC_ASSETS } from 'src/constants'
 import * as timeago from 'timeago.js'
 
@@ -37,6 +35,7 @@ import Social from './Social'
 import Tips from './Tips'
 
 const UserMod = dynamic(() => import('./Mod'))
+const ETHAddress = dynamic(() => import('./ETHAddress'))
 
 interface Props {
   user: User
@@ -44,7 +43,6 @@ interface Props {
 
 const Details: React.FC<Props> = ({ user }) => {
   const { currentUser, currentUserLoading, staffMode } = useContext(AppContext)
-  const { name: ensName } = useENS(user)
 
   return (
     <div className="mb-4">
@@ -67,7 +65,7 @@ const Details: React.FC<Props> = ({ user }) => {
         </div>
         <div>
           <div className="text-2xl font-bold flex items-center gap-1.5">
-            {user?.profile?.name}
+            <div className="truncate">{user?.profile?.name}</div>
             {user?.isVerified && (
               <Tooltip content={'Verified'}>
                 <BadgeCheckIcon className="h-6 w-6 text-brand-500" />
@@ -85,29 +83,17 @@ const Details: React.FC<Props> = ({ user }) => {
             )}
           </div>
           <div className="flex items-center space-x-2">
-            <Slug slug={user?.username} prefix="@" className="text-xl" />
+            <Slug
+              slug={formatUsername(user?.username)}
+              prefix="@"
+              className="text-xl truncate"
+            />
             {user?.isFollowing && (
               <span className="text-xs bg-gray-200 dark:bg-gray-800 border py-0.5 px-1.5 rounded-md">
                 Follows you
               </span>
             )}
-            {ensName && (
-              <CopyToClipboard
-                text={ensName}
-                onCopy={() => {
-                  toast.success('ENS name copied!')
-                }}
-              >
-                <div className="flex items-center space-x-1.5 bg-white dark:bg-gray-800 shadown-sm rounded-full border dark:border-gray-700 text-xs px-3 py-0.5 w-max cursor-pointer">
-                  <img
-                    className="h-3 w-3"
-                    src="https://assets.devparty.io/images/brands/ens.svg"
-                    alt="ENS logo"
-                  />
-                  <div>{ensName}</div>
-                </div>
-              </CopyToClipboard>
-            )}
+            {user?.integrations?.ensAddress && <ETHAddress user={user} />}
           </div>
         </div>
         {user?.status?.emoji && (

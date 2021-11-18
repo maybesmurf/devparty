@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import Hero from '@components/shared/Hero'
 import Slug from '@components/shared/Slug'
+import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { GetInviteQuery } from '@graphql/types.generated'
 import Head from 'next/head'
@@ -59,7 +60,12 @@ const InviteSignup: React.FC = () => {
                   <div className="text-xl space-y-2">
                     <Link href={`/u/${invite?.user?.username}`} passHref>
                       <a className="font-bold">
-                        <Slug slug={invite?.user?.username} prefix="@" />{' '}
+                        <Slug
+                          slug={formatUsername(
+                            invite?.user?.username as string
+                          )}
+                          prefix="@"
+                        />{' '}
                         invited you to the party
                       </a>
                     </Link>

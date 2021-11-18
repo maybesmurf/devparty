@@ -5,6 +5,7 @@ import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Spinner } from '@components/UI/Spinner'
+import { formatUsername } from '@components/utils/formatUsername'
 import { GetFollowersQuery, User } from '@graphql/types.generated'
 import { UsersIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
@@ -105,7 +106,9 @@ const FollowersList: React.FC = () => {
           <EmptyState
             message={
               <div>
-                <span className="font-bold mr-1">@{router.query.username}</span>
+                <span className="font-bold mr-1">
+                  @{formatUsername(router.query.username as string)}
+                </span>
                 <span>doesn’t have any followers yet.</span>
               </div>
             }

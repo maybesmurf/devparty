@@ -1,6 +1,7 @@
 import { Tooltip } from '@components/UI/Tooltip'
 import Follow from '@components/User/Follow'
 import AppContext from '@components/utils/AppContext'
+import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { User } from '@graphql/types.generated'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
@@ -11,12 +12,14 @@ import Slug from './Slug'
 
 interface Props {
   user: User
+  action?: React.ReactNode
   showFollow?: boolean
   showToast?: boolean
 }
 
 const UserProfileLarge: React.FC<Props> = ({
   user,
+  action,
   showFollow = false,
   showToast = true
 }) => {
@@ -53,7 +56,7 @@ const UserProfileLarge: React.FC<Props> = ({
               </Link>
             </div>
             <div className="flex items-center space-x-2">
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
               {user?.isFollowing && (
                 <span className="text-xs bg-gray-200 dark:bg-gray-800 border py-0.5 px-1.5 rounded-md">
                   Follows you
@@ -64,9 +67,12 @@ const UserProfileLarge: React.FC<Props> = ({
           <div>{user?.profile?.bio}</div>
         </div>
       </div>
-      {currentUser && showFollow && (
-        <Follow user={user} showText showToast={showToast} />
-      )}
+      <div className="flex items-center space-x-2">
+        {action && action}
+        {currentUser && showFollow && (
+          <Follow user={user} showText showToast={showToast} />
+        )}
+      </div>
     </div>
   )
 }

@@ -1,10 +1,11 @@
 import { gql, useQuery } from '@apollo/client'
 import CommunityProfileLarge from '@components/shared/CommunityProfileLarge'
-import UserProfileLargeShimmer from '@components/shared/Shimmer/UserProfileLargeShimmer'
+import CommunityProfileLargeShimmer from '@components/shared/Shimmer/CommunityProfileLargeShimmer'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Spinner } from '@components/UI/Spinner'
+import { formatUsername } from '@components/utils/formatUsername'
 import { Community, GetAllUserCommunitiesQuery } from '@graphql/types.generated'
 import { UsersIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
@@ -70,17 +71,17 @@ const CommunitiesList: React.FC = () => {
       <div className="space-y-3">
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
         <Card>
           <CardBody>
-            <UserProfileLargeShimmer showFollow />
+            <CommunityProfileLargeShimmer showJoin />
           </CardBody>
         </Card>
       </div>
@@ -94,7 +95,9 @@ const CommunitiesList: React.FC = () => {
           <EmptyState
             message={
               <div>
-                <span className="font-bold mr-1">@{router.query.username}</span>
+                <span className="font-bold mr-1">
+                  @{formatUsername(router.query.username as string)}
+                </span>
                 <span>doesn’t have any communities yet.</span>
               </div>
             }

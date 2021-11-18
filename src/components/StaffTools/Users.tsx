@@ -163,9 +163,11 @@ const StaffToolsUsers: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-sm pl-3">
-                      <div>
-                        Email: <b>{user?.email}</b>
-                      </div>
+                      {user?.email && (
+                        <div>
+                          Email: <b>{user?.email}</b>
+                        </div>
+                      )}
                       <div className="flex items-center space-x-1">
                         <div>Integrations:</div>
                         <div className="flex items-center space-x-1.5">

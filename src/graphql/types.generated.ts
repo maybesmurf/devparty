@@ -1,4 +1,5 @@
 export type Maybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
@@ -23,6 +24,11 @@ export type AcceptCocAndTosInput = {
   tos: Scalars['Boolean']
 }
 
+export type AddCommunityModeratorInput = {
+  communityId: Scalars['ID']
+  userId: Scalars['ID']
+}
+
 export type AnswerPollInput = {
   id: Scalars['ID']
 }
@@ -40,6 +46,11 @@ export type Attachment = {
   url: Scalars['String']
 }
 
+export type AuthWithWalletInput = {
+  nonce: Scalars['String']
+  signature: Scalars['String']
+}
+
 export type Badge = {
   __typename?: 'Badge'
   description?: Maybe<Scalars['String']>
@@ -50,10 +61,10 @@ export type Badge = {
 }
 
 export type BadgeUsersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type BadgeUsersConnection = {
@@ -101,31 +112,31 @@ export type Community = {
 }
 
 export type CommunityMembersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type CommunityModeratorsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type CommunityPostsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type CommunityRulesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type CommunityMembersConnection = {
@@ -186,27 +197,27 @@ export type CreateBadgeInput = {
 }
 
 export type CreateCommunityInput = {
-  description?: Maybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
   name: Scalars['String']
   slug: Scalars['String']
 }
 
 export type CreatePostInput = {
-  address?: Maybe<Scalars['String']>
-  attachments?: Maybe<Scalars['String']>
+  address?: InputMaybe<Scalars['String']>
+  attachments?: InputMaybe<Scalars['String']>
   body: Scalars['String']
   done?: Scalars['Boolean']
-  parentId?: Maybe<Scalars['ID']>
-  polls?: Maybe<Scalars['String']>
-  targetId?: Maybe<Scalars['ID']>
-  targetType?: Maybe<Scalars['String']>
-  title?: Maybe<Scalars['String']>
-  tokenId?: Maybe<Scalars['String']>
+  parentId?: InputMaybe<Scalars['ID']>
+  polls?: InputMaybe<Scalars['String']>
+  targetId?: InputMaybe<Scalars['ID']>
+  targetType?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']>
+  tokenId?: InputMaybe<Scalars['String']>
   type?: Scalars['String']
 }
 
 export type CreateProductInput = {
-  description?: Maybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
   name: Scalars['String']
   slug: Scalars['String']
   website: Scalars['String']
@@ -226,9 +237,9 @@ export type DeleteProductInput = {
 }
 
 export type EditIntegrationInput = {
-  ethAddress?: Maybe<Scalars['String']>
-  spotifyRefreshToken?: Maybe<Scalars['String']>
-  wakatimeAPIKey?: Maybe<Scalars['String']>
+  ethAddress?: InputMaybe<Scalars['String']>
+  spotifyRefreshToken?: InputMaybe<Scalars['String']>
+  wakatimeAPIKey?: InputMaybe<Scalars['String']>
 }
 
 export type EditNftAvatarInput = {
@@ -237,25 +248,25 @@ export type EditNftAvatarInput = {
 }
 
 export type EditPostInput = {
-  body?: Maybe<Scalars['String']>
-  done?: Maybe<Scalars['Boolean']>
+  body?: InputMaybe<Scalars['String']>
+  done?: InputMaybe<Scalars['Boolean']>
   id: Scalars['ID']
 }
 
 export type EditProductProfileInput = {
-  avatar?: Maybe<Scalars['String']>
-  description?: Maybe<Scalars['String']>
+  avatar?: InputMaybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
   id: Scalars['ID']
   name: Scalars['String']
   slug: Scalars['String']
 }
 
 export type EditProductSocialInput = {
-  discord?: Maybe<Scalars['String']>
-  github?: Maybe<Scalars['String']>
+  discord?: InputMaybe<Scalars['String']>
+  github?: InputMaybe<Scalars['String']>
   id: Scalars['ID']
-  twitter?: Maybe<Scalars['String']>
-  website?: Maybe<Scalars['String']>
+  twitter?: InputMaybe<Scalars['String']>
+  website?: InputMaybe<Scalars['String']>
 }
 
 export type EditProfileReadmeInput = {
@@ -268,34 +279,35 @@ export type EditStatusInput = {
 }
 
 export type EditTipsInput = {
-  bitcoin?: Maybe<Scalars['String']>
-  buymeacoffee?: Maybe<Scalars['String']>
-  cash?: Maybe<Scalars['String']>
-  ethereum?: Maybe<Scalars['String']>
-  github?: Maybe<Scalars['String']>
-  paypal?: Maybe<Scalars['String']>
-  solana?: Maybe<Scalars['String']>
+  bitcoin?: InputMaybe<Scalars['String']>
+  buymeacoffee?: InputMaybe<Scalars['String']>
+  cash?: InputMaybe<Scalars['String']>
+  ethereum?: InputMaybe<Scalars['String']>
+  github?: InputMaybe<Scalars['String']>
+  paypal?: InputMaybe<Scalars['String']>
+  solana?: InputMaybe<Scalars['String']>
 }
 
 export type EditUserInput = {
   avatar: Scalars['String']
-  bio?: Maybe<Scalars['String']>
+  bio?: InputMaybe<Scalars['String']>
   cover: Scalars['String']
-  email: Scalars['String']
-  location?: Maybe<Scalars['String']>
+  email?: InputMaybe<Scalars['String']>
+  location?: InputMaybe<Scalars['String']>
   name: Scalars['String']
   username: Scalars['String']
 }
 
 export type EditUserSocialInput = {
-  discord?: Maybe<Scalars['String']>
-  github?: Maybe<Scalars['String']>
-  twitter?: Maybe<Scalars['String']>
-  website?: Maybe<Scalars['String']>
+  discord?: InputMaybe<Scalars['String']>
+  github?: InputMaybe<Scalars['String']>
+  twitter?: InputMaybe<Scalars['String']>
+  website?: InputMaybe<Scalars['String']>
 }
 
 export type Integration = {
   __typename?: 'Integration'
+  ensAddress?: Maybe<Scalars['String']>
   ethAddress?: Maybe<Scalars['String']>
   githubId?: Maybe<Scalars['String']>
   id: Scalars['ID']
@@ -340,11 +352,6 @@ export type LoginInput = {
   password: Scalars['String']
 }
 
-export type LoginWithWalletInput = {
-  nonce: Scalars['String']
-  signature: Scalars['String']
-}
-
 export type MintNftInput = {
   address: Scalars['String']
   network: Scalars['String']
@@ -353,24 +360,26 @@ export type MintNftInput = {
 }
 
 export type ModTopicInput = {
-  description?: Maybe<Scalars['String']>
-  featuredAt?: Maybe<Scalars['Boolean']>
+  description?: InputMaybe<Scalars['String']>
+  featuredAt?: InputMaybe<Scalars['Boolean']>
   id: Scalars['ID']
 }
 
 export type ModUserInput = {
-  featuredAt?: Maybe<Scalars['Boolean']>
-  isStaff?: Maybe<Scalars['Boolean']>
-  isVerified?: Maybe<Scalars['Boolean']>
-  spammy?: Maybe<Scalars['Boolean']>
+  featuredAt?: InputMaybe<Scalars['Boolean']>
+  isStaff?: InputMaybe<Scalars['Boolean']>
+  isVerified?: InputMaybe<Scalars['Boolean']>
+  spammy?: InputMaybe<Scalars['Boolean']>
   userId: Scalars['ID']
 }
 
 export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
+  addCommunityModerator?: Maybe<Result>
   answerPoll?: Maybe<PollAnswer>
   attachBadge: User
+  authWithWallet?: Maybe<User>
   changePassword: Result
   clearStatus: Result
   createBadge: Badge
@@ -393,13 +402,14 @@ export type Mutation = {
   editUserSocial: User
   joinWaitlist: User
   login?: Maybe<User>
-  loginWithWallet?: Maybe<User>
   mint: Nft
   modTopic?: Maybe<Topic>
   modUser?: Maybe<User>
   onboardUser?: Maybe<User>
   readNotification: Result
   regenerateInvite: Invite
+  removeCommunityModerator?: Maybe<Result>
+  removeCommunityUser?: Maybe<Result>
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
@@ -415,12 +425,20 @@ export type MutationAcceptCocAndTosArgs = {
   input: AcceptCocAndTosInput
 }
 
+export type MutationAddCommunityModeratorArgs = {
+  input: AddCommunityModeratorInput
+}
+
 export type MutationAnswerPollArgs = {
   input: AnswerPollInput
 }
 
 export type MutationAttachBadgeArgs = {
   input: AttachBadgeToUserInput
+}
+
+export type MutationAuthWithWalletArgs = {
+  input: AuthWithWalletInput
 }
 
 export type MutationChangePasswordArgs = {
@@ -503,10 +521,6 @@ export type MutationLoginArgs = {
   input: LoginInput
 }
 
-export type MutationLoginWithWalletArgs = {
-  input: LoginWithWalletInput
-}
-
 export type MutationMintArgs = {
   input: MintNftInput
 }
@@ -525,6 +539,14 @@ export type MutationOnboardUserArgs = {
 
 export type MutationReadNotificationArgs = {
   input: ReadNotificationInput
+}
+
+export type MutationRemoveCommunityModeratorArgs = {
+  input: RemoveCommunityModeratorInput
+}
+
+export type MutationRemoveCommunityUserArgs = {
+  input: RemoveCommunityUserInput
 }
 
 export type MutationResolveReportArgs = {
@@ -615,10 +637,10 @@ export type PollAnswer = {
 }
 
 export type PollAnswerVotersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type PollAnswerVotersConnection = {
@@ -659,17 +681,17 @@ export type Post = {
 }
 
 export type PostLikesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type PostRepliesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type PostLikesConnection = {
@@ -720,17 +742,17 @@ export type Product = {
 }
 
 export type ProductPostsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type ProductSubscribersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type ProductPostsConnection = {
@@ -810,10 +832,10 @@ export type Query = {
 }
 
 export type QueryBadgesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryCommunityArgs = {
@@ -821,36 +843,36 @@ export type QueryCommunityArgs = {
 }
 
 export type QueryExploreFeedArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryFeaturedTopicsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryFeaturedUsersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryHomeFeedArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
   type?: Scalars['String']
 }
 
 export type QueryIntegrationArgs = {
-  userId?: Maybe<Scalars['ID']>
+  userId?: InputMaybe<Scalars['ID']>
 }
 
 export type QueryInviteArgs = {
@@ -858,27 +880,27 @@ export type QueryInviteArgs = {
 }
 
 export type QueryLogsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryMorePostsByUserArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
   type: Scalars['String']
   userId: Scalars['ID']
 }
 
 export type QueryNotificationsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
   isRead?: Scalars['Boolean']
-  last?: Maybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryPostArgs = {
@@ -890,40 +912,40 @@ export type QueryProductArgs = {
 }
 
 export type QueryProductsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryReportsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QuerySearchTopicsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
   keyword: Scalars['String']
-  last?: Maybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QuerySearchUsersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
   keyword: Scalars['String']
-  last?: Maybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QuerySessionsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QuerySpotifyArgs = {
@@ -931,10 +953,10 @@ export type QuerySpotifyArgs = {
 }
 
 export type QuerySuggestedUsersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryTopicArgs = {
@@ -946,10 +968,10 @@ export type QueryUserArgs = {
 }
 
 export type QueryUsersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryWakatimeArgs = {
@@ -957,10 +979,10 @@ export type QueryWakatimeArgs = {
 }
 
 export type QueryWhoToFollowArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryBadgesConnection = {
@@ -1159,6 +1181,16 @@ export type ReadNotificationInput = {
   id: Scalars['ID']
 }
 
+export type RemoveCommunityModeratorInput = {
+  communityId: Scalars['ID']
+  userId: Scalars['ID']
+}
+
+export type RemoveCommunityUserInput = {
+  communityId: Scalars['ID']
+  userId: Scalars['ID']
+}
+
 export type Report = {
   __typename?: 'Report'
   createdAt: Scalars['DateTime']
@@ -1291,17 +1323,17 @@ export type Topic = {
 }
 
 export type TopicPostsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type TopicStarrersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type TopicPostsConnection = {
@@ -1364,59 +1396,59 @@ export type User = {
 }
 
 export type UserBadgesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserBookmarksArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserCommunitiesArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserFollowersArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserFollowingArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserOwnedProductsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserPostsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserTopicsArgs = {
-  after?: Maybe<Scalars['String']>
-  before?: Maybe<Scalars['String']>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
 }
 
 export type UserBadgesConnection = {
@@ -1558,6 +1590,15 @@ export type GetInviteQuery = {
   waitlistCount: { __typename?: 'WaitlistCount'; count: number }
 }
 
+export type AuthWithWalletMutationVariables = Exact<{
+  input: AuthWithWalletInput
+}>
+
+export type AuthWithWalletMutation = {
+  __typename?: 'Mutation'
+  authWithWallet?: { __typename?: 'User'; id: string } | null | undefined
+}
+
 export type LoginMutationVariables = Exact<{
   input: LoginInput
 }>
@@ -1570,15 +1611,6 @@ export type LoginMutation = {
     | undefined
 }
 
-export type LoginWithWalletMutationVariables = Exact<{
-  input: LoginWithWalletInput
-}>
-
-export type LoginWithWalletMutation = {
-  __typename?: 'Mutation'
-  loginWithWallet?: { __typename?: 'User'; id: string } | null | undefined
-}
-
 export type JoinWaitlistFormMutationVariables = Exact<{
   input: JoinWaitlistInput
 }>
@@ -1589,7 +1621,7 @@ export type JoinWaitlistFormMutation = {
 }
 
 export type GetModeratorsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -1597,6 +1629,8 @@ export type GetModeratorsQuery = {
   __typename?: 'Query'
   community: {
     __typename?: 'Community'
+    id: string
+    owner: { __typename?: 'User'; id: string }
     moderators: {
       __typename?: 'CommunityModeratorsConnection'
       totalCount: number
@@ -1635,6 +1669,24 @@ export type GetModeratorsQuery = {
   }
 }
 
+export type RemoveCommunityModeratorMutationVariables = Exact<{
+  input: RemoveCommunityModeratorInput
+}>
+
+export type RemoveCommunityModeratorMutation = {
+  __typename?: 'Mutation'
+  removeCommunityModerator?: Result | null | undefined
+}
+
+export type AddCommunityModeratorMutationVariables = Exact<{
+  input: AddCommunityModeratorInput
+}>
+
+export type AddCommunityModeratorMutation = {
+  __typename?: 'Mutation'
+  addCommunityModerator?: Result | null | undefined
+}
+
 export type GetCommunitiesQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetCommunitiesQuery = {
@@ -1660,7 +1712,7 @@ export type GetCommunitiesQuery = {
 }
 
 export type GetCommunityFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -1801,7 +1853,7 @@ export type ToggleCommunityJoinMutation = {
 }
 
 export type MembersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -1809,6 +1861,8 @@ export type MembersQuery = {
   __typename?: 'Query'
   community: {
     __typename?: 'Community'
+    id: string
+    owner: { __typename?: 'User'; id: string }
     members: {
       __typename?: 'CommunityMembersConnection'
       totalCount: number
@@ -1845,6 +1899,15 @@ export type MembersQuery = {
       >
     }
   }
+}
+
+export type RemoveCommunityUserMutationVariables = Exact<{
+  input: RemoveCommunityUserInput
+}>
+
+export type RemoveCommunityUserMutation = {
+  __typename?: 'Mutation'
+  removeCommunityUser?: Result | null | undefined
 }
 
 export type CreateCommunityMutationVariables = Exact<{
@@ -1952,7 +2015,7 @@ export type GetFeaturedUsersQuery = {
 }
 
 export type GetExploreFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetExploreFeedQuery = {
@@ -2118,7 +2181,7 @@ export type GetExploreUserQuery = {
 }
 
 export type GetHomeFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   type: Scalars['String']
 }>
 
@@ -2309,8 +2372,8 @@ export type ReadNotificationMutation = {
 }
 
 export type GetNotificationsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
-  isRead?: Maybe<Scalars['Boolean']>
+  after?: InputMaybe<Scalars['String']>
+  isRead?: InputMaybe<Scalars['Boolean']>
 }>
 
 export type GetNotificationsQuery = {
@@ -2583,7 +2646,7 @@ export type GetNotificationsQuery = {
 }
 
 export type GetOnboardingUsersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetOnboardingUsersQuery = {
@@ -2637,7 +2700,7 @@ export type EditOnboardingProfileMutation = {
 }
 
 export type GetOnboardingTopicsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetOnboardingTopicsQuery = {
@@ -2826,7 +2889,7 @@ export type CreateReplyMutation = {
 }
 
 export type GetRepliesQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   id: Scalars['ID']
 }>
 
@@ -3240,7 +3303,7 @@ export type GetPostQuery = {
 }
 
 export type GetProductFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -3386,7 +3449,7 @@ export type CreateProductMutation = {
 }
 
 export type GetProductsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetProductsQuery = {
@@ -3577,7 +3640,7 @@ export type CurrentUserQuery = {
 }
 
 export type GetStaffReportsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetStaffReportsQuery = {
@@ -3617,7 +3680,7 @@ export type ResolveReportMutation = {
 }
 
 export type GetStaffUsersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetStaffUsersQuery = {
@@ -3723,7 +3786,7 @@ export type GetStaffStatsQuery = {
 }
 
 export type GetTopicFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   name: Scalars['String']
 }>
 
@@ -3931,7 +3994,7 @@ export type GetUserBadgesQuery = {
 }
 
 export type GetBookmarkFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetBookmarkFeedQuery = {
@@ -4070,7 +4133,7 @@ export type GetBookmarkFeedQuery = {
 }
 
 export type GetAllUserCommunitiesQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4110,7 +4173,7 @@ export type GetAllUserCommunitiesQuery = {
 }
 
 export type GetUserFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4247,7 +4310,7 @@ export type GetUserFeedQuery = {
 }
 
 export type GetFollowersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4297,7 +4360,7 @@ export type GetFollowersQuery = {
 }
 
 export type GetFollowingQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4428,7 +4491,7 @@ export type GetUserProductsQuery = {
 }
 
 export type GetAllUserProductsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4545,7 +4608,7 @@ export type GetIntegrationQuery = {
 }
 
 export type GetLogsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetLogsQuery = {
@@ -4590,7 +4653,6 @@ export type EditProfileMutation = {
     __typename?: 'User'
     id: string
     username: string
-    email?: string | null | undefined
     profile: {
       __typename?: 'Profile'
       id: string
@@ -4675,7 +4737,7 @@ export type RevokeSessionMutation = {
 }
 
 export type GetSessionsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetSessionsQuery = {
@@ -4873,7 +4935,11 @@ export type UserFragmentFragment = {
     | null
     | undefined
   integrations?:
-    | { __typename?: 'Integration'; ethAddress?: string | null | undefined }
+    | {
+        __typename?: 'Integration'
+        ethAddress?: string | null | undefined
+        ensAddress?: string | null | undefined
+      }
     | null
     | undefined
   tip?: { __typename?: 'Tip'; id: string } | null | undefined
@@ -4931,6 +4997,7 @@ export type GetUserQuery = {
           | {
               __typename?: 'Integration'
               ethAddress?: string | null | undefined
+              ensAddress?: string | null | undefined
             }
           | null
           | undefined

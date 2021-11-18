@@ -3,9 +3,9 @@ import { Prisma } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { BASE_URL, ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
-import { createLog } from '../Log/mutations/createLog'
 import { Result } from '../ResultResolver'
 import { deleteAccount } from './mutations/deleteAccount'
+import { editUser } from './mutations/editUser'
 import { modUser } from './mutations/modUser'
 import { toggleFollow } from './mutations/toggleFollow'
 import { getFeaturedUsers } from './queries/getFeaturedUsers'
@@ -26,7 +26,7 @@ builder.prismaObject('User', {
     inWaitlist: t.exposeBoolean('inWaitlist'),
     email: t.exposeString('email', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     hasFollowed: t.field({
       type: 'Boolean',
@@ -117,7 +117,7 @@ builder.prismaObject('User', {
     }),
     invite: t.relation('invite', {
       nullable: true,
-      authScopes: { isStaff: true, $granted: 'currentUser' }
+      authScopes: { staff: true, $granted: 'currentUser' }
     }),
     ownedProducts: t.relatedConnection('ownedProducts', {
       cursor: 'id',
@@ -203,15 +203,9 @@ builder.queryField('featuredUsers', (t) =>
 
 const EditUserInput = builder.inputType('EditUserInput', {
   fields: (t) => ({
-    username: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
-    email: t.string({ required: true, validate: { email: true } }),
-    name: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
+    username: t.string({ validate: { minLength: 2, maxLength: 50 } }),
+    email: t.string({ required: false, validate: { email: true } }),
+    name: t.string({ validate: { minLength: 2, maxLength: 50 } }),
     bio: t.string({ required: false, validate: { maxLength: 190 } }),
     location: t.string({ required: false, validate: { maxLength: 100 } }),
     avatar: t.string(),
@@ -219,56 +213,21 @@ const EditUserInput = builder.inputType('EditUserInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditUserInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      try {
-        const user = await db.user.update({
-          ...query,
-          where: { id: session!.userId },
-          data: {
-            username: input.username,
-            email: input.email,
-            profile: {
-              update: {
-                name: input.name,
-                bio: input.bio,
-                location: input.location,
-                avatar: input.avatar,
-                cover: input.cover
-              }
-            }
-          }
-        })
-        createLog(session!.userId, user?.id, 'SETTINGS_UPDATE')
-
-        return user
-      } catch (error: any) {
-        if (
-          error.code === 'P2002' &&
-          error.meta.target === 'users_username_key'
-        ) {
-          throw new Error('Username is already taken!')
-        }
-
-        if (error.code === 'P2002' && error.meta.target === 'users_email_key') {
-          throw new Error('Email is already taken!')
-        }
-
-        throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-      }
+      return await editUser(query, input, session)
     }
   })
 )
 
 const EditNFTAvatarInput = builder.inputType('EditNFTAvatarInput', {
   fields: (t) => ({
-    avatar: t.string({ required: true }),
-    nftSource: t.string({ required: true })
+    avatar: t.string(),
+    nftSource: t.string()
   })
 })
 
@@ -277,7 +236,7 @@ builder.mutationField('editNFTAvatar', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditNFTAvatarInput }) },
-    authScopes: { user: true },
+    authScopes: { user: true, $granted: 'currentUser' },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       try {
@@ -305,11 +264,11 @@ const ToggleFollowInput = builder.inputType('ToggleFollowInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('toggleFollow', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: ToggleFollowInput }) },
+    authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleFollow(session?.userId as string, input?.userId)
@@ -332,10 +291,8 @@ builder.mutationField('modUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: ModUserInput }) },
+    authScopes: { staff: true },
     nullable: true,
-    authScopes: {
-      isStaff: true
-    },
     resolve: async (query, parent, { input }) => {
       return modUser(query, input)
     }
@@ -352,6 +309,7 @@ builder.mutationField('onboardUser', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: OnboardUserInput }) },
+    authScopes: { staff: true },
     nullable: true,
     resolve: async (query, parent, { input }) => {
       return await db.user.update({
@@ -373,6 +331,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: AcceptCOCAndTOSInput }) },
+    authScopes: { user: true },
     resolve: async (query, parent, { input }, { session }) => {
       if (input.coc && input.tos) {
         return await db.user.update({
@@ -389,6 +348,7 @@ builder.mutationField('acceptCocAndTos', (t) =>
 builder.mutationField('deleteAccount', (t) =>
   t.field({
     type: Result,
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, args, { session }) => {
       return await deleteAccount(session)
     }

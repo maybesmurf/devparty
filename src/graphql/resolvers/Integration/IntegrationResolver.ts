@@ -35,6 +35,7 @@ builder.prismaObject('Integration', {
     }),
     githubId: t.exposeString('githubId', { nullable: true }),
     ethAddress: t.exposeString('ethAddress', { nullable: true }),
+    ensAddress: t.exposeString('ensAddress', { nullable: true }),
 
     // Relations
     user: t.relation('user')
@@ -66,6 +67,7 @@ builder.mutationField('editIntegration', (t) =>
   t.prismaField({
     type: 'Integration',
     args: { input: t.arg({ type: EditIntegrationInput }) },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await editIntegration(query, input, session)
     }

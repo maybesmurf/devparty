@@ -43,24 +43,21 @@ builder.mutationField('login', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: false
-    },
     args: { input: t.arg({ type: LoginInput }) },
+    authScopes: { unauthenticated: false },
     nullable: true,
     resolve: async (_query, parent, { input }, { req }) => {
+      const user = await authenticateUser(input.login, input.password)
+      if (user.inWaitlist) {
+        // Don't allow users in waitlist
+        return user
+      }
+
+      if (user.spammy) {
+        // Don't allow users to login if marked as spammy 😈
+        throw new Error('Your account is suspended!')
+      }
       try {
-        const user = await authenticateUser(input.login, input.password)
-        if (user.inWaitlist) {
-          // Don't allow users in waitlist
-          return user
-        }
-
-        if (user.spammy) {
-          // Don't allow users to login if marked as spammy 😈
-          throw new Error('Your account is suspended!')
-        }
-
         await createSession(req, user, false)
         createLog(user?.id, user?.id, 'LOGIN')
         return user
@@ -77,25 +74,23 @@ builder.mutationField('login', (t) =>
   })
 )
 
-const LoginWithWalletInput = builder.inputType('LoginWithWalletInput', {
+const AuthWithWalletInput = builder.inputType('AuthWithWalletInput', {
   fields: (t) => ({
     nonce: t.string(),
     signature: t.string()
   })
 })
 
-builder.mutationField('loginWithWallet', (t) =>
+builder.mutationField('authWithWallet', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: false
-    },
-    args: { input: t.arg({ type: LoginWithWalletInput }) },
+    args: { input: t.arg({ type: AuthWithWalletInput }) },
+    authScopes: { unauthenticated: false },
     nullable: true,
-    resolve: async (_query, parent, { input }, { req }) => {
+    resolve: async (query, parent, { input }, { req }) => {
       try {
-        const user = await authWithWallet(input.nonce, input.signature)
+        const user = await authWithWallet(query, input.nonce, input.signature)
         createLog(user?.id, user?.id, 'LOGIN')
         await createSession(req, user, false)
 
@@ -127,10 +122,8 @@ builder.mutationField('joinWaitlist', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: true
-    },
     args: { input: t.arg({ type: JoinWaitlistInput }) },
+    authScopes: { unauthenticated: true },
     resolve: async (query, parent, { input }) => {
       return joinWaitlist(query, input)
     }
@@ -156,10 +149,8 @@ builder.mutationField('signUp', (t) =>
   t.prismaField({
     type: 'User',
     skipTypeScopes: true,
-    authScopes: {
-      unauthenticated: true
-    },
     args: { input: t.arg({ type: SignupInput }) },
+    authScopes: { unauthenticated: true },
     resolve: async (query, parent, { input }, { req }) => {
       return signUp(query, input, req)
     }
@@ -177,6 +168,7 @@ builder.mutationField('changePassword', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: ChangePasswordInput }) },
+    authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, { input }, { session }) => {
       return changePassword(input, session)
     }

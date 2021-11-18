@@ -1,9 +1,9 @@
 -- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
-    `username` VARCHAR(32) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
-    `hashedPassword` VARCHAR(191) NOT NULL,
+    `username` VARCHAR(64) NOT NULL,
+    `email` VARCHAR(191) NULL,
+    `hashedPassword` VARCHAR(191) NULL,
     `spammy` BOOLEAN NOT NULL DEFAULT false,
     `isVerified` BOOLEAN NOT NULL DEFAULT false,
     `isStaff` BOOLEAN NOT NULL DEFAULT false,
@@ -277,6 +277,7 @@ CREATE TABLE `integrations` (
     `spotifyRefreshToken` VARCHAR(191) NULL,
     `githubId` VARCHAR(64) NULL,
     `ethAddress` VARCHAR(64) NULL,
+    `ensAddress` VARCHAR(191) NULL,
     `ethNonce` VARCHAR(6) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
@@ -328,12 +329,12 @@ CREATE TABLE `_communityModerator` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `_CommunityToUser` (
+CREATE TABLE `_communityMember` (
     `A` VARCHAR(191) NOT NULL,
     `B` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `_CommunityToUser_AB_unique`(`A`, `B`),
-    INDEX `_CommunityToUser_B_index`(`B`)
+    UNIQUE INDEX `_communityMember_AB_unique`(`A`, `B`),
+    INDEX `_communityMember_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

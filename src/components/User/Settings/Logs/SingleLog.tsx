@@ -1,4 +1,5 @@
 import Slug from '@components/shared/Slug'
+import { formatUsername } from '@components/utils/formatUsername'
 import { Log } from '@graphql/types.generated'
 import {
   CogIcon,
@@ -23,7 +24,7 @@ const SingleLog: React.FC<Props> = ({ log }) => {
       />
       <div className="space-y-1">
         <div className="flex items-center space-x-1">
-          <Slug slug={log?.user?.username} prefix="@" />
+          <Slug slug={formatUsername(log?.user?.username)} prefix="@" />
           <div>–</div>
           <div className="text-sm font-bold">{log?.action}</div>
         </div>

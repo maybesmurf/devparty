@@ -20,7 +20,7 @@ const DataSettings: React.FC = () => {
       .then((response) => [response.status, response.blob()])
       .then(async (result) => {
         if (result[0] === 200) {
-          const blob = await result[1]
+          const blob: any = await result[1]
           var url = window.URL.createObjectURL(blob)
           var a = document.createElement('a')
           a.href = url

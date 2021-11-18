@@ -3,6 +3,11 @@ input AcceptCOCAndTOSInput {
   tos: Boolean!
 }
 
+input AddCommunityModeratorInput {
+  communityId: ID!
+  userId: ID!
+}
+
 input AnswerPollInput {
   id: ID!
 }
@@ -17,6 +22,11 @@ type Attachment {
   index: Int!
   type: String!
   url: String!
+}
+
+input AuthWithWalletInput {
+  nonce: String!
+  signature: String!
 }
 
 type Badge {
@@ -214,7 +224,7 @@ input EditUserInput {
   avatar: String!
   bio: String
   cover: String!
-  email: String!
+  email: String
   location: String
   name: String!
   username: String!
@@ -228,6 +238,7 @@ input EditUserSocialInput {
 }
 
 type Integration {
+  ensAddress: String
   ethAddress: String
   githubId: String
   id: ID!
@@ -269,11 +280,6 @@ input LoginInput {
   password: String!
 }
 
-input LoginWithWalletInput {
-  nonce: String!
-  signature: String!
-}
-
 input MintNFTInput {
   address: String!
   network: String!
@@ -297,8 +303,10 @@ input ModUserInput {
 
 type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
+  addCommunityModerator(input: AddCommunityModeratorInput!): Result
   answerPoll(input: AnswerPollInput!): PollAnswer
   attachBadge(input: AttachBadgeToUserInput!): User!
+  authWithWallet(input: AuthWithWalletInput!): User
   changePassword(input: ChangePasswordInput!): Result!
   clearStatus: Result!
   createBadge(input: CreateBadgeInput!): Badge!
@@ -321,13 +329,14 @@ type Mutation {
   editUserSocial(input: EditUserSocialInput!): User!
   joinWaitlist(input: JoinWaitlistInput!): User!
   login(input: LoginInput!): User
-  loginWithWallet(input: LoginWithWalletInput!): User
   mint(input: MintNFTInput!): NFT!
   modTopic(input: ModTopicInput!): Topic
   modUser(input: ModUserInput!): User
   onboardUser(input: OnboardUserInput!): User
   readNotification(input: ReadNotificationInput!): Result!
   regenerateInvite: Invite!
+  removeCommunityModerator(input: RemoveCommunityModeratorInput!): Result
+  removeCommunityUser(input: RemoveCommunityUserInput!): Result
   resolveReport(input: ResolveReportInput!): Result
   revokeSession(input: RevokeSessionInput!): Result!
   signUp(input: SignupInput!): User!
@@ -693,6 +702,16 @@ type QueryWhoToFollowConnectionEdge {
 
 input ReadNotificationInput {
   id: ID!
+}
+
+input RemoveCommunityModeratorInput {
+  communityId: ID!
+  userId: ID!
+}
+
+input RemoveCommunityUserInput {
+  communityId: ID!
+  userId: ID!
 }
 
 type Report {

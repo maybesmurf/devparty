@@ -1,6 +1,7 @@
 import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Modal } from '@components/UI/Modal'
+import { formatUsername } from '@components/utils/formatUsername'
 import { User } from '@graphql/types.generated'
 import { CashIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
@@ -30,7 +31,7 @@ const Tips: React.FC<Props> = ({ user }) => {
           title={
             <div className="flex items-center space-x-1.5">
               <div>Send dev tips to</div>
-              <Slug slug={user?.username} prefix="@" />
+              <Slug slug={formatUsername(user?.username)} prefix="@" />
             </div>
           }
           show={showModal}

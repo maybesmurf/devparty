@@ -105,6 +105,7 @@ builder.mutationField('createProduct', (t) =>
   t.prismaField({
     type: 'Product',
     args: { input: t.arg({ type: CreateProductInput }) },
+    authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await createProduct(query, input, session)
@@ -115,14 +116,8 @@ builder.mutationField('createProduct', (t) =>
 const EditProductProfileInput = builder.inputType('EditProductProfileInput', {
   fields: (t) => ({
     id: t.id({ validate: { uuid: true } }),
-    slug: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
-    name: t.string({
-      required: true,
-      validate: { minLength: 2, maxLength: 50 }
-    }),
+    slug: t.string({ validate: { minLength: 2, maxLength: 50 } }),
+    name: t.string({ validate: { minLength: 2, maxLength: 50 } }),
     description: t.string({ required: false, validate: { maxLength: 255 } }),
     avatar: t.string({ required: false })
   })
@@ -202,6 +197,7 @@ builder.mutationField('toggleProductSubscribe', (t) =>
   t.prismaField({
     type: 'Product',
     args: { input: t.arg({ type: ToggleProductSubscribeInput }) },
+    authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
       return await toggleSubscribe(session?.userId as string, input.id)
@@ -219,6 +215,7 @@ builder.mutationField('deleteProduct', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeleteProductInput }) },
+    authScopes: { user: true },
     resolve: async (parent, { input }, { session }) => {
       return await deleteProduct(input, session)
     }
