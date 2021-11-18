@@ -3,7 +3,7 @@ import { Card } from '@components/UI/Card'
 import { Spinner } from '@components/UI/Spinner'
 import useOnClickOutside from '@components/utils/hooks/useOnClickOutside'
 import { imagekitURL } from '@components/utils/imagekitURL'
-import { SearchUsersQuery } from '@graphql/types.generated'
+import { SearchUsersQuery, User } from '@graphql/types.generated'
 import React, { useRef, useState } from 'react'
 
 import { SEARCH_USERS_QUERY } from './Navbar/Search'
@@ -11,7 +11,8 @@ import Slug from './Slug'
 
 interface Props {
   placeholder?: string
-  onClick: () => void
+  // eslint-disable-next-line no-unused-vars
+  onClick: (user: User) => void
 }
 
 const SearchUsers: React.FC<Props> = ({ placeholder, onClick }) => {
@@ -55,7 +56,7 @@ const SearchUsers: React.FC<Props> = ({ placeholder, onClick }) => {
                   <div
                     key={user?.node?.id}
                     className="hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 flex items-center text-sm space-x-2 cursor-pointer"
-                    onClick={onClick}
+                    onClick={() => onClick(user?.node)}
                   >
                     <img
                       src={imagekitURL(

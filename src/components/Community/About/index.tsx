@@ -13,7 +13,7 @@ import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
-import { Community, GetCommunityQuery } from '@graphql/types.generated'
+import { Community, GetCommunityQuery, User } from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -34,8 +34,8 @@ const About: React.FC = () => {
   })
   const community = data?.community
 
-  const handleAdd = () => {
-    alert('yo')
+  const handleAdd = (user: User) => {
+    alert(user?.username)
   }
 
   if (!router.isReady || loading) return <PageLoading message="Loading about" />
@@ -97,7 +97,7 @@ const About: React.FC = () => {
                     <div className="text-lg font-bold">Add Moderators</div>
                     <SearchUsers
                       placeholder="Search by username"
-                      onClick={() => handleAdd()}
+                      onClick={(user) => handleAdd(user)}
                     />
                   </div>
                 )}
