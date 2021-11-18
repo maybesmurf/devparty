@@ -103,66 +103,69 @@ const StaffToolsReports: React.FC = () => {
       </GridItemFour>
       <GridItemEight>
         <Card>
-          <CardBody className="divide-y">
-            <ErrorMessage title="Failed to load reports" error={error} />
-            {(reports?.length as number) < 1 && (
-              <EmptyState
-                icon={<ShieldCheckIcon className="h-8 w-8 text-brand-500" />}
-                message="No reports to process!"
-                hideCard
-              />
-            )}
-            {reports?.map((report: any) => (
-              <div key={report?.id} className="py-3 space-y-3">
-                <div className="justify-between flex flex-col sm:flex-row sm:items-center space-x-0 sm:space-x-10">
-                  <div className="space-y-3">
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Tooltip content="Reported by">
-                          <UserIcon className="h-5 w-5 text-gray-500" />
-                        </Tooltip>
-                        <Link href={`/u/${report?.user?.username}`} passHref>
-                          <a href={`/u/${report?.user?.username}`}>
-                            <Slug
-                              slug={formatUsername(report?.user?.username)}
-                              prefix="@"
-                            />
-                          </a>
-                        </Link>
+          <CardBody>
+            <div className="text-xl font-bold">Reports</div>
+            <div className="divide-y">
+              <ErrorMessage title="Failed to load reports" error={error} />
+              {(reports?.length as number) < 1 && (
+                <EmptyState
+                  icon={<ShieldCheckIcon className="h-8 w-8 text-brand-500" />}
+                  message="No reports to process!"
+                  hideCard
+                />
+              )}
+              {reports?.map((report: any) => (
+                <div key={report?.id} className="py-5 space-y-3">
+                  <div className="justify-between flex flex-col sm:flex-row sm:items-center space-x-0 sm:space-x-10">
+                    <div className="space-y-3">
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Tooltip content="Reported by">
+                            <UserIcon className="h-5 w-5 text-gray-500" />
+                          </Tooltip>
+                          <Link href={`/u/${report?.user?.username}`} passHref>
+                            <a href={`/u/${report?.user?.username}`}>
+                              <Slug
+                                slug={formatUsername(report?.user?.username)}
+                                prefix="@"
+                              />
+                            </a>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Tooltip content="Message">
-                          <MailIcon className="h-5 w-5 text-gray-500" />
-                        </Tooltip>
-                        <div>{report?.message}</div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Tooltip content="Message">
+                            <MailIcon className="h-5 w-5 text-gray-500" />
+                          </Tooltip>
+                          <div>{report?.message}</div>
+                        </div>
                       </div>
+                      <ReportEntity report={report} />
                     </div>
-                    <ReportEntity report={report} />
+                    <Button
+                      className="mt-3 sm:mt-0 text-sm"
+                      size="sm"
+                      icon={<CheckCircleIcon className="h-4 w-4" />}
+                      onClick={() => {
+                        toast.promise(
+                          resolveReport({
+                            variables: { input: { id: report?.id } }
+                          }),
+                          {
+                            loading: 'Resolving the report...',
+                            success: () => 'Report resoved successfully!',
+                            error: () => ERROR_MESSAGE
+                          }
+                        )
+                      }}
+                    >
+                      Resolve
+                    </Button>
                   </div>
-                  <Button
-                    className="mt-3 sm:mt-0 text-sm"
-                    size="sm"
-                    icon={<CheckCircleIcon className="h-4 w-4" />}
-                    onClick={() => {
-                      toast.promise(
-                        resolveReport({
-                          variables: { input: { id: report?.id } }
-                        }),
-                        {
-                          loading: 'Resolving the report...',
-                          success: () => 'Report resoved successfully!',
-                          error: () => ERROR_MESSAGE
-                        }
-                      )
-                    }}
-                  >
-                    Resolve
-                  </Button>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </CardBody>
         </Card>
         {pageInfo?.hasNextPage && (
