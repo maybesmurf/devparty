@@ -47,18 +47,17 @@ builder.mutationField('login', (t) =>
     authScopes: { unauthenticated: false },
     nullable: true,
     resolve: async (_query, parent, { input }, { req }) => {
+      const user = await authenticateUser(input.login, input.password)
+      if (user.inWaitlist) {
+        // Don't allow users in waitlist
+        return user
+      }
+
+      if (user.spammy) {
+        // Don't allow users to login if marked as spammy 😈
+        throw new Error('Your account is suspended!')
+      }
       try {
-        const user = await authenticateUser(input.login, input.password)
-        if (user.inWaitlist) {
-          // Don't allow users in waitlist
-          return user
-        }
-
-        if (user.spammy) {
-          // Don't allow users to login if marked as spammy 😈
-          throw new Error('Your account is suspended!')
-        }
-
         await createSession(req, user, false)
         createLog(user?.id, user?.id, 'LOGIN')
         return user
