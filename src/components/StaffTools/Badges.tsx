@@ -4,6 +4,7 @@ import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
+import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetStaffBadgesQuery } from '@graphql/types.generated'
 import React from 'react'
 import useInView from 'react-cool-inview'
@@ -78,8 +79,27 @@ const StaffToolsBadges: React.FC = () => {
           <CardBody className="divide-y">
             <ErrorMessage title="Failed to load badges" error={error} />
             {badges?.map((badge: any) => (
-              <div key={badge?.id} className="py-3 space-y-3">
-                <div>{badge?.description}</div>
+              <div
+                key={badge?.id}
+                className="flex justify-between items-center py-5"
+              >
+                <div className="flex space-x-4 items-center">
+                  <img
+                    src={imagekitURL(badge?.image as string, 100, 100)}
+                    className="w-24"
+                    alt={badge?.name}
+                  />
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      {badge?.name}
+                    </div>
+                    {badge?.description && (
+                      <div className="mt-2 text-gray-600 dark:text-gray-300">
+                        {badge?.description}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </CardBody>
