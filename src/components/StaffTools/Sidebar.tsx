@@ -1,4 +1,5 @@
 import {
+  BadgeCheckIcon,
   ChartSquareBarIcon,
   ShieldExclamationIcon,
   UsersIcon
@@ -50,6 +51,13 @@ const Sidebar: React.FC = () => {
       >
         <ShieldExclamationIcon className="h-4 w-4" />
         <div>Reports</div>
+      </Menu>
+      <Menu
+        current={router.pathname == '/stafftools/badges'}
+        url="/stafftools/badges"
+      >
+        <BadgeCheckIcon className="h-4 w-4" />
+        <div>Badges</div>
       </Menu>
     </div>
   )
