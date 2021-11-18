@@ -7,16 +7,10 @@ import { db } from '@utils/prisma'
  * @returns whether user is joined to the community or not
  */
 export const hasJoined = async (currentUserId: string, communityId: string) => {
-  const product = await db.community.findUnique({
+  const community = await db.community.findUnique({
     where: { id: communityId },
-    include: {
-      members: {
-        where: {
-          id: currentUserId
-        }
-      }
-    }
+    include: { members: { where: { id: currentUserId } } }
   })
 
-  return product?.members?.length === 0 ? false : true
+  return community?.members?.length === 0 ? false : true
 }
