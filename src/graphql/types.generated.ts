@@ -1621,7 +1621,7 @@ export type JoinWaitlistFormMutation = {
 }
 
 export type GetModeratorsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -1712,7 +1712,7 @@ export type GetCommunitiesQuery = {
 }
 
 export type GetCommunityFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -1853,7 +1853,7 @@ export type ToggleCommunityJoinMutation = {
 }
 
 export type MembersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -2015,7 +2015,7 @@ export type GetFeaturedUsersQuery = {
 }
 
 export type GetExploreFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetExploreFeedQuery = {
@@ -2181,7 +2181,7 @@ export type GetExploreUserQuery = {
 }
 
 export type GetHomeFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   type: Scalars['String']
 }>
 
@@ -2372,8 +2372,8 @@ export type ReadNotificationMutation = {
 }
 
 export type GetNotificationsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
-  isRead?: Maybe<Scalars['Boolean']>
+  after?: InputMaybe<Scalars['String']>
+  isRead?: InputMaybe<Scalars['Boolean']>
 }>
 
 export type GetNotificationsQuery = {
@@ -2646,7 +2646,7 @@ export type GetNotificationsQuery = {
 }
 
 export type GetOnboardingUsersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetOnboardingUsersQuery = {
@@ -2700,7 +2700,7 @@ export type EditOnboardingProfileMutation = {
 }
 
 export type GetOnboardingTopicsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetOnboardingTopicsQuery = {
@@ -2889,7 +2889,7 @@ export type CreateReplyMutation = {
 }
 
 export type GetRepliesQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   id: Scalars['ID']
 }>
 
@@ -3303,7 +3303,7 @@ export type GetPostQuery = {
 }
 
 export type GetProductFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
 }>
 
@@ -3449,7 +3449,7 @@ export type CreateProductMutation = {
 }
 
 export type GetProductsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetProductsQuery = {
@@ -3640,7 +3640,7 @@ export type CurrentUserQuery = {
 }
 
 export type GetStaffReportsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetStaffReportsQuery = {
@@ -3680,7 +3680,7 @@ export type ResolveReportMutation = {
 }
 
 export type GetStaffUsersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetStaffUsersQuery = {
@@ -3786,7 +3786,7 @@ export type GetStaffStatsQuery = {
 }
 
 export type GetTopicFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   name: Scalars['String']
 }>
 
@@ -3994,7 +3994,7 @@ export type GetUserBadgesQuery = {
 }
 
 export type GetBookmarkFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetBookmarkFeedQuery = {
@@ -4133,7 +4133,7 @@ export type GetBookmarkFeedQuery = {
 }
 
 export type GetAllUserCommunitiesQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4173,7 +4173,7 @@ export type GetAllUserCommunitiesQuery = {
 }
 
 export type GetUserFeedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4310,7 +4310,7 @@ export type GetUserFeedQuery = {
 }
 
 export type GetFollowersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4360,7 +4360,7 @@ export type GetFollowersQuery = {
 }
 
 export type GetFollowingQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4491,7 +4491,7 @@ export type GetUserProductsQuery = {
 }
 
 export type GetAllUserProductsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
@@ -4608,7 +4608,7 @@ export type GetIntegrationQuery = {
 }
 
 export type GetLogsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetLogsQuery = {
@@ -4737,7 +4737,7 @@ export type RevokeSessionMutation = {
 }
 
 export type GetSessionsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type GetSessionsQuery = {
