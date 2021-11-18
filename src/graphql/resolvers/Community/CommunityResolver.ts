@@ -6,7 +6,6 @@ import { createCommunity } from './mutations/createCommunity'
 import { removeCommunityUser } from './mutations/removeCommunityUser'
 import { toggleJoin } from './mutations/toggleJoin'
 import { hasJoined } from './queries/hasJoined'
-import { isModerator } from './queries/isModerator'
 
 builder.prismaObject('Community', {
   findUnique: (community) => ({ id: community.id }),
@@ -21,13 +20,6 @@ builder.prismaObject('Community', {
       resolve: async (parent, args, { session }) => {
         if (!session) return false
         return await hasJoined(session?.userId as string, parent.id)
-      }
-    }),
-    isModerator: t.field({
-      type: 'Boolean',
-      resolve: async (parent, args, { session }) => {
-        if (!session) return false
-        return await isModerator(session?.userId as string, parent.id)
       }
     }),
     htmlUrl: t.field({
