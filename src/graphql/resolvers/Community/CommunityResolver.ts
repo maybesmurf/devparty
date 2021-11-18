@@ -5,6 +5,7 @@ import { BASE_URL } from 'src/constants'
 import { Result } from '../ResultResolver'
 import { addCommunityModerator } from './mutations/addCommunityModerator'
 import { createCommunity } from './mutations/createCommunity'
+import { removeCommunityModerator } from './mutations/removeCommunityModerator'
 import { removeCommunityUser } from './mutations/removeCommunityUser'
 import { toggleJoin } from './mutations/toggleJoin'
 import { hasJoined } from './queries/hasJoined'
@@ -154,6 +155,27 @@ builder.mutationField('addCommunityModerator', (t) =>
     nullable: true,
     resolve: async (parent, { input }, { session }) => {
       return await addCommunityModerator(input, session)
+    }
+  })
+)
+const RemoveCommunityModeratorInput = builder.inputType(
+  'RemoveCommunityModeratorInput',
+  {
+    fields: (t) => ({
+      userId: t.id({ validate: { uuid: true } }),
+      communityId: t.id({ validate: { uuid: true } })
+    })
+  }
+)
+
+builder.mutationField('removeCommunityModerator', (t) =>
+  t.field({
+    type: Result,
+    args: { input: t.arg({ type: RemoveCommunityModeratorInput }) },
+    authScopes: { user: true },
+    nullable: true,
+    resolve: async (parent, { input }, { session }) => {
+      return await removeCommunityModerator(input, session)
     }
   })
 )

@@ -335,6 +335,7 @@ type Mutation {
   onboardUser(input: OnboardUserInput!): User
   readNotification(input: ReadNotificationInput!): Result!
   regenerateInvite: Invite!
+  removeCommunityModerator(input: RemoveCommunityModeratorInput!): Result
   removeCommunityUser(input: RemoveCommunityUserInput!): Result
   resolveReport(input: ResolveReportInput!): Result
   revokeSession(input: RevokeSessionInput!): Result!
@@ -701,6 +702,11 @@ type QueryWhoToFollowConnectionEdge {
 
 input ReadNotificationInput {
   id: ID!
+}
+
+input RemoveCommunityModeratorInput {
+  communityId: ID!
+  userId: ID!
 }
 
 input RemoveCommunityUserInput {
