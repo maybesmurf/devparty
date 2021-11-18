@@ -56,7 +56,10 @@ const SearchUsers: React.FC<Props> = ({ placeholder, onClick }) => {
                   <div
                     key={user?.node?.id}
                     className="hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 flex items-center text-sm space-x-2 cursor-pointer"
-                    onClick={() => onClick(user?.node)}
+                    onClick={() => {
+                      onClick(user?.node)
+                      setSearchText('')
+                    }}
                   >
                     <img
                       src={imagekitURL(
