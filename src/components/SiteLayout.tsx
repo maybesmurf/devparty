@@ -74,7 +74,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
     setStaffMode
   }
 
-  if (loading) {
+  if (loading && !data) {
     return <SiteLoading />
   }
 
