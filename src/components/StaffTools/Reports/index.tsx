@@ -26,9 +26,9 @@ import useInView from 'react-cool-inview'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE } from 'src/constants'
 
-import { GET_STAFF_STATS_QUERY } from '.'
+import { GET_STAFF_STATS_QUERY } from '..'
+import Sidebar from '../Sidebar'
 import ReportEntity from './ReportEntity'
-import Sidebar from './Sidebar'
 
 export const GET_STAFF_REPORTS_QUERY = gql`
   query GetStaffReports($after: String) {

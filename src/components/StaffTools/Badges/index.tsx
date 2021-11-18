@@ -11,7 +11,7 @@ import { PlusCircleIcon } from '@heroicons/react/outline'
 import React from 'react'
 import useInView from 'react-cool-inview'
 
-import Sidebar from './Sidebar'
+import Sidebar from '../Sidebar'
 
 export const GET_STAFF_BADGES_QUERY = gql`
   query GetStaffBadges($after: String) {
