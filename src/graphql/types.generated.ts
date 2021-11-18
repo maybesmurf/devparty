@@ -24,6 +24,11 @@ export type AcceptCocAndTosInput = {
   tos: Scalars['Boolean']
 }
 
+export type AddCommunityModeratorInput = {
+  communityId: Scalars['ID']
+  userId: Scalars['ID']
+}
+
 export type AnswerPollInput = {
   id: Scalars['ID']
 }
@@ -371,6 +376,7 @@ export type ModUserInput = {
 export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
+  addCommunityModerator?: Maybe<Community>
   answerPoll?: Maybe<PollAnswer>
   attachBadge: User
   authWithWallet?: Maybe<User>
@@ -416,6 +422,10 @@ export type Mutation = {
 
 export type MutationAcceptCocAndTosArgs = {
   input: AcceptCocAndTosInput
+}
+
+export type MutationAddCommunityModeratorArgs = {
+  input: AddCommunityModeratorInput
 }
 
 export type MutationAnswerPollArgs = {
@@ -1645,6 +1655,18 @@ export type GetModeratorsQuery = {
       >
     }
   }
+}
+
+export type AddCommunityModeratorMutationVariables = Exact<{
+  input: AddCommunityModeratorInput
+}>
+
+export type AddCommunityModeratorMutation = {
+  __typename?: 'Mutation'
+  addCommunityModerator?:
+    | { __typename?: 'Community'; id: string }
+    | null
+    | undefined
 }
 
 export type GetCommunitiesQueryVariables = Exact<{ [key: string]: never }>

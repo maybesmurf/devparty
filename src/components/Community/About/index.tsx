@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import Details from '@components/Community/Details'
 import {
   GridItemEight,
@@ -13,17 +13,24 @@ import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
-import { Community, GetCommunityQuery, User } from '@graphql/types.generated'
+import {
+  AddCommunityModeratorMutation,
+  AddCommunityModeratorMutationVariables,
+  Community,
+  GetCommunityQuery,
+  User
+} from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
+import toast from 'react-hot-toast'
 import Custom404 from 'src/pages/404'
 import * as timeago from 'timeago.js'
 
 import Rules from '../Rules'
 import { GET_COMMUNITY_QUERY } from '../ViewCommunity'
-import ModeratorsList from './Moderators'
+import ModeratorsList, { GET_MODERATORS_QUERY } from './Moderators'
 
 const About: React.FC = () => {
   const router = useRouter()
@@ -32,15 +39,40 @@ const About: React.FC = () => {
     variables: { slug: router.query.slug },
     skip: !router.isReady
   })
+  const [addCommunityModerator] = useMutation<
+    AddCommunityModeratorMutation,
+    AddCommunityModeratorMutationVariables
+  >(
+    gql`
+      mutation addCommunityModerator($input: AddCommunityModeratorInput!) {
+        addCommunityModerator(input: $input) {
+          id
+        }
+      }
+    `,
+    {
+      refetchQueries: [
+        { query: GET_MODERATORS_QUERY, variables: { slug: router.query.slug } }
+      ],
+      onError(error) {
+        toast.error(error.message)
+      },
+      onCompleted() {
+        toast.success('Moderator added successfully!')
+      }
+    }
+  )
   const community = data?.community
-
-  const handleAdd = (user: User) => {
-    alert(user?.username)
-  }
 
   if (!router.isReady || loading) return <PageLoading message="Loading about" />
 
   if (!community) return <Custom404 />
+
+  const handleAdd = (user: User) => {
+    addCommunityModerator({
+      variables: { input: { userId: user?.id, communityId: community?.id } }
+    })
+  }
 
   return (
     <>
