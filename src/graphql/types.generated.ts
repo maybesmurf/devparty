@@ -1360,6 +1360,7 @@ export type User = {
   integrations?: Maybe<Integration>
   invite?: Maybe<Invite>
   isFollowing: Scalars['Boolean']
+  isOnboarded: Scalars['Boolean']
   isStaff: Scalars['Boolean']
   isVerified: Scalars['Boolean']
   masquerading?: Maybe<Scalars['Boolean']>
@@ -3590,6 +3591,7 @@ export type CurrentUserQuery = {
         id: string
         username: string
         isStaff: boolean
+        isOnboarded: boolean
         spammy: boolean
         masquerading?: boolean | null | undefined
         profile: { __typename?: 'Profile'; id: string; avatar: string }

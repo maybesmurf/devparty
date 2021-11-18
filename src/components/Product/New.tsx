@@ -6,15 +6,17 @@ import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
+import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { TextArea } from '@components/UI/TextArea'
+import AppContext from '@components/utils/AppContext'
 import {
   CreateProductMutation,
   CreateProductMutationVariables
 } from '@graphql/types.generated'
 import { PlusIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
 import { object, string } from 'zod'
 
 const newProductSchema = object({
@@ -36,6 +38,7 @@ const newProductSchema = object({
 
 const NewProduct: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const [createProduct, createProductResult] = useMutation<
     CreateProductMutation,
     CreateProductMutationVariables
@@ -59,6 +62,11 @@ const NewProduct: React.FC = () => {
   const form = useZodForm({
     schema: newProductSchema
   })
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
+  }
 
   return (
     <GridLayout>

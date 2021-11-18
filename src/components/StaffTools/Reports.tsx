@@ -94,7 +94,7 @@ const StaffToolsReports: React.FC = () => {
     }
   })
 
-  if (loading) return <PageLoading message="Loading reports" />
+  if (loading) return <PageLoading />
 
   return (
     <GridLayout>

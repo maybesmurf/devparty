@@ -1,7 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
 import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import { GetIntegrationQuery, Integration } from '@graphql/types.generated'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext } from 'react'
 
 import IntegrationSettingsForm from './Form'
 
@@ -17,11 +19,16 @@ export const GET_INTEGRATION_QUERY = gql`
 `
 
 const IntegrationSettings: React.FC = () => {
+  const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading } = useQuery<GetIntegrationQuery>(GET_INTEGRATION_QUERY)
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
+
+  if (loading) return <PageLoading />
 
   return (
     <IntegrationSettingsForm integration={data?.integration as Integration} />

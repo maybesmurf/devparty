@@ -54,8 +54,7 @@ const ViewProduct: React.FC = () => {
   )
   const product = data?.product
 
-  if (!router.isReady || loading)
-    return <PageLoading message="Loading product" />
+  if (!router.isReady || loading) return <PageLoading />
 
   if (!product) return <Custom404 />
 

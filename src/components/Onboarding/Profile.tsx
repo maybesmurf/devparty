@@ -1,22 +1,32 @@
 import { useQuery } from '@apollo/client'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
+import { PageLoading } from '@components/UI/PageLoading'
 import { ProgressBar } from '@components/UI/ProgressBar'
 import { Spinner } from '@components/UI/Spinner'
 import { GET_PROFILE_SETTINGS_QUERY } from '@components/User/Settings/Profile'
 import { GetProfileSettingsQuery, User } from '@graphql/types.generated'
 import { ArrowCircleRightIcon, ArrowLeftIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 import ProfileForm from './ProfileForm'
 
 const Profile: React.FC = () => {
+  const router = useRouter()
   const [showSkip, setShowSkip] = useState<boolean>(true)
   const { data, loading } = useQuery<GetProfileSettingsQuery>(
     GET_PROFILE_SETTINGS_QUERY
   )
   const currentUser = data?.me
+
+  if (loading) return <PageLoading />
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
+  }
 
   return (
     <div className="onboarding-bg page-center">

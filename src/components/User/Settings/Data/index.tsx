@@ -1,10 +1,12 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
+import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
 import { DownloadIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE } from 'src/constants'
@@ -12,6 +14,7 @@ import { ERROR_MESSAGE } from 'src/constants'
 import Sidebar from '../Sidebar'
 
 const DataSettings: React.FC = () => {
+  const router = useRouter()
   const { currentUser } = useContext(AppContext)
   const [exporting, setExporting] = useState<boolean>(false)
   const handleExport = () => {
@@ -37,6 +40,11 @@ const DataSettings: React.FC = () => {
         }
       })
       .finally(() => setExporting(false))
+  }
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
 
   return (

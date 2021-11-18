@@ -3,6 +3,7 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { Checkbox } from '@components/UI/Checkbox'
 import { Form, useZodForm } from '@components/UI/Form'
+import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
@@ -22,8 +23,8 @@ const acceptCOCAndTosSchema = object({
 })
 
 const Onboarding: React.FC = () => {
-  const { currentUser } = useContext(AppContext)
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const [acceptCocAndTos] = useMutation<
     AcceptCocAndTosMutation,
     AcceptCocAndTosMutationVariables
@@ -48,6 +49,11 @@ const Onboarding: React.FC = () => {
   const form = useZodForm({
     schema: acceptCOCAndTosSchema
   })
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
+  }
 
   return (
     <div className="onboarding-bg page-center">

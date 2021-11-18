@@ -22,8 +22,7 @@ const Followers: React.FC = () => {
   })
   const user = data?.user
 
-  if (!router.isReady || loading)
-    return <PageLoading message="Loading followers" />
+  if (!router.isReady || loading) return <PageLoading />
 
   if (!user) return <Custom404 />
 
