@@ -24,20 +24,20 @@ export const removeCommunityUser = async (
     throw new Error("Owner can't be removed from the community!")
   }
 
-  try {
-    if (community?.owner?.id === session?.userId) {
+  if (community?.owner?.id === session?.userId) {
+    try {
       await db.community.update({
         where: { id: community?.id },
         data: { members: { disconnect: { id: input.userId } } }
       })
 
       return Result.SUCCESS
-    } else {
-      throw new Error('You dont have permission to remove the user!')
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
+      }
     }
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-    }
+  } else {
+    throw new Error('You dont have permission to remove the user!')
   }
 }

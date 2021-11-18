@@ -24,8 +24,8 @@ export const addCommunityModerator = async (
     throw new Error('Only owner can add mods to community!')
   }
 
-  try {
-    if (community?.owner?.id === session?.userId) {
+  if (community?.owner?.id === session?.userId) {
+    try {
       await db.community.update({
         where: { id: community?.id },
         data: { moderators: { connect: { id: input.userId } } }
@@ -34,12 +34,12 @@ export const addCommunityModerator = async (
       // TODO: Send notification when added
 
       return Result.SUCCESS
-    } else {
-      throw new Error('You dont have permission to add the user!')
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
+      }
     }
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-    }
+  } else {
+    throw new Error('You dont have permission to add the user!')
   }
 }
