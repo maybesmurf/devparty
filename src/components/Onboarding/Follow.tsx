@@ -5,7 +5,9 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
+import { PageLoading } from '@components/UI/PageLoading'
 import { ProgressBar } from '@components/UI/ProgressBar'
+import AppContext from '@components/utils/AppContext'
 import { GetOnboardingUsersQuery, User } from '@graphql/types.generated'
 import {
   ArrowCircleRightIcon,
@@ -14,7 +16,7 @@ import {
 } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 export const GET_ONBOARDING_USERS_QUERY = gql`
   query GetOnboardingUsers($after: String) {
@@ -43,6 +45,7 @@ export const GET_ONBOARDING_USERS_QUERY = gql`
 
 const Follow: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const [showSkip, setShowSkip] = useState<boolean>(true)
   const { data, loading, error } = useQuery<GetOnboardingUsersQuery>(
     GET_ONBOARDING_USERS_QUERY,
@@ -52,6 +55,11 @@ const Follow: React.FC = () => {
 
   const handleContinue = () => {
     router.push('/onboarding/finish')
+  }
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
 
   return (

@@ -35,8 +35,11 @@ const ProductSettings: React.FC = () => {
   )
   const product = data?.product
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
+  if (loading) return <PageLoading />
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
 
   if (product?.owner?.id !== currentUser?.id) return <Custom404 />

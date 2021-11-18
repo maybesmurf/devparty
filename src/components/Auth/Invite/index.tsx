@@ -1,13 +1,15 @@
 import { gql, useQuery } from '@apollo/client'
 import Hero from '@components/shared/Hero'
 import Slug from '@components/shared/Slug'
+import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
 import { humanize } from '@components/utils/humanize'
 import { GetInviteQuery } from '@graphql/types.generated'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 
 import SignupForm from './Form'
@@ -28,6 +30,7 @@ export const GET_INVITE_QUERY = gql`
 
 const InviteSignup: React.FC = () => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading, error } = useQuery<GetInviteQuery>(GET_INVITE_QUERY, {
     variables: {
       code: router.query.code
@@ -36,6 +39,11 @@ const InviteSignup: React.FC = () => {
   })
   const invite = data?.invite
   const waitlistCount = data?.waitlistCount?.count
+
+  if (currentUser) {
+    if (process.browser) router.push('/home')
+    return <PageLoading />
+  }
 
   return (
     <div className="flex flex-grow">

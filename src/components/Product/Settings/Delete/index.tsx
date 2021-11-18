@@ -46,7 +46,7 @@ const DeleteSettings: React.FC = () => {
         toast.error(ERROR_MESSAGE)
       },
       onCompleted() {
-        window.location.href = '/'
+        if (process.browser) router.push('/login')
       }
     }
   )
@@ -62,8 +62,11 @@ const DeleteSettings: React.FC = () => {
     }
   }
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
+  if (loading) return <PageLoading />
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
 
   if (product?.owner?.id !== currentUser?.id) return <Custom404 />

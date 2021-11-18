@@ -123,7 +123,7 @@ const StaffToolsUsers: React.FC = () => {
     }
   })
 
-  if (loading) return <PageLoading message="Loading users" />
+  if (loading) return <PageLoading />
 
   return (
     <GridLayout>

@@ -4,8 +4,10 @@ import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
+import AppContext from '@components/utils/AppContext'
 import { GetSessionsQuery, Session } from '@graphql/types.generated'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext } from 'react'
 import useInView from 'react-cool-inview'
 
 import Sidebar from '../Sidebar'
@@ -43,6 +45,8 @@ export const GET_SESSION_QUERY = gql`
 `
 
 const SessionsSettings: React.FC = () => {
+  const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading, error, fetchMore } = useQuery<GetSessionsQuery>(
     GET_SESSION_QUERY,
     { variables: { after: null } }
@@ -67,9 +71,12 @@ const SessionsSettings: React.FC = () => {
     }
   })
 
-  if (loading) {
-    return <PageLoading message="Loading sessions" />
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
+
+  if (loading) return <PageLoading />
 
   return (
     <GridLayout>

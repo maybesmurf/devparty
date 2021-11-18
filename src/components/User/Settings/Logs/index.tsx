@@ -4,9 +4,11 @@ import { Card, CardBody } from '@components/UI/Card'
 import { EmptyState } from '@components/UI/EmptyState'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
+import AppContext from '@components/utils/AppContext'
 import { GetLogsQuery, Log } from '@graphql/types.generated'
 import { ClipboardListIcon } from '@heroicons/react/outline'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext } from 'react'
 import useInView from 'react-cool-inview'
 
 import Sidebar from '../Sidebar'
@@ -40,6 +42,8 @@ export const GET_LOGS_QUERY = gql`
 `
 
 const LogsSettings: React.FC = () => {
+  const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { data, loading, fetchMore } = useQuery<GetLogsQuery>(GET_LOGS_QUERY, {
     variables: { after: null }
   })
@@ -63,9 +67,12 @@ const LogsSettings: React.FC = () => {
     }
   })
 
-  if (loading) {
-    return <PageLoading message="Loading sessions" />
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
   }
+
+  if (loading) return <PageLoading />
 
   return (
     <GridLayout>
