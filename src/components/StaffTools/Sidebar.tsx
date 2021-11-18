@@ -1,6 +1,6 @@
 import {
-  BadgeCheckIcon,
   ChartSquareBarIcon,
+  ShieldCheckIcon,
   ShieldExclamationIcon,
   UsersIcon
 } from '@heroicons/react/outline'
@@ -56,7 +56,7 @@ const Sidebar: React.FC = () => {
         current={router.pathname == '/stafftools/badges'}
         url="/stafftools/badges"
       >
-        <BadgeCheckIcon className="h-4 w-4" />
+        <ShieldCheckIcon className="h-4 w-4" />
         <div>Badges</div>
       </Menu>
     </div>
