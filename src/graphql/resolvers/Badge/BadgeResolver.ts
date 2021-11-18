@@ -22,6 +22,7 @@ builder.queryField('badges', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
+    authScopes: { staff: true },
     resolve: async (query) => {
       return await getBadges(query)
     }
@@ -42,6 +43,7 @@ builder.mutationField('createBadge', (t) =>
     args: { input: t.arg({ type: CreateBadgeInput }) },
     resolve: async (query, parent, { input }) => {
       return await db.badge.create({
+        ...query,
         data: {
           name: input.name,
           image: input.image,

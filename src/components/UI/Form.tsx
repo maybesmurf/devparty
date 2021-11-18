@@ -1,4 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
 import React, { ComponentProps } from 'react'
 import {
   FieldValues,
@@ -10,6 +9,8 @@ import {
   UseFormReturn
 } from 'react-hook-form'
 import { TypeOf, ZodSchema } from 'zod'
+
+const { zodResolver } = require('@hookform/resolvers/zod')
 
 interface UseZodFormProps<T extends ZodSchema<FieldValues>>
   extends UseFormProps<TypeOf<T>> {

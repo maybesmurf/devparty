@@ -3639,6 +3639,53 @@ export type CurrentUserQuery = {
     | undefined
 }
 
+export type GetStaffBadgesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>
+}>
+
+export type GetStaffBadgesQuery = {
+  __typename?: 'Query'
+  badges: {
+    __typename?: 'QueryBadgesConnection'
+    pageInfo: {
+      __typename?: 'PageInfo'
+      endCursor?: string | null | undefined
+      hasNextPage: boolean
+    }
+    edges: Array<
+      | {
+          __typename?: 'QueryBadgesConnectionEdge'
+          node: {
+            __typename?: 'Badge'
+            id: string
+            name: string
+            image: string
+            description?: string | null | undefined
+            users: {
+              __typename?: 'BadgeUsersConnection'
+              totalCount: number
+              edges: Array<
+                | {
+                    __typename?: 'BadgeUsersConnectionEdge'
+                    node: {
+                      __typename?: 'User'
+                      id: string
+                      username: string
+                      profile: { __typename?: 'Profile'; avatar: string }
+                    }
+                  }
+                | null
+                | undefined
+              >
+            }
+          }
+        }
+      | null
+      | undefined
+    >
+  }
+}
+
 export type GetStaffReportsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>
 }>
