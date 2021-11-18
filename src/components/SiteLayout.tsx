@@ -1,5 +1,4 @@
 import { gql, useQuery } from '@apollo/client'
-import { SiteLoading } from '@components/UI/SiteLoading'
 import { CurrentUserQuery, User } from '@graphql/types.generated'
 import Head from 'next/head'
 import { useTheme } from 'next-themes'
@@ -16,7 +15,6 @@ export const CURRENT_USER_QUERY = gql`
       id
       username
       isStaff
-      isOnboarded
       spammy
       masquerading
       profile {
@@ -72,10 +70,6 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
     currentUserError: error,
     staffMode,
     setStaffMode
-  }
-
-  if (loading) {
-    return <SiteLoading />
   }
 
   return (

@@ -4,11 +4,9 @@ import { EmptyState } from '@components/UI/EmptyState'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
-import AppContext from '@components/utils/AppContext'
 import { GetNotificationsQuery } from '@graphql/types.generated'
 import { BellIcon } from '@heroicons/react/outline'
-import { useRouter } from 'next/router'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import useInView from 'react-cool-inview'
 
 import NotificationType from './NotificationType'
@@ -69,8 +67,6 @@ export const GET_NOTIFICATIONS_QUERY = gql`
 `
 
 const Notifications: React.FC = () => {
-  const router = useRouter()
-  const { currentUser } = useContext(AppContext)
   const [isRead, setIsRead] = useState<boolean>(false)
   const { data, loading, error, fetchMore } = useQuery<GetNotificationsQuery>(
     GET_NOTIFICATIONS_QUERY,
@@ -96,12 +92,7 @@ const Notifications: React.FC = () => {
     }
   })
 
-  if (loading) return <PageLoading />
-
-  if (!currentUser) {
-    if (process.browser) router.push('/login')
-    return <PageLoading />
-  }
+  if (loading) return <PageLoading message="Loading notifications" />
 
   return (
     <div className="flex flex-grow justify-center px-0 sm:px-6 lg:px-8 py-8">

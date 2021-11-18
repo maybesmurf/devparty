@@ -7,7 +7,6 @@ import {
 import { Menu } from '@headlessui/react'
 import { TrashIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 type Props = {
@@ -15,7 +14,6 @@ type Props = {
 }
 
 const Delete: React.FC<Props> = ({ post }) => {
-  const router = useRouter()
   const [deletePost] = useMutation<
     DeletePostMutation,
     DeletePostMutationVariables
@@ -27,7 +25,7 @@ const Delete: React.FC<Props> = ({ post }) => {
     `,
     {
       onCompleted() {
-        if (process.browser) router.push('/login')
+        window.location.replace('/')
       }
     }
   )

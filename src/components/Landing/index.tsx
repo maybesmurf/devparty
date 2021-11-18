@@ -1,23 +1,12 @@
 import Hero from '@components/shared/Hero'
 import LandingFooter from '@components/shared/LandingFooter'
 import { Button } from '@components/UI/Button'
-import { PageLoading } from '@components/UI/PageLoading'
-import AppContext from '@components/utils/AppContext'
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 
 const Landing: React.FC = () => {
-  const router = useRouter()
-  const { currentUser } = useContext(AppContext)
-
-  if (currentUser) {
-    if (process.browser) router.push('/home')
-    return <PageLoading />
-  }
-
   return (
     <div className="flex flex-grow">
       <div className="grid grid-cols-12 w-full">

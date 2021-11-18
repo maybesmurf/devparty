@@ -46,7 +46,7 @@ const StaffToolsDashboard: React.FC = () => {
   )
   const stats = data?.stats
 
-  if (loading) return <PageLoading />
+  if (loading) return <PageLoading message="Loading dashboard" />
 
   return (
     <GridLayout>

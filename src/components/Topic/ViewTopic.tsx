@@ -38,7 +38,7 @@ const ViewTopic: React.FC = () => {
   })
   const topic = data?.topic
 
-  if (!router.isReady || loading) return <PageLoading />
+  if (!router.isReady || loading) return <PageLoading message="Loading topic" />
 
   if (!topic) return <Custom404 />
 
