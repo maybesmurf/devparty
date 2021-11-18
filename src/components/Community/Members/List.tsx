@@ -75,9 +75,7 @@ const MembersList: React.FC = () => {
   >(
     gql`
       mutation RemoveCommunityUser($input: RemoveCommunityUserInput!) {
-        removeCommunityUser(input: $input) {
-          id
-        }
+        removeCommunityUser(input: $input)
       }
     `,
     {

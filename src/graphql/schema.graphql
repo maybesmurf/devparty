@@ -335,7 +335,7 @@ type Mutation {
   onboardUser(input: OnboardUserInput!): User
   readNotification(input: ReadNotificationInput!): Result!
   regenerateInvite: Invite!
-  removeCommunityUser(input: RemoveCommunityUserInput!): Community
+  removeCommunityUser(input: RemoveCommunityUserInput!): Result
   resolveReport(input: ResolveReportInput!): Result
   revokeSession(input: RevokeSessionInput!): Result!
   signUp(input: SignupInput!): User!

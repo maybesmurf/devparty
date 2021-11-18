@@ -1,3 +1,4 @@
+import { Result } from '@graphql/resolvers/ResultResolver'
 import { RemoveCommunityUserInput } from '@graphql/types.generated'
 import { Prisma, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
@@ -5,18 +6,15 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
  * Remove user from the community
- * @param query - Contains an include object to pre-load data needed to resolve nested parts.
  * @param input - RemoveCommunityUserInput
  * @param session - Current user's session
  * @returns RESULT
  */
 export const removeCommunityUser = async (
-  query: Record<string, unknown>,
   input: RemoveCommunityUserInput,
   session: Session | null | undefined
 ) => {
   const community = await db.community.findUnique({
-    ...query,
     where: { id: input.communityId },
     select: { id: true, owner: { select: { id: true } } },
     rejectOnNotFound: true
@@ -28,11 +26,12 @@ export const removeCommunityUser = async (
 
   try {
     if (community?.owner?.id === session?.userId) {
-      return await db.community.update({
-        ...query,
+      await db.community.update({
         where: { id: community?.id },
         data: { members: { disconnect: { id: input.userId } } }
       })
+
+      return Result.SUCCESS
     } else {
       throw new Error('You dont have permission to remove the user!')
     }

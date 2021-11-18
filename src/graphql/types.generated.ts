@@ -376,7 +376,7 @@ export type ModUserInput = {
 export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
-  addCommunityModerator?: Maybe<Community>
+  addCommunityModerator?: Maybe<Result>
   answerPoll?: Maybe<PollAnswer>
   attachBadge: User
   authWithWallet?: Maybe<User>
@@ -1663,10 +1663,7 @@ export type AddCommunityModeratorMutationVariables = Exact<{
 
 export type AddCommunityModeratorMutation = {
   __typename?: 'Mutation'
-  addCommunityModerator?:
-    | { __typename?: 'Community'; id: string }
-    | null
-    | undefined
+  addCommunityModerator?: Result | null | undefined
 }
 
 export type GetCommunitiesQueryVariables = Exact<{ [key: string]: never }>

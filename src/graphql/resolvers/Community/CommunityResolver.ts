@@ -125,13 +125,13 @@ const RemoveCommunityUserInput = builder.inputType('RemoveCommunityUserInput', {
 })
 
 builder.mutationField('removeCommunityUser', (t) =>
-  t.prismaField({
-    type: 'Community',
+  t.field({
+    type: Result,
     args: { input: t.arg({ type: RemoveCommunityUserInput }) },
     authScopes: { user: true },
     nullable: true,
-    resolve: async (query, parent, { input }, { session }) => {
-      return await removeCommunityUser(query, input, session)
+    resolve: async (parent, { input }, { session }) => {
+      return await removeCommunityUser(input, session)
     }
   })
 )

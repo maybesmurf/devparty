@@ -45,9 +45,7 @@ const About: React.FC = () => {
   >(
     gql`
       mutation addCommunityModerator($input: AddCommunityModeratorInput!) {
-        addCommunityModerator(input: $input) {
-          id
-        }
+        addCommunityModerator(input: $input)
       }
     `,
     {
