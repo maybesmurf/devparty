@@ -864,7 +864,6 @@ type User {
   integrations: Integration
   invite: Invite
   isFollowing: Boolean!
-  isOnboarded: Boolean!
   isStaff: Boolean!
   isVerified: Boolean!
   masquerading: Boolean

@@ -4,14 +4,12 @@ import TopicProfile from '@components/shared/TopicProfile'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
-import { PageLoading } from '@components/UI/PageLoading'
 import { ProgressBar } from '@components/UI/ProgressBar'
-import AppContext from '@components/utils/AppContext'
 import { GetOnboardingTopicsQuery, Topic } from '@graphql/types.generated'
 import { ArrowCircleRightIcon, ArrowLeftIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
 export const GET_ONBOARDING_TOPICS_QUERY = gql`
   query GetOnboardingTopics($after: String) {
@@ -34,7 +32,6 @@ export const GET_ONBOARDING_TOPICS_QUERY = gql`
 
 const Topics: React.FC = () => {
   const router = useRouter()
-  const { currentUser } = useContext(AppContext)
   const [showSkip, setShowSkip] = useState<boolean>(true)
   const { data, loading, error } = useQuery<GetOnboardingTopicsQuery>(
     GET_ONBOARDING_TOPICS_QUERY,
@@ -44,11 +41,6 @@ const Topics: React.FC = () => {
 
   const handleContinue = () => {
     router.push('/onboarding/profile')
-  }
-
-  if (!currentUser) {
-    if (process.browser) router.push('/login')
-    return <PageLoading />
   }
 
   return (

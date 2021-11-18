@@ -25,7 +25,8 @@ const Members: React.FC = () => {
   })
   const community = data?.community
 
-  if (!router.isReady || loading) return <PageLoading />
+  if (!router.isReady || loading)
+    return <PageLoading message="Loading members" />
 
   if (!community) return <Custom404 />
 

@@ -22,7 +22,8 @@ const Communities: React.FC = () => {
   })
   const user = data?.user
 
-  if (!router.isReady || loading) return <PageLoading />
+  if (!router.isReady || loading)
+    return <PageLoading message="Loading communities" />
 
   if (!user) return <Custom404 />
 

@@ -6,17 +6,15 @@ import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
-import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { TextArea } from '@components/UI/TextArea'
-import AppContext from '@components/utils/AppContext'
 import {
   CreateCommunityMutation,
   CreateCommunityMutationVariables
 } from '@graphql/types.generated'
 import { PlusIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React from 'react'
 import { object, string } from 'zod'
 
 const newCommunitySchema = object({
@@ -34,7 +32,6 @@ const newCommunitySchema = object({
 
 const NewCommunity: React.FC = () => {
   const router = useRouter()
-  const { currentUser } = useContext(AppContext)
   const [createCommunity, createCommunityResult] = useMutation<
     CreateCommunityMutation,
     CreateCommunityMutationVariables
@@ -58,11 +55,6 @@ const NewCommunity: React.FC = () => {
   const form = useZodForm({
     schema: newCommunitySchema
   })
-
-  if (!currentUser) {
-    if (process.browser) router.push('/login')
-    return <PageLoading />
-  }
 
   return (
     <GridLayout>

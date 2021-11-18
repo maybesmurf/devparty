@@ -1,24 +1,16 @@
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
-import { PageLoading } from '@components/UI/PageLoading'
 import { ProgressBar } from '@components/UI/ProgressBar'
-import AppContext from '@components/utils/AppContext'
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React from 'react'
 
 const Finish: React.FC = () => {
   const router = useRouter()
-  const { currentUser } = useContext(AppContext)
 
   const handleContinue = () => {
     router.push('/home')
-  }
-
-  if (!currentUser) {
-    if (process.browser) router.push('/login')
-    return <PageLoading />
   }
 
   return (
