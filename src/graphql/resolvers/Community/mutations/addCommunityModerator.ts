@@ -31,6 +31,8 @@ export const addCommunityModerator = async (
         data: { moderators: { connect: { id: input.userId } } }
       })
 
+      // TODO: Send notification when added
+
       return Result.SUCCESS
     } else {
       throw new Error('You dont have permission to add the user!')
