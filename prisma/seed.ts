@@ -6,6 +6,7 @@ import { hashPassword } from '@utils/auth'
 import faker from 'faker'
 import { md5 } from 'hash-wasm'
 
+import { badgeData } from './seeds/badges'
 import { communityData, rulesData } from './seeds/communities'
 import { productData } from './seeds/products'
 import { topicsData } from './seeds/topics'
@@ -150,6 +151,19 @@ async function main() {
         },
         moderators: { connect: { username: 'yoginth' } },
         rules: { createMany: { data: rulesData } }
+      }
+    })
+  }
+
+  // Badges
+  for (const badge of badgeData) {
+    console.log(`🌱 Seeding real badge - ${badge.name} 🏆`)
+    await db.badge.create({
+      data: {
+        name: badge.name,
+        image: badge.image,
+        description: badge.description,
+        users: { connect: { username: 'yoginth' } }
       }
     })
   }
