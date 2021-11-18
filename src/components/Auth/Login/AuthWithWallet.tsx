@@ -54,7 +54,7 @@ const AuthWithWallet: React.FC = () => {
             address
           ])
 
-        setLoginButtonMessage('Loggin in...')
+        setLoginButtonMessage('Logging in...')
         await authWithWallet({
           variables: { input: { nonce: data?.nonce as string, signature } }
         })

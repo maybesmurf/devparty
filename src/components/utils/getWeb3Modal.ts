@@ -3,7 +3,8 @@ import WalletLink from 'walletlink'
 import Web3Modal from 'web3modal'
 
 const getWeb3Modal = (theme: string) => {
-  const INFURA_ID = process.env.INFURA_ID
+  // const INFURA_ID = process.env.INFURA_ID
+  const INFURA_ID = 'e108e03761524c2ca74d8294c4502519'
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
