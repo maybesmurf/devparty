@@ -22,6 +22,7 @@ builder.queryField('badges', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
+    authScopes: { staff: true },
     resolve: async (query) => {
       return await getBadges(query)
     }
