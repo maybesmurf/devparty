@@ -1534,42 +1534,42 @@
   resolved "https://registry.yarnpkg.com/@giraphql/core/-/core-2.18.1.tgz#98f4371d2c6fb6a3f7943418666ddcc563d22cd4"
   integrity sha512-31AyjOpLHGmu1Ujxf7hgbAsMtzI/GlZZ2IPZL0m60EdxS6XcdwpJJn2aZbG5RG09lvxQtog+CmO+86kWN7mQ8g==
 
-"@giraphql/plugin-directives@^2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-directives/-/plugin-directives-2.9.0.tgz#78b6f05207eef81a3129845f88395ba6d3f56693"
-  integrity sha512-JokCVZ53Sfl9XcQMM7C5ga1WMap9ducsAAwJ21/Cs6LOj8hfjvC3LcyjFCvrNUe52IcBG23VogkaIyCemttVLw==
+"@giraphql/plugin-directives@^2.10.1":
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-directives/-/plugin-directives-2.10.1.tgz#3de2f2d9b678ee12118f0920e25a0c4e65a1407a"
+  integrity sha512-PXzCCL569ogaE1oH46h7goml7ypeb5Tgh2OBOAhT4TRgAw/u2QYBnvXdGkLL0qjG45W1cafPoCZ/Y6AWrihWZA==
 
-"@giraphql/plugin-prisma@^0.12.1":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.12.1.tgz#95189e13d9bd4b59ad1ccb2dfda3349d2ff79238"
-  integrity sha512-/0zspp+gC6mrnM7RAbwBrdaLZvHGTF90oUFIIo8jIVqXqhxYMVVnmJH40LpwiZi9UBEkPl1IwONp7AGxCnqgPQ==
+"@giraphql/plugin-prisma@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.13.0.tgz#3854f0a128555aa6b37148dc5d2f84f06e200059"
+  integrity sha512-f1PKUe9oyBh4u2uYWI6FJfh2ECkYbY8ma1Bs4YV6lmFiYC5+uaUcfaQjEwpFyd9a9no79QpPaHrgcrYEQU2b5w==
   dependencies:
     "@prisma/generator-helper" "^3.5.0"
 
-"@giraphql/plugin-relay@^2.17.0":
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-relay/-/plugin-relay-2.17.0.tgz#fea11045fcea7980d649f1da68ab356391080d99"
-  integrity sha512-n/67CH3iWvz1+6fzq+WJI9/bWZiOfLa8AvbhZIdnV7bMtw/l6f7Z6UCVW7h4802qqqcvVEpWy7qtqle83NqQIA==
+"@giraphql/plugin-relay@^2.18.1":
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-relay/-/plugin-relay-2.18.1.tgz#4e0947ab39c80b1b37e433f6a872adc09d618fba"
+  integrity sha512-hFrbIzXQ6JmTO4biG/IdZlAvjpV1Q5h+gr+QRjF6wXrcld8ytikMMRReAmb/gFy8Ixvrr9bgxS2N5m43mfLD1Q==
 
 "@giraphql/plugin-scope-auth@^2.13.1":
   version "2.13.1"
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-scope-auth/-/plugin-scope-auth-2.13.1.tgz#f9a019b67900e0a5da0db80ec5f76f5d405d6228"
   integrity sha512-nmJ2qeN9ceqHpMG+swPHK9rQdTWoVnrswrP06V6Ilc+hxwyxW12VBY3IcuLOqVb2uJemBEfpUBPc+/CZM3yG6g==
 
-"@giraphql/plugin-simple-objects@^2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-simple-objects/-/plugin-simple-objects-2.10.0.tgz#0493133cb2e07a0387e92fe6d0f9a1889592ce12"
-  integrity sha512-mTxqtxTmLLNl8Bxt8/Wpgw4uI60vNR0R5+MXkYsLTZ6sEz1WWEM/4/WSe460dHq6gWv6N36twnloFlJdrEJ2qg==
+"@giraphql/plugin-simple-objects@^2.11.1":
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-simple-objects/-/plugin-simple-objects-2.11.1.tgz#1ea7f662c08cb9efc820c80131508ac573f4d7bc"
+  integrity sha512-OkZhFyrLI0T5WXyvWtli5T531cQBx//T68l9BikgG4EucL4RjFqdh1Im9ovnSyZlj3UCX0h/3RNWgl40BhZvbg==
 
 "@giraphql/plugin-validation@^2.15.0":
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-validation/-/plugin-validation-2.15.0.tgz#151d1ed5f72267d71e1636130897000773d1a2c7"
   integrity sha512-1LJUQB5ulx6cJWwXgaU9Gw1LKy4Wjc/ZGTGVFS1qI9o7sQ3EbJPVjcOjZvfe8NGjmQlvK3OVSX/1RPfRC34wyw==
 
-"@graphql-codegen/cli@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.2.2.tgz#f079af082ade06b7639b73a7fc12754c704dada7"
-  integrity sha512-QTijlvgmzBkSQ/7+VTxQbkcEoSfX/qpX2yg6xXQPISU71Q+6k2dGvYfRrjchwGu7/cNeSaYfgh8S/MhkmNg7Uw==
+"@graphql-codegen/cli@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.3.0.tgz#07ef86eea6d42c56f9c7118871115d779dee49f3"
+  integrity sha512-5pgrcnBFeOJbDGfZwhnytwMqpwFDrmdaAgD6HYywT9Fggsrx2yWSkVrxoAjEcbDMFLhxzjxECwfJYklm967AKA==
   dependencies:
     "@graphql-codegen/core" "2.3.0"
     "@graphql-codegen/plugin-helpers" "^2.3.0"
@@ -1594,7 +1594,7 @@
     detect-indent "^6.0.0"
     glob "^7.1.6"
     globby "^11.0.4"
-    graphql-config "^4.0.1"
+    graphql-config "^4.1.0"
     inquirer "^7.3.3"
     is-glob "^4.0.1"
     json-to-pretty-yaml "^1.2.2"
@@ -2933,10 +2933,10 @@
   resolved "https://registry.yarnpkg.com/@types/spotify-api/-/spotify-api-0.0.11.tgz#5cc45ad6341b5233f4617601dc4826b9e6370473"
   integrity sha512-ZSEpG22JPMcN+tR0+U3wvmGHF4L+jyh1N+8aFbT6WzdXwPuTgH2iL+wKASkMN79CEntHQTPgBwpywZVDhll0Eg==
 
-"@types/spotify-web-api-node@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@types/spotify-web-api-node/-/spotify-web-api-node-5.0.3.tgz#0968b8063146898056cde826e6e0db9e6884f8e1"
-  integrity sha512-aw7bW/Jxb7urwWLrJutMuTzyiNQVTeO/6/0OaPpDkXKauAPAoO1RiI8bJncoK4umtWTk8oeHqOTYRAhY3DLjCQ==
+"@types/spotify-web-api-node@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/spotify-web-api-node/-/spotify-web-api-node-5.0.4.tgz#457f3a82d08aa0a561f98ebc1d5f78228e3b0c5d"
+  integrity sha512-t2a0wqe/9ydzqPTvL6CKys8v3mS3jR942BqSlg2e9lOtskUFSim9pXwathV0A9MTout5dpeWC3jW1yNUzJhovg==
   dependencies:
     "@types/spotify-api" "*"
 
@@ -6189,10 +6189,10 @@ eslint-plugin-simple-import-sort@^7.0.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-7.0.0.tgz#a1dad262f46d2184a90095a60c66fef74727f0f8"
   integrity sha512-U3vEDB5zhYPNfxT5TYR7u01dboFZp+HNpnGhkDB2g/2E4wZ/g1Q9Ton8UwCLfRV9yAKyYqDh62oHOamvkFxsvw==
 
-eslint-plugin-unused-imports@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-unused-imports/-/eslint-plugin-unused-imports-1.1.5.tgz#a2b992ef0faf6c6c75c3815cc47bde76739513c2"
-  integrity sha512-TeV8l8zkLQrq9LBeYFCQmYVIXMjfHgdRQLw7dEZp4ZB3PeR10Y5Uif11heCsHRmhdRIYMoewr1d9ouUHLbLHew==
+eslint-plugin-unused-imports@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-unused-imports/-/eslint-plugin-unused-imports-2.0.0.tgz#d8db8c4d0cfa0637a8b51ce3fd7d1b6bc3f08520"
+  integrity sha512-3APeS/tQlTrFa167ThtP0Zm0vctjr4M44HMpeg1P4bK6wItarumq0Ma82xorMKdFsWpphQBlRPzw/pxiVELX1A==
   dependencies:
     eslint-rule-composer "^0.3.0"
 
@@ -7651,7 +7651,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9,
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
-graphql-config@^4.0.1:
+graphql-config@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-4.1.0.tgz#a3b28d3fb537952ebeb69c75e4430605a10695e3"
   integrity sha512-Myqay6pmdcmX3KqoH+bMbeKZ1cTODpHS2CxF1ZzNnfTE+YUpGTcp01bOw6LpzamRb0T/WTYtGFbZeXGo9Hab2Q==
