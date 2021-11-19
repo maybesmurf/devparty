@@ -5,6 +5,7 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
+import { TextArea } from '@components/UI/TextArea'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
@@ -44,9 +45,10 @@ const newNFTSchema = object({
 interface Props {
   post: Post
   setShowMint: React.Dispatch<React.SetStateAction<boolean>>
+  setShowMintForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Mint: React.FC<Props> = ({ post, setShowMint }) => {
+const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
   const [isMinting, setIsMinting] = useState<boolean>(false)
@@ -158,7 +160,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
   return (
     <div className="space-y-3">
       {mintingStatus === 'Minting Completed!' ? (
-        <div className="p-5 font-bold text-center space-y-4">
+        <div className="font-bold text-center space-y-4">
           <div className="space-y-2">
             <div className="text-3xl">🎉</div>
             <div>Your NFT has been successfully minted!</div>
@@ -176,17 +178,18 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
           </div>
         </div>
       ) : isMinting ? (
-        <div className="p-5 font-bold text-center space-y-2">
+        <div className="font-bold text-center space-y-2">
           <Spinner size="md" className="mx-auto" />
           <div>{mintingStatus}</div>
         </div>
       ) : (
         <Form form={form} onSubmit={mintToken}>
-          <div className="px-5 py-3.5 space-y-7">
+          <div className="space-y-7">
             <div>
-              <Input
+              <TextArea
                 label="Title"
                 placeholder="Title of your NFT"
+                rows={3}
                 {...form.register('title')}
               />
             </div>
@@ -245,7 +248,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
               />
             )}
           </div>
-          <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
+          <div className="flex items-center justify-between pt-5 border-t dark:border-gray-800">
             <a
               className="text-sm text-gray-500"
               href="https://ipfs.io"
@@ -254,15 +257,24 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
             >
               Stored on <b>IPFS</b>
             </a>
-            <Button
-              disabled={
-                !form.watch('accept') ||
-                parseInt(form.watch('quantity')) < 1 ||
-                parseInt(form.watch('quantity')) > 1000
-              }
-            >
-              Mint NFT
-            </Button>
+            <div className="space-x-1">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setShowMintForm(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                disabled={
+                  !form.watch('accept') ||
+                  parseInt(form.watch('quantity')) < 1 ||
+                  parseInt(form.watch('quantity')) > 1000
+                }
+              >
+                Mint NFT
+              </Button>
+            </div>
           </div>
         </Form>
       )}
