@@ -12,11 +12,6 @@ input AnswerPollInput {
   id: ID!
 }
 
-input AttachBadgeToUserInput {
-  badgeId: ID!
-  userId: ID!
-}
-
 type Attachment {
   id: ID!
   index: Int!
@@ -27,6 +22,11 @@ type Attachment {
 input AuthWithWalletInput {
   nonce: String!
   signature: String!
+}
+
+input AwardBadgeInput {
+  badgeId: ID!
+  userId: ID!
 }
 
 type Badge {
@@ -305,8 +305,8 @@ type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
   addCommunityModerator(input: AddCommunityModeratorInput!): Result
   answerPoll(input: AnswerPollInput!): PollAnswer
-  attachBadge(input: AttachBadgeToUserInput!): User!
   authWithWallet(input: AuthWithWalletInput!): User
+  awardBadge(input: AwardBadgeInput!): User!
   changePassword(input: ChangePasswordInput!): Result!
   clearStatus: Result!
   createBadge(input: CreateBadgeInput!): Badge!
