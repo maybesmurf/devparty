@@ -12,13 +12,19 @@ import React from 'react'
 import toast from 'react-hot-toast'
 import { object, string } from 'zod'
 
-const newBadgeSchema = object({
+import { GET_STAFF_BADGES_QUERY } from '.'
+
+const createBadgeSchema = object({
   name: string().min(0).max(255),
   url: string().url(),
   description: string()
 })
 
-const NewBadge: React.FC = () => {
+interface Props {
+  setShowNewBadgeModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const CreateBadge: React.FC<Props> = ({ setShowNewBadgeModal }) => {
   const [createBadge] = useMutation<
     CreateBadgeMutation,
     CreateBadgeMutationVariables
@@ -31,17 +37,19 @@ const NewBadge: React.FC = () => {
       }
     `,
     {
+      refetchQueries: [{ query: GET_STAFF_BADGES_QUERY }],
       onError(error) {
         toast.error(error.message)
       },
       onCompleted() {
+        setShowNewBadgeModal(false)
         toast.success('Badge created successfully!')
       }
     }
   )
 
   const form = useZodForm({
-    schema: newBadgeSchema
+    schema: createBadgeSchema
   })
 
   return (
@@ -83,4 +91,4 @@ const NewBadge: React.FC = () => {
   )
 }
 
-export default NewBadge
+export default CreateBadge
