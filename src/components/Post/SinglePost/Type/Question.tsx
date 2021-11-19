@@ -13,7 +13,7 @@ const QuestionType: React.FC<Props> = ({ question }) => {
     <div className="post space-y-3">
       <div>
         <div className="text-lg font-bold mb-1">{question?.title}</div>
-        <div className="prose">
+        <div className="prose dark:prose-dark">
           <Markdown options={{ wrapper: 'article' }}>{question?.body}</Markdown>
         </div>
       </div>
