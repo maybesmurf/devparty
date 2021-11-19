@@ -9,7 +9,12 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
  */
 export const awardBadge = async (input: AwardBadgeInput) => {
   try {
-    console.log(input.users)
+    const users = input.users
+      .split(/[ ,]+/)
+      .filter(function (item, index, inputArray) {
+        return inputArray.indexOf(item) === index
+      })
+    console.log(users)
     // await db.community.create({
     //   data: {
     //     name: input.name,
