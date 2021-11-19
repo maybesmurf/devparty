@@ -1,10 +1,13 @@
 import { Card, CardBody } from '@components/UI/Card'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 import { useStreak } from 'use-streak'
 
 const Day = ({ day }: { day: number }) => (
-  <img className="h-10" src={`${STATIC_ASSETS}/streak/${day}.png`} />
+  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+    <img className="h-10" src={`${STATIC_ASSETS}/streak/${day}.png`} />
+  </motion.button>
 )
 
 const Streak = () => {
