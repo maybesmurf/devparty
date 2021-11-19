@@ -42,7 +42,7 @@ body {
   @apply !bg-white;
 }
 
-.walletconnect-wrapper, 
+.walletconnect-wrapper,
 .walletconnect-modal__mobile__toggle {
   @apply text-black;
 }
