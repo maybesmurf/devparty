@@ -21,10 +21,10 @@ const createBadgeSchema = object({
 })
 
 interface Props {
-  setShowNewBadgeModal: React.Dispatch<React.SetStateAction<boolean>>
+  setShowCreateBadgeModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateBadge: React.FC<Props> = ({ setShowNewBadgeModal }) => {
+const CreateBadge: React.FC<Props> = ({ setShowCreateBadgeModal }) => {
   const [createBadge] = useMutation<
     CreateBadgeMutation,
     CreateBadgeMutationVariables
@@ -42,7 +42,7 @@ const CreateBadge: React.FC<Props> = ({ setShowNewBadgeModal }) => {
         toast.error(error.message)
       },
       onCompleted() {
-        setShowNewBadgeModal(false)
+        setShowCreateBadgeModal(false)
         toast.success('Badge created successfully!')
       }
     }

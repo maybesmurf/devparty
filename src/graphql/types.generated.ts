@@ -33,11 +33,6 @@ export type AnswerPollInput = {
   id: Scalars['ID']
 }
 
-export type AttachBadgeToUserInput = {
-  badgeId: Scalars['ID']
-  userId: Scalars['ID']
-}
-
 export type Attachment = {
   __typename?: 'Attachment'
   id: Scalars['ID']
@@ -49,6 +44,11 @@ export type Attachment = {
 export type AuthWithWalletInput = {
   nonce: Scalars['String']
   signature: Scalars['String']
+}
+
+export type AwardBadgeInput = {
+  badgeId: Scalars['ID']
+  users: Scalars['String']
 }
 
 export type Badge = {
@@ -378,8 +378,8 @@ export type Mutation = {
   acceptCocAndTos: User
   addCommunityModerator?: Maybe<Result>
   answerPoll?: Maybe<PollAnswer>
-  attachBadge: User
   authWithWallet?: Maybe<User>
+  awardBadge: Result
   changePassword: Result
   clearStatus: Result
   createBadge: Badge
@@ -433,12 +433,12 @@ export type MutationAnswerPollArgs = {
   input: AnswerPollInput
 }
 
-export type MutationAttachBadgeArgs = {
-  input: AttachBadgeToUserInput
-}
-
 export type MutationAuthWithWalletArgs = {
   input: AuthWithWalletInput
+}
+
+export type MutationAwardBadgeArgs = {
+  input: AwardBadgeInput
 }
 
 export type MutationChangePasswordArgs = {
@@ -3638,6 +3638,12 @@ export type CurrentUserQuery = {
     | null
     | undefined
 }
+
+export type AwardBadgeMutationVariables = Exact<{
+  input: AwardBadgeInput
+}>
+
+export type AwardBadgeMutation = { __typename?: 'Mutation'; awardBadge: Result }
 
 export type CreateBadgeMutationVariables = Exact<{
   input: CreateBadgeInput

@@ -8,11 +8,12 @@ import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetStaffBadgesQuery } from '@graphql/types.generated'
-import { PlusCircleIcon } from '@heroicons/react/outline'
+import { GiftIcon, PlusCircleIcon } from '@heroicons/react/outline'
 import React, { useState } from 'react'
 import useInView from 'react-cool-inview'
 
 import Sidebar from '../Sidebar'
+import AwardBadge from './AwardBadge'
 import CreateBadge from './CreateBadge'
 
 export const GET_STAFF_BADGES_QUERY = gql`
@@ -47,7 +48,10 @@ export const GET_STAFF_BADGES_QUERY = gql`
 `
 
 const StaffToolsBadges: React.FC = () => {
-  const [showNewBadgeModal, setShowNewBadgeModal] = useState<boolean>(false)
+  const [showCreateBadgeModal, setShowCreateBadgeModal] =
+    useState<boolean>(false)
+  const [showAwardBadgeModal, setShowAwardBadgeModal] = useState<boolean>(false)
+  const [selectedBadgeID, setSelectedBadgeID] = useState<string>()
   const { data, loading, error, fetchMore } = useQuery<GetStaffBadgesQuery>(
     GET_STAFF_BADGES_QUERY,
     { variables: { after: null } }
@@ -86,16 +90,28 @@ const StaffToolsBadges: React.FC = () => {
               <div className="text-xl font-bold">Badges</div>
               <Button
                 icon={<PlusCircleIcon className="h-5 w-5" />}
-                onClick={() => setShowNewBadgeModal(!showNewBadgeModal)}
+                onClick={() => setShowCreateBadgeModal(!showCreateBadgeModal)}
               >
-                New Badge
+                Create
               </Button>
               <Modal
-                onClose={() => setShowNewBadgeModal(!showNewBadgeModal)}
-                title="New Badge"
-                show={showNewBadgeModal}
+                onClose={() => setShowAwardBadgeModal(!showAwardBadgeModal)}
+                title="Award Badge"
+                show={showAwardBadgeModal}
               >
-                <CreateBadge setShowNewBadgeModal={setShowNewBadgeModal} />
+                <AwardBadge
+                  setShowAwardBadgeModal={setShowAwardBadgeModal}
+                  selectedBadgeID={selectedBadgeID as string}
+                />
+              </Modal>
+              <Modal
+                onClose={() => setShowCreateBadgeModal(!showCreateBadgeModal)}
+                title="Create Badge"
+                show={showCreateBadgeModal}
+              >
+                <CreateBadge
+                  setShowCreateBadgeModal={setShowCreateBadgeModal}
+                />
               </Modal>
             </div>
             <div className="divide-y">
@@ -103,7 +119,7 @@ const StaffToolsBadges: React.FC = () => {
               {badges?.map((badge: any) => (
                 <div
                   key={badge?.id}
-                  className="flex justify-between items-center py-5"
+                  className="flex justify-between items-center space-x-5 py-5"
                 >
                   <div className="flex space-x-4 items-center">
                     <img
@@ -121,6 +137,16 @@ const StaffToolsBadges: React.FC = () => {
                         </div>
                       )}
                     </div>
+                  </div>
+                  <div>
+                    <Button
+                      variant="success"
+                      icon={<GiftIcon className="h-5 w-5" />}
+                      onClick={() => {
+                        setSelectedBadgeID(badge?.id)
+                        setShowAwardBadgeModal(!showAwardBadgeModal)
+                      }}
+                    />
                   </div>
                 </div>
               ))}
