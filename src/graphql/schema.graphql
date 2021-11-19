@@ -25,6 +25,7 @@ input AuthWithWalletInput {
 }
 
 input AwardBadgeInput {
+  badgeId: ID!
   users: String!
 }
 

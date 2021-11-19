@@ -54,7 +54,7 @@ const AwardBadge: React.FC<Props> = ({
       form={form}
       onSubmit={({ users }) =>
         awardBadge({
-          variables: { input: { users } }
+          variables: { input: { badgeId: selectedBadgeID as string, users } }
         })
       }
     >

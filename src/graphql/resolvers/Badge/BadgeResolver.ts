@@ -58,6 +58,7 @@ builder.mutationField('createBadge', (t) =>
 
 const AwardBadgeInput = builder.inputType('AwardBadgeInput', {
   fields: (t) => ({
+    badgeId: t.id({ validate: { uuid: true } }),
     users: t.string()
   })
 })
