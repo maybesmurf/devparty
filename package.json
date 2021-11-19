@@ -37,7 +37,7 @@
     "@rehooks/online-status": "^1.1.2",
     "@tailwindcss/line-clamp": "^0.2.2",
     "clsx": "^1.1.1",
-    "date-fns": "^2.25.0",
+    "date-fns": "^2.26.0",
     "dotenv": "^10.0.0",
     "emoji-mart": "^3.0.1",
     "ethereum-waffle": "^3.4.0",
