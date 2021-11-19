@@ -13,7 +13,7 @@ import React, { useState } from 'react'
 import useInView from 'react-cool-inview'
 
 import Sidebar from '../Sidebar'
-import NewBadge from './NewBadge'
+import CreateBadge from './CreateBadge'
 
 export const GET_STAFF_BADGES_QUERY = gql`
   query GetStaffBadges($after: String) {
@@ -95,7 +95,7 @@ const StaffToolsBadges: React.FC = () => {
                 title="New Badge"
                 show={showNewBadgeModal}
               >
-                <NewBadge />
+                <CreateBadge setShowNewBadgeModal={setShowNewBadgeModal} />
               </Modal>
             </div>
             <div className="divide-y">

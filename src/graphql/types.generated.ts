@@ -3639,6 +3639,15 @@ export type CurrentUserQuery = {
     | undefined
 }
 
+export type CreateBadgeMutationVariables = Exact<{
+  input: CreateBadgeInput
+}>
+
+export type CreateBadgeMutation = {
+  __typename?: 'Mutation'
+  createBadge: { __typename?: 'Badge'; id: string }
+}
+
 export type GetStaffBadgesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>
 }>
