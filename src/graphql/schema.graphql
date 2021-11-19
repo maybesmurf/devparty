@@ -25,8 +25,7 @@ input AuthWithWalletInput {
 }
 
 input AwardBadgeInput {
-  badgeId: ID!
-  userId: ID!
+  users: String!
 }
 
 type Badge {
@@ -306,7 +305,7 @@ type Mutation {
   addCommunityModerator(input: AddCommunityModeratorInput!): Result
   answerPoll(input: AnswerPollInput!): PollAnswer
   authWithWallet(input: AuthWithWalletInput!): User
-  awardBadge(input: AwardBadgeInput!): User!
+  awardBadge(input: AwardBadgeInput!): Result!
   changePassword(input: ChangePasswordInput!): Result!
   clearStatus: Result!
   createBadge(input: CreateBadgeInput!): Badge!

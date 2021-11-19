@@ -47,8 +47,7 @@ export type AuthWithWalletInput = {
 }
 
 export type AwardBadgeInput = {
-  badgeId: Scalars['ID']
-  userId: Scalars['ID']
+  users: Scalars['String']
 }
 
 export type Badge = {
@@ -379,7 +378,7 @@ export type Mutation = {
   addCommunityModerator?: Maybe<Result>
   answerPoll?: Maybe<PollAnswer>
   authWithWallet?: Maybe<User>
-  awardBadge: User
+  awardBadge: Result
   changePassword: Result
   clearStatus: Result
   createBadge: Badge
@@ -3638,6 +3637,12 @@ export type CurrentUserQuery = {
     | null
     | undefined
 }
+
+export type AwardBadgeMutationVariables = Exact<{
+  input: AwardBadgeInput
+}>
+
+export type AwardBadgeMutation = { __typename?: 'Mutation'; awardBadge: Result }
 
 export type CreateBadgeMutationVariables = Exact<{
   input: CreateBadgeInput

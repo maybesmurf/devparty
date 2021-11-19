@@ -1,6 +1,7 @@
 import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 
+import { Result } from '../ResultResolver'
 import { getBadges } from './queries/getBadges'
 
 builder.prismaObject('Badge', {
@@ -57,22 +58,22 @@ builder.mutationField('createBadge', (t) =>
 
 const AwardBadgeInput = builder.inputType('AwardBadgeInput', {
   fields: (t) => ({
-    userId: t.id(),
-    badgeId: t.id()
+    users: t.string()
   })
 })
 
 builder.mutationField('awardBadge', (t) =>
-  t.prismaField({
-    type: 'User',
+  t.field({
+    type: Result,
     args: { input: t.arg({ type: AwardBadgeInput }) },
     authScopes: { staff: true },
-    resolve: async (query, parent, { input }) => {
-      return await db.user.update({
-        ...query,
-        where: { id: input.userId },
-        data: { badges: { connect: { id: input.badgeId } } }
-      })
+    resolve: async (parent, { input }) => {
+      // await db.user.update({
+      //   where: { id: input.userId },
+      //   data: { badges: { connect: { id: input.badgeId } } }
+      // })
+
+      return Result.SUCCESS
     }
   })
 )
