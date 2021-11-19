@@ -1,4 +1,4 @@
-import { NotificationType, Post, Session, User } from '@prisma/client'
+import { NotificationType, Post, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 
 /**
@@ -15,10 +15,11 @@ export const parseMentions = async (
 ) => {
   if (mentions) {
     const users = await db.user.findMany({
-      where: { username: { in: mentions } }
+      where: { username: { in: mentions } },
+      select: { id: true }
     })
 
-    return users.map((user: User) => ({
+    return users.map((user) => ({
       dispatcherId: session?.userId as string,
       receiverId: user?.id,
       postId: post?.id,

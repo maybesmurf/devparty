@@ -1,5 +1,6 @@
 import { Result } from '@graphql/resolvers/ResultResolver'
 import { AwardBadgeInput } from '@graphql/types.generated'
+import { db } from '@utils/prisma'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
@@ -9,23 +10,21 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
  */
 export const awardBadge = async (input: AwardBadgeInput) => {
   try {
-    const users = input.users
+    const list = input.users
       .split(/[ ,]+/)
       .filter(function (item, index, inputArray) {
         return inputArray.indexOf(item) === index
       })
-    console.log(users)
-    // await db.community.create({
-    //   data: {
-    //     name: input.name,
-    //     slug: input.slug,
-    //     description: input.description,
-    //     avatar: `https://avatar.tobi.sh/${await md5(input.slug)}.svg?text=🎭`,
-    //     owner: { connect: { id: session!.userId } },
-    //     members: { connect: { id: session!.userId } },
-    //     moderators: { connect: { id: session!.userId } }
-    //   }
-    // })
+
+    const users = await db.user.findMany({
+      where: { username: { in: list } },
+      select: { id: true }
+    })
+
+    await db.badge.update({
+      where: { id: input.badgeId },
+      data: { users: { connect: users } }
+    })
 
     return Result.SUCCESS
   } catch (error: any) {
