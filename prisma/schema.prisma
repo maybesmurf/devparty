@@ -376,6 +376,9 @@ model Badge {
   image       String
   description String? @db.VarChar(280)
 
+  // Timestamps
+  createdAt DateTime @default(now())
+
   // Relations
   users User[]
 
