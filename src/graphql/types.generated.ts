@@ -47,6 +47,7 @@ export type AuthWithWalletInput = {
 }
 
 export type AwardBadgeInput = {
+  badgeId: Scalars['ID']
   users: Scalars['String']
 }
 
