@@ -41,6 +41,7 @@ builder.mutationField('createBadge', (t) =>
   t.prismaField({
     type: 'Badge',
     args: { input: t.arg({ type: CreateBadgeInput }) },
+    authScopes: { staff: true },
     resolve: async (query, parent, { input }) => {
       return await db.badge.create({
         ...query,
