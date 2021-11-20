@@ -2,6 +2,7 @@ import { gql, useMutation } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/UI/Card'
+import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
 import { useOembed } from '@components/utils/hooks/useOembed'
 import { humanize } from '@components/utils/humanize'
@@ -16,11 +17,12 @@ import { ChatAlt2Icon } from '@heroicons/react/outline'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import * as timeago from 'timeago.js'
 
 import LikeButton from '../LikeButton'
+import Mint from '../MintNFT/Mint'
 import PostMenu from './Menu'
 import Oembed from './Oembed'
 import SelectedCommunity from './SelectedCommunity'
@@ -112,11 +114,18 @@ export const PostFragment = gql`
 interface Props {
   post: Post
   showParent?: boolean
+  showMint?: boolean
 }
 
-const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
+const SinglePost: React.FC<Props> = ({
+  post,
+  showParent = false,
+  showMint = false
+}) => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { oembed, isLoading, isError } = useOembed(post?.oembedUrl)
+  const [showMintForm, setShowMintForm] = useState<boolean>(false)
   const [togglePostLike] = useMutation<
     TogglePostLikeMutation,
     TogglePostLikeMutationVariables
@@ -252,7 +261,14 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
           {post?.community && <SelectedCommunity community={post?.community} />}
           {post?.nft && <ViewNFT nft={post?.nft} />}
         </div>
+        {showMint &&
+          currentUser?.id === post?.user?.id &&
+          !post?.nft &&
+          post?.type === 'POST' && (
+            <button onClick={() => setShowMintForm(!showMintForm)}>NFT</button>
+          )}
       </div>
+      {showMintForm && <Mint setShowMintForm={setShowMintForm} post={post} />}
     </Card>
   )
 }

@@ -73,7 +73,7 @@ const ViewPost: React.FC = () => {
       <GridItemEight>
         <div className="space-y-5">
           <ErrorMessage title="Failed to load post" error={error} />
-          <SinglePost post={post as Post} showParent />
+          <SinglePost post={post as Post} showParent showMint />
           {currentUser && !loading && <NewReply post={post as Post} />}
           <Replies post={post as Post} />
         </div>
@@ -81,9 +81,6 @@ const ViewPost: React.FC = () => {
       <GridItemFour>
         <div className="space-y-5">
           <UserCard user={post?.user as User} />
-          {currentUser?.id === post?.user?.id &&
-            !post?.nft &&
-            post?.type === 'POST' && <MintNFT post={post as Post} />}
           {currentUser?.isStaff && staffMode && <PostMod post={post as Post} />}
           {post?.type === 'QUESTION' && <MorePosts post={post as Post} />}
           <Footer />

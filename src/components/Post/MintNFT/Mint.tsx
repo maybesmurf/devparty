@@ -43,11 +43,10 @@ const newNFTSchema = object({
 
 interface Props {
   post: Post
-  setShowMint: React.Dispatch<React.SetStateAction<boolean>>
   setShowMintForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
+const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
   const [isMinting, setIsMinting] = useState<boolean>(false)
@@ -149,7 +148,6 @@ const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
 
       toast.success('Minting has been successfully completed!')
       setMintingStatus('Minting Completed!')
-      setShowMint(false)
     } catch {
       setIsMinting(false)
       setError('Transaction has been cancelled!')
@@ -158,7 +156,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
 
   return (
     <div className="space-y-3">
-      <div className="font-bold px-5 py-3.5 border-b dark:border-gray-700">
+      <div className="font-bold px-5 py-3.5 border-y dark:border-gray-700">
         Create NFT
       </div>
       {mintingStatus === 'Minting Completed!' ? (
