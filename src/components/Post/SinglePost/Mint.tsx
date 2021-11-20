@@ -8,6 +8,7 @@ import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
+import { getTransactionURL } from '@components/utils/getTransactionURL'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
@@ -15,7 +16,11 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { ArrowRightIcon, FingerPrintIcon } from '@heroicons/react/outline'
+import {
+  ArrowRightIcon,
+  FingerPrintIcon,
+  SwitchHorizontalIcon
+} from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -136,6 +141,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
           IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
         }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
       )
+      setTxURL(getTransactionURL(network, tx.transactionHash))
 
       // Add transaction to the DB
       // mintNFT({
@@ -268,31 +274,34 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )}
 
       {/* Completed */}
-      {mintingStatus === 'NOTSTARTED' && (
+      {mintingStatus === 'COMPLETED' && (
         <div className="p-5 font-bold text-center space-y-4">
           <div className="space-y-2">
             <div className="text-3xl">🎉</div>
             <div>Your NFT has been successfully minted!</div>
           </div>
-          <div>
-            <a href={openseaURL} target="_blank" rel="noreferrer">
-              <Button
-                className="mx-auto"
-                icon={<ArrowRightIcon className="h-5 w-5" />}
-                outline
-              >
-                View Transaction
-              </Button>
-            </a>
-            <a href={openseaURL} target="_blank" rel="noreferrer">
-              <Button
-                className="mx-auto"
-                icon={<ArrowRightIcon className="h-5 w-5" />}
-                outline
-              >
-                View on Opensea
-              </Button>
-            </a>
+          <div className="flex">
+            <div className="mx-auto">
+              <a href={txURL} target="_blank" rel="noreferrer">
+                <Button
+                  className="text-sm mb-2"
+                  variant="success"
+                  icon={<SwitchHorizontalIcon className="h-4 w-4" />}
+                  outline
+                >
+                  View Transaction
+                </Button>
+              </a>
+              <a href={openseaURL} target="_blank" rel="noreferrer">
+                <Button
+                  className="text-sm"
+                  icon={<ArrowRightIcon className="h-4 w-4" />}
+                  outline
+                >
+                  View on Opensea
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       )}
