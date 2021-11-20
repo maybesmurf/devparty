@@ -1,5 +1,4 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import Fortmatic from 'fortmatic'
 import { INFURA_ID, STATIC_ASSETS } from 'src/constants'
 import WalletLink from 'walletlink'
 import Web3Modal from 'web3modal'
@@ -9,10 +8,6 @@ const getWeb3Modal = (theme: string) => {
     walletconnect: {
       package: WalletConnectProvider,
       options: { infuraId: INFURA_ID }
-    },
-    fortmatic: {
-      package: Fortmatic,
-      options: { key: 'pk_live_66C75459C14ADB4A' }
     },
     'custom-walletlink': {
       display: {
