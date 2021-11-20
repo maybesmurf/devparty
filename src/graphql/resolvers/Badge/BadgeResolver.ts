@@ -1,6 +1,8 @@
 import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 
+import { Result } from '../ResultResolver'
+import { awardBadge } from './mutations/awardBadge'
 import { getBadges } from './queries/getBadges'
 
 builder.prismaObject('Badge', {
@@ -22,6 +24,7 @@ builder.queryField('badges', (t) =>
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
+    authScopes: { staff: true },
     resolve: async (query) => {
       return await getBadges(query)
     }
@@ -40,8 +43,10 @@ builder.mutationField('createBadge', (t) =>
   t.prismaField({
     type: 'Badge',
     args: { input: t.arg({ type: CreateBadgeInput }) },
+    authScopes: { staff: true },
     resolve: async (query, parent, { input }) => {
       return await db.badge.create({
+        ...query,
         data: {
           name: input.name,
           image: input.image,
@@ -52,28 +57,20 @@ builder.mutationField('createBadge', (t) =>
   })
 )
 
-const AttachBadgeToUserInput = builder.inputType('AttachBadgeToUserInput', {
+const AwardBadgeInput = builder.inputType('AwardBadgeInput', {
   fields: (t) => ({
-    userId: t.id(),
-    badgeId: t.id()
+    badgeId: t.id({ validate: { uuid: true } }),
+    users: t.string()
   })
 })
 
-builder.mutationField('attachBadge', (t) =>
-  t.prismaField({
-    type: 'User',
-    args: { input: t.arg({ type: AttachBadgeToUserInput }) },
+builder.mutationField('awardBadge', (t) =>
+  t.field({
+    type: Result,
+    args: { input: t.arg({ type: AwardBadgeInput }) },
     authScopes: { staff: true },
-    resolve: async (query, parent, { input }) => {
-      return await db.user.update({
-        ...query,
-        where: { id: input.userId },
-        data: {
-          badges: {
-            connect: { id: input.badgeId }
-          }
-        }
-      })
+    resolve: async (parent, { input }) => {
+      return await awardBadge(input)
     }
   })
 )

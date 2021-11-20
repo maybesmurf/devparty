@@ -7,6 +7,7 @@ import InviteDetails from './InviteDetails'
 
 const Invite: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false)
+
   return (
     <div>
       <Button

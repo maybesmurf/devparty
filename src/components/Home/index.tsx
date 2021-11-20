@@ -1,6 +1,7 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import FeedType from '@components/Home/FeedType'
 import NewPost from '@components/Post/NewPost'
+import Streak from '@components/User/Streak'
 import AppContext from '@components/utils/AppContext'
 import dynamic from 'next/dynamic'
 import React, { useContext, useState } from 'react'
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
         </div>
       </GridItemEight>
       <GridItemFour>
+        <Streak />
         <WhoToFollow />
         <RecentProducts />
         <Footer />

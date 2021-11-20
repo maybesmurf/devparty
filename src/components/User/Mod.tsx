@@ -1,10 +1,7 @@
 import { gql, useMutation } from '@apollo/client'
-import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { Form, useZodForm } from '@components/UI/Form'
-import { Modal } from '@components/UI/Modal'
-import { formatUsername } from '@components/utils/formatUsername'
 import {
   ModUserMutation,
   ModUserMutationVariables,
@@ -13,15 +10,12 @@ import {
 import {
   HashtagIcon,
   PencilIcon,
-  ShieldCheckIcon,
   SwitchHorizontalIcon
 } from '@heroicons/react/outline'
-import React, { useState } from 'react'
+import React from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE } from 'src/constants'
 import { boolean, object } from 'zod'
-
-import UpdateBadges from './UpdateBadges'
 
 const modUserSchema = object({
   isVerified: boolean(),
@@ -35,8 +29,6 @@ interface Props {
 }
 
 const UserMod: React.FC<Props> = ({ user }) => {
-  const [showUpdateBadgesModal, setShowUpdateBadgesModal] =
-    useState<boolean>(false)
   const [modUser] = useMutation<ModUserMutation, ModUserMutationVariables>(
     gql`
       mutation ModUser($input: ModUserInput!) {
@@ -142,18 +134,6 @@ const UserMod: React.FC<Props> = ({ user }) => {
                 </Button>
               </div>
               <div>
-                <Button
-                  type="button"
-                  variant="success"
-                  onClick={() =>
-                    setShowUpdateBadgesModal(!showUpdateBadgesModal)
-                  }
-                  icon={<ShieldCheckIcon className="h-4 w-4" />}
-                >
-                  Update Badges
-                </Button>
-              </div>
-              <div>
                 <a href={`/api/masquerade/${user?.id}`}>
                   <Button
                     type="button"
@@ -167,20 +147,6 @@ const UserMod: React.FC<Props> = ({ user }) => {
           </Form>
         </CardBody>
       </Card>
-      {showUpdateBadgesModal && (
-        <Modal
-          onClose={() => setShowUpdateBadgesModal(!showUpdateBadgesModal)}
-          title={
-            <div className="flex items-center space-x-1.5">
-              <div>Update badges for</div>
-              <Slug slug={formatUsername(user?.username)} prefix="@" />
-            </div>
-          }
-          show={showUpdateBadgesModal}
-        >
-          <UpdateBadges />
-        </Modal>
-      )}
     </>
   )
 }
