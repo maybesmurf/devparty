@@ -20,7 +20,7 @@ const Terms: React.FC = () => {
       <div className="relative">
         <div className="flex justify-center">
           <div className="relative mx-auto rounded-lg max-w-3/4 md:w-3/4">
-            <div className="!p-8 prose max-w-none text-gray-900 dark:text-gray-200">
+            <div className="!p-8 prose dark:prose-dark max-w-none text-gray-900 dark:text-gray-200">
               <p>
                 Welcome to the Devparty. <b>(Devparty, "us" "we" or "our")</b>{' '}
                 website. Please read these Terms of Service (the <b>"Terms"</b>)

@@ -114,7 +114,7 @@ const IssueType: React.FC<Props> = ({ post }) => {
           </div>
         )}
         {isPostPage && (
-          <div className="prose">
+          <div className="prose dark:prose-dark">
             <Markdown options={{ wrapper: 'article' }}>{issue?.body}</Markdown>
           </div>
         )}
