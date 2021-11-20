@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
+import Footer from '@components/shared/Footer'
 import DevpartySEO from '@components/shared/SEO'
 import PostShimmer from '@components/shared/Shimmer/PostShimmer'
 import UserProfileShimmer from '@components/shared/Shimmer/UserProfileShimmer'
@@ -80,11 +81,12 @@ const ViewPost: React.FC = () => {
       <GridItemFour>
         <div className="space-y-5">
           <UserCard user={post?.user as User} />
-          {currentUser?.id === post?.user?.id && !post?.nft && (
-            <MintNFT post={post as Post} />
-          )}
+          {currentUser?.id === post?.user?.id &&
+            !post?.nft &&
+            post?.type === 'POST' && <MintNFT post={post as Post} />}
           {currentUser?.isStaff && staffMode && <PostMod post={post as Post} />}
           {post?.type === 'QUESTION' && <MorePosts post={post as Post} />}
+          <Footer />
         </div>
       </GridItemFour>
     </GridLayout>

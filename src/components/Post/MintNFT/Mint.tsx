@@ -5,7 +5,6 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
-import { TextArea } from '@components/UI/TextArea'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
@@ -159,8 +158,11 @@ const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
 
   return (
     <div className="space-y-3">
+      <div className="font-bold px-5 py-3.5 border-b dark:border-gray-700">
+        Create NFT
+      </div>
       {mintingStatus === 'Minting Completed!' ? (
-        <div className="font-bold text-center space-y-4">
+        <div className="font-bold text-center space-y-4 px-5 py-3.5">
           <div className="space-y-2">
             <div className="text-3xl">🎉</div>
             <div>Your NFT has been successfully minted!</div>
@@ -178,18 +180,17 @@ const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
           </div>
         </div>
       ) : isMinting ? (
-        <div className="font-bold text-center space-y-2">
+        <div className="font-bold text-center space-y-2 px-5 py-3.5">
           <Spinner size="md" className="mx-auto" />
           <div>{mintingStatus}</div>
         </div>
       ) : (
         <Form form={form} onSubmit={mintToken}>
-          <div className="space-y-7">
+          <div className="space-y-7 px-5 py-3.5">
             <div>
-              <TextArea
+              <Input
                 label="Title"
                 placeholder="Title of your NFT"
-                rows={3}
                 {...form.register('title')}
               />
             </div>
@@ -248,7 +249,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint, setShowMintForm }) => {
               />
             )}
           </div>
-          <div className="flex items-center justify-between pt-5 border-t dark:border-gray-800">
+          <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
             <a
               className="text-sm text-gray-500"
               href="https://ipfs.io"
