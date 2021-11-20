@@ -48,9 +48,11 @@ interface Props {
 const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
-  const [isMinting, setIsMinting] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>()
-  const [mintingStatus, setMintingStatus] = useState<string>('')
+  const [mintingStatus, setMintingStatus] = useState<
+    'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
+  >('NOTSTARTED')
+  const [mintingStatusText, setMintingStatusText] = useState<string>('')
   const [mintNFT] = useMutation<MintNftMutation, MintNftMutationVariables>(
     gql`
       mutation MintNFT($input: MintNFTInput!) {
@@ -85,7 +87,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
         : ['rinkeby', 'maticmum']
 
       if (!expectedNetwork.includes(network)) {
-        setIsMinting(false)
+        setMintingStatus('NOTSTARTED')
         return IS_PRODUCTION
           ? setError(
               'You are in wrong network only Mainet and Polygon matic are allowed!'
@@ -95,14 +97,14 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
             )
       }
 
-      setIsMinting(true)
-      setMintingStatus('Converting your post as an art')
+      setMintingStatus('PROCESSING')
+      setMintingStatusText('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
           `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
         )
       )
-      setMintingStatus('Uploading metadata to decentralized servers')
+      setMintingStatusText('Uploading metadata to decentralized servers')
       const { path } = await client.add(
         JSON.stringify({
           name: form.watch('title'),
@@ -117,7 +119,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
         NFT.abi,
         signer
       )
-      setMintingStatus('Minting NFT in progress')
+      setMintingStatusText('Minting NFT in progress')
       const transaction = await contract.issueToken(
         await signer.getAddress(),
         form.watch('quantity'),
@@ -138,21 +140,19 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       //   }
       // })
 
+      setMintingStatus('COMPLETED')
       toast.success('Minting has been successfully completed!')
-    } catch {
-      setIsMinting(false)
+    } catch (error: any) {
+      console.log(error.message)
+      setMintingStatus('NOTSTARTED')
       setError('Transaction has been cancelled!')
     }
   }
 
   return (
     <div className="space-y-3 border-t dark:border-gray-700">
-      {isMinting ? (
-        <div className="font-bold text-center space-y-2 p-5">
-          <Spinner size="md" className="mx-auto" />
-          <div>{mintingStatus}</div>
-        </div>
-      ) : (
+      {/* Not started */}
+      {mintingStatus === 'NOTSTARTED' && (
         <Form form={form} onSubmit={mintToken}>
           <div className="space-y-7 px-5 py-3.5">
             <div>
@@ -248,6 +248,21 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
             </div>
           </div>
         </Form>
+      )}
+
+      {/* Processing */}
+      {mintingStatus === 'PROCESSING' && (
+        <div className="font-bold text-center space-y-2 p-5">
+          <Spinner size="md" className="mx-auto" />
+          <div>{mintingStatusText}</div>
+        </div>
+      )}
+
+      {/* Completed */}
+      {mintingStatus === 'COMPLETED' && (
+        <div className="font-bold text-center space-y-2 p-5">
+          <div>DONE</div>
+        </div>
       )}
     </div>
   )
