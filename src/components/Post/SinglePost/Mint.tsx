@@ -7,6 +7,7 @@ import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
+import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
@@ -14,7 +15,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { FingerPrintIcon } from '@heroicons/react/outline'
+import { ArrowRightIcon, FingerPrintIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -49,6 +50,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
   const [error, setError] = useState<string | undefined>()
+  const [openseaURL, setOpenseaURL] = useState<string>()
   const [mintingStatus, setMintingStatus] = useState<
     'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
   >('NOTSTARTED')
@@ -127,6 +129,12 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )
       const tx = await transaction.wait()
       let event = tx.events[0]
+
+      setOpenseaURL(
+        `https://${
+          IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
+        }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
+      )
 
       // Add transaction to the DB
       // mintNFT({
@@ -260,8 +268,22 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
 
       {/* Completed */}
       {mintingStatus === 'COMPLETED' && (
-        <div className="font-bold text-center space-y-2 p-5">
-          <div>DONE</div>
+        <div className="p-5 font-bold text-center space-y-4">
+          <div className="space-y-2">
+            <div className="text-3xl">🎉</div>
+            <div>Your NFT has been successfully minted!</div>
+          </div>
+          <div>
+            <a href={openseaURL} target="_blank" rel="noreferrer">
+              <Button
+                className="mx-auto"
+                icon={<ArrowRightIcon className="h-5 w-5" />}
+                outline
+              >
+                View on Opensea
+              </Button>
+            </a>
+          </div>
         </div>
       )}
     </div>
