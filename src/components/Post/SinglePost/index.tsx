@@ -2,6 +2,8 @@ import { gql, useMutation } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/UI/Card'
+import { Spinner } from '@components/UI/Spinner'
+import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
 import { useOembed } from '@components/utils/hooks/useOembed'
 import { humanize } from '@components/utils/humanize'
@@ -12,11 +14,12 @@ import {
   TogglePostLikeMutationVariables,
   User
 } from '@graphql/types.generated'
-import { ChatAlt2Icon } from '@heroicons/react/outline'
+import { ChatAlt2Icon, SparklesIcon } from '@heroicons/react/outline'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import * as timeago from 'timeago.js'
 
@@ -31,6 +34,15 @@ import PostType from './Type/Post'
 import QuestionType from './Type/Question'
 import TaskType from './Type/Task'
 import ViewNFT from './ViewNFT'
+
+const Mint = dynamic(() => import('./Mint'), {
+  loading: () => (
+    <div className="p-5 font-bold text-center space-y-2 border-t dark:border-gray-700">
+      <Spinner size="md" className="mx-auto" />
+      <div>Get ready to mint your NFT!</div>
+    </div>
+  )
+})
 
 export const PostFragment = gql`
   fragment PostFragment on Post {
@@ -112,11 +124,19 @@ export const PostFragment = gql`
 interface Props {
   post: Post
   showParent?: boolean
+  showMint?: boolean
 }
 
-const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
+const SinglePost: React.FC<Props> = ({
+  post,
+  showParent = false,
+  showMint = false
+}) => {
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const { oembed, isLoading, isError } = useOembed(post?.oembedUrl)
+  const [isMinting, setIsMinting] = useState<boolean>(false)
+  const [showMintForm, setShowMintForm] = useState<boolean>(false)
   const [togglePostLike] = useMutation<
     TogglePostLikeMutation,
     TogglePostLikeMutationVariables
@@ -214,6 +234,21 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
             </a>
           </Link>
         </motion.button>
+        {showMint &&
+          !isMinting &&
+          currentUser?.id === post?.user?.id &&
+          !post?.nft &&
+          post?.type === 'POST' && (
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="text-purple-500 hover:text-purple-400 flex items-center space-x-1"
+              onClick={() => setShowMintForm(!showMintForm)}
+            >
+              <div className="hover:bg-purple-300 hover:bg-opacity-20 p-1.5 rounded-full">
+                <SparklesIcon className="h-5 w-5" />
+              </div>
+            </motion.button>
+          )}
         <PostMenu post={post} />
         {(post?.likes?.totalCount as number) > 0 && (
           <div className="text-gray-600 dark:text-gray-400 text-sm items-center gap-2 hidden sm:flex">
@@ -253,6 +288,13 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
           {post?.nft && <ViewNFT nft={post?.nft} />}
         </div>
       </div>
+      {showMint && showMintForm && (
+        <Mint
+          setShowMintForm={setShowMintForm}
+          setIsMinting={setIsMinting}
+          post={post}
+        />
+      )}
     </Card>
   )
 }

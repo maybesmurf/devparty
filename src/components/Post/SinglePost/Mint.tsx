@@ -8,6 +8,7 @@ import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
+import { getTransactionURL } from '@components/utils/getTransactionURL'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
@@ -15,10 +16,15 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { ArrowRightIcon } from '@heroicons/react/outline'
+import {
+  ArrowRightIcon,
+  FingerPrintIcon,
+  SwitchHorizontalIcon
+} from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
+import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
@@ -42,15 +48,20 @@ const newNFTSchema = object({
 
 interface Props {
   post: Post
-  setShowMint: React.Dispatch<React.SetStateAction<boolean>>
+  setShowMintForm: React.Dispatch<React.SetStateAction<boolean>>
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Mint: React.FC<Props> = ({ post, setShowMint }) => {
+const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
-  const [isMinting, setIsMinting] = useState<boolean>(false)
-  const [openseaURL, setOpenseaURL] = useState<string>()
+  const { resolvedTheme } = useTheme()
   const [error, setError] = useState<string | undefined>()
-  const [mintingStatus, setMintingStatus] = useState<string>('')
+  const [openseaURL, setOpenseaURL] = useState<string>()
+  const [txURL, setTxURL] = useState<string>()
+  const [mintingStatus, setMintingStatus] = useState<
+    'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
+  >('NOTSTARTED')
+  const [mintingStatusText, setMintingStatusText] = useState<string>('')
   const [mintNFT] = useMutation<MintNftMutation, MintNftMutationVariables>(
     gql`
       mutation MintNFT($input: MintNFTInput!) {
@@ -73,8 +84,9 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
 
   const mintToken = async () => {
     try {
+      setIsMinting(true)
       // Connect to Wallet
-      const web3Modal = getWeb3Modal()
+      const web3Modal = getWeb3Modal(resolvedTheme || 'light')
       const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
 
       // Get signature from the user
@@ -85,7 +97,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
         : ['rinkeby', 'maticmum']
 
       if (!expectedNetwork.includes(network)) {
-        setIsMinting(false)
+        setMintingStatus('NOTSTARTED')
         return IS_PRODUCTION
           ? setError(
               'You are in wrong network only Mainet and Polygon matic are allowed!'
@@ -95,14 +107,14 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
             )
       }
 
-      setIsMinting(true)
-      setMintingStatus('Converting your post as an art')
+      setMintingStatus('PROCESSING')
+      setMintingStatusText('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
           `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
         )
       )
-      setMintingStatus('Uploading metadata to decentralized servers')
+      setMintingStatusText('Uploading metadata to decentralized servers')
       const { path } = await client.add(
         JSON.stringify({
           name: form.watch('title'),
@@ -117,7 +129,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
         NFT.abi,
         signer
       )
-      setMintingStatus('Minting NFT in progress')
+      setMintingStatusText('Minting NFT in progress')
       const transaction = await contract.issueToken(
         await signer.getAddress(),
         form.watch('quantity'),
@@ -131,6 +143,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
           IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
         }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
       )
+      setTxURL(getTransactionURL(network, tx.transactionHash))
 
       // Add transaction to the DB
       mintNFT({
@@ -144,43 +157,21 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
         }
       })
 
+      setMintingStatus('COMPLETED')
       toast.success('Minting has been successfully completed!')
-      setMintingStatus('Minting Completed!')
-      setShowMint(false)
-    } catch {
-      setIsMinting(false)
+    } catch (error: any) {
+      console.log(error.message)
+      setMintingStatus('NOTSTARTED')
       setError('Transaction has been cancelled!')
     }
   }
 
   return (
-    <div className="space-y-3">
-      {mintingStatus === 'Minting Completed!' ? (
-        <div className="p-5 font-bold text-center space-y-4">
-          <div className="space-y-2">
-            <div className="text-3xl">🎉</div>
-            <div>Your NFT has been successfully minted!</div>
-          </div>
-          <div>
-            <a href={openseaURL} target="_blank" rel="noreferrer">
-              <Button
-                className="mx-auto"
-                icon={<ArrowRightIcon className="h-5 w-5" />}
-                outline
-              >
-                View on Opensea
-              </Button>
-            </a>
-          </div>
-        </div>
-      ) : isMinting ? (
-        <div className="p-5 font-bold text-center space-y-2">
-          <Spinner size="md" className="mx-auto" />
-          <div>{mintingStatus}</div>
-        </div>
-      ) : (
+    <div className="space-y-3 border-t dark:border-gray-700">
+      {/* Not started */}
+      {mintingStatus === 'NOTSTARTED' && (
         <Form form={form} onSubmit={mintToken}>
-          <div className="px-5 py-3.5 space-y-7">
+          <div className="space-y-7 px-5 py-3.5">
             <div>
               <Input
                 label="Title"
@@ -229,7 +220,7 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
                 </Switch>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <Checkbox id="acceptRights" {...form.register('accept')} />
               <label htmlFor="acceptRights">
                 I have the rights to publish this artwork, and understand it
@@ -252,17 +243,69 @@ const Mint: React.FC<Props> = ({ post, setShowMint }) => {
             >
               Stored on <b>IPFS</b>
             </a>
-            <Button
-              disabled={
-                !form.watch('accept') ||
-                parseInt(form.watch('quantity')) < 1 ||
-                parseInt(form.watch('quantity')) > 1000
-              }
-            >
-              Mint NFT
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button
+                type="button"
+                variant="danger"
+                outline
+                onClick={() => setShowMintForm(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                disabled={
+                  !form.watch('accept') ||
+                  parseInt(form.watch('quantity')) < 1 ||
+                  parseInt(form.watch('quantity')) > 1000
+                }
+                icon={<FingerPrintIcon className="h-5 w-5" />}
+              >
+                Mint NFT
+              </Button>
+            </div>
           </div>
         </Form>
+      )}
+
+      {/* Processing */}
+      {mintingStatus === 'PROCESSING' && (
+        <div className="font-bold text-center space-y-2 p-5">
+          <Spinner size="md" className="mx-auto" />
+          <div>{mintingStatusText}</div>
+        </div>
+      )}
+
+      {/* Completed */}
+      {mintingStatus === 'COMPLETED' && (
+        <div className="p-5 font-bold text-center space-y-4">
+          <div className="space-y-2">
+            <div className="text-3xl">🎉</div>
+            <div>Your NFT has been successfully minted!</div>
+          </div>
+          <div className="flex">
+            <div className="mx-auto">
+              <a href={txURL} target="_blank" rel="noreferrer">
+                <Button
+                  className="text-sm mb-2"
+                  variant="success"
+                  icon={<SwitchHorizontalIcon className="h-4 w-4" />}
+                  outline
+                >
+                  View Transaction
+                </Button>
+              </a>
+              <a href={openseaURL} target="_blank" rel="noreferrer">
+                <Button
+                  className="text-sm"
+                  icon={<ArrowRightIcon className="h-4 w-4" />}
+                  outline
+                >
+                  View on Opensea
+                </Button>
+              </a>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )
