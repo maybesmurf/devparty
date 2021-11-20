@@ -15,7 +15,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { ArrowRightIcon } from '@heroicons/react/outline'
+import { ArrowRightIcon, FingerPrintIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -135,16 +135,16 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )
 
       // Add transaction to the DB
-      mintNFT({
-        variables: {
-          input: {
-            postId: post?.id,
-            address: transaction.to,
-            tokenId: event.args[3].toString(),
-            network
-          }
-        }
-      })
+      // mintNFT({
+      //   variables: {
+      //     input: {
+      //       postId: post?.id,
+      //       address: transaction.to,
+      //       tokenId: event.args[3].toString(),
+      //       network
+      //     }
+      //   }
+      // })
 
       toast.success('Minting has been successfully completed!')
       setMintingStatus('Minting Completed!')
@@ -155,10 +155,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   }
 
   return (
-    <div className="space-y-3">
-      <div className="font-bold px-5 py-3.5 border-y dark:border-gray-700">
-        Create NFT
-      </div>
+    <div className="space-y-3 border-t dark:border-gray-700">
       {mintingStatus === 'Minting Completed!' ? (
         <div className="font-bold text-center space-y-4 px-5 py-3.5">
           <div className="space-y-2">
@@ -256,10 +253,11 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
             >
               Stored on <b>IPFS</b>
             </a>
-            <div className="space-x-1">
+            <div className="flex items-center space-x-2">
               <Button
                 type="button"
-                variant="secondary"
+                variant="danger"
+                outline
                 onClick={() => setShowMintForm(false)}
               >
                 Cancel
@@ -270,6 +268,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
                   parseInt(form.watch('quantity')) < 1 ||
                   parseInt(form.watch('quantity')) > 1000
                 }
+                icon={<FingerPrintIcon className="h-5 w-5" />}
               >
                 Mint NFT
               </Button>

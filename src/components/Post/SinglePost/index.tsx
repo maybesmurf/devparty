@@ -13,7 +13,7 @@ import {
   TogglePostLikeMutationVariables,
   User
 } from '@graphql/types.generated'
-import { ChatAlt2Icon } from '@heroicons/react/outline'
+import { ChatAlt2Icon, SparklesIcon } from '@heroicons/react/outline'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -223,6 +223,20 @@ const SinglePost: React.FC<Props> = ({
             </a>
           </Link>
         </motion.button>
+        {showMint &&
+          currentUser?.id === post?.user?.id &&
+          !post?.nft &&
+          post?.type === 'POST' && (
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="text-purple-500 hover:text-purple-400 flex items-center space-x-1"
+              onClick={() => setShowMintForm(!showMintForm)}
+            >
+              <div className="hover:bg-purple-300 hover:bg-opacity-20 p-1.5 rounded-full">
+                <SparklesIcon className="h-5 w-5" />
+              </div>
+            </motion.button>
+          )}
         <PostMenu post={post} />
         {(post?.likes?.totalCount as number) > 0 && (
           <div className="text-gray-600 dark:text-gray-400 text-sm items-center gap-2 hidden sm:flex">
@@ -261,12 +275,6 @@ const SinglePost: React.FC<Props> = ({
           {post?.community && <SelectedCommunity community={post?.community} />}
           {post?.nft && <ViewNFT nft={post?.nft} />}
         </div>
-        {showMint &&
-          currentUser?.id === post?.user?.id &&
-          !post?.nft &&
-          post?.type === 'POST' && (
-            <button onClick={() => setShowMintForm(!showMintForm)}>NFT</button>
-          )}
       </div>
       {showMintForm && <Mint setShowMintForm={setShowMintForm} post={post} />}
     </Card>
