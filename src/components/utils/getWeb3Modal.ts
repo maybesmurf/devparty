@@ -1,14 +1,18 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import { STATIC_ASSETS } from 'src/constants'
+import Fortmatic from 'fortmatic'
+import { INFURA_ID, STATIC_ASSETS } from 'src/constants'
 import WalletLink from 'walletlink'
 import Web3Modal from 'web3modal'
 
 const getWeb3Modal = (theme: string) => {
-  const INFURA_ID = process.env.INFURA_ID
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
       options: { infuraId: INFURA_ID }
+    },
+    fortmatic: {
+      package: Fortmatic,
+      options: { key: 'pk_test_736D346F8F5F07C3' }
     },
     'custom-walletlink': {
       display: {
@@ -18,8 +22,7 @@ const getWeb3Modal = (theme: string) => {
       },
       options: {
         appName: 'Devparty',
-        networkUrl:
-          'https://mainnet.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b'
+        networkUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`
         // chainId: 1
       },
       package: WalletLink,
