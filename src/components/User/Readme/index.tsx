@@ -86,7 +86,7 @@ const Readme: React.FC = () => {
                 <div className="shimmer h-10 w-full rounded-lg" />
               ) : readmeData?.user?.profile?.readme ? (
                 <div>
-                  <div className="prose">
+                  <div className="prose dark:prose-dark">
                     <Markdown options={{ wrapper: 'article' }}>
                       {readmeData?.user?.profile?.readme}
                     </Markdown>

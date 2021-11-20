@@ -96,7 +96,7 @@ const QuestionType: React.FC = () => {
       {preview ? (
         <div className="text-xl post">
           <div className="font-bold mb-1">{form.getValues('title')}</div>
-          <div className="prose">
+          <div className="prose dark:prose-dark">
             <Markdown options={{ wrapper: 'article' }}>
               {form.getValues('body')}
             </Markdown>

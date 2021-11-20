@@ -20,7 +20,7 @@ const Privacy: React.FC = () => {
       <div className="relative">
         <div className="flex justify-center">
           <div className="relative mx-auto rounded-lg max-w-3/4 md:w-3/4">
-            <div className="!p-8 prose max-w-none text-gray-900 dark:text-gray-200">
+            <div className="!p-8 prose dark:prose-dark max-w-none text-gray-900 dark:text-gray-200">
               <h2 className="text-black dark:text-white">TBD</h2>
               <p>TBD</p>
             </div>
