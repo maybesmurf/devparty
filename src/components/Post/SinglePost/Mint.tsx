@@ -137,16 +137,16 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )
 
       // Add transaction to the DB
-      // mintNFT({
-      //   variables: {
-      //     input: {
-      //       postId: post?.id,
-      //       address: transaction.to,
-      //       tokenId: event.args[3].toString(),
-      //       network
-      //     }
-      //   }
-      // })
+      mintNFT({
+        variables: {
+          input: {
+            postId: post?.id,
+            address: transaction.to,
+            tokenId: event.args[3].toString(),
+            network
+          }
+        }
+      })
 
       setMintingStatus('COMPLETED')
       toast.success('Minting has been successfully completed!')
