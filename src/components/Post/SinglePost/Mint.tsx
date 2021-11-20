@@ -220,7 +220,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
                 </Switch>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <Checkbox id="acceptRights" {...form.register('accept')} />
               <label htmlFor="acceptRights">
                 I have the rights to publish this artwork, and understand it
