@@ -35,8 +35,8 @@ export const MATIC_CONTRACT_ADDRESS = process.env.MATIC_CONTRACT_ADDRESS
 export const MUMBAI_CONTRACT_ADDRESS = process.env.MUMBAI_CONTRACT_ADDRESS
 export const INFURA_ID = '3d19324a72854976a7160e0e2ebc9c2b'
 export const FORTMATIC_KEY = IS_PRODUCTION
-  ? 'pk_live_F7594E44A566B507'
-  : 'pk_test_736D346F8F5F07C3'
+  ? 'pk_test_7E1A4EA61903B76F'
+  : 'pk_live_66C75459C14ADB4A'
 
 // Misc
 export const GRAPHCDN_ENABLED =
