@@ -1,4 +1,3 @@
-import Torus from '@toruslabs/torus-embed'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { STATIC_ASSETS } from 'src/constants'
 import WalletLink from 'walletlink'
@@ -11,7 +10,6 @@ const getWeb3Modal = (theme: string) => {
       package: WalletConnectProvider,
       options: { infuraId: INFURA_ID }
     },
-    torus: { package: Torus },
     'custom-walletlink': {
       display: {
         logo: `${STATIC_ASSETS}/brands/coinbase.svg`,
