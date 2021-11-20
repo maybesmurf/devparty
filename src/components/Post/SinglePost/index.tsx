@@ -125,6 +125,7 @@ const SinglePost: React.FC<Props> = ({
   const router = useRouter()
   const { currentUser } = useContext(AppContext)
   const { oembed, isLoading, isError } = useOembed(post?.oembedUrl)
+  const [isMinting, setIsMinting] = useState<boolean>(false)
   const [showMintForm, setShowMintForm] = useState<boolean>(false)
   const [togglePostLike] = useMutation<
     TogglePostLikeMutation,
@@ -224,6 +225,7 @@ const SinglePost: React.FC<Props> = ({
           </Link>
         </motion.button>
         {showMint &&
+          !isMinting &&
           currentUser?.id === post?.user?.id &&
           !post?.nft &&
           post?.type === 'POST' && (
@@ -277,7 +279,11 @@ const SinglePost: React.FC<Props> = ({
         </div>
       </div>
       {showMint && showMintForm && (
-        <Mint setShowMintForm={setShowMintForm} post={post} />
+        <Mint
+          setShowMintForm={setShowMintForm}
+          setIsMinting={setIsMinting}
+          post={post}
+        />
       )}
     </Card>
   )

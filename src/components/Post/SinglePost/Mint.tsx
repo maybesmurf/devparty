@@ -49,9 +49,10 @@ const newNFTSchema = object({
 interface Props {
   post: Post
   setShowMintForm: React.Dispatch<React.SetStateAction<boolean>>
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
+const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
   const [error, setError] = useState<string | undefined>()
@@ -83,6 +84,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
 
   const mintToken = async () => {
     try {
+      setIsMinting(true)
       // Connect to Wallet
       const web3Modal = getWeb3Modal(resolvedTheme || 'light')
       const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
