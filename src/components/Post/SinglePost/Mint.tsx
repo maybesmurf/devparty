@@ -25,7 +25,6 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../data/abi.json'
-import { GET_POST_QUERY } from '../ViewPost'
 
 const client = create({
   host: 'ipfs.infura.io',
@@ -61,10 +60,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
           tokenId
         }
       }
-    `,
-    {
-      refetchQueries: [{ query: GET_POST_QUERY, variables: { id: post?.id } }]
-    }
+    `
   )
 
   const form = useZodForm({
