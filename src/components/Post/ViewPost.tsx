@@ -20,9 +20,6 @@ import Replies from './Reply/Replies'
 import SinglePost, { PostFragment } from './SinglePost'
 
 const PostMod = dynamic(() => import('./Mod'))
-const MintNFT = dynamic(() => import('./MintNFT'), {
-  loading: () => <div className="shimmer w-full h-15 rounded-lg" />
-})
 
 export const GET_POST_QUERY = gql`
   query GetPost($id: ID!) {

@@ -7,7 +7,6 @@ import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
-import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
@@ -15,7 +14,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { ArrowRightIcon, FingerPrintIcon } from '@heroicons/react/outline'
+import { FingerPrintIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -26,6 +25,7 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../data/abi.json'
+import { GET_POST_QUERY } from '../ViewPost'
 
 const client = create({
   host: 'ipfs.infura.io',
@@ -50,7 +50,6 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
   const [isMinting, setIsMinting] = useState<boolean>(false)
-  const [openseaURL, setOpenseaURL] = useState<string>()
   const [error, setError] = useState<string | undefined>()
   const [mintingStatus, setMintingStatus] = useState<string>('')
   const [mintNFT] = useMutation<MintNftMutation, MintNftMutationVariables>(
@@ -62,7 +61,10 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
           tokenId
         }
       }
-    `
+    `,
+    {
+      refetchQueries: [{ query: GET_POST_QUERY, variables: { id: post?.id } }]
+    }
   )
 
   const form = useZodForm({
@@ -128,26 +130,19 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       const tx = await transaction.wait()
       let event = tx.events[0]
 
-      setOpenseaURL(
-        `https://${
-          IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
-        }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
-      )
-
       // Add transaction to the DB
-      // mintNFT({
-      //   variables: {
-      //     input: {
-      //       postId: post?.id,
-      //       address: transaction.to,
-      //       tokenId: event.args[3].toString(),
-      //       network
-      //     }
-      //   }
-      // })
+      mintNFT({
+        variables: {
+          input: {
+            postId: post?.id,
+            address: transaction.to,
+            tokenId: event.args[3].toString(),
+            network
+          }
+        }
+      })
 
       toast.success('Minting has been successfully completed!')
-      setMintingStatus('Minting Completed!')
     } catch {
       setIsMinting(false)
       setError('Transaction has been cancelled!')
@@ -156,26 +151,8 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
 
   return (
     <div className="space-y-3 border-t dark:border-gray-700">
-      {mintingStatus === 'Minting Completed!' ? (
-        <div className="font-bold text-center space-y-4 px-5 py-3.5">
-          <div className="space-y-2">
-            <div className="text-3xl">🎉</div>
-            <div>Your NFT has been successfully minted!</div>
-          </div>
-          <div>
-            <a href={openseaURL} target="_blank" rel="noreferrer">
-              <Button
-                className="mx-auto"
-                icon={<ArrowRightIcon className="h-5 w-5" />}
-                outline
-              >
-                View on Opensea
-              </Button>
-            </a>
-          </div>
-        </div>
-      ) : isMinting ? (
-        <div className="font-bold text-center space-y-2 px-5 py-3.5">
+      {isMinting ? (
+        <div className="font-bold text-center space-y-2 p-5">
           <Spinner size="md" className="mx-auto" />
           <div>{mintingStatus}</div>
         </div>
