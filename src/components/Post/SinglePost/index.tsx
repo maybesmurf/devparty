@@ -2,6 +2,7 @@ import { gql, useMutation } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/UI/Card'
+import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
 import { useOembed } from '@components/utils/hooks/useOembed'
@@ -15,6 +16,7 @@ import {
 } from '@graphql/types.generated'
 import { ChatAlt2Icon, SparklesIcon } from '@heroicons/react/outline'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
@@ -23,7 +25,6 @@ import * as timeago from 'timeago.js'
 
 import LikeButton from '../LikeButton'
 import PostMenu from './Menu'
-import Mint from './Mint'
 import Oembed from './Oembed'
 import SelectedCommunity from './SelectedCommunity'
 import SelectedProduct from './SelectedProduct'
@@ -33,6 +34,15 @@ import PostType from './Type/Post'
 import QuestionType from './Type/Question'
 import TaskType from './Type/Task'
 import ViewNFT from './ViewNFT'
+
+const Mint = dynamic(() => import('./Mint'), {
+  loading: () => (
+    <div className="p-5 font-bold text-center space-y-2 border-t dark:border-gray-700">
+      <Spinner size="md" className="mx-auto" />
+      <div>Get ready to mint your NFT!</div>
+    </div>
+  )
+})
 
 export const PostFragment = gql`
   fragment PostFragment on Post {
