@@ -276,7 +276,9 @@ const SinglePost: React.FC<Props> = ({
           {post?.nft && <ViewNFT nft={post?.nft} />}
         </div>
       </div>
-      {showMintForm && <Mint setShowMintForm={setShowMintForm} post={post} />}
+      {showMint && showMintForm && (
+        <Mint setShowMintForm={setShowMintForm} post={post} />
+      )}
     </Card>
   )
 }
