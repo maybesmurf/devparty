@@ -51,6 +51,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
   const { resolvedTheme } = useTheme()
   const [error, setError] = useState<string | undefined>()
   const [openseaURL, setOpenseaURL] = useState<string>()
+  const [txURL, setTxURL] = useState<string>()
   const [mintingStatus, setMintingStatus] = useState<
     'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
   >('NOTSTARTED')
@@ -137,16 +138,16 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )
 
       // Add transaction to the DB
-      mintNFT({
-        variables: {
-          input: {
-            postId: post?.id,
-            address: transaction.to,
-            tokenId: event.args[3].toString(),
-            network
-          }
-        }
-      })
+      // mintNFT({
+      //   variables: {
+      //     input: {
+      //       postId: post?.id,
+      //       address: transaction.to,
+      //       tokenId: event.args[3].toString(),
+      //       network
+      //     }
+      //   }
+      // })
 
       setMintingStatus('COMPLETED')
       toast.success('Minting has been successfully completed!')
@@ -267,13 +268,22 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm }) => {
       )}
 
       {/* Completed */}
-      {mintingStatus === 'COMPLETED' && (
+      {mintingStatus === 'NOTSTARTED' && (
         <div className="p-5 font-bold text-center space-y-4">
           <div className="space-y-2">
             <div className="text-3xl">🎉</div>
             <div>Your NFT has been successfully minted!</div>
           </div>
           <div>
+            <a href={openseaURL} target="_blank" rel="noreferrer">
+              <Button
+                className="mx-auto"
+                icon={<ArrowRightIcon className="h-5 w-5" />}
+                outline
+              >
+                View Transaction
+              </Button>
+            </a>
             <a href={openseaURL} target="_blank" rel="noreferrer">
               <Button
                 className="mx-auto"
