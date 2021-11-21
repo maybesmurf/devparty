@@ -2696,7 +2696,6 @@ export type EditOnboardingProfileMutation = {
       id: string
       bio?: string | null | undefined
       location?: string | null | undefined
-      avatar: string
     }
   }
 }
