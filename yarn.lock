@@ -1551,10 +1551,10 @@
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-directives/-/plugin-directives-2.10.1.tgz#3de2f2d9b678ee12118f0920e25a0c4e65a1407a"
   integrity sha512-PXzCCL569ogaE1oH46h7goml7ypeb5Tgh2OBOAhT4TRgAw/u2QYBnvXdGkLL0qjG45W1cafPoCZ/Y6AWrihWZA==
 
-"@giraphql/plugin-prisma@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.13.0.tgz#3854f0a128555aa6b37148dc5d2f84f06e200059"
-  integrity sha512-f1PKUe9oyBh4u2uYWI6FJfh2ECkYbY8ma1Bs4YV6lmFiYC5+uaUcfaQjEwpFyd9a9no79QpPaHrgcrYEQU2b5w==
+"@giraphql/plugin-prisma@^0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.13.1.tgz#1cce2cfd0aacf607d03f69949d49d0640f7e4fd3"
+  integrity sha512-r8eZ08NT+hEqIvsxWx0SRe6r7YmbSjrFQVA4YOJhUyZ7wkkRu3AaIL8wr+NOHCwXbmZyn4z8sFn7zaXE7rACng==
   dependencies:
     "@prisma/generator-helper" "^3.5.0"
 
