@@ -70,9 +70,9 @@ const DataSettings: React.FC = () => {
             </p>
             <p className="text-yellow-500 text-sm flex items-center space-x-1">
               <ExclamationCircleIcon className="h-4 w-4" />
-              <div>
+              <p>
                 Please note you can download data only once in every 10 days
-              </div>
+              </p>
             </p>
             <Button
               icon={

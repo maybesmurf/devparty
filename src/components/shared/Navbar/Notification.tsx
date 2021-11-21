@@ -7,6 +7,7 @@ import { POLLING_INTERVAL } from 'src/constants'
 const GET_NOTIFICATION_COUNT_QUERY = gql`
   query GetNotificationCount {
     me {
+      id
       notificationsCount
     }
   }
