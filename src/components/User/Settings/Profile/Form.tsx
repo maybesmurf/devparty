@@ -23,7 +23,7 @@ import Sidebar from '../Sidebar'
 
 const NFTAvatars = dynamic(() => import('./NFTAvatars'))
 
-const editProfileSchema = object({
+export const editProfileSchema = object({
   username: string()
     .min(2, { message: '👤 Username should atleast have 2 characters' })
     .max(50, { message: '👤 Useranme should be within 50 characters' })
@@ -104,12 +104,12 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
   const form = useZodForm({
     schema: editProfileSchema,
     defaultValues: {
-      username: currentUser.username,
-      email: currentUser.email as string,
-      name: currentUser.profile.name,
-      bio: currentUser.profile.bio as string,
-      location: currentUser.profile.location as string,
-      avatar: currentUser.profile.avatar as string
+      username: currentUser?.username,
+      email: currentUser?.email as string,
+      name: currentUser?.profile.name,
+      bio: currentUser?.profile.bio as string,
+      location: currentUser?.profile.location as string,
+      avatar: currentUser?.profile.avatar as string
     }
   })
 

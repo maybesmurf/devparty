@@ -2690,11 +2690,13 @@ export type EditOnboardingProfileMutation = {
   editUser: {
     __typename?: 'User'
     id: string
+    username: string
     profile: {
       __typename?: 'Profile'
       id: string
       bio?: string | null | undefined
       location?: string | null | undefined
+      avatar: string
     }
   }
 }

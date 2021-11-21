@@ -15,6 +15,10 @@ import toast from 'react-hot-toast'
 import { object, string } from 'zod'
 
 const editProfileSchema = object({
+  username: string()
+    .min(2, { message: '👤 Username should atleast have 2 characters' })
+    .max(50, { message: '👤 Useranme should be within 50 characters' })
+    .regex(/^[a-z0-9_\.]+$/, { message: '👤 Invalid username' }),
   name: string()
     .min(2, { message: '👤 Name should atleast have 2 characters' })
     .max(50, { message: '👤 Name should be within 50 characters' }),
@@ -40,6 +44,7 @@ const ProfileForm: React.FC<Props> = ({ currentUser, setShowSkip }) => {
       mutation EditOnboardingProfile($input: EditUserInput!) {
         editUser(input: $input) {
           id
+          username
           profile {
             id
             bio
@@ -61,6 +66,7 @@ const ProfileForm: React.FC<Props> = ({ currentUser, setShowSkip }) => {
   const form = useZodForm({
     schema: editProfileSchema,
     defaultValues: {
+      username: currentUser?.username,
       name: currentUser?.profile?.name,
       bio: currentUser?.profile?.bio as string,
       location: currentUser?.profile?.location as string
@@ -71,11 +77,11 @@ const ProfileForm: React.FC<Props> = ({ currentUser, setShowSkip }) => {
     <Form
       form={form}
       className="space-y-4"
-      onSubmit={({ name, bio, location }) => {
+      onSubmit={({ username, name, bio, location }) => {
         editUser({
           variables: {
             input: {
-              username: currentUser?.username as string,
+              username,
               email: currentUser?.email as string,
               name,
               bio: bio as string,
@@ -88,6 +94,13 @@ const ProfileForm: React.FC<Props> = ({ currentUser, setShowSkip }) => {
         setShowSkip(false)
       }}
     >
+      <Input
+        label="Username"
+        type="text"
+        placeholder="johndoe"
+        prefix="https://devparty.io/u/"
+        {...form.register('username')}
+      />
       <Input
         label="Name"
         type="text"
