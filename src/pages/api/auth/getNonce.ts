@@ -12,16 +12,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       where: { integrations: { ethAddress: address as string } }
     })
 
-    const nonce = crypto.randomUUID()
+    const nonce = crypto.randomInt(111111, 999999)
     if (user) {
       const updatedIntegration = await db.integration.update({
         where: { userId: user.id },
-        data: { ethNonce: nonce }
+        data: { ethNonce: nonce.toString() }
       })
 
       return res.json({ nonce: updatedIntegration?.ethNonce })
     } else {
-      return res.json({ nonce })
+      return res.json({ nonce: nonce.toString() })
     }
   } else {
     return res.json({

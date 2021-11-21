@@ -279,7 +279,7 @@ CREATE TABLE `integrations` (
     `githubId` VARCHAR(64) NULL,
     `ethAddress` VARCHAR(64) NULL,
     `ensAddress` VARCHAR(191) NULL,
-    `ethNonce` VARCHAR(36) NULL,
+    `ethNonce` VARCHAR(6) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `integrations_githubId_key`(`githubId`),
