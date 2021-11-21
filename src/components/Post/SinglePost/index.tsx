@@ -215,7 +215,7 @@ const SinglePost: React.FC<Props> = ({
       </CardBody>
       <div className="flex px-3 py-1.5 space-x-4 border-t dark:border-gray-800">
         <motion.button whileTap={{ scale: 0.9 }}>
-          <LikeButton entity={post} handleLike={handleLike} loading={false} />
+          <LikeButton entity={post} handleLike={handleLike} />
         </motion.button>
         <motion.button whileTap={{ scale: 0.9 }}>
           <Link href={`/posts/${post?.id}`} passHref>

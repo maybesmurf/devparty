@@ -11,10 +11,9 @@ type Props = {
   entity: Post
   // eslint-disable-next-line no-unused-vars
   handleLike: (post: Post) => void
-  loading: boolean
 }
 
-const LikeButton: React.FC<Props> = ({ entity, handleLike, loading }) => {
+const LikeButton: React.FC<Props> = ({ entity, handleLike }) => {
   const { currentUser } = useContext(AppContext)
   const router = useRouter()
   const [likesCount, setLikesCount] = useState<number>(
@@ -40,10 +39,10 @@ const LikeButton: React.FC<Props> = ({ entity, handleLike, loading }) => {
   return (
     <div className="text-pink-500 hover:text-pink-400 flex items-center space-x-1">
       <Switch
+        as="div"
         checked={entity?.hasLiked}
         onChange={toggleLike}
         className="hover:bg-pink-300 hover:bg-opacity-20 p-1.5 rounded-full"
-        disabled={loading}
       >
         {isLiked ? (
           <HeartIconSolid className="h-5 w-5" />
