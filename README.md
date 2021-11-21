@@ -84,6 +84,7 @@ Special thanks to these amazing projects which help power Devparty:
 
 - [Devparty Assets](https://gitlab.com/yo/dp-assets) - Static assets hosted in Vercel edge CDN
 - [Devparty Contracts](https://gitlab.com/yo/dp-contracts) - Ethereum contracts for NFTs
+- [Devparty NFT Generator](https://gitlab.com/yo/dp-nft) - Used to generate NFT from a post
 
 ## ⚖️ License
 
