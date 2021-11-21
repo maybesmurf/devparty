@@ -1568,10 +1568,10 @@
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-scope-auth/-/plugin-scope-auth-2.13.1.tgz#f9a019b67900e0a5da0db80ec5f76f5d405d6228"
   integrity sha512-nmJ2qeN9ceqHpMG+swPHK9rQdTWoVnrswrP06V6Ilc+hxwyxW12VBY3IcuLOqVb2uJemBEfpUBPc+/CZM3yG6g==
 
-"@giraphql/plugin-simple-objects@^2.11.1":
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-simple-objects/-/plugin-simple-objects-2.11.1.tgz#1ea7f662c08cb9efc820c80131508ac573f4d7bc"
-  integrity sha512-OkZhFyrLI0T5WXyvWtli5T531cQBx//T68l9BikgG4EucL4RjFqdh1Im9ovnSyZlj3UCX0h/3RNWgl40BhZvbg==
+"@giraphql/plugin-simple-objects@^2.12.0":
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-simple-objects/-/plugin-simple-objects-2.12.0.tgz#17cd632066061112bea27b88106b7683dfe28ac4"
+  integrity sha512-YuY5RUw8sYXgW3LBldjSmWxvsdEch9t2ZCe4G3ky0YDIWKgd4F0/p4h80iyl5S8k7sVexvohBwwdxcPFkujxJQ==
 
 "@giraphql/plugin-validation@^2.15.0":
   version "2.15.0"
