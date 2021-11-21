@@ -7,6 +7,7 @@ import Link from 'next/link'
 export const GET_USER_PRODUCTS_QUERY = gql`
   query GetUserProducts($username: String!) {
     user(username: $username) {
+      id
       ownedProducts {
         edges {
           node {
