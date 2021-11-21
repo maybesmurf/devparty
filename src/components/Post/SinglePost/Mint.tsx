@@ -135,6 +135,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
         form.watch('quantity'),
         url
       )
+      setTxURL(getTransactionURL(network, transaction.hash))
       const tx = await transaction.wait()
       let event = tx.events[0]
 
@@ -143,7 +144,6 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
           IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
         }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
       )
-      setTxURL(getTransactionURL(network, tx.transactionHash))
 
       // Add transaction to the DB
       mintNFT({
@@ -272,6 +272,18 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
         <div className="font-bold text-center space-y-2 p-5">
           <Spinner size="md" className="mx-auto" />
           <div>{mintingStatusText}</div>
+          {txURL && (
+            <a href={txURL} target="_blank" rel="noreferrer">
+              <Button
+                className="text-sm mt-3 mx-auto"
+                variant="success"
+                icon={<SwitchHorizontalIcon className="h-4 w-4" />}
+                outline
+              >
+                View Transaction
+              </Button>
+            </a>
+          )}
         </div>
       )}
 
