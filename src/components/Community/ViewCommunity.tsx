@@ -8,13 +8,15 @@ import {
 import DevpartySEO from '@components/shared/SEO'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import { Community, GetCommunityQuery } from '@graphql/types.generated'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
 import Custom404 from 'src/pages/404'
 
 import Details from './Details'
 import CommunityFeed from './Feed'
+import CommunityMod from './Mod'
 import Rules from './Rules'
 
 export const GET_COMMUNITY_QUERY = gql`
@@ -47,6 +49,7 @@ export const GET_COMMUNITY_QUERY = gql`
 
 const ViewCommunity: React.FC = () => {
   const router = useRouter()
+  const { currentUser, staffMode } = useContext(AppContext)
   const { data, loading, error } = useQuery<GetCommunityQuery>(
     GET_COMMUNITY_QUERY,
     {
@@ -81,6 +84,9 @@ const ViewCommunity: React.FC = () => {
         </GridItemEight>
         <GridItemFour>
           <Rules community={community as Community} />
+          {currentUser?.isStaff && staffMode && (
+            <CommunityMod community={community as Community} />
+          )}
         </GridItemFour>
       </GridLayout>
     </>
