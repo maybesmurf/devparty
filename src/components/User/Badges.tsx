@@ -35,6 +35,12 @@ const Badges: React.FC<Props> = ({ user }) => {
 
   const badges = data?.user?.badges?.edges?.map((edge) => edge?.node)
 
+  const getRandomRotate = () => {
+    const rotateVariants = ['rotate-6', '-rotate-6']
+
+    return rotateVariants[Math.floor(Math.random() * rotateVariants.length)]
+  }
+
   if (loading) return null
 
   return (
@@ -44,7 +50,11 @@ const Badges: React.FC<Props> = ({ user }) => {
         {badges?.map((badge) => (
           <div key={badge?.id}>
             <Tooltip content={badge?.name as string}>
-              <img className="h-16" src={badge?.image} alt={badge?.name} />
+              <img
+                className={`h-16 transform ${getRandomRotate()}`}
+                src={badge?.image}
+                alt={badge?.name}
+              />
             </Tooltip>
           </div>
         ))}
