@@ -85,12 +85,16 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
     if (currentUser?.profile?.cover) setCover(currentUser?.profile?.cover)
   }, [currentUser])
 
-  const handleUpload = async (evt: any, type: string) => {
+  const handleUpload = async (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    type: string
+  ) => {
     evt.preventDefault()
     // setLoading({ type, status: true })
 
     try {
-      const attachment = await uploadToIPFS(evt.target.files)
+      // @ts-ignore
+      const attachment = await uploadToIPFS(evt.target.files[0])
       type === 'avatar' ? setAvatar(attachment.url) : setCover(attachment.url)
     } finally {
       // setLoading({ type, status: false })

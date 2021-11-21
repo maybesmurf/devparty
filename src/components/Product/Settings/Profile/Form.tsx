@@ -68,12 +68,13 @@ const ProductSettingsForm: React.FC<Props> = ({ product }) => {
     if (product?.avatar) setAvatar(product?.avatar)
   }, [product])
 
-  const handleUpload = async (evt: any) => {
+  const handleUpload = async (evt: React.ChangeEvent<HTMLInputElement>) => {
     evt.preventDefault()
     // setLoading({ type, status: true })
 
     try {
-      const attachment = await uploadToIPFS(evt.target.files)
+      // @ts-ignore
+      const attachment = await uploadToIPFS(evt.target.files[0])
       setAvatar(attachment.url)
     } finally {
       // setLoading({ type, status: false })
@@ -148,7 +149,11 @@ const ProductSettingsForm: React.FC<Props> = ({ product }) => {
                     src={avatar}
                     alt={avatar}
                   />
-                  <input type="file" onChange={(evt) => handleUpload(evt)} />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(evt) => handleUpload(evt)}
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-between pt-3">
