@@ -1558,10 +1558,10 @@
   dependencies:
     "@prisma/generator-helper" "^3.5.0"
 
-"@giraphql/plugin-relay@^2.18.1":
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-relay/-/plugin-relay-2.18.1.tgz#4e0947ab39c80b1b37e433f6a872adc09d618fba"
-  integrity sha512-hFrbIzXQ6JmTO4biG/IdZlAvjpV1Q5h+gr+QRjF6wXrcld8ytikMMRReAmb/gFy8Ixvrr9bgxS2N5m43mfLD1Q==
+"@giraphql/plugin-relay@^2.18.2":
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-relay/-/plugin-relay-2.18.2.tgz#26ba7f220716ba0612bfd99777657f50234a0678"
+  integrity sha512-1FhH32rTPCBDpvwJkxXyOJ/RcBvFLYM3qayj5iNXuv7ambFe5cqfhN6nN/QzoBn3sGU72Mh+5NKfFDxFSVeZag==
 
 "@giraphql/plugin-scope-auth@^2.13.1":
   version "2.13.1"
