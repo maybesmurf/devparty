@@ -36,7 +36,7 @@ const Badges: React.FC<Props> = ({ user }) => {
   const badges = data?.user?.badges?.edges?.map((edge) => edge?.node)
 
   const getRandomRotate = () => {
-    const rotateVariants = ['rotate-6', '-rotate-6']
+    const rotateVariants = ['rotate-3', 'rotate-6', '-rotate-3', '-rotate-6']
 
     return rotateVariants[Math.floor(Math.random() * rotateVariants.length)]
   }
@@ -46,12 +46,12 @@ const Badges: React.FC<Props> = ({ user }) => {
   return (
     <div className="space-y-2">
       <div className="font-bold">Badges</div>
-      <div className="flex flex-wrap gap-x-5 gap-y-5 w-3/4">
+      <div className="flex flex-wrap gap-6">
         {badges?.map((badge) => (
           <div key={badge?.id}>
             <Tooltip content={badge?.name as string}>
               <img
-                className={`h-16 transform ${getRandomRotate()}`}
+                className={`h-16 sm:h-20 transform ${getRandomRotate()}`}
                 src={badge?.image}
                 alt={badge?.name}
               />
