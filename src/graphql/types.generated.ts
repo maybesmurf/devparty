@@ -4530,6 +4530,7 @@ export type GetUserProductsQuery = {
   user?:
     | {
         __typename?: 'User'
+        id: string
         ownedProducts: {
           __typename?: 'UserOwnedProductsConnection'
           edges: Array<
@@ -5109,7 +5110,10 @@ export type GetNotificationCountQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetNotificationCountQuery = {
   __typename?: 'Query'
-  me?: { __typename?: 'User'; notificationsCount: number } | null | undefined
+  me?:
+    | { __typename?: 'User'; id: string; notificationsCount: number }
+    | null
+    | undefined
 }
 
 export type SearchUsersQueryVariables = Exact<{
