@@ -58,7 +58,7 @@ const Rules: React.FC<Props> = ({ community, showCardAndHeading = true }) => {
           </div>
         )}
         <div className="divide-y">
-          {[...Array(3)]?.map((index: number) => (
+          {[...Array(3)]?.map((item: any, index: number) => (
             <div className="px-5 py-3 flex space-x-3" key={index}>
               <div className="shimmer h-5 w-5 rounded" />
               <div className="space-y-3 w-full">
