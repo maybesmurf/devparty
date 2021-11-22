@@ -16,11 +16,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import {
-  ArrowRightIcon,
-  FingerPrintIcon,
-  SwitchHorizontalIcon
-} from '@heroicons/react/outline'
+import { FingerPrintIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -31,6 +27,7 @@ import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../../data/abi.json'
+import MintCompleted from './Completed'
 
 const client = create({
   host: 'ipfs.infura.io',
@@ -289,35 +286,10 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
 
       {/* Completed */}
       {mintingStatus === 'COMPLETED' && (
-        <div className="p-5 font-bold text-center space-y-4">
-          <div className="space-y-2">
-            <div className="text-3xl">🎉</div>
-            <div>Your NFT has been successfully minted!</div>
-          </div>
-          <div className="flex">
-            <div className="mx-auto">
-              <a href={txURL} target="_blank" rel="noreferrer">
-                <Button
-                  className="text-sm mb-2"
-                  variant="success"
-                  icon={<SwitchHorizontalIcon className="h-4 w-4" />}
-                  outline
-                >
-                  View Transaction
-                </Button>
-              </a>
-              <a href={openseaURL} target="_blank" rel="noreferrer">
-                <Button
-                  className="text-sm"
-                  icon={<ArrowRightIcon className="h-4 w-4" />}
-                  outline
-                >
-                  View on Opensea
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
+        <MintCompleted
+          txURL={txURL as string}
+          openseaURL={openseaURL as string}
+        />
       )}
     </div>
   )
