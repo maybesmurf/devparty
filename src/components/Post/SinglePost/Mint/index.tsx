@@ -1,10 +1,10 @@
 import { gql, useMutation } from '@apollo/client'
+import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Button } from '@components/UI/Button'
 import { Checkbox } from '@components/UI/Checkbox'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
-import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
@@ -16,11 +16,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import {
-  ArrowRightIcon,
-  FingerPrintIcon,
-  SwitchHorizontalIcon
-} from '@heroicons/react/outline'
+import { FingerPrintIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -30,7 +26,10 @@ import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
-import NFT from '../../../../data/abi.json'
+import NFT from '../../../../../data/abi.json'
+import MintCompleted from './Completed'
+import MintPreview from './Preview'
+import MintProcessing from './Processing'
 
 const client = create({
   host: 'ipfs.infura.io',
@@ -55,6 +54,7 @@ interface Props {
 const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
+  const [theme, setTheme] = useState<'dark' | 'light'>('light')
   const [error, setError] = useState<string | undefined>()
   const [openseaURL, setOpenseaURL] = useState<string>()
   const [txURL, setTxURL] = useState<string>()
@@ -111,7 +111,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
       setMintingStatusText('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
-          `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
+          `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}&theme=${theme}`
         )
       )
       setMintingStatusText('Uploading metadata to decentralized servers')
@@ -171,69 +171,74 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
       {/* Not started */}
       {mintingStatus === 'NOTSTARTED' && (
         <Form form={form} onSubmit={mintToken}>
-          <div className="space-y-7 px-5 py-3.5">
-            <div>
-              <Input
-                label="Title"
-                placeholder="Title of your NFT"
-                {...form.register('title')}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-lg font-bold">Number of Editions</div>
-                <div className="text-gray-500">1 by default</div>
-              </div>
+          <GridLayout className="!p-5">
+            <GridItemEight className="space-y-7 !mb-0">
               <div>
                 <Input
-                  type="number"
-                  className="w-20"
-                  placeholder="5"
-                  {...form.register('quantity')}
+                  label="Title"
+                  placeholder="Title of your NFT"
+                  {...form.register('title')}
                 />
               </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-lg font-bold">Explicit Content</div>
-                <div className="text-gray-500">18+</div>
-              </div>
-              <div>
-                <Switch
-                  checked={nsfw}
-                  onChange={setNsfw}
-                  className={clsx(
-                    { 'bg-brand-500': nsfw },
-                    { 'bg-gray-300': !nsfw },
-                    'relative inline-flex flex-shrink-0 h-[24.5px] w-12 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
-                  )}
-                >
-                  <span className="sr-only">Use setting</span>
-                  <span
-                    aria-hidden="true"
-                    className={clsx(
-                      { 'translate-x-6': nsfw },
-                      { 'translate-x-0': !nsfw },
-                      'pointer-events-none inline-block h-[20px] w-[20px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200'
-                    )}
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-lg font-bold">Number of Editions</div>
+                  <div className="text-gray-500">1 by default</div>
+                </div>
+                <div>
+                  <Input
+                    type="number"
+                    className="w-20"
+                    placeholder="5"
+                    {...form.register('quantity')}
                   />
-                </Switch>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Checkbox id="acceptRights" {...form.register('accept')} />
-              <label htmlFor="acceptRights">
-                I have the rights to publish this artwork, and understand it
-                will be minted on the decentralized network.
-              </label>
-            </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-lg font-bold">Explicit Content</div>
+                  <div className="text-gray-500">18+</div>
+                </div>
+                <div>
+                  <Switch
+                    checked={nsfw}
+                    onChange={setNsfw}
+                    className={clsx(
+                      { 'bg-brand-500': nsfw },
+                      { 'bg-gray-300': !nsfw },
+                      'relative inline-flex flex-shrink-0 h-[24.5px] w-12 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
+                    )}
+                  >
+                    <span className="sr-only">Use setting</span>
+                    <span
+                      aria-hidden="true"
+                      className={clsx(
+                        { 'translate-x-6': nsfw },
+                        { 'translate-x-0': !nsfw },
+                        'pointer-events-none inline-block h-[20px] w-[20px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200'
+                      )}
+                    />
+                  </Switch>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Checkbox id="acceptRights" {...form.register('accept')} />
+                <label htmlFor="acceptRights">
+                  I have the rights to publish this artwork, and understand it
+                  will be minted on the decentralized network.
+                </label>
+              </div>
+            </GridItemEight>
+            <GridItemFour>
+              <MintPreview theme={theme} setTheme={setTheme} post={post} />
+            </GridItemFour>
             {error && (
               <ErrorMessage
                 title={ERROR_MESSAGE}
                 error={{ name: error, message: error }}
               />
             )}
-          </div>
+          </GridLayout>
           <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
             <a
               className="text-sm text-gray-500"
@@ -269,55 +274,18 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
 
       {/* Processing */}
       {mintingStatus === 'PROCESSING' && (
-        <div className="font-bold text-center space-y-2 p-5">
-          <Spinner size="md" className="mx-auto" />
-          <div>{mintingStatusText}</div>
-          {txURL && (
-            <a href={txURL} target="_blank" rel="noreferrer">
-              <Button
-                className="text-sm mt-3 mx-auto"
-                variant="success"
-                icon={<SwitchHorizontalIcon className="h-4 w-4" />}
-                outline
-              >
-                View Transaction
-              </Button>
-            </a>
-          )}
-        </div>
+        <MintProcessing
+          txURL={txURL as string}
+          mintingStatusText={mintingStatusText}
+        />
       )}
 
       {/* Completed */}
       {mintingStatus === 'COMPLETED' && (
-        <div className="p-5 font-bold text-center space-y-4">
-          <div className="space-y-2">
-            <div className="text-3xl">🎉</div>
-            <div>Your NFT has been successfully minted!</div>
-          </div>
-          <div className="flex">
-            <div className="mx-auto">
-              <a href={txURL} target="_blank" rel="noreferrer">
-                <Button
-                  className="text-sm mb-2"
-                  variant="success"
-                  icon={<SwitchHorizontalIcon className="h-4 w-4" />}
-                  outline
-                >
-                  View Transaction
-                </Button>
-              </a>
-              <a href={openseaURL} target="_blank" rel="noreferrer">
-                <Button
-                  className="text-sm"
-                  icon={<ArrowRightIcon className="h-4 w-4" />}
-                  outline
-                >
-                  View on Opensea
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
+        <MintCompleted
+          txURL={txURL as string}
+          openseaURL={openseaURL as string}
+        />
       )}
     </div>
   )
