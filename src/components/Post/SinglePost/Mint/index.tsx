@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client'
+import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Button } from '@components/UI/Button'
 import { Checkbox } from '@components/UI/Checkbox'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
@@ -27,6 +28,7 @@ import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../../data/abi.json'
 import MintCompleted from './Completed'
+import MintPreview from './Preview'
 import MintProcessing from './Processing'
 
 const client = create({
@@ -168,69 +170,74 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
       {/* Not started */}
       {mintingStatus === 'NOTSTARTED' && (
         <Form form={form} onSubmit={mintToken}>
-          <div className="space-y-7 px-5 py-3.5">
-            <div>
-              <Input
-                label="Title"
-                placeholder="Title of your NFT"
-                {...form.register('title')}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-lg font-bold">Number of Editions</div>
-                <div className="text-gray-500">1 by default</div>
-              </div>
+          <GridLayout className="!p-5">
+            <GridItemEight className="space-y-7 !mb-0">
               <div>
                 <Input
-                  type="number"
-                  className="w-20"
-                  placeholder="5"
-                  {...form.register('quantity')}
+                  label="Title"
+                  placeholder="Title of your NFT"
+                  {...form.register('title')}
                 />
               </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-lg font-bold">Explicit Content</div>
-                <div className="text-gray-500">18+</div>
-              </div>
-              <div>
-                <Switch
-                  checked={nsfw}
-                  onChange={setNsfw}
-                  className={clsx(
-                    { 'bg-brand-500': nsfw },
-                    { 'bg-gray-300': !nsfw },
-                    'relative inline-flex flex-shrink-0 h-[24.5px] w-12 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
-                  )}
-                >
-                  <span className="sr-only">Use setting</span>
-                  <span
-                    aria-hidden="true"
-                    className={clsx(
-                      { 'translate-x-6': nsfw },
-                      { 'translate-x-0': !nsfw },
-                      'pointer-events-none inline-block h-[20px] w-[20px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200'
-                    )}
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-lg font-bold">Number of Editions</div>
+                  <div className="text-gray-500">1 by default</div>
+                </div>
+                <div>
+                  <Input
+                    type="number"
+                    className="w-20"
+                    placeholder="5"
+                    {...form.register('quantity')}
                   />
-                </Switch>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Checkbox id="acceptRights" {...form.register('accept')} />
-              <label htmlFor="acceptRights">
-                I have the rights to publish this artwork, and understand it
-                will be minted on the decentralized network.
-              </label>
-            </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-lg font-bold">Explicit Content</div>
+                  <div className="text-gray-500">18+</div>
+                </div>
+                <div>
+                  <Switch
+                    checked={nsfw}
+                    onChange={setNsfw}
+                    className={clsx(
+                      { 'bg-brand-500': nsfw },
+                      { 'bg-gray-300': !nsfw },
+                      'relative inline-flex flex-shrink-0 h-[24.5px] w-12 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
+                    )}
+                  >
+                    <span className="sr-only">Use setting</span>
+                    <span
+                      aria-hidden="true"
+                      className={clsx(
+                        { 'translate-x-6': nsfw },
+                        { 'translate-x-0': !nsfw },
+                        'pointer-events-none inline-block h-[20px] w-[20px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200'
+                      )}
+                    />
+                  </Switch>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Checkbox id="acceptRights" {...form.register('accept')} />
+                <label htmlFor="acceptRights">
+                  I have the rights to publish this artwork, and understand it
+                  will be minted on the decentralized network.
+                </label>
+              </div>
+            </GridItemEight>
+            <GridItemFour>
+              <MintPreview post={post} />
+            </GridItemFour>
             {error && (
               <ErrorMessage
                 title={ERROR_MESSAGE}
                 error={{ name: error, message: error }}
               />
             )}
-          </div>
+          </GridLayout>
           <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
             <a
               className="text-sm text-gray-500"

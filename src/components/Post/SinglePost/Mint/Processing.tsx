@@ -1,22 +1,6 @@
 import { Button } from '@components/UI/Button'
 import { Spinner } from '@components/UI/Spinner'
 import { SwitchHorizontalIcon } from '@heroicons/react/outline'
-import { create } from 'ipfs-http-client'
-import { boolean, object, string } from 'zod'
-
-const client = create({
-  host: 'ipfs.infura.io',
-  port: 5001,
-  protocol: 'https'
-})
-
-const newNFTSchema = object({
-  title: string().min(0).max(255),
-  quantity: string().refine((val: string) => !Number.isNaN(parseInt(val, 10)), {
-    message: 'Expected number'
-  }),
-  accept: boolean()
-})
 
 interface Props {
   txURL: string
