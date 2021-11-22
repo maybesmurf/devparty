@@ -1,14 +1,13 @@
 import { Checkbox } from '@components/UI/Checkbox'
 import { Post } from '@graphql/types.generated'
-import { useState } from 'react'
 
 interface Props {
   post: Post
+  theme: 'dark' | 'light'
+  setTheme: React.Dispatch<React.SetStateAction<'dark' | 'light'>>
 }
 
-const MintPreview: React.FC<Props> = ({ post }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('light')
-
+const MintPreview: React.FC<Props> = ({ theme, setTheme, post }) => {
   return (
     <div className="space-y-5">
       <div className="relative group w-60 h-60">

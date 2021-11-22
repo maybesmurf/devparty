@@ -54,6 +54,7 @@ interface Props {
 const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
   const [nsfw, setNsfw] = useState<boolean>(false)
   const { resolvedTheme } = useTheme()
+  const [theme, setTheme] = useState<'dark' | 'light'>('light')
   const [error, setError] = useState<string | undefined>()
   const [openseaURL, setOpenseaURL] = useState<string>()
   const [txURL, setTxURL] = useState<string>()
@@ -110,7 +111,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
       setMintingStatusText('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
-          `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
+          `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}&theme=${theme}`
         )
       )
       setMintingStatusText('Uploading metadata to decentralized servers')
@@ -229,7 +230,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
               </div>
             </GridItemEight>
             <GridItemFour>
-              <MintPreview post={post} />
+              <MintPreview theme={theme} setTheme={setTheme} post={post} />
             </GridItemFour>
             {error && (
               <ErrorMessage
