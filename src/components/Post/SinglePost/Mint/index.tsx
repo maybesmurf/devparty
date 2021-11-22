@@ -4,7 +4,6 @@ import { Checkbox } from '@components/UI/Checkbox'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
-import { Spinner } from '@components/UI/Spinner'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import getNFTData from '@components/utils/getNFTData'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
@@ -16,7 +15,7 @@ import {
   Post
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
-import { FingerPrintIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
+import { FingerPrintIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'
@@ -28,6 +27,7 @@ import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../../data/abi.json'
 import MintCompleted from './Completed'
+import MintProcessing from './Processing'
 
 const client = create({
   host: 'ipfs.infura.io',
@@ -266,22 +266,10 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
 
       {/* Processing */}
       {mintingStatus === 'PROCESSING' && (
-        <div className="font-bold text-center space-y-2 p-5">
-          <Spinner size="md" className="mx-auto" />
-          <div>{mintingStatusText}</div>
-          {txURL && (
-            <a href={txURL} target="_blank" rel="noreferrer">
-              <Button
-                className="text-sm mt-3 mx-auto"
-                variant="success"
-                icon={<SwitchHorizontalIcon className="h-4 w-4" />}
-                outline
-              >
-                View Transaction
-              </Button>
-            </a>
-          )}
-        </div>
+        <MintProcessing
+          txURL={txURL as string}
+          mintingStatusText={mintingStatusText}
+        />
       )}
 
       {/* Completed */}
