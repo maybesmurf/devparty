@@ -30,7 +30,7 @@ import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
-import NFT from '../../../../data/abi.json'
+import NFT from '../../../../../data/abi.json'
 
 const client = create({
   host: 'ipfs.infura.io',
