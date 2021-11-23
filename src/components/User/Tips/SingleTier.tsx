@@ -1,4 +1,6 @@
+import { Button } from '@components/UI/Button'
 import { TipTier } from '@graphql/types.generated'
+import { HeartIcon } from '@heroicons/react/outline'
 import Markdown from 'markdown-to-jsx'
 import React from 'react'
 
@@ -18,6 +20,9 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
           </Markdown>
         </div>
       </div>
+      <Button icon={<HeartIcon className="h-5 2-5" />} outline>
+        Tip
+      </Button>
     </div>
   )
 }
