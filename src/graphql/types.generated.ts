@@ -29,6 +29,12 @@ export type AddCommunityModeratorInput = {
   userId: Scalars['ID']
 }
 
+export type AddTipTierInput = {
+  amount: Scalars['Int']
+  description: Scalars['String']
+  name: Scalars['String']
+}
+
 export type AnswerPollInput = {
   id: Scalars['ID']
 }
@@ -236,6 +242,10 @@ export type DeleteProductInput = {
   id: Scalars['ID']
 }
 
+export type DeleteTipTierInput = {
+  id: Scalars['String']
+}
+
 export type EditIntegrationInput = {
   ethAddress?: InputMaybe<Scalars['String']>
   spotifyRefreshToken?: InputMaybe<Scalars['String']>
@@ -285,7 +295,6 @@ export type EditTipsInput = {
   ethereum?: InputMaybe<Scalars['String']>
   github?: InputMaybe<Scalars['String']>
   paypal?: InputMaybe<Scalars['String']>
-  solana?: InputMaybe<Scalars['String']>
 }
 
 export type EditUserInput = {
@@ -377,6 +386,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
   addCommunityModerator?: Maybe<Result>
+  addTipTier: Result
   answerPoll?: Maybe<PollAnswer>
   authWithWallet?: Maybe<User>
   awardBadge: Result
@@ -390,6 +400,7 @@ export type Mutation = {
   deleteAccount: Result
   deletePost: Result
   deleteProduct: Result
+  deleteTipTier: Result
   editIntegration: Integration
   editNFTAvatar?: Maybe<User>
   editPost: Post
@@ -427,6 +438,10 @@ export type MutationAcceptCocAndTosArgs = {
 
 export type MutationAddCommunityModeratorArgs = {
   input: AddCommunityModeratorInput
+}
+
+export type MutationAddTipTierArgs = {
+  input: AddTipTierInput
 }
 
 export type MutationAnswerPollArgs = {
@@ -471,6 +486,10 @@ export type MutationDeletePostArgs = {
 
 export type MutationDeleteProductArgs = {
   input: DeleteProductInput
+}
+
+export type MutationDeleteTipTierArgs = {
+  input: DeleteTipTierInput
 }
 
 export type MutationEditIntegrationArgs = {
@@ -1280,8 +1299,38 @@ export type Tip = {
   github?: Maybe<Scalars['String']>
   id: Scalars['ID']
   paypal?: Maybe<Scalars['String']>
-  solana?: Maybe<Scalars['String']>
+  tiers: TipTiersConnection
   user: User
+}
+
+export type TipTiersArgs = {
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+}
+
+export type TipTier = {
+  __typename?: 'TipTier'
+  amount: Scalars['Int']
+  createdAt: Scalars['DateTime']
+  description: Scalars['String']
+  id: Scalars['ID']
+  name: Scalars['String']
+  tip: Tip
+}
+
+export type TipTiersConnection = {
+  __typename?: 'TipTiersConnection'
+  edges: Array<Maybe<TipTiersConnectionEdge>>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']
+}
+
+export type TipTiersConnectionEdge = {
+  __typename?: 'TipTiersConnectionEdge'
+  cursor: Scalars['String']
+  node: TipTier
 }
 
 export type ToggleBookmarkInput = {
@@ -4902,8 +4951,59 @@ export type EditTipsMutation = {
     buymeacoffee?: string | null | undefined
     bitcoin?: string | null | undefined
     ethereum?: string | null | undefined
-    solana?: string | null | undefined
   }
+}
+
+export type AddTipTierMutationVariables = Exact<{
+  input: AddTipTierInput
+}>
+
+export type AddTipTierMutation = { __typename?: 'Mutation'; addTipTier: Result }
+
+export type DeleteTipTierMutationVariables = Exact<{
+  input: DeleteTipTierInput
+}>
+
+export type DeleteTipTierMutation = {
+  __typename?: 'Mutation'
+  deleteTipTier: Result
+}
+
+export type GetTipTiersQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetTipTiersQuery = {
+  __typename?: 'Query'
+  me?:
+    | {
+        __typename?: 'User'
+        id: string
+        tip?:
+          | {
+              __typename?: 'Tip'
+              id: string
+              tiers: {
+                __typename?: 'TipTiersConnection'
+                edges: Array<
+                  | {
+                      __typename?: 'TipTiersConnectionEdge'
+                      node: {
+                        __typename?: 'TipTier'
+                        id: string
+                        name: string
+                        description: string
+                        amount: number
+                      }
+                    }
+                  | null
+                  | undefined
+                >
+              }
+            }
+          | null
+          | undefined
+      }
+    | null
+    | undefined
 }
 
 export type GetTipsQueryVariables = Exact<{ [key: string]: never }>
@@ -4924,7 +5024,6 @@ export type GetTipsQuery = {
               buymeacoffee?: string | null | undefined
               bitcoin?: string | null | undefined
               ethereum?: string | null | undefined
-              solana?: string | null | undefined
             }
           | null
           | undefined
@@ -4953,7 +5052,6 @@ export type GetUserTipsQuery = {
               buymeacoffee?: string | null | undefined
               bitcoin?: string | null | undefined
               ethereum?: string | null | undefined
-              solana?: string | null | undefined
               user: { __typename?: 'User'; id: string }
             }
           | null

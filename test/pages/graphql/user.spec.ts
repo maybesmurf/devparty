@@ -89,7 +89,6 @@ test('user should have tips', async ({ request }) => {
             ethereum
             github
             paypal
-            solana
           }
         }
       }`
@@ -104,7 +103,6 @@ test('user should have tips', async ({ request }) => {
   expect(tip.ethereum).toBe('0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3')
   expect(tip.github).toBe('yoginth')
   expect(tip.paypal).toBe('yoginth')
-  expect(tip.solana).toBe('2GLjNxR3Gf37PhDrMMa1copXXHvpSmwMbv9Qb94TK9yx')
 })
 
 test('connection should have count', async ({ request }) => {

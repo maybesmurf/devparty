@@ -58,7 +58,6 @@ async function main() {
         create: {
           bitcoin: '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy',
           ethereum: '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3',
-          solana: '2GLjNxR3Gf37PhDrMMa1copXXHvpSmwMbv9Qb94TK9yx',
           buymeacoffee: 'yoginth',
           github: 'yoginth',
           cash: 'yoginth',

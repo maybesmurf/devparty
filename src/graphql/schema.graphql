@@ -8,6 +8,12 @@ input AddCommunityModeratorInput {
   userId: ID!
 }
 
+input AddTipTierInput {
+  amount: Int!
+  description: String!
+  name: String!
+}
+
 input AnswerPollInput {
   id: ID!
 }
@@ -168,6 +174,10 @@ input DeleteProductInput {
   id: ID!
 }
 
+input DeleteTipTierInput {
+  id: String!
+}
+
 input EditIntegrationInput {
   ethAddress: String
   spotifyRefreshToken: String
@@ -217,7 +227,6 @@ input EditTipsInput {
   ethereum: String
   github: String
   paypal: String
-  solana: String
 }
 
 input EditUserInput {
@@ -304,6 +313,7 @@ input ModUserInput {
 type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
   addCommunityModerator(input: AddCommunityModeratorInput!): Result
+  addTipTier(input: AddTipTierInput!): Result!
   answerPoll(input: AnswerPollInput!): PollAnswer
   authWithWallet(input: AuthWithWalletInput!): User
   awardBadge(input: AwardBadgeInput!): Result!
@@ -317,6 +327,7 @@ type Mutation {
   deleteAccount: Result!
   deletePost(input: DeletePostInput!): Result!
   deleteProduct(input: DeleteProductInput!): Result!
+  deleteTipTier(input: DeleteTipTierInput!): Result!
   editIntegration(input: EditIntegrationInput!): Integration!
   editNFTAvatar(input: EditNFTAvatarInput!): User
   editPost(input: EditPostInput!): Post!
@@ -796,9 +807,28 @@ type Tip {
   github: String
   id: ID!
   paypal: String
-  solana: String
-  tips: User!
+  tiers(after: String, before: String, first: Int, last: Int): TipTiersConnection!
   user: User!
+}
+
+type TipTier {
+  amount: Int!
+  createdAt: DateTime!
+  description: String!
+  id: ID!
+  name: String!
+  tip: Tip!
+}
+
+type TipTiersConnection {
+  edges: [TipTiersConnectionEdge]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TipTiersConnectionEdge {
+  cursor: String!
+  node: TipTier!
 }
 
 input ToggleBookmarkInput {
