@@ -1281,6 +1281,7 @@ export type Tip = {
   id: Scalars['ID']
   paypal?: Maybe<Scalars['String']>
   solana?: Maybe<Scalars['String']>
+  tips: User
   user: User
 }
 
