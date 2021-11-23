@@ -242,6 +242,10 @@ export type DeleteProductInput = {
   id: Scalars['ID']
 }
 
+export type DeleteTipTierInput = {
+  id: Scalars['String']
+}
+
 export type EditIntegrationInput = {
   ethAddress?: InputMaybe<Scalars['String']>
   spotifyRefreshToken?: InputMaybe<Scalars['String']>
@@ -382,7 +386,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
   addCommunityModerator?: Maybe<Result>
-  addTipTier: TipTier
+  addTipTier: Result
   answerPoll?: Maybe<PollAnswer>
   authWithWallet?: Maybe<User>
   awardBadge: Result
@@ -396,6 +400,7 @@ export type Mutation = {
   deleteAccount: Result
   deletePost: Result
   deleteProduct: Result
+  deleteTipTier: Result
   editIntegration: Integration
   editNFTAvatar?: Maybe<User>
   editPost: Post
@@ -481,6 +486,10 @@ export type MutationDeletePostArgs = {
 
 export type MutationDeleteProductArgs = {
   input: DeleteProductInput
+}
+
+export type MutationDeleteTipTierArgs = {
+  input: DeleteTipTierInput
 }
 
 export type MutationEditIntegrationArgs = {
@@ -4949,15 +4958,15 @@ export type AddTipTierMutationVariables = Exact<{
   input: AddTipTierInput
 }>
 
-export type AddTipTierMutation = {
+export type AddTipTierMutation = { __typename?: 'Mutation'; addTipTier: Result }
+
+export type DeleteTipTierMutationVariables = Exact<{
+  input: DeleteTipTierInput
+}>
+
+export type DeleteTipTierMutation = {
   __typename?: 'Mutation'
-  addTipTier: {
-    __typename?: 'TipTier'
-    id: string
-    name: string
-    description: string
-    amount: number
-  }
+  deleteTipTier: Result
 }
 
 export type GetTipTiersQueryVariables = Exact<{ [key: string]: never }>
@@ -4980,8 +4989,9 @@ export type GetTipTiersQuery = {
                       node: {
                         __typename?: 'TipTier'
                         id: string
-                        amount: number
+                        name: string
                         description: string
+                        amount: number
                       }
                     }
                   | null

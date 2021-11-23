@@ -1,15 +1,43 @@
+import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
-import { TipTier } from '@graphql/types.generated'
+import {
+  DeleteTipTierMutation,
+  DeleteTipTierMutationVariables,
+  TipTier
+} from '@graphql/types.generated'
 import { TrashIcon } from '@heroicons/react/outline'
 import React from 'react'
+import toast from 'react-hot-toast'
+
+import { GET_TIP_TIERS_QUERY } from '.'
 
 interface Props {
   tier: TipTier
 }
 
 const SingleTier: React.FC<Props> = ({ tier }) => {
+  const [deleteTipTier] = useMutation<
+    DeleteTipTierMutation,
+    DeleteTipTierMutationVariables
+  >(
+    gql`
+      mutation DeleteTipTier($input: DeleteTipTierInput!) {
+        deleteTipTier(input: $input)
+      }
+    `,
+    {
+      refetchQueries: [{ query: GET_TIP_TIERS_QUERY }],
+      onError(error) {
+        toast.error(error.message)
+      },
+      onCompleted() {
+        toast.success('Tip deleted successfully!')
+      }
+    }
+  )
+
   return (
-    <div className="py-5 space-y-3 flex items-start space-x-5">
+    <div className="py-5 space-y-3 flex items-start justify-between space-x-5">
       <div className="space-y-3">
         <div className="text-lg font-bold">{tier?.amount} Ξ one time</div>
         <div className="text-lg font-bold">{tier?.name}</div>
@@ -20,6 +48,9 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
         size="sm"
         className="text-sm"
         icon={<TrashIcon className="h-4 w-4" />}
+        onClick={() =>
+          deleteTipTier({ variables: { input: { id: tier?.id } } })
+        }
       >
         Delete
       </Button>

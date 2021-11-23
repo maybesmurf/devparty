@@ -46,8 +46,8 @@ const TierSettings: React.FC = () => {
 
   return (
     <div>
-      <div>
-        {tiers?.length === 0 ? (
+      {tiers?.length === 0 ? (
+        <div className="p-5">
           <EmptyState
             message={
               <div className="text-center">
@@ -64,26 +64,26 @@ const TierSettings: React.FC = () => {
             icon={<CashIcon className="h-10 w-10 text-brand-500" />}
             hideCard
           />
-        ) : (
-          <div className="space-y-5">
-            <div className="flex items-center justify-between p-5 border-b">
-              <div className="text-lg font-bold">Tip Tiers</div>
-              <Button onClick={() => setShowAddTierModal(!showAddTierModal)}>
-                Add tier
-              </Button>
-            </div>
-            <div className="px-5 !mt-0 divide-y">
-              {tiers?.map((tier) => (
-                <SingleTier key={tier?.id} tier={tier as TipTier} />
-              ))}
-            </div>
+        </div>
+      ) : (
+        <div className="space-y-5">
+          <div className="flex items-center justify-between p-5 border-b">
+            <div className="text-lg font-bold">Tip Tiers</div>
+            <Button onClick={() => setShowAddTierModal(!showAddTierModal)}>
+              Add tier
+            </Button>
           </div>
-        )}
-        <AddTier
-          showAddTierModal={showAddTierModal}
-          setShowAddTierModal={setShowAddTierModal}
-        />
-      </div>
+          <div className="px-5 !mt-0 divide-y">
+            {tiers?.map((tier) => (
+              <SingleTier key={tier?.id} tier={tier as TipTier} />
+            ))}
+          </div>
+        </div>
+      )}
+      <AddTier
+        showAddTierModal={showAddTierModal}
+        setShowAddTierModal={setShowAddTierModal}
+      />
     </div>
   )
 }
