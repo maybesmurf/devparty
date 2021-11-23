@@ -4933,9 +4933,9 @@ export type EditTipsMutation = {
   }
 }
 
-export type GetTipTiersSettingsQueryVariables = Exact<{ [key: string]: never }>
+export type GetTipTiersQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetTipTiersSettingsQuery = {
+export type GetTipTiersQuery = {
   __typename?: 'Query'
   me?:
     | {
@@ -4944,6 +4944,7 @@ export type GetTipTiersSettingsQuery = {
         tip?:
           | {
               __typename?: 'Tip'
+              id: string
               tiers: {
                 __typename?: 'TipTiersConnection'
                 edges: Array<

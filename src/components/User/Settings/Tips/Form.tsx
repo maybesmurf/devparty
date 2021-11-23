@@ -20,6 +20,7 @@ import { object, string } from 'zod'
 
 import Sidebar from '../Sidebar'
 import { GET_TIPS_QUERY } from '.'
+import TierSettings from './Tiers'
 
 const editTipsSchema = object({
   cash: string()
@@ -194,6 +195,13 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
             </Form>
           </CardBody>
         </Card>
+        {currentUser.tip?.ethereum && (
+          <Card className="mt-5">
+            <CardBody>
+              <TierSettings />
+            </CardBody>
+          </Card>
+        )}
       </GridItemEight>
     </GridLayout>
   )
