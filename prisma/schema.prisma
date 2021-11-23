@@ -150,16 +150,17 @@ model Tip {
 }
 
 model TipTier {
-  id          String  @id @default(uuid())
+  id          String @id @default(uuid())
   amount      Int
-  description String? @db.Text
+  name        String @db.VarChar(64)
+  description String @db.Text
 
   // Timestamps
   createdAt DateTime @default(now())
 
   // Relations
   tip   Tip    @relation(fields: [tipId], references: [id], onDelete: Cascade)
-  tipId String @unique
+  tipId String
 
   // Attributes
   @@map("tip_tiers")

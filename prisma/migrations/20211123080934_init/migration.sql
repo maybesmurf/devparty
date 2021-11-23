@@ -94,11 +94,11 @@ CREATE TABLE `tips` (
 CREATE TABLE `tip_tiers` (
     `id` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
-    `description` TEXT NULL,
+    `name` VARCHAR(64) NOT NULL,
+    `description` TEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `tipId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `tip_tiers_tipId_key`(`tipId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

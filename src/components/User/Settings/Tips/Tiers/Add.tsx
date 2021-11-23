@@ -17,6 +17,7 @@ import { object, string } from 'zod'
 import { GET_TIP_TIERS_QUERY } from '.'
 
 const addTierSchema = object({
+  name: string(),
   description: string(),
   amount: string()
 })
@@ -36,11 +37,7 @@ const AddTier: React.FC<Props> = ({
   >(
     gql`
       mutation AddTipTier($input: AddTipTierInput!) {
-        addTipTier(input: $input) {
-          id
-          amount
-          description
-        }
+        addTipTier(input: $input)
       }
     `,
     {
@@ -67,13 +64,22 @@ const AddTier: React.FC<Props> = ({
     >
       <Form
         form={form}
-        onSubmit={({ description, amount }) =>
+        onSubmit={({ name, description, amount }) =>
           addTipTier({
-            variables: { input: { description, amount: parseInt(amount) } }
+            variables: {
+              input: { name, description, amount: parseInt(amount) }
+            }
           })
         }
       >
         <div className="px-5 py-3.5 space-y-2">
+          <div>
+            <Input
+              label="Name"
+              placeholder="Name your tier"
+              {...form.register('name')}
+            />
+          </div>
           <div>
             <TextArea
               label="Description"

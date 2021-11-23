@@ -32,6 +32,7 @@ export type AddCommunityModeratorInput = {
 export type AddTipTierInput = {
   amount: Scalars['Int']
   description: Scalars['String']
+  name: Scalars['String']
 }
 
 export type AnswerPollInput = {
@@ -1304,8 +1305,9 @@ export type TipTier = {
   __typename?: 'TipTier'
   amount: Scalars['Int']
   createdAt: Scalars['DateTime']
-  description?: Maybe<Scalars['String']>
+  description: Scalars['String']
   id: Scalars['ID']
+  name: Scalars['String']
   tip: Tip
 }
 
@@ -4952,8 +4954,9 @@ export type AddTipTierMutation = {
   addTipTier: {
     __typename?: 'TipTier'
     id: string
+    name: string
+    description: string
     amount: number
-    description?: string | null | undefined
   }
 }
 
@@ -4978,7 +4981,7 @@ export type GetTipTiersQuery = {
                         __typename?: 'TipTier'
                         id: string
                         amount: number
-                        description?: string | null | undefined
+                        description: string
                       }
                     }
                   | null
