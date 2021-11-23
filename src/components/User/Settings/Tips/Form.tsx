@@ -37,9 +37,6 @@ const editTipsSchema = object({
     .nullable(),
   ethereum: string()
     .max(42, { message: 'Ethereum address should be within 42 characters' })
-    .nullable(),
-  solana: string()
-    .max(44, { message: 'Solana address should be within 44 characters' })
     .nullable()
 })
 
@@ -61,7 +58,6 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
           buymeacoffee
           bitcoin
           ethereum
-          solana
         }
       }
     `,
@@ -83,8 +79,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
       github: currentUser.tip?.github as string,
       buymeacoffee: currentUser.tip?.buymeacoffee as string,
       bitcoin: currentUser.tip?.bitcoin as string,
-      ethereum: currentUser.tip?.ethereum as string,
-      solana: currentUser.tip?.solana as string
+      ethereum: currentUser.tip?.ethereum as string
     }
   })
 
@@ -105,8 +100,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                 github,
                 buymeacoffee,
                 bitcoin,
-                ethereum,
-                solana
+                ethereum
               }) =>
                 editTips({
                   variables: {
@@ -116,8 +110,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                       github,
                       buymeacoffee,
                       bitcoin,
-                      ethereum,
-                      solana
+                      ethereum
                     }
                   }
                 })
@@ -162,12 +155,6 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                 type="text"
                 placeholder="0x635f595A4a0216106FA888773c0A6daCB4b3Ffc5"
                 {...form.register('ethereum')}
-              />
-              <Input
-                label="Solana"
-                type="text"
-                placeholder="2GLjNxR3Gf37PhDrMMa1copXXHvpSmwMbv9Qb94TK9yx"
-                {...form.register('solana')}
               />
               <div className="ml-auto pt-3">
                 <Button

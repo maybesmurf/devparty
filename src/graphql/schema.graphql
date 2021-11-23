@@ -217,7 +217,6 @@ input EditTipsInput {
   ethereum: String
   github: String
   paypal: String
-  solana: String
 }
 
 input EditUserInput {
@@ -796,7 +795,6 @@ type Tip {
   github: String
   id: ID!
   paypal: String
-  solana: String
   tiers(after: String, before: String, first: Int, last: Int): TipTiersConnection!
   user: User!
 }

@@ -84,7 +84,6 @@ CREATE TABLE `tips` (
     `buymeacoffee` VARCHAR(32) NULL,
     `bitcoin` VARCHAR(64) NULL,
     `ethereum` VARCHAR(64) NULL,
-    `solana` VARCHAR(64) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `tips_userId_key`(`userId`),
