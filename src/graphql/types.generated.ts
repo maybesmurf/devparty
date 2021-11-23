@@ -381,7 +381,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
   addCommunityModerator?: Maybe<Result>
-  addTipTier: Result
+  addTipTier: TipTier
   answerPoll?: Maybe<PollAnswer>
   authWithWallet?: Maybe<User>
   awardBadge: Result
@@ -4947,7 +4947,15 @@ export type AddTipTierMutationVariables = Exact<{
   input: AddTipTierInput
 }>
 
-export type AddTipTierMutation = { __typename?: 'Mutation'; addTipTier: Result }
+export type AddTipTierMutation = {
+  __typename?: 'Mutation'
+  addTipTier: {
+    __typename?: 'TipTier'
+    id: string
+    amount: number
+    description?: string | null | undefined
+  }
+}
 
 export type GetTipTiersQueryVariables = Exact<{ [key: string]: never }>
 

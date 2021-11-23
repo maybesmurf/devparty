@@ -1,8 +1,6 @@
 import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 
-import { Result } from '../ResultResolver'
-
 builder.prismaObject('TipTier', {
   findUnique: (tip_tier) => ({ id: tip_tier.id }),
   fields: (t) => ({
@@ -28,23 +26,22 @@ const AddTipTierInput = builder.inputType('AddTipTierInput', {
 // TODO: Split to function
 builder.mutationField('addTipTier', (t) =>
   t.field({
-    type: Result,
+    type: 'TipTier',
     args: { input: t.arg({ type: AddTipTierInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, { input }, { session }) => {
-      await db.tip.update({
+      const tip = await db.tip.findUnique({
         where: { userId: session?.userId },
-        data: {
-          tiers: {
-            create: {
-              description: input.description,
-              amount: input.amount
-            }
-          }
-        }
+        select: { id: true }
       })
 
-      return Result.SUCCESS
+      return await db.tipTier.create({
+        data: {
+          description: input.description,
+          amount: input.amount,
+          tip: { connect: { id: tip?.id } }
+        }
+      })
     }
   })
 )

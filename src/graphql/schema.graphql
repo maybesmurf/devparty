@@ -308,7 +308,7 @@ input ModUserInput {
 type Mutation {
   acceptCocAndTos(input: AcceptCOCAndTOSInput!): User!
   addCommunityModerator(input: AddCommunityModeratorInput!): Result
-  addTipTier(input: AddTipTierInput!): Result!
+  addTipTier(input: AddTipTierInput!): TipTier!
   answerPoll(input: AnswerPollInput!): PollAnswer
   authWithWallet(input: AuthWithWalletInput!): User
   awardBadge(input: AwardBadgeInput!): Result!

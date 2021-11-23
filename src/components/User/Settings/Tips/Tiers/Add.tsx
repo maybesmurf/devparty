@@ -36,7 +36,11 @@ const AddTier: React.FC<Props> = ({
   >(
     gql`
       mutation AddTipTier($input: AddTipTierInput!) {
-        addTipTier(input: $input)
+        addTipTier(input: $input) {
+          id
+          amount
+          description
+        }
       }
     `,
     {
