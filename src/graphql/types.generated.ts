@@ -285,7 +285,6 @@ export type EditTipsInput = {
   ethereum?: InputMaybe<Scalars['String']>
   github?: InputMaybe<Scalars['String']>
   paypal?: InputMaybe<Scalars['String']>
-  solana?: InputMaybe<Scalars['String']>
 }
 
 export type EditUserInput = {
@@ -1280,9 +1279,37 @@ export type Tip = {
   github?: Maybe<Scalars['String']>
   id: Scalars['ID']
   paypal?: Maybe<Scalars['String']>
-  solana?: Maybe<Scalars['String']>
-  tips: User
+  tiers: TipTiersConnection
   user: User
+}
+
+export type TipTiersArgs = {
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+}
+
+export type TipTier = {
+  __typename?: 'TipTier'
+  amount: Scalars['Int']
+  createdAt: Scalars['DateTime']
+  description?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  tip: Tip
+}
+
+export type TipTiersConnection = {
+  __typename?: 'TipTiersConnection'
+  edges: Array<Maybe<TipTiersConnectionEdge>>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']
+}
+
+export type TipTiersConnectionEdge = {
+  __typename?: 'TipTiersConnectionEdge'
+  cursor: Scalars['String']
+  node: TipTier
 }
 
 export type ToggleBookmarkInput = {
@@ -4903,7 +4930,6 @@ export type EditTipsMutation = {
     buymeacoffee?: string | null | undefined
     bitcoin?: string | null | undefined
     ethereum?: string | null | undefined
-    solana?: string | null | undefined
   }
 }
 
@@ -4925,7 +4951,6 @@ export type GetTipsQuery = {
               buymeacoffee?: string | null | undefined
               bitcoin?: string | null | undefined
               ethereum?: string | null | undefined
-              solana?: string | null | undefined
             }
           | null
           | undefined
@@ -4954,7 +4979,6 @@ export type GetUserTipsQuery = {
               buymeacoffee?: string | null | undefined
               bitcoin?: string | null | undefined
               ethereum?: string | null | undefined
-              solana?: string | null | undefined
               user: { __typename?: 'User'; id: string }
             }
           | null
