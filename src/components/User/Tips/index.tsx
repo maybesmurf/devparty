@@ -8,7 +8,12 @@ import { PageLoading } from '@components/UI/PageLoading'
 import Details from '@components/User/Details'
 import { formatUsername } from '@components/utils/formatUsername'
 import { imagekitURL } from '@components/utils/imagekitURL'
-import { GetUserQuery, GetUserTipsQuery, User } from '@graphql/types.generated'
+import {
+  GetUserQuery,
+  GetUserTipsQuery,
+  TipTier,
+  User
+} from '@graphql/types.generated'
 import { CashIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -19,6 +24,7 @@ import Custom404 from 'src/pages/404'
 
 import PageType from '../PageType'
 import { GET_USER_QUERY } from '../ViewUser'
+import TipTiers from './Tiers'
 
 export const GET_USER_TIPS_QUERY = gql`
   query GetUserTips($username: String!) {
@@ -33,6 +39,7 @@ export const GET_USER_TIPS_QUERY = gql`
         bitcoin
         ethereum
         tiers {
+          totalCount
           edges {
             node {
               id
@@ -84,6 +91,7 @@ const Tips: React.FC = () => {
   )
   const user = data?.user
   const tip = tipsData?.user?.tip
+  const tiers = tip?.tiers?.edges?.map((edge) => edge?.node)
 
   if (!router.isReady || loading) return <PageLoading message="Loading tips" />
 
@@ -179,6 +187,9 @@ const Tips: React.FC = () => {
                       </CopyToClipboard>
                     )}
                   </div>
+                  {tip?.ethereum && tip?.tiers?.totalCount > 0 && (
+                    <TipTiers tiers={tiers as TipTier[]} />
+                  )}
                 </div>
               ) : (
                 <EmptyState

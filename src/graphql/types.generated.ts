@@ -5054,6 +5054,7 @@ export type GetUserTipsQuery = {
               ethereum?: string | null | undefined
               tiers: {
                 __typename?: 'TipTiersConnection'
+                totalCount: number
                 edges: Array<
                   | {
                       __typename?: 'TipTiersConnectionEdge'
