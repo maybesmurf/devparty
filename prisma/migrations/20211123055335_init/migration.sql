@@ -92,6 +92,17 @@ CREATE TABLE `tips` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `tip_tiers` (
+    `id` VARCHAR(191) NOT NULL,
+    `amount` INTEGER NOT NULL,
+    `description` TEXT NULL,
+    `tipId` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `tip_tiers_tipId_key`(`tipId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `posts` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(280) NULL,
