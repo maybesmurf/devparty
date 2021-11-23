@@ -10,7 +10,10 @@ import {
   EditTipsMutationVariables,
   User
 } from '@graphql/types.generated'
-import { CheckCircleIcon } from '@heroicons/react/outline'
+import {
+  CheckCircleIcon,
+  InformationCircleIcon
+} from '@heroicons/react/outline'
 import React from 'react'
 import toast from 'react-hot-toast'
 import { object, string } from 'zod'
@@ -153,12 +156,28 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                 placeholder="38gqtXyXUxB1mHR7mJf1bHzLSf6vHVBi6Q"
                 {...form.register('bitcoin')}
               />
-              <Input
-                label="Ethereum"
-                type="text"
-                placeholder="0x635f595A4a0216106FA888773c0A6daCB4b3Ffc5"
-                {...form.register('ethereum')}
-              />
+              <div>
+                <Input
+                  label="Ethereum"
+                  type="text"
+                  placeholder="0x635f595A4a0216106FA888773c0A6daCB4b3Ffc5"
+                  {...form.register('ethereum')}
+                />
+                {currentUser.tip?.ethereum ? (
+                  <div className="mt-2 text-sm text-green-500 flex items-center space-x-1">
+                    <CheckCircleIcon className="h-4 w-4" />
+                    <div>Tip tiers enabled</div>
+                  </div>
+                ) : (
+                  <div className="mt-2 text-sm text-gray-500 flex items-center space-x-1">
+                    <InformationCircleIcon className="h-4 w-4" />
+                    <div>
+                      Add Ethereum address to add tip tiers, so user can
+                      directly tip to your wallet
+                    </div>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center justify-between pt-3">
                 <div>{currentUser.tip?.ethereum && <Tier />}</div>
                 <Button

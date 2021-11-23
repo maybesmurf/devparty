@@ -4933,6 +4933,41 @@ export type EditTipsMutation = {
   }
 }
 
+export type GetTipTiersSettingsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetTipTiersSettingsQuery = {
+  __typename?: 'Query'
+  me?:
+    | {
+        __typename?: 'User'
+        id: string
+        tip?:
+          | {
+              __typename?: 'Tip'
+              tiers: {
+                __typename?: 'TipTiersConnection'
+                edges: Array<
+                  | {
+                      __typename?: 'TipTiersConnectionEdge'
+                      node: {
+                        __typename?: 'TipTier'
+                        id: string
+                        amount: number
+                        description?: string | null | undefined
+                      }
+                    }
+                  | null
+                  | undefined
+                >
+              }
+            }
+          | null
+          | undefined
+      }
+    | null
+    | undefined
+}
+
 export type GetTipsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTipsQuery = {
