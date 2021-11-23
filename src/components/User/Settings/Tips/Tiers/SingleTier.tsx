@@ -18,7 +18,8 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
       <Button
         variant="danger"
         size="sm"
-        icon={<TrashIcon className="h-5 w-5" />}
+        className="text-sm"
+        icon={<TrashIcon className="h-4 w-4" />}
       >
         Delete
       </Button>
