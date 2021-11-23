@@ -5052,7 +5052,23 @@ export type GetUserTipsQuery = {
               buymeacoffee?: string | null | undefined
               bitcoin?: string | null | undefined
               ethereum?: string | null | undefined
-              user: { __typename?: 'User'; id: string }
+              tiers: {
+                __typename?: 'TipTiersConnection'
+                edges: Array<
+                  | {
+                      __typename?: 'TipTiersConnectionEdge'
+                      node: {
+                        __typename?: 'TipTier'
+                        id: string
+                        name: string
+                        description: string
+                        amount: number
+                      }
+                    }
+                  | null
+                  | undefined
+                >
+              }
             }
           | null
           | undefined
