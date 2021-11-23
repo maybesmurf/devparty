@@ -10,12 +10,14 @@ import {
   EditTipsMutationVariables,
   User
 } from '@graphql/types.generated'
-import { CashIcon, CheckCircleIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon } from '@heroicons/react/outline'
 import React from 'react'
 import toast from 'react-hot-toast'
 import { object, string } from 'zod'
 
 import Sidebar from '../Sidebar'
+import { GET_TIPS_QUERY } from '.'
+import Tier from './Tier'
 
 const editTipsSchema = object({
   cash: string()
@@ -62,6 +64,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
       }
     `,
     {
+      refetchQueries: [{ query: GET_TIPS_QUERY }],
       onError(error) {
         toast.error(error.message)
       },
@@ -157,12 +160,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                 {...form.register('ethereum')}
               />
               <div className="flex items-center justify-between pt-3">
-                <Button
-                  variant="success"
-                  icon={<CashIcon className="h-5 w-5" />}
-                >
-                  Add Tiers
-                </Button>
+                <div>{currentUser.tip?.ethereum && <Tier />}</div>
                 <Button
                   type="submit"
                   icon={
