@@ -96,6 +96,7 @@ CREATE TABLE `tip_tiers` (
     `id` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
     `description` TEXT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `tipId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `tip_tiers_tipId_key`(`tipId`),
