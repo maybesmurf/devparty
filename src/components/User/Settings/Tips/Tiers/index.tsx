@@ -19,8 +19,9 @@ export const GET_TIP_TIERS_QUERY = gql`
           edges {
             node {
               id
-              amount
+              name
               description
+              amount
             }
           }
         }
@@ -65,13 +66,13 @@ const TierSettings: React.FC = () => {
           />
         ) : (
           <div className="space-y-5">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-5 border-b">
               <div className="text-lg font-bold">Tip Tiers</div>
               <Button onClick={() => setShowAddTierModal(!showAddTierModal)}>
                 Add tier
               </Button>
             </div>
-            <div className="space-y-5">
+            <div className="px-5 !mt-0 divide-y">
               {tiers?.map((tier) => (
                 <SingleTier key={tier?.id} tier={tier as TipTier} />
               ))}

@@ -197,9 +197,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
         </Card>
         {currentUser.tip?.ethereum && (
           <Card className="mt-5">
-            <CardBody>
-              <TierSettings />
-            </CardBody>
+            <TierSettings />
           </Card>
         )}
       </GridItemEight>
