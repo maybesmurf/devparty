@@ -142,11 +142,25 @@ model Tip {
   solana       String? @db.VarChar(64)
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String    @unique
+  tiers  TipTier[]
 
   // Attributes
   @@map("tips")
+}
+
+model TipTier {
+  id          String  @id @default(uuid())
+  amount      String
+  description String? @db.Text
+
+  // Relations
+  tip   Tip    @relation(fields: [tipId], references: [id], onDelete: Cascade)
+  tipId String @unique
+
+  // Attributes
+  @@map("tip_tiers")
 }
 
 model Post {
