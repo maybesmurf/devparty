@@ -14,7 +14,14 @@ builder.prismaObject('Tip', {
     solana: t.exposeString('solana', { nullable: true }),
 
     // Relations
-    user: t.relation('user')
+    user: t.relation('user'),
+    tiers: t.relatedConnection('tiers', {
+      cursor: 'id',
+      totalCount: true,
+      query: () => ({
+        orderBy: { createdAt: 'desc' }
+      })
+    })
   })
 })
 
