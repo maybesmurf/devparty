@@ -232,13 +232,14 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
             <GridItemFour>
               <MintPreview theme={theme} setTheme={setTheme} post={post} />
             </GridItemFour>
-            {error && (
-              <ErrorMessage
-                title={ERROR_MESSAGE}
-                error={{ name: error, message: error }}
-              />
-            )}
           </GridLayout>
+          {error && (
+            <ErrorMessage
+              className="!mx-5 mb-5"
+              title={ERROR_MESSAGE}
+              error={{ name: error, message: error }}
+            />
+          )}
           <div className="flex items-center justify-between p-5 border-t dark:border-gray-800">
             <a
               className="text-sm text-gray-500"
