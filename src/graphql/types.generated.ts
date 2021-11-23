@@ -29,6 +29,11 @@ export type AddCommunityModeratorInput = {
   userId: Scalars['ID']
 }
 
+export type AddTipTierInput = {
+  amount: Scalars['Int']
+  description: Scalars['String']
+}
+
 export type AnswerPollInput = {
   id: Scalars['ID']
 }
@@ -376,6 +381,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   acceptCocAndTos: User
   addCommunityModerator?: Maybe<Result>
+  addTipTier: TipTier
   answerPoll?: Maybe<PollAnswer>
   authWithWallet?: Maybe<User>
   awardBadge: Result
@@ -426,6 +432,10 @@ export type MutationAcceptCocAndTosArgs = {
 
 export type MutationAddCommunityModeratorArgs = {
   input: AddCommunityModeratorInput
+}
+
+export type MutationAddTipTierArgs = {
+  input: AddTipTierInput
 }
 
 export type MutationAnswerPollArgs = {
