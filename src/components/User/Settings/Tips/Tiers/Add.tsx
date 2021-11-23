@@ -91,6 +91,7 @@ const AddTier: React.FC<Props> = ({
             <Input
               label="Amount in ETH"
               type="number"
+              step="0.01"
               placeholder="0.5"
               prefix="ETH"
               {...form.register('amount')}
