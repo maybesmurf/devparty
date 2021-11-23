@@ -75,7 +75,7 @@ const Readme: React.FC = () => {
       />
       <GridLayout>
         <GridItemFour>
-          <ErrorMessage title="Failed to load post" error={error} />
+          <ErrorMessage title="Failed to load readme" error={error} />
           <Details user={user as User} />
         </GridItemFour>
         <GridItemEight className="space-y-5">

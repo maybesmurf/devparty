@@ -11,6 +11,7 @@ import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
 import {
+  CashIcon,
   ClockIcon,
   FireIcon,
   LocationMarkerIcon,
@@ -32,7 +33,6 @@ import Spotify from './Highlights/Spotify'
 import Wakatime from './Highlights/Wakatime'
 import OwnedProducts from './OwnedProducts'
 import Social from './Social'
-import Tips from './Tips'
 
 const UserMod = dynamic(() => import('./Mod'))
 const ETHAddress = dynamic(() => import('./ETHAddress'))
@@ -123,7 +123,19 @@ const Details: React.FC<Props> = ({ user }) => {
                 </a>
               </Link>
             )}
-            {user?.tip && <Tips user={user} />}
+            {user?.tip && (
+              <Link href={`/u/${user?.username}/tips`} passHref>
+                <a href={`/u/${user?.username}/tips`}>
+                  <Button
+                    className="text-sm"
+                    icon={<CashIcon className="h-4 w-4" />}
+                    outline
+                  >
+                    Tip
+                  </Button>
+                </a>
+              </Link>
+            )}
           </div>
         )}
         {user?.profile?.bio && (

@@ -3,7 +3,7 @@ import { Button } from '@components/UI/Button'
 import { EmptyState } from '@components/UI/EmptyState'
 import { Spinner } from '@components/UI/Spinner'
 import { GetTipTiersQuery, TipTier } from '@graphql/types.generated'
-import { CashIcon } from '@heroicons/react/outline'
+import { CashIcon, PlusCircleIcon } from '@heroicons/react/outline'
 import React, { useState } from 'react'
 
 import AddTier from './Add'
@@ -54,6 +54,7 @@ const TierSettings: React.FC = () => {
                 <span>You don't have any tiers!</span>
                 <div className="mt-4">
                   <Button
+                    icon={<PlusCircleIcon className="h-4 w-4" />}
                     onClick={() => setShowAddTierModal(!showAddTierModal)}
                   >
                     Add tier
@@ -69,7 +70,10 @@ const TierSettings: React.FC = () => {
         <div className="space-y-5">
           <div className="flex items-center justify-between p-5 border-b">
             <div className="text-lg font-bold">Tip Tiers</div>
-            <Button onClick={() => setShowAddTierModal(!showAddTierModal)}>
+            <Button
+              icon={<PlusCircleIcon className="h-4 w-4" />}
+              onClick={() => setShowAddTierModal(!showAddTierModal)}
+            >
               Add tier
             </Button>
           </div>

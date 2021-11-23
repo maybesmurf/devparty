@@ -47,6 +47,7 @@ const AddTier: React.FC<Props> = ({
       },
       onCompleted() {
         setShowAddTierModal(false)
+        form.reset()
         toast.success('Readme successfully updated!')
       }
     }
@@ -84,6 +85,7 @@ const AddTier: React.FC<Props> = ({
             <TextArea
               label="Description"
               placeholder="Say somethin' about this tier"
+              rows={5}
               {...form.register('description')}
             />
           </div>
