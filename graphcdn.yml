@@ -4,24 +4,33 @@ scopes:
   AUTHENTICATED: 'cookie:devparty_session|header:authorization'
 rules:
   - types:
-      - Query
-    maxAge: 1000
-    swr: 1000
+      Query:
+        - me
+        - logs
+        - post
+        - user
+        - stats
+        - topic
+        - users
+        - badges
+        - product
+        - homeFeed
+        - products
+        - sessions
+        - community
+        - exploreFeed
+        - searchUsers
+        - whoToFollow
+        - searchTopics
+        - featuredUsers
+        - waitlistCount
+        - featuredTopics
+        - suggestedUsers
+        - morePostsByUser
+    maxAge: 900
+    swr: 900
     scope: AUTHENTICATED
-    description: Cache everything
-  - types:
-      - Spotify
-    maxAge: 0
-    swr: 0
-    description: Skip spotify query
-  - types:
-      User:
-        - invite
-        - notificationsCount
-    maxAge: 0
-    swr: 0
-    scope: AUTHENTICATED
-    description: Skip user notificationsCount and invite fields
+    description: Cache Frequent queries
 schema: 'https://devparty.io/api/graphql'
 passThroughOnly: false
 rootTypeNames:
