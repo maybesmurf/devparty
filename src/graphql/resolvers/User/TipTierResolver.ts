@@ -29,25 +29,25 @@ const AddTipTierInput = builder.inputType('AddTipTierInput', {
 
 // TODO: Split to function
 builder.mutationField('addTipTier', (t) =>
-  t.field({
-    type: Result,
+  t.prismaField({
+    type: 'TipTier',
     args: { input: t.arg({ type: AddTipTierInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
-    resolve: async (parent, { input }, { session }) => {
-      await db.tip.update({
+    resolve: async (query, parent, { input }, { session }) => {
+      const tip = await db.tip.findUnique({
         where: { userId: session?.userId },
-        data: {
-          tiers: {
-            create: {
-              name: input.name,
-              description: input.description,
-              amount: input.amount
-            }
-          }
-        }
+        select: { id: true }
       })
 
-      return Result.SUCCESS
+      return await db.tipTier.create({
+        ...query,
+        data: {
+          name: input.name,
+          description: input.description,
+          amount: input.amount,
+          tip: { connect: { id: tip?.id } }
+        }
+      })
     }
   })
 )
