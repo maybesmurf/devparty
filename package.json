@@ -60,7 +60,7 @@
     "next-pwa": "^5.4.1",
     "next-themes": "^0.0.15",
     "nextjs-progressbar": "^0.0.13",
-    "octokit": "^1.7.0",
+    "octokit": "^1.7.1",
     "react": "^17.0.2",
     "react-cool-inview": "^2.0.8",
     "react-copy-to-clipboard": "^5.0.4",
