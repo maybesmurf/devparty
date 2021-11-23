@@ -10,7 +10,7 @@ import {
   EditTipsMutationVariables,
   User
 } from '@graphql/types.generated'
-import { CheckCircleIcon } from '@heroicons/react/outline'
+import { CashIcon, CheckCircleIcon } from '@heroicons/react/outline'
 import React from 'react'
 import toast from 'react-hot-toast'
 import { object, string } from 'zod'
@@ -156,7 +156,13 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                 placeholder="0x635f595A4a0216106FA888773c0A6daCB4b3Ffc5"
                 {...form.register('ethereum')}
               />
-              <div className="ml-auto pt-3">
+              <div className="flex items-center justify-between pt-3">
+                <Button
+                  variant="success"
+                  icon={<CashIcon className="h-5 w-5" />}
+                >
+                  Add Tiers
+                </Button>
                 <Button
                   type="submit"
                   icon={
