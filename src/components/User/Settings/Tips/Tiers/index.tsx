@@ -1,6 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
+import { Button } from '@components/UI/Button'
+import { EmptyState } from '@components/UI/EmptyState'
 import { Spinner } from '@components/UI/Spinner'
 import { GetTipTiersQuery } from '@graphql/types.generated'
+import { CashIcon } from '@heroicons/react/outline'
 import React from 'react'
 
 export const GET_TIP_TIERS_QUERY = gql`
@@ -38,7 +41,22 @@ const TierSettings: React.FC = () => {
 
   return (
     <div>
-      <div className="text-lg font-bold">Tiers</div>
+      <div>
+        {tiers?.length === 0 && (
+          <EmptyState
+            message={
+              <div className="text-center">
+                <span>You don't have any tiers!</span>
+                <div className="mt-4">
+                  <Button>Add tier</Button>
+                </div>
+              </div>
+            }
+            icon={<CashIcon className="h-10 w-10 text-brand-500" />}
+            hideCard
+          />
+        )}
+      </div>
     </div>
   )
 }
