@@ -5,7 +5,6 @@ scopes:
 rules:
   - types:
       Query:
-        - me
         - logs
         - post
         - user
