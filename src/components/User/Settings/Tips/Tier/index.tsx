@@ -20,7 +20,7 @@ const Tier: React.FC = () => {
       </Button>
       <Modal
         size="lg"
-        title="Your Invite Code"
+        title="Tip Tier Settings"
         show={showTierModal}
         onClose={() => setShowTierModal(!showTierModal)}
       >
