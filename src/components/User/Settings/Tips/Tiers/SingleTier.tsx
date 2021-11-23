@@ -6,6 +6,7 @@ import {
   TipTier
 } from '@graphql/types.generated'
 import { TrashIcon } from '@heroicons/react/outline'
+import Markdown from 'markdown-to-jsx'
 import React from 'react'
 import toast from 'react-hot-toast'
 
@@ -41,7 +42,11 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
       <div className="space-y-3">
         <div className="text-lg font-bold">{tier?.amount} Ξ one time</div>
         <div className="text-lg font-bold">{tier?.name}</div>
-        <div>{tier?.description}</div>
+        <div className="prose dark:prose-dark">
+          <Markdown options={{ wrapper: 'article' }}>
+            {tier?.description}
+          </Markdown>
+        </div>
       </div>
       <Button
         variant="danger"
