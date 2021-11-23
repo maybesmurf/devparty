@@ -20,7 +20,6 @@ import { object, string } from 'zod'
 
 import Sidebar from '../Sidebar'
 import { GET_TIPS_QUERY } from '.'
-import Tier from './Tier'
 
 const editTipsSchema = object({
   cash: string()
@@ -178,8 +177,7 @@ const TipsSettingsForm: React.FC<Props> = ({ currentUser }) => {
                   </div>
                 )}
               </div>
-              <div className="flex items-center justify-between pt-3">
-                <div>{currentUser.tip?.ethereum && <Tier />}</div>
+              <div className="ml-auto pt-3">
                 <Button
                   type="submit"
                   icon={
