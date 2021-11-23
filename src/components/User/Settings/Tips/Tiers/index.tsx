@@ -4,7 +4,9 @@ import { EmptyState } from '@components/UI/EmptyState'
 import { Spinner } from '@components/UI/Spinner'
 import { GetTipTiersQuery } from '@graphql/types.generated'
 import { CashIcon } from '@heroicons/react/outline'
-import React from 'react'
+import React, { useState } from 'react'
+
+import AddTier from './Add'
 
 export const GET_TIP_TIERS_QUERY = gql`
   query GetTipTiers {
@@ -27,6 +29,7 @@ export const GET_TIP_TIERS_QUERY = gql`
 `
 
 const TierSettings: React.FC = () => {
+  const [showAddTierModal, setShowAddTierModal] = useState<boolean>(false)
   const { data, loading } = useQuery<GetTipTiersQuery>(GET_TIP_TIERS_QUERY)
   const tiers = data?.me?.tip?.tiers?.edges?.map((edge) => edge?.node)
 
@@ -48,7 +51,11 @@ const TierSettings: React.FC = () => {
               <div className="text-center">
                 <span>You don't have any tiers!</span>
                 <div className="mt-4">
-                  <Button>Add tier</Button>
+                  <Button
+                    onClick={() => setShowAddTierModal(!showAddTierModal)}
+                  >
+                    Add tier
+                  </Button>
                 </div>
               </div>
             }
@@ -56,6 +63,13 @@ const TierSettings: React.FC = () => {
             hideCard
           />
         )}
+        {tiers?.map((tier) => (
+          <div key={tier?.id}>{tier?.id}</div>
+        ))}
+        <AddTier
+          showAddTierModal={showAddTierModal}
+          setShowAddTierModal={setShowAddTierModal}
+        />
       </div>
     </div>
   )
