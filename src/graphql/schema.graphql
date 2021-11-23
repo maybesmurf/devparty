@@ -797,8 +797,27 @@ type Tip {
   id: ID!
   paypal: String
   solana: String
-  tips: User!
+  tiers(after: String, before: String, first: Int, last: Int): TipTiersConnection!
   user: User!
+}
+
+type TipTier {
+  amount: Int!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  tip: Tip!
+}
+
+type TipTiersConnection {
+  edges: [TipTiersConnectionEdge]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TipTiersConnectionEdge {
+  cursor: String!
+  node: TipTier!
 }
 
 input ToggleBookmarkInput {
