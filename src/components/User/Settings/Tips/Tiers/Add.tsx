@@ -95,8 +95,7 @@ const AddTier: React.FC<Props> = ({
             <Input
               label="Amount in MATIC"
               type="number"
-              step="0.01"
-              placeholder="0.5"
+              placeholder="5"
               prefix="MATIC"
               {...form.register('amount')}
             />
