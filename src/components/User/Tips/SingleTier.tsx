@@ -9,9 +9,10 @@ const Tip = dynamic(() => import('./Tip'), {
 
 interface Props {
   tier: TipTier
+  address: string
 }
 
-const SingleTier: React.FC<Props> = ({ tier }) => {
+const SingleTier: React.FC<Props> = ({ tier, address }) => {
   return (
     <div className="py-5 space-y-3 flex items-start justify-between space-x-5">
       <div className="space-y-3">
@@ -23,7 +24,7 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
           </Markdown>
         </div>
       </div>
-      <Tip tier={tier} />
+      <Tip tier={tier} address={address} />
     </div>
   )
 }
