@@ -14,9 +14,6 @@ export async function uploadToIPFS(data: File) {
 
   return {
     type: data.type,
-    url:
-      data.type === 'video/mp4'
-        ? `https://ipfs.io/ipfs/${Hash}`
-        : `https://cloudflare-ipfs.com/ipfs/${Hash}`
+    url: `https://ipfs.infura.io/ipfs/${Hash}`
   }
 }

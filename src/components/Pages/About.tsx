@@ -25,7 +25,7 @@ const About: React.FC = () => {
         <div className="container items-center max-w-4xl px-5 mx-auto mt-16 text-center">
           <img
             alt="Hero Illustration"
-            src="https://cloudflare-ipfs.com/ipfs/QmcDpJhD72Bk7SJ2sD6mnW4h7p8wf7CCy5UHHLtvh7WtW9"
+            src="https://ipfs.infura.io/ipfs/QmcDpJhD72Bk7SJ2sD6mnW4h7p8wf7CCy5UHHLtvh7WtW9"
           />
         </div>
       </section>
@@ -81,7 +81,7 @@ const About: React.FC = () => {
                       <div className="rounded-full mr-4">
                         <img
                           className="w-16"
-                          src={`https://cloudflare-ipfs.com/ipfs/${image}`}
+                          src={`https://ipfs.infura.io/ipfs/${image}`}
                           alt={title}
                         />
                       </div>
@@ -134,7 +134,7 @@ const About: React.FC = () => {
             <div className="w-full mb-12 lg:w-1/2 order-0 lg:order-1 lg:mb-0">
               <img
                 className="mx-auto max-w-sm"
-                src="https://cloudflare-ipfs.com/ipfs/QmR7TPhoTk8LqxqjCmcADXpieDHZwp3aEJcUxh4dn3Wu9n"
+                src="https://ipfs.infura.io/ipfs/QmR7TPhoTk8LqxqjCmcADXpieDHZwp3aEJcUxh4dn3Wu9n"
                 alt="Invite"
               />
             </div>
