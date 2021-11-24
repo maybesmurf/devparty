@@ -9,7 +9,7 @@ interface Props {
 
 const Tip: React.FC<Props> = ({ tier }) => {
   return (
-    <Button icon={<HeartIcon className="h-5 2-5" />} outline>
+    <Button variant="danger" icon={<HeartIcon className="h-5 2-5" />} outline>
       Tip
     </Button>
   )
