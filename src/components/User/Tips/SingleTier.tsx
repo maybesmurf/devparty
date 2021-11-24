@@ -10,15 +10,27 @@ const Tip = dynamic(() => import('./Tip'), {
 interface Props {
   tier: TipTier
   address: string
+  convData: any
 }
 
-const SingleTier: React.FC<Props> = ({ tier, address }) => {
+const SingleTier: React.FC<Props> = ({ tier, address, convData }) => {
   return (
     <div className="py-5 space-y-3 flex items-start justify-between space-x-5">
       <div className="space-y-3">
         <div>
           <div className="text-lg font-bold">{tier?.amount} MATIC</div>
-          <div className="text-gray-500 font-light text-sm">5 ETH</div>
+          <div className="text-gray-500 font-light text-sm flex items-center space-x-1">
+            {convData ? (
+              <div>
+                {(parseFloat(convData['matic-network']['eth']).toFixed(
+                  5
+                ) as any) * tier?.amount}
+              </div>
+            ) : (
+              <div className="shimmer h-4 w-7 rounded" />
+            )}
+            <div>ETH</div>
+          </div>
         </div>
         <div className="text-lg font-bold">{tier?.name}</div>
         <div className="prose dark:prose-dark">
@@ -27,7 +39,15 @@ const SingleTier: React.FC<Props> = ({ tier, address }) => {
           </Markdown>
         </div>
       </div>
-      <Tip tier={tier} address={address} />
+      <Tip
+        tier={tier}
+        address={address}
+        eth={
+          convData &&
+          (parseFloat(convData['matic-network']['eth']).toFixed(5) as any) *
+            tier?.amount
+        }
+      />
     </div>
   )
 }

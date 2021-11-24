@@ -19,9 +19,10 @@ import TXProcessing from './Processing'
 interface Props {
   tier: TipTier
   address: string
+  eth: number
 }
 
-const Tip: React.FC<Props> = ({ tier, address }) => {
+const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
     'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
@@ -66,8 +67,14 @@ const Tip: React.FC<Props> = ({ tier, address }) => {
         signer
       )
       const transaction = await contract.tipUser(address, {
-        // @ts-ignore
-        value: ethers.utils.parseEther(tier?.amount?.toString()).toString(10)
+        value: ethers.utils
+          .parseEther(
+            ['matic', 'maticmum'].includes(network)
+              ? tier?.amount?.toString()
+              : eth.toString()
+          )
+          // @ts-ignore
+          .toString(10)
       })
       setProgressStatusText('Transaction is being processed')
       setTxURL(getTransactionURL(network, transaction.hash))
