@@ -162,7 +162,11 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
     } catch (error: any) {
       console.log(error.message)
       setMintingStatus('NOTSTARTED')
-      setError('Transaction has been cancelled!')
+      setError(
+        error?.data?.message
+          ? error.data.message
+          : 'Transaction has been cancelled!'
+      )
     }
   }
 
