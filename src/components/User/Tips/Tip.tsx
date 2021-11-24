@@ -68,7 +68,7 @@ const Tip: React.FC<Props> = ({ tier }) => {
         await signer.getAddress(),
         {
           // @ts-ignore
-          value: ethers.utils.parseEther('1').toString(10)
+          value: ethers.utils.parseEther(tier?.amount?.toString()).toString(10)
         }
       )
       setProgressStatusText('Transaction is being processed')
