@@ -1,11 +1,8 @@
+import { Button } from '@components/UI/Button'
 import { TipTier } from '@graphql/types.generated'
+import { HeartIcon } from '@heroicons/react/outline'
 import Markdown from 'markdown-to-jsx'
-import dynamic from 'next/dynamic'
 import React from 'react'
-
-const Tip = dynamic(() => import('./Tip'), {
-  loading: () => <div className="w-20 h-9 rounded-lg shimmer" />
-})
 
 interface Props {
   tier: TipTier
@@ -23,7 +20,9 @@ const SingleTier: React.FC<Props> = ({ tier }) => {
           </Markdown>
         </div>
       </div>
-      <Tip tier={tier} />
+      <Button variant="danger" icon={<HeartIcon className="h-5 2-5" />} outline>
+        Tip
+      </Button>
     </div>
   )
 }
