@@ -76,10 +76,13 @@ const Tip: React.FC<Props> = ({ tier, address }) => {
       setProgressStatus('COMPLETED')
       toast.success('Sponsor Transaction completed!')
     } catch (error: any) {
-      console.log(error.message)
       setProgressStatus('NOTSTARTED')
       setTxURL('')
-      setError('Transaction has been cancelled!')
+      setError(
+        error?.data?.message
+          ? error.data.message
+          : 'Transaction has been cancelled!'
+      )
     }
   }
 
