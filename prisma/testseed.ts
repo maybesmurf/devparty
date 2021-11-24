@@ -57,7 +57,7 @@ async function main() {
       tip: {
         create: {
           bitcoin: '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy',
-          ethereum: '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3',
+          ethereum: '0x03Ba34f6Ea1496fa316873CF8350A3f7eaD317EF',
           buymeacoffee: 'yoginth',
           github: 'yoginth',
           cash: 'yoginth',

@@ -100,7 +100,7 @@ test('user should have tips', async ({ request }) => {
   expect(tip.bitcoin).toBe('3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy')
   expect(tip.buymeacoffee).toBe('yoginth')
   expect(tip.cash).toBe('yoginth')
-  expect(tip.ethereum).toBe('0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3')
+  expect(tip.ethereum).toBe('0x03Ba34f6Ea1496fa316873CF8350A3f7eaD317EF')
   expect(tip.github).toBe('yoginth')
   expect(tip.paypal).toBe('yoginth')
 })
