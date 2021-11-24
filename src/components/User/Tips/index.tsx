@@ -188,7 +188,10 @@ const Tips: React.FC = () => {
                     )}
                   </div>
                   {tip?.ethereum && tip?.tiers?.totalCount > 0 && (
-                    <TipTiers tiers={tiers as TipTier[]} />
+                    <TipTiers
+                      tiers={tiers as TipTier[]}
+                      address={tip?.ethereum}
+                    />
                   )}
                 </div>
               ) : (
