@@ -65,7 +65,7 @@ const Tip: React.FC<Props> = ({ tier, address }) => {
         Sponsor.abi,
         signer
       )
-      const transaction = await contract.sponsorUser(address, {
+      const transaction = await contract.tipUser(address, {
         // @ts-ignore
         value: ethers.utils.parseEther(tier?.amount?.toString()).toString(10)
       })
