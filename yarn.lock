@@ -9790,10 +9790,10 @@ linkify-plugin-hashtag@^3.0.3:
   resolved "https://registry.yarnpkg.com/linkify-plugin-hashtag/-/linkify-plugin-hashtag-3.0.3.tgz#7d744764b8c379e9e2482f67923aa41588fd38cf"
   integrity sha512-60v/jDigRuqa8uWNwKNYx5D6yMAn1GCgNk/JU7SbIgW8DMTDFg/vS1JG4Y2lSUBIJXLkZC5a0ZOTDmpbjwPCWw==
 
-linkify-plugin-mention@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/linkify-plugin-mention/-/linkify-plugin-mention-3.0.3.tgz#8896dfe032610b1ce360d1f934f0dd92748e9e3d"
-  integrity sha512-P63yTexhLj975Qm+znP63grkM1WlEW76FljGLfUybZQVz+1gZE89YX3lsdOXVOnLF45VKULDlHqIfuS71QrPOg==
+linkify-plugin-mention@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/linkify-plugin-mention/-/linkify-plugin-mention-3.0.4.tgz#60276ec2b6a8087a9d709dce2d3568d112eabe43"
+  integrity sha512-8zttb+zpkV/+BZMAC6AGpC1pB2bjx9vV1TAWNodVuDe6Jr+Bi6b4QPUgZr/05UP+T/EIw1b8TM2Y+CEcqE2Qng==
 
 linkify-react@^3.0.3:
   version "3.0.3"
