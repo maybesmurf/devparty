@@ -24,7 +24,7 @@
     "@apollo/client": "^3.5.5",
     "@davatar/react": "^1.8.1",
     "@giraphql/core": "^2.19.0",
-    "@giraphql/plugin-complexity": "^2.1.0",
+    "@giraphql/plugin-complexity": "^2.3.0",
     "@giraphql/plugin-directives": "^2.10.1",
     "@giraphql/plugin-prisma": "^0.13.1",
     "@giraphql/plugin-relay": "^2.18.2",

@@ -1546,10 +1546,10 @@
   resolved "https://registry.yarnpkg.com/@giraphql/core/-/core-2.19.0.tgz#3fcb6f087890b331749ec4793ec5660899610a3f"
   integrity sha512-QMozhNIVNaOnNRDoYtTKacp+CErzmxqs8kTRAieuuRRPUibFT73hZ8/6VcLG240DpWlstOSfcWsPZMwDIm9Lkw==
 
-"@giraphql/plugin-complexity@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-complexity/-/plugin-complexity-2.1.0.tgz#5e3f22ada334101b58cae605e0ddb7c94f23dd99"
-  integrity sha512-iu0MNwB8KP43WXAKYEcY12vvrmo86f0RrujdMM2MsKRwaGjec1xdEYa1GnttQ9NkBLG3GqeqREoVZ8grp4m0Mw==
+"@giraphql/plugin-complexity@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-complexity/-/plugin-complexity-2.3.0.tgz#4ddac1abafe2e41ed5b9bdd85be4bcf5776214e8"
+  integrity sha512-Ao4OJGePWxts+HuOU9Dv4dU0uon8k1XnUC9S35Qa0h5toXkV+IbffaVbcrRN8z87V649Jkhc1xRAgg/utYxjyQ==
 
 "@giraphql/plugin-directives@^2.10.1":
   version "2.10.1"

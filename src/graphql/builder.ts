@@ -55,6 +55,13 @@ export const builder = new SchemaBuilder<{
     DirectivePlugin,
     ComplexityPlugin
   ],
+  complexity: {
+    limit: {
+      complexity: 500,
+      depth: 10,
+      breadth: 50
+    }
+  },
   prisma: { client: db },
   authScopes: ({ session }) => ({
     public: true,
