@@ -3,7 +3,7 @@ import { getRandomCover } from '@graphql/utils/getRandomCover'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
-import { IS_PRODUCTION, PUBLIC_SIGNING_MESSAGE } from 'src/constants'
+import { AUTH_SIGNING_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
  * Authenticate a user with Wallet
@@ -18,7 +18,7 @@ export const authWithWallet = async (
   signature: string
 ) => {
   const address = ethers.utils
-    .verifyMessage(`${PUBLIC_SIGNING_MESSAGE} ${nonce}`, signature)
+    .verifyMessage(`${AUTH_SIGNING_MESSAGE} ${nonce}`, signature)
     .toString()
     .toLowerCase()
 
