@@ -16,7 +16,7 @@ builder.prismaObject('Tipping', {
   })
 })
 
-const CreateTippingInput = builder.inputType('CreateTippingInput', {
+const TipUserInput = builder.inputType('TipUserInput', {
   fields: (t) => ({
     dispatcherAddress: t.string(),
     receiverAddress: t.string(),
@@ -27,10 +27,10 @@ const CreateTippingInput = builder.inputType('CreateTippingInput', {
 })
 
 // TODO: Split to function
-builder.mutationField('createTipping', (t) =>
+builder.mutationField('tipUser', (t) =>
   t.prismaField({
     type: 'Tipping',
-    args: { input: t.arg({ type: CreateTippingInput }) },
+    args: { input: t.arg({ type: TipUserInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
       return await db.tipping.create({

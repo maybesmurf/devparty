@@ -1,14 +1,20 @@
+import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
+import AppContext from '@components/utils/AppContext'
 import { getContractAddress } from '@components/utils/getContractAddress'
 import { getTransactionURL } from '@components/utils/getTransactionURL'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
-import { TipTier } from '@graphql/types.generated'
+import {
+  TipTier,
+  TipUserMutation,
+  TipUserMutationVariables
+} from '@graphql/types.generated'
 import { HeartIcon } from '@heroicons/react/outline'
 import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
@@ -23,6 +29,7 @@ interface Props {
 }
 
 const Tip: React.FC<Props> = ({ tier, address, eth }) => {
+  const { currentUser } = useContext(AppContext)
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
     'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
@@ -31,6 +38,15 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   const [txURL, setTxURL] = useState<string>()
   const [error, setError] = useState<string | undefined>()
   const { resolvedTheme } = useTheme()
+  const [tipUser] = useMutation<TipUserMutation, TipUserMutationVariables>(
+    gql`
+      mutation TipUser($input: TipUserInput!) {
+        tipUser(input: $input) {
+          id
+        }
+      }
+    `
+  )
 
   const sponsorUser = async () => {
     try {
@@ -78,8 +94,18 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       })
       setProgressStatusText('Transaction is being processed')
       setTxURL(getTransactionURL(network, transaction.hash))
-      const tx = await transaction.wait()
-      let event = tx.events[0]
+      tipUser({
+        variables: {
+          input: {
+            txHash: transaction.hash,
+            tierId: tier?.id,
+            receiverAddress: address,
+            dispatcherAddress: await signer.getAddress(),
+            userId: currentUser?.id as string
+          }
+        }
+      })
+      await transaction.wait()
       setProgressStatus('COMPLETED')
       toast.success('Sponsor Transaction completed!')
     } catch (error: any) {

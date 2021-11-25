@@ -234,12 +234,6 @@ export type CreateReportInput = {
   type: Scalars['String']
 }
 
-export type CreateTippingInput = {
-  tierId: Scalars['ID']
-  txHash: Scalars['String']
-  userId: Scalars['ID']
-}
-
 export type DeletePostInput = {
   id: Scalars['ID']
 }
@@ -403,7 +397,6 @@ export type Mutation = {
   createPost: Post
   createProduct?: Maybe<Product>
   createReport: Report
-  createTipping: Tipping
   deleteAccount: Result
   deletePost: Result
   deleteProduct: Result
@@ -431,6 +424,7 @@ export type Mutation = {
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
+  tipUser: Tipping
   toggleBookmark?: Maybe<Post>
   toggleCommunityJoin?: Maybe<Community>
   toggleFollow?: Maybe<User>
@@ -485,10 +479,6 @@ export type MutationCreateProductArgs = {
 
 export type MutationCreateReportArgs = {
   input: CreateReportInput
-}
-
-export type MutationCreateTippingArgs = {
-  input: CreateTippingInput
 }
 
 export type MutationDeletePostArgs = {
@@ -589,6 +579,10 @@ export type MutationRevokeSessionArgs = {
 
 export type MutationSignUpArgs = {
   input: SignupInput
+}
+
+export type MutationTipUserArgs = {
+  input: TipUserInput
 }
 
 export type MutationToggleBookmarkArgs = {
@@ -1344,11 +1338,21 @@ export type TipTiersConnectionEdge = {
   node: TipTier
 }
 
+export type TipUserInput = {
+  dispatcherAddress: Scalars['String']
+  receiverAddress: Scalars['String']
+  tierId: Scalars['ID']
+  txHash: Scalars['String']
+  userId: Scalars['ID']
+}
+
 export type Tipping = {
   __typename?: 'Tipping'
   dispatcher: User
+  dispatcherAddress: Scalars['String']
   id: Scalars['ID']
   receiver: User
+  receiverAddress: Scalars['String']
   tier: TipTier
   txHash: Scalars['String']
 }
@@ -5053,6 +5057,15 @@ export type GetTipsQuery = {
       }
     | null
     | undefined
+}
+
+export type TipUserMutationVariables = Exact<{
+  input: TipUserInput
+}>
+
+export type TipUserMutation = {
+  __typename?: 'Mutation'
+  tipUser: { __typename?: 'Tipping'; id: string }
 }
 
 export type GetUserTipsQueryVariables = Exact<{
