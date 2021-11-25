@@ -1,5 +1,4 @@
 import SchemaBuilder from '@giraphql/core'
-import ComplexityPlugin from '@giraphql/plugin-complexity'
 import DirectivePlugin from '@giraphql/plugin-directives'
 import PrismaPlugin from '@giraphql/plugin-prisma'
 import RelayPlugin from '@giraphql/plugin-relay'
@@ -52,16 +51,8 @@ export const builder = new SchemaBuilder<{
     ValidationPlugin,
     PrismaPlugin,
     RelayPlugin,
-    DirectivePlugin,
-    ComplexityPlugin
+    DirectivePlugin
   ],
-  complexity: {
-    limit: {
-      complexity: 500,
-      depth: 10,
-      breadth: 50
-    }
-  },
   prisma: { client: db },
   authScopes: ({ session }) => ({
     public: true,

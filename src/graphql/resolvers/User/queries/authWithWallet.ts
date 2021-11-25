@@ -3,7 +3,7 @@ import { getRandomCover } from '@graphql/utils/getRandomCover'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
-import { AUTH_SIGNING_MESSAGE, IS_PRODUCTION } from 'src/constants'
+import { AUTH_SIGNING_MESSAGE } from 'src/constants'
 
 /**
  * Authenticate a user with Wallet
@@ -27,33 +27,12 @@ export const authWithWallet = async (
     where: { integrations: { ethAddress: address } }
   })
 
-  let ens
   const response = await fetch(
-    `https://api.thegraph.com/subgraphs/name/ensdomains/${
-      IS_PRODUCTION ? 'ensrinkeby' : 'ensrinkeby'
-    }`,
-    {
-      body: JSON.stringify({
-        operationName: 'getNamesFromSubgraph',
-        query: `
-            query getNamesFromSubgraph($address: String!) {
-              domains(first: 1, where: {resolvedAddress: $address}) {
-                name
-              }
-            }
-          `,
-        variables: { address }
-      }),
-      method: 'POST'
-    }
+    `https://deep-index.moralis.io/api/v2/resolve/${address}/reverse`,
+    { headers: { 'X-API-Key': process.env.MORALIS_API_KEY as string } }
   )
   const result = await response.json()
-  const domains = result?.data?.domains
-  if (domains.length > 0) {
-    ens = result?.data?.domains[0]?.name
-  } else {
-    ens = address
-  }
+  const ens = result?.name ? result?.name : address
 
   if (user) {
     return await db.user.update({
