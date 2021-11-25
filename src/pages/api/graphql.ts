@@ -2,7 +2,6 @@ import { Context, createGraphQLContext } from '@graphql/builder'
 import schema from '@graphql/index'
 import { resolveSession } from '@utils/sessions'
 import { ExecutionResult, GraphQLError } from 'graphql'
-import depthLimit from 'graphql-depth-limit'
 import {
   getGraphQLParameters,
   processRequest,
@@ -75,7 +74,6 @@ const handler: NextApiHandler = async (req, res) => {
         variables,
         request,
         schema,
-        validationRules: [depthLimit(15)],
         contextFactory: () => createGraphQLContext(req, res, session)
       })
 
