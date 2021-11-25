@@ -164,6 +164,12 @@ input CreateReportInput {
   type: String!
 }
 
+input CreateTippingInput {
+  tierId: ID!
+  txHash: String!
+  userId: ID!
+}
+
 scalar DateTime
 
 input DeletePostInput {
@@ -324,6 +330,7 @@ type Mutation {
   createPost(input: CreatePostInput!): Post!
   createProduct(input: CreateProductInput!): Product
   createReport(input: CreateReportInput!): Report!
+  createTipping(input: CreateTippingInput!): Tipping!
   deleteAccount: Result!
   deletePost(input: DeletePostInput!): Result!
   deleteProduct(input: DeleteProductInput!): Result!
@@ -829,6 +836,14 @@ type TipTiersConnection {
 type TipTiersConnectionEdge {
   cursor: String!
   node: TipTier!
+}
+
+type Tipping {
+  dispatcher: User!
+  id: ID!
+  receiver: User!
+  tier: TipTier!
+  txHash: String!
 }
 
 input ToggleBookmarkInput {
