@@ -100,7 +100,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
             txHash: transaction.hash,
             tierId: tier?.id,
             receiverAddress: address,
-            dispatcherAddress: await signer.getAddress(),
+            dispatcherAddress: transaction.from,
             userId: currentUser?.id as string
           }
         }
