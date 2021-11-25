@@ -234,6 +234,12 @@ export type CreateReportInput = {
   type: Scalars['String']
 }
 
+export type CreateTippingInput = {
+  tierId: Scalars['ID']
+  txHash: Scalars['String']
+  userId: Scalars['ID']
+}
+
 export type DeletePostInput = {
   id: Scalars['ID']
 }
@@ -397,6 +403,7 @@ export type Mutation = {
   createPost: Post
   createProduct?: Maybe<Product>
   createReport: Report
+  createTipping: Tipping
   deleteAccount: Result
   deletePost: Result
   deleteProduct: Result
@@ -478,6 +485,10 @@ export type MutationCreateProductArgs = {
 
 export type MutationCreateReportArgs = {
   input: CreateReportInput
+}
+
+export type MutationCreateTippingArgs = {
+  input: CreateTippingInput
 }
 
 export type MutationDeletePostArgs = {
@@ -1331,6 +1342,15 @@ export type TipTiersConnectionEdge = {
   __typename?: 'TipTiersConnectionEdge'
   cursor: Scalars['String']
   node: TipTier
+}
+
+export type Tipping = {
+  __typename?: 'Tipping'
+  dispatcher: User
+  id: Scalars['ID']
+  receiver: User
+  tier: TipTier
+  txHash: Scalars['String']
 }
 
 export type ToggleBookmarkInput = {

@@ -165,6 +165,8 @@ input CreateReportInput {
 }
 
 input CreateTippingInput {
+  dispatcherAddress: String!
+  receiverAddress: String!
   tierId: ID!
   txHash: String!
   userId: ID!
@@ -840,8 +842,10 @@ type TipTiersConnectionEdge {
 
 type Tipping {
   dispatcher: User!
+  dispatcherAddress: String!
   id: ID!
   receiver: User!
+  receiverAddress: String!
   tier: TipTier!
   txHash: String!
 }

@@ -54,7 +54,6 @@ const TierSettings: React.FC = () => {
                 <span>You don't have any tiers!</span>
                 <div className="mt-4">
                   <Button
-                    icon={<PlusCircleIcon className="h-4 w-4" />}
                     onClick={() => setShowAddTierModal(!showAddTierModal)}
                   >
                     Add tier
