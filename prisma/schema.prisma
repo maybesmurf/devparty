@@ -177,8 +177,8 @@ model Tipping {
   createdAt DateTime @default(now())
 
   // Relations
-  tipTier      TipTier @relation(fields: [tipTierId], references: [id], onDelete: Cascade)
-  tipTierId    String
+  tier         TipTier @relation(fields: [tierId], references: [id], onDelete: Cascade)
+  tierId       String
   receiver     User    @relation("tipReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
   receiverId   String
   dispatcher   User    @relation("tipDispatcher", fields: [dispatcherId], references: [id], onDelete: Cascade)
