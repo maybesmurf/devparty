@@ -105,6 +105,8 @@ CREATE TABLE `tip_tiers` (
 -- CreateTable
 CREATE TABLE `tippings` (
     `id` VARCHAR(191) NOT NULL,
+    `dispatcherAddress` VARCHAR(191) NOT NULL,
+    `receiverAddress` VARCHAR(191) NOT NULL,
     `txHash` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `tierId` VARCHAR(191) NOT NULL,

@@ -5,6 +5,8 @@ builder.prismaObject('Tipping', {
   findUnique: (tipping) => ({ id: tipping.id }),
   fields: (t) => ({
     id: t.exposeID('id'),
+    dispatcherAddress: t.exposeString('dispatcherAddress'),
+    receiverAddress: t.exposeString('receiverAddress'),
     txHash: t.exposeString('txHash'),
 
     // Relations
@@ -16,6 +18,8 @@ builder.prismaObject('Tipping', {
 
 const CreateTippingInput = builder.inputType('CreateTippingInput', {
   fields: (t) => ({
+    dispatcherAddress: t.string(),
+    receiverAddress: t.string(),
     txHash: t.string(),
     tierId: t.id({ validate: { uuid: true } }),
     userId: t.id({ validate: { uuid: true } })
@@ -32,7 +36,9 @@ builder.mutationField('createTipping', (t) =>
       return await db.tipping.create({
         ...query,
         data: {
+          dispatcherAddress: input.dispatcherAddress,
           txHash: input.txHash,
+          receiverAddress: input.receiverAddress,
           tier: { connect: { id: input.tierId } },
           receiver: { connect: { id: input.userId } },
           dispatcher: { connect: { id: session?.userId } }
