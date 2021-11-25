@@ -43,7 +43,7 @@
     "emoji-mart": "^3.0.1",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.1",
-    "framer-motion": "^5.3.2",
+    "framer-motion": "^5.3.3",
     "graphql": "16.0.1",
     "graphql-depth-limit": "^1.1.0",
     "graphql-helix": "1.10.2",
