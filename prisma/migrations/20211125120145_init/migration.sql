@@ -103,6 +103,18 @@ CREATE TABLE `tip_tiers` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `tippings` (
+    `id` VARCHAR(191) NOT NULL,
+    `txHash` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `tipTierId` VARCHAR(191) NOT NULL,
+    `receiverId` VARCHAR(191) NOT NULL,
+    `dispatcherId` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `posts` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(280) NULL,

@@ -58,6 +58,8 @@ model User {
   followedBy             User[]         @relation("follows")
   receivedNotification   Notification[] @relation("notificationReceiver")
   dispatchedNotification Notification[] @relation("notificationDispatcher")
+  receivedTips           Tipping[]      @relation("tipReceiver")
+  dispatchedTips         Tipping[]      @relation("tipDispatcher")
 
   // Attributes
   @@map("users")
@@ -159,11 +161,31 @@ model TipTier {
   createdAt DateTime @default(now())
 
   // Relations
-  tip   Tip    @relation(fields: [tipId], references: [id], onDelete: Cascade)
-  tipId String
+  tip      Tip       @relation(fields: [tipId], references: [id], onDelete: Cascade)
+  tipId    String
+  tippings Tipping[]
 
   // Attributes
   @@map("tip_tiers")
+}
+
+model Tipping {
+  id     String @id @default(uuid())
+  txHash String
+
+  // Timestamps
+  createdAt DateTime @default(now())
+
+  // Relations
+  tipTier      TipTier @relation(fields: [tipTierId], references: [id], onDelete: Cascade)
+  tipTierId    String
+  receiver     User    @relation("tipReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId   String
+  dispatcher   User    @relation("tipDispatcher", fields: [dispatcherId], references: [id], onDelete: Cascade)
+  dispatcherId String
+
+  // Attributes
+  @@map("tippings")
 }
 
 model Post {
