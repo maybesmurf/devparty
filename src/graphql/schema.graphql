@@ -351,6 +351,7 @@ type Mutation {
   resolveReport(input: ResolveReportInput!): Result
   revokeSession(input: RevokeSessionInput!): Result!
   signUp(input: SignupInput!): User!
+  tipUser(input: TipUserInput!): Tipping!
   toggleBookmark(input: ToggleBookmarkInput!): Post
   toggleCommunityJoin(input: ToggleCommunityJoinInput!): Community
   toggleFollow(input: ToggleFollowInput!): User
@@ -829,6 +830,24 @@ type TipTiersConnection {
 type TipTiersConnectionEdge {
   cursor: String!
   node: TipTier!
+}
+
+input TipUserInput {
+  dispatcherAddress: String!
+  receiverAddress: String!
+  tierId: ID!
+  txHash: String!
+  userId: ID!
+}
+
+type Tipping {
+  dispatcher: User!
+  dispatcherAddress: String!
+  id: ID!
+  receiver: User!
+  receiverAddress: String!
+  tier: TipTier!
+  txHash: String!
 }
 
 input ToggleBookmarkInput {

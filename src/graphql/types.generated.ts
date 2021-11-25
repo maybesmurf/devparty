@@ -424,6 +424,7 @@ export type Mutation = {
   resolveReport?: Maybe<Result>
   revokeSession: Result
   signUp: User
+  tipUser: Tipping
   toggleBookmark?: Maybe<Post>
   toggleCommunityJoin?: Maybe<Community>
   toggleFollow?: Maybe<User>
@@ -578,6 +579,10 @@ export type MutationRevokeSessionArgs = {
 
 export type MutationSignUpArgs = {
   input: SignupInput
+}
+
+export type MutationTipUserArgs = {
+  input: TipUserInput
 }
 
 export type MutationToggleBookmarkArgs = {
@@ -1331,6 +1336,25 @@ export type TipTiersConnectionEdge = {
   __typename?: 'TipTiersConnectionEdge'
   cursor: Scalars['String']
   node: TipTier
+}
+
+export type TipUserInput = {
+  dispatcherAddress: Scalars['String']
+  receiverAddress: Scalars['String']
+  tierId: Scalars['ID']
+  txHash: Scalars['String']
+  userId: Scalars['ID']
+}
+
+export type Tipping = {
+  __typename?: 'Tipping'
+  dispatcher: User
+  dispatcherAddress: Scalars['String']
+  id: Scalars['ID']
+  receiver: User
+  receiverAddress: Scalars['String']
+  tier: TipTier
+  txHash: Scalars['String']
 }
 
 export type ToggleBookmarkInput = {
@@ -5033,6 +5057,15 @@ export type GetTipsQuery = {
       }
     | null
     | undefined
+}
+
+export type TipUserMutationVariables = Exact<{
+  input: TipUserInput
+}>
+
+export type TipUserMutation = {
+  __typename?: 'Mutation'
+  tipUser: { __typename?: 'Tipping'; id: string }
 }
 
 export type GetUserTipsQueryVariables = Exact<{

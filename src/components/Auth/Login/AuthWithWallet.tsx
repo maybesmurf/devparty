@@ -10,7 +10,7 @@ import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { PUBLIC_SIGNING_MESSAGE, STATIC_ASSETS } from 'src/constants'
+import { AUTH_SIGNING_MESSAGE, STATIC_ASSETS } from 'src/constants'
 
 const AuthWithWallet: React.FC = () => {
   const authRedirect = useAuthRedirect()
@@ -50,7 +50,7 @@ const AuthWithWallet: React.FC = () => {
         const signature = await web3
           .getSigner()
           .provider.send('personal_sign', [
-            `${PUBLIC_SIGNING_MESSAGE} ${data?.nonce}`,
+            `${AUTH_SIGNING_MESSAGE} ${data?.nonce}`,
             address
           ])
 
