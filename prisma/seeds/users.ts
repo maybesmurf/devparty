@@ -14,7 +14,7 @@ export const userData = [
     isStaff: true,
     avatar: 'https://i.ibb.co/Kw0Jbzf/avatar.png',
     bio: '요기 • Creator of Devparty • BTS Fanboi ⟬⟭ • he/him 🌳',
-    ethAddress: '0x03Ba34f6Ea1496fa316873CF8350A3f7eaD317EF'
+    ethAddress: '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
   },
   {
     email: 'filip.tronicek@seznam.cz',
