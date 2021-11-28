@@ -88,15 +88,20 @@ warmup:
 migrate:
   stage: deploy
   before_script: []
+  variables:
+    DATABASE_URL: $DEV_DATABASE_URL
   script:
-    - DATABASE_URL=$DEV_DATABASE_URL npx prisma migrate reset --force
+    - npx prisma migrate reset --force
   when: manual
 
 # Remove after Devparty release
 seed:
   stage: deploy
+  variables:
+    DATABASE_URL: $PROD_DATABASE_URL
   script:
-    - DATABASE_URL=$PROD_DATABASE_URL yarn prisma:seed
+    - yarn prisma:seed
+    - yarn prisma:testseed
   only:
     - main
   when: manual
