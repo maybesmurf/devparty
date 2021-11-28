@@ -191,12 +191,13 @@ model Tipping {
 }
 
 model Post {
-  id     String   @id @default(uuid())
-  title  String?  @db.VarChar(280)
-  body   String   @db.Text
-  done   Boolean  @default(false)
-  type   PostType @default(POST)
-  hidden Boolean  @default(false)
+  id       String   @id @default(uuid())
+  title    String?  @db.VarChar(280)
+  body     String   @db.Text
+  done     Boolean  @default(false)
+  type     PostType @default(POST)
+  hidden   Boolean  @default(false)
+  ipfsHash String?  @db.VarChar(46)
 
   // Timestamps
   createdAt DateTime @default(now())
