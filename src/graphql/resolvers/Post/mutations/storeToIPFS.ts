@@ -13,23 +13,22 @@ const client = create({
  * @param post - Post to be uploaded to IPFS
  */
 export const storeToIPFS = async (post: Post) => {
-  new Promise((resolve) => {
-    setTimeout(async function () {
-      const { path } = await client.add(
-        JSON.stringify({
-          post: post?.id,
-          title: post?.title,
-          body: post?.body,
-          type: post?.type,
-          created_at: post?.createdAt
-        })
-      )
-
-      await db.post.update({
-        where: { id: post?.id },
-        data: { ipfsHash: path }
+  new Promise(async (resolve) => {
+    const { path } = await client.add(
+      JSON.stringify({
+        post: post?.id,
+        title: post?.title,
+        body: post?.body,
+        type: post?.type,
+        created_at: post?.createdAt
       })
-      resolve('Success!')
-    }, 250)
+    )
+
+    await db.post.update({
+      where: { id: post?.id },
+      data: { ipfsHash: path }
+    })
+    console.log(path)
+    resolve(path)
   })
 }
