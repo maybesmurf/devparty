@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import Custom404 from 'src/pages/404'
 
+import Metadata from './Metadata'
 import MorePosts from './MorePosts'
 import NewReply from './Reply/NewReply'
 import Replies from './Reply/Replies'
@@ -79,6 +80,7 @@ const ViewPost: React.FC = () => {
         <div className="space-y-5">
           <UserCard user={post?.user as User} />
           {currentUser?.isStaff && staffMode && <PostMod post={post as Post} />}
+          <Metadata post={post as Post} />
           {post?.type === 'QUESTION' && <MorePosts post={post as Post} />}
           <Footer />
         </div>
