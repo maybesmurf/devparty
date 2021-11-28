@@ -61,7 +61,43 @@ async function main() {
           buymeacoffee: 'yoginth',
           github: 'yoginth',
           cash: 'yoginth',
-          paypal: 'yoginth'
+          paypal: 'yoginth',
+          tiers: {
+            createMany: {
+              data: [
+                {
+                  name: 'A dollar goes along way 💰 ',
+                  description:
+                    "If you and 6000 other people do this I will quit my day job and work on open source full time. You'll be added to https://yogi.codes/thanks.",
+                  amount: 1
+                },
+                {
+                  name: 'Coffee Support ❤️',
+                  description:
+                    "You will receive a Sponsor badge 🎖 on your profile and if you're in town (and I'm there) the coffee is on me.",
+                  amount: 5
+                },
+                {
+                  name: 'Pen Pal ✍️',
+                  description:
+                    "Thanks for supporting my work! You'll get early access to blog posts before they come out.",
+                  amount: 10
+                },
+                {
+                  name: 'Hops Sponsor 🍺 ',
+                  description:
+                    "If you're in town (and I'm there) it's my shout. If you don't drink then we can do high-tea ☕ or whatever.",
+                  amount: 25
+                },
+                {
+                  name: '🍌📞',
+                  description:
+                    "Let's schedule a monthly half-hour-long phone or video call where you get to chat with me about whatever you want related to your career, open source, the projects I work on, or other stuff like that! I'm open to ideas! (All discussions non-corporate).",
+                  amount: 50
+                }
+              ]
+            }
+          }
         }
       },
       profile: {
