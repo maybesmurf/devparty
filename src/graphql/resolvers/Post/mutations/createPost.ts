@@ -4,6 +4,7 @@ import { getTopics } from '@graphql/utils/getTopics'
 import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 
+import { storeToIPFS } from './storeToIPFS'
 import { issue } from './type/issue'
 import { poll } from './type/poll'
 import { post } from './type/post'
@@ -100,6 +101,8 @@ export const createPost = async (
   if (input?.type === 'REPLY') {
     newPost = await reply(query, input, session, parentId)
   }
+
+  storeToIPFS(newPost)
 
   return newPost
 }
