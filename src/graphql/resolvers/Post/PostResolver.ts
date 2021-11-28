@@ -21,6 +21,7 @@ builder.prismaObject('Post', {
     body: t.exposeString('body'),
     type: t.exposeString('type'),
     done: t.exposeBoolean('done'),
+    ipfsHash: t.exposeString('ipfsHash', { nullable: true }),
     hasLiked: t.field({
       type: 'Boolean',
       resolve: async (parent, args, { session }) => {

@@ -28,7 +28,6 @@ export const storeToIPFS = async (post: Post) => {
       where: { id: post?.id },
       data: { ipfsHash: path }
     })
-    console.log(path)
     resolve(path)
   })
 }
