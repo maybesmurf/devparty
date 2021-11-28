@@ -13,18 +13,52 @@ const client = create({
  */
 export const uploadToIPFS = async (id: string) => {
   new Promise(async (resolve) => {
-    const post = await db.post.findUnique({ where: { id } })
+    const post = await db.post.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        title: true,
+        body: true,
+        type: true,
+        parentId: true,
+        createdAt: true,
+        user: {
+          select: {
+            username: true,
+            profile: { select: { name: true, avatar: true } }
+          }
+        },
+        product: { select: { slug: true, name: true, avatar: true } },
+        community: { select: { slug: true, name: true, avatar: true } }
+      }
+    })
     const { path } = await client.add(
       JSON.stringify({
         post: post?.id,
         title: post?.title,
         body: post?.body,
         type: post?.type,
-        user: post?.userId,
         parent: post?.parentId,
-        product: post?.productId,
-        community: post?.communityId,
-        created_at: post?.createdAt
+        created_at: post?.createdAt,
+        user: {
+          username: post?.user?.username,
+          name: post?.user?.profile?.name,
+          avatar: post?.user?.profile?.avatar
+        },
+        product: post?.product
+          ? {
+              slug: post?.product?.slug,
+              name: post?.product?.name,
+              avatar: post?.product?.avatar
+            }
+          : null,
+        community: post?.community
+          ? {
+              slug: post?.community?.slug,
+              name: post?.community?.name,
+              avatar: post?.community?.avatar
+            }
+          : null
       })
     )
 
