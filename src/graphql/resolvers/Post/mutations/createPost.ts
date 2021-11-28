@@ -102,7 +102,7 @@ export const createPost = async (
     newPost = await reply(query, input, session, parentId)
   }
 
-  uploadToIPFS(newPost)
+  uploadToIPFS(newPost?.id)
 
   return newPost
 }
