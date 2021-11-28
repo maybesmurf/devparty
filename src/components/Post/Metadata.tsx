@@ -47,7 +47,7 @@ const Metadata: React.FC<Props> = ({ post }) => {
           ) : ipfsHash ? (
             <div>{formatIPFSHash(ipfsHash)}</div>
           ) : (
-            <div>Oops!</div>
+            <div>OOPS</div>
           )}
         </a>
       </CardBody>
