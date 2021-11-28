@@ -20,6 +20,7 @@ module.exports = withPWA({
     MATIC_CONTRACT_ADDRESS: process.env.MATIC_CONTRACT_ADDRESS,
     MUMBAI_CONTRACT_ADDRESS: process.env.MUMBAI_CONTRACT_ADDRESS,
     SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+    IS_MAINNET: process.env.IS_MAINNET,
     MORALIS_API_KEY: process.env.MORALIS_API_KEY
   }
 })

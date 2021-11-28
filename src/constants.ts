@@ -3,6 +3,7 @@ import React from 'react'
 // Environments
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 export const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+export const IS_MAINNET = process.env.IS_MAINNET
 
 // Versions
 export const REACT_VERSION = React.version
@@ -25,7 +26,7 @@ export const BASE_URL = process.env.BASE_URL
 export const GRAPHCDN_URL = 'https://graphql.devparty.io'
 export const STATIC_ASSETS = 'https://assets.devparty.io/images'
 export const OPENSEA_API_URL = `https://${
-  IS_PRODUCTION ? 'testnets-api' : 'testnets-api'
+  IS_MAINNET ? 'api' : 'testnets-api'
 }.opensea.io/api/v1`
 
 // NFT
@@ -34,6 +35,9 @@ export const RINKEBY_CONTRACT_ADDRESS = process.env.RINKEBY_CONTRACT_ADDRESS
 export const MATIC_CONTRACT_ADDRESS = process.env.MATIC_CONTRACT_ADDRESS
 export const MUMBAI_CONTRACT_ADDRESS = process.env.MUMBAI_CONTRACT_ADDRESS
 export const INFURA_ID = '3d19324a72854976a7160e0e2ebc9c2b'
+export const EXPECTED_NETWORK = IS_MAINNET
+  ? ['homestead', 'matic']
+  : ['rinkeby', 'maticmum']
 
 // Misc
 export const GRAPHCDN_ENABLED =

@@ -1,7 +1,7 @@
 import { Tooltip } from '@components/UI/Tooltip'
 import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
 import { Nft } from '@graphql/types.generated'
-import { IS_PRODUCTION, STATIC_ASSETS } from 'src/constants'
+import { IS_MAINNET, STATIC_ASSETS } from 'src/constants'
 
 interface Props {
   nft: Nft
@@ -13,7 +13,7 @@ const ViewNFT: React.FC<Props> = ({ nft }) => {
       <Tooltip content="View in Opensea">
         <a
           href={`https://${
-            IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
+            IS_MAINNET ? 'opensea.io' : 'testnets.opensea.io'
           }/${getOpenSeaPath(nft?.network, nft?.address, nft?.tokenId)}`}
           target="_blank"
           rel="noreferrer"

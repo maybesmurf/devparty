@@ -16,7 +16,7 @@ import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
+import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 
 import Sponsor from '../../../../data/abi.json'
 import TXCompleted from './Completed'
@@ -61,19 +61,12 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       setProgressStatusText('Please confirm the transaction in wallet')
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
-      const expectedNetwork = IS_PRODUCTION
-        ? ['homestead', 'matic']
-        : ['rinkeby', 'maticmum']
 
-      if (!expectedNetwork.includes(network)) {
+      if (!EXPECTED_NETWORK.includes(network)) {
         setProgressStatus('NOTSTARTED')
-        return IS_PRODUCTION
-          ? setError(
-              'You are in wrong network only Mainet and Polygon matic are allowed!'
-            )
-          : setError(
-              'You are in wrong network only Rinkeby and Polygon mumbai are allowed!'
-            )
+        return IS_MAINNET
+          ? setError('You are in wrong network, switch to mainnet!')
+          : setError('You are in wrong network, switch to testnet!')
       }
 
       // Sponsor the user
