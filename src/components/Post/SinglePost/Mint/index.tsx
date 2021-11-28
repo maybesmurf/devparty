@@ -23,7 +23,7 @@ import { create, urlSource } from 'ipfs-http-client'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
+import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
 import NFT from '../../../../../data/abi.json'
@@ -92,19 +92,12 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
       // Get signature from the user
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
-      const expectedNetwork = IS_PRODUCTION
-        ? ['homestead', 'matic']
-        : ['rinkeby', 'maticmum']
 
-      if (!expectedNetwork.includes(network)) {
+      if (!EXPECTED_NETWORK.includes(network)) {
         setMintingStatus('NOTSTARTED')
-        return IS_PRODUCTION
-          ? setError(
-              'You are in wrong network only Mainet and Polygon matic are allowed!'
-            )
-          : setError(
-              'You are in wrong network only Rinkeby and Polygon mumbai are allowed!'
-            )
+        return IS_MAINNET
+          ? setError('You are in wrong network, switch to mainnet!')
+          : setError('You are in wrong network, switch to testnet!')
       }
 
       setMintingStatus('PROCESSING')
@@ -141,7 +134,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
 
       setOpenseaURL(
         `https://${
-          IS_PRODUCTION ? 'opensea.io' : 'testnets.opensea.io'
+          IS_MAINNET ? 'opensea.io' : 'testnets.opensea.io'
         }/${getOpenSeaPath(network, transaction.to, event.args[3].toString())}`
       )
 
