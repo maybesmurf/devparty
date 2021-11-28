@@ -691,6 +691,7 @@ export type Post = {
   hasLiked: Scalars['Boolean']
   htmlUrl: Scalars['String']
   id: Scalars['ID']
+  ipfsHash?: Maybe<Scalars['String']>
   likes: PostLikesConnection
   nft?: Maybe<Nft>
   oembedUrl?: Maybe<Scalars['String']>
@@ -1814,6 +1815,7 @@ export type GetCommunityFeedQuery = {
               oembedUrl?: string | null | undefined
               hasLiked: boolean
               hasBookmarked: boolean
+              ipfsHash?: string | null | undefined
               createdAt: string
               parent?:
                 | {
@@ -2113,6 +2115,7 @@ export type GetExploreFeedQuery = {
             oembedUrl?: string | null | undefined
             hasLiked: boolean
             hasBookmarked: boolean
+            ipfsHash?: string | null | undefined
             createdAt: string
             parent?:
               | {
@@ -2280,6 +2283,7 @@ export type GetHomeFeedQuery = {
             oembedUrl?: string | null | undefined
             hasLiked: boolean
             hasBookmarked: boolean
+            ipfsHash?: string | null | undefined
             createdAt: string
             parent?:
               | {
@@ -2492,6 +2496,7 @@ export type GetNotificationsQuery = {
                     oembedUrl?: string | null | undefined
                     hasLiked: boolean
                     hasBookmarked: boolean
+                    ipfsHash?: string | null | undefined
                     createdAt: string
                     parent?:
                       | {
@@ -2601,6 +2606,7 @@ export type GetNotificationsQuery = {
                   oembedUrl?: string | null | undefined
                   hasLiked: boolean
                   hasBookmarked: boolean
+                  ipfsHash?: string | null | undefined
                   createdAt: string
                   parent?:
                     | {
@@ -2983,6 +2989,7 @@ export type GetRepliesQuery = {
               oembedUrl?: string | null | undefined
               hasLiked: boolean
               hasBookmarked: boolean
+              ipfsHash?: string | null | undefined
               createdAt: string
               parent?:
                 | {
@@ -3188,6 +3195,7 @@ export type PostFragmentFragment = {
   oembedUrl?: string | null | undefined
   hasLiked: boolean
   hasBookmarked: boolean
+  ipfsHash?: string | null | undefined
   createdAt: string
   parent?:
     | {
@@ -3294,6 +3302,7 @@ export type GetPostQuery = {
     oembedUrl?: string | null | undefined
     hasLiked: boolean
     hasBookmarked: boolean
+    ipfsHash?: string | null | undefined
     createdAt: string
     parent?:
       | {
@@ -3406,6 +3415,7 @@ export type GetProductFeedQuery = {
               oembedUrl?: string | null | undefined
               hasLiked: boolean
               hasBookmarked: boolean
+              ipfsHash?: string | null | undefined
               createdAt: string
               parent?:
                 | {
@@ -3951,6 +3961,7 @@ export type GetTopicFeedQuery = {
               oembedUrl?: string | null | undefined
               hasLiked: boolean
               hasBookmarked: boolean
+              ipfsHash?: string | null | undefined
               createdAt: string
               parent?:
                 | {
@@ -4162,6 +4173,7 @@ export type GetBookmarkFeedQuery = {
                     oembedUrl?: string | null | undefined
                     hasLiked: boolean
                     hasBookmarked: boolean
+                    ipfsHash?: string | null | undefined
                     createdAt: string
                     parent?:
                       | {
@@ -4340,6 +4352,7 @@ export type GetUserFeedQuery = {
                   oembedUrl?: string | null | undefined
                   hasLiked: boolean
                   hasBookmarked: boolean
+                  ipfsHash?: string | null | undefined
                   createdAt: string
                   parent?:
                     | {

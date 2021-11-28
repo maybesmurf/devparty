@@ -10,6 +10,7 @@ import { post } from './type/post'
 import { question } from './type/question'
 import { reply } from './type/reply'
 import { task } from './type/task'
+import { uploadToIPFS } from './uploadToIPFS'
 
 /**
  * Creates a new post
@@ -100,6 +101,8 @@ export const createPost = async (
   if (input?.type === 'REPLY') {
     newPost = await reply(query, input, session, parentId)
   }
+
+  uploadToIPFS(newPost?.id)
 
   return newPost
 }

@@ -124,6 +124,7 @@ CREATE TABLE `posts` (
     `done` BOOLEAN NOT NULL DEFAULT false,
     `type` ENUM('POST', 'TASK', 'QUESTION', 'POLL', 'ISSUE', 'REPLY') NOT NULL DEFAULT 'POST',
     `hidden` BOOLEAN NOT NULL DEFAULT false,
+    `ipfsHash` VARCHAR(46) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,

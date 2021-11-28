@@ -427,6 +427,7 @@ type Post {
   hasLiked: Boolean!
   htmlUrl: String!
   id: ID!
+  ipfsHash: String
   likes(after: String, before: String, first: Int, last: Int): PostLikesConnection!
   nft: NFT
   oembedUrl: String
