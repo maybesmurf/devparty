@@ -47,9 +47,15 @@ const ViewPost: React.FC = () => {
           <PostShimmer />
         </GridItemEight>
         <GridItemFour>
-          <Card>
+          <Card className="mb-5">
             <CardBody>
               <UserProfileShimmer showFollow />
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody className="flex justify-between">
+              <div className="shimmer rounded h-4 w-28" />
+              <div className="shimmer rounded h-4 w-16" />
             </CardBody>
           </Card>
         </GridItemFour>
@@ -80,7 +86,7 @@ const ViewPost: React.FC = () => {
         <div className="space-y-5">
           <UserCard user={post?.user as User} />
           {currentUser?.isStaff && staffMode && <PostMod post={post as Post} />}
-          <Metadata post={post as Post} />
+          <Metadata ipfsHash={post?.ipfsHash as string} />
           {post?.type === 'QUESTION' && <MorePosts post={post as Post} />}
           <Footer />
         </div>

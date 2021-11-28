@@ -12,7 +12,7 @@ const client = create({
  * Upload a post to ipfs
  * @param post - Post to be uploaded to IPFS
  */
-export const storeToIPFS = async (post: Post) => {
+export const uploadToIPFS = async (post: Post) => {
   new Promise(async (resolve) => {
     const { path } = await client.add(
       JSON.stringify({

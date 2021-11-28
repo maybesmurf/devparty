@@ -4,13 +4,13 @@ import { getTopics } from '@graphql/utils/getTopics'
 import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 
-import { storeToIPFS } from './storeToIPFS'
 import { issue } from './type/issue'
 import { poll } from './type/poll'
 import { post } from './type/post'
 import { question } from './type/question'
 import { reply } from './type/reply'
 import { task } from './type/task'
+import { uploadToIPFS } from './uploadToIPFS'
 
 /**
  * Creates a new post
@@ -102,7 +102,7 @@ export const createPost = async (
     newPost = await reply(query, input, session, parentId)
   }
 
-  storeToIPFS(newPost)
+  uploadToIPFS(newPost)
 
   return newPost
 }

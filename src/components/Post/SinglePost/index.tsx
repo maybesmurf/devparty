@@ -54,6 +54,7 @@ export const PostFragment = gql`
     oembedUrl
     hasLiked
     hasBookmarked
+    ipfsHash
     createdAt
     parent {
       id
