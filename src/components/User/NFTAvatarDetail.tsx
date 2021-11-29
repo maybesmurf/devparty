@@ -70,20 +70,20 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
             <h1 className="text-2xl font-semibold">{nft?.name}</h1>
           </div>
           {nft?.description && (
-            <div className="space-y-1 linkify">
+            <div className="space-y-2 linkify">
               <h5 className="font-bold opacity-80">Description</h5>
               <Markdown options={{ wrapper: 'article' }}>
                 {nft?.description}
               </Markdown>
             </div>
           )}
-          <div className="space-y-1">
+          <div className="space-y-2">
             <h5 className="font-bold opacity-80">Attributes</h5>
-            <div className="opacity-70 gap-8 flex flex-wrap">
+            <div className="gap-3 flex flex-wrap">
               {nft?.traits.map((trait, idx) => (
                 <div
                   key={idx}
-                  className="bg-gray-100 rounded-lg dark:bg-gray-900"
+                  className="px-4 py-1 bg-gray-200 rounded-lg dark:bg-gray-900 text-gray-700 dark:text-gray-300"
                 >
                   <div>
                     <span className="text-xs opacity-80">
