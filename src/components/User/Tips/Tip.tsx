@@ -16,12 +16,7 @@ import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
-import {
-  DEV_CONTRACT_ADDRESS,
-  ERROR_MESSAGE,
-  EXPECTED_NETWORK,
-  IS_MAINNET
-} from 'src/constants'
+import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 
 import Sponsor from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
@@ -74,8 +69,6 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           : setError('You are in wrong network, switch to testnet!')
       }
 
-      console.log(DEV_CONTRACT_ADDRESS, getContractAddress(network.toString()))
-
       // Sponsor the user
       const contract = new ethers.Contract(
         getContractAddress(network) as string,
@@ -109,7 +102,6 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       setProgressStatus('COMPLETED')
       toast.success('Sponsor Transaction completed!')
     } catch (error: any) {
-      console.log(error)
       setProgressStatus('NOTSTARTED')
       setTxURL('')
       setError(
