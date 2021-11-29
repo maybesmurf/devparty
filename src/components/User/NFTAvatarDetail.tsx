@@ -3,6 +3,7 @@ import { Spinner } from '@components/UI/Spinner'
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
 import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
+import { OPENSEA_API_URL } from 'src/constants'
 
 type Props = {
   url: string
@@ -38,7 +39,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
 
   const fetchNftDetail = useCallback(async () => {
     const response = await fetch(
-      `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`
+      `${OPENSEA_API_URL}/asset/${contractAddress}/${tokenId}`
     )
     const data = await response.json()
     setNft(data)
