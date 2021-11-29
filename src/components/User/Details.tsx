@@ -32,7 +32,7 @@ import Follow from './Follow'
 import Followerings from './Followerings'
 import Spotify from './Highlights/Spotify'
 import Wakatime from './Highlights/Wakatime'
-import NFTDetail from './NFTDetail'
+import NFTAvatarDetail from './NFTAvatarDetail'
 import OwnedProducts from './OwnedProducts'
 import Social from './Social'
 
@@ -65,7 +65,7 @@ const Details: React.FC<Props> = ({ user }) => {
                 onClose={() => setShowNftDetail(false)}
               >
                 <div className="p-5">
-                  <NFTDetail url={user.profile?.nftSource} />
+                  <NFTAvatarDetail url={user.profile?.nftSource} />
                 </div>
               </Modal>
               <button onClick={() => setShowNftDetail(true)}>

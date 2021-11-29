@@ -31,19 +31,17 @@ export type Trait = {
   value: number
 }
 
-const NFTDetail: React.FC<Props> = ({ url }) => {
+const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
   const { contractAddress, tokenId } = getNFTAddressFromUrl(url)
   const [nft, setNft] = useState<NFT>()
 
   const fetchNftDetail = useCallback(async () => {
-    //   `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`
     const response = await fetch(
-      'https://api.opensea.io/api/v1/asset/0xef3c951e22c65f6256746f4e227e19a5bcbf393c/867'
+      `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`
     )
     const data = await response.json()
     setNft(data)
-  }, [])
-  //   }, [contractAddress, tokenId])
+  }, [contractAddress, tokenId])
 
   useEffect(() => {
     fetchNftDetail()
@@ -117,4 +115,4 @@ const NFTDetail: React.FC<Props> = ({ url }) => {
   )
 }
 
-export default NFTDetail
+export default NFTAvatarDetail
