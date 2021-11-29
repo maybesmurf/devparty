@@ -63,7 +63,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
       <GridItemFour className="h-[350px] mb-5 sm:mb-0">
         <img
           src={nft?.image_url}
-          className="object-cover h-[350px] rounded-lg"
+          className="object-cover h-[350px] rounded-lg bg-gray-500"
           alt={nft?.name}
         />
       </GridItemFour>
