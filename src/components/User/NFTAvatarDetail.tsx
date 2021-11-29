@@ -1,4 +1,5 @@
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
+import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
 
 type Props = {
@@ -35,7 +36,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
 
   const fetchNftDetail = useCallback(async () => {
     const response = await fetch(
-      `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`
+      `https://api.opensea.io/api/v1/asset/${'0xec9c519d49856fd2f8133a0741b4dbe002ce211b'}/${'6554'}`
     )
     const data = await response.json()
     setNft(data)
@@ -69,9 +70,11 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
             <h1 className="text-2xl font-semibold">{nft?.name}</h1>
           </div>
           {nft?.description && (
-            <div className="space-y-1">
+            <div className="space-y-1 linkify">
               <h5 className="font-bold opacity-80">Description</h5>
-              <p className="opacity-70">{nft?.description || '~'}</p>
+              <Markdown options={{ wrapper: 'article' }}>
+                {nft?.description}
+              </Markdown>
             </div>
           )}
           <div className="space-y-1">
