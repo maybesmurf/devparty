@@ -11,6 +11,8 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
     Counters.Counter private _tokenIds;
     mapping(uint256 => string) private _tokenURIs;
 
+    address public constant devparty = 0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3;
+
     constructor() ERC1155("") {}
 
     function contractURI() public pure returns (string memory) {
@@ -66,6 +68,15 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
      */
     function tipUser(address payable recipient) external payable nonReentrant {
         (bool success, ) = recipient.call{value: msg.value}("");
+        require(success, "Transfer failed.");
+    }
+
+    /**
+     * Subscribe to Devparty Pro
+     *
+     */
+    function subscribeToPro() external payable nonReentrant {
+        (bool success, ) = devparty.call{value: msg.value}("");
         require(success, "Transfer failed.");
     }
 }
