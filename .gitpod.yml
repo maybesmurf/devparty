@@ -7,13 +7,10 @@ tasks:
     init: scripts/gp-init.sh
     command: |
       yarn codegen:graphql --watch &
+      npx hardhat node &
+      npx hardhat run scripts/deploy.js --network localhost
       export BASE_URL=`gp url 3000`
       yarn dev
-
-  - name: Hardhat
-    command: |
-      gp await-port 3000
-      npx hardhat node
 
   - command: |
       clear
