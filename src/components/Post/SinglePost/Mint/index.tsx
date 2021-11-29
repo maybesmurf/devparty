@@ -26,7 +26,7 @@ import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
-import NFT from '../../../../../data/abi.json'
+import NFT from '../../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import MintCompleted from './Completed'
 import MintPreview from './Preview'
 import MintProcessing from './Processing'

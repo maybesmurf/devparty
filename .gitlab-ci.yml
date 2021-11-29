@@ -11,6 +11,8 @@ cache:
   paths:
     - node_modules/
     - .next/cache/
+    - artifacts/
+    - cache/
 
 variables:
   MYSQL_ROOT_PASSWORD: root
@@ -62,6 +64,11 @@ typecheck:
 #     - yarn prisma:testseed
 #     - npx playwright test --list
 #     - npx playwright test
+
+hardhat-test:
+  stage: test
+  script:
+    - npx hardhat test
 
 build:
   stage: test

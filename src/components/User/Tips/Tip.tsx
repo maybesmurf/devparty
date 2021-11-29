@@ -18,7 +18,7 @@ import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 
-import Sponsor from '../../../../data/abi.json'
+import Sponsor from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
