@@ -87,7 +87,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
             </Markdown>
           </div>
         )}
-        {(nft?.traits.length as number) > 0 && (
+        {(nft?.traits?.length as number) > 0 && (
           <div className="space-y-2">
             <div className="text-lg text-gray-700 dark:text-gray-300 font-bold">
               Attributes
