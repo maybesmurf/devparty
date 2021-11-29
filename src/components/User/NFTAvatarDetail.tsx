@@ -1,4 +1,5 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
+import { Spinner } from '@components/UI/Spinner'
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
 import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -46,6 +47,14 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
   useEffect(() => {
     fetchNftDetail()
   }, [fetchNftDetail])
+
+  if (!nft)
+    return (
+      <div className="p-5 font-bold text-center space-y-2">
+        <Spinner size="md" className="mx-auto" />
+        <div>Loading avatar details from OpenSea</div>
+      </div>
+    )
 
   return (
     <GridLayout className="!p-5 max-h-[80vh] overflow-y-auto">
