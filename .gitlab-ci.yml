@@ -11,6 +11,8 @@ cache:
   paths:
     - node_modules/
     - .next/cache/
+    - artifacts/
+    - cache/
 
 variables:
   MYSQL_ROOT_PASSWORD: root
