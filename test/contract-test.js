@@ -28,4 +28,13 @@ describe('Devparty Contract', function () {
 
     console.log(token)
   })
+
+  it('should subscribe to pro (subscribeToPro)', async function () {
+    const Devparty = await ethers.getContractFactory('Devparty')
+    const devparty = await Devparty.deploy()
+    await devparty.deployed()
+    const token = await devparty.subscribeToPro()
+
+    console.log(token)
+  })
 })

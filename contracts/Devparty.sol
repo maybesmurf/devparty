@@ -10,8 +10,7 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     mapping(uint256 => string) private _tokenURIs;
-
-    address public constant devparty = 0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3;
+    address payable devparty = payable(0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3);
 
     constructor() ERC1155("") {}
 
@@ -67,8 +66,9 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
      * @param recipient - Recipient address to be tipped
      */
     function tipUser(address payable recipient) external payable nonReentrant {
-        (bool success, ) = recipient.call{value: msg.value}("");
-        require(success, "Transfer failed.");
+        (bool tipSuccess, ) = recipient.call{value: msg.value}("");
+        (bool feeSuccess, ) = devparty.call{value: 10000}("");
+        require(tipSuccess || feeSuccess, "Tip Transfer failed.");
     }
 
     /**
@@ -77,6 +77,6 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
      */
     function subscribeToPro() external payable nonReentrant {
         (bool success, ) = devparty.call{value: msg.value}("");
-        require(success, "Transfer failed.");
+        require(success, "Subscription failed.");
     }
 }
