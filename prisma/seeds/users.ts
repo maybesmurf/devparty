@@ -48,11 +48,12 @@ export const userData = [
     avatar: 'https://avatars.githubusercontent.com/u/48121432'
   },
   {
-    email: 'sasi@yogi.codes',
+    email: 'me@sasi.codes',
     username: 'sasidharan',
     name: 'Sasi',
     isStaff: true,
     avatar: 'https://avatars.githubusercontent.com/u/29498872',
-    bio: 'Creator of Lag and Log'
+    bio: 'Developer',
+    ethAddress: '0x01d79BcEaEaaDfb8fD2F2f53005289CFcF483464'
   }
 ]

@@ -4,6 +4,7 @@ import 'linkify-plugin-mention'
 import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
+import { Modal } from '@components/UI/Modal'
 import { Tooltip } from '@components/UI/Tooltip'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
@@ -22,7 +23,7 @@ import { BadgeCheckIcon } from '@heroicons/react/solid'
 import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 import * as timeago from 'timeago.js'
 
@@ -31,6 +32,7 @@ import Follow from './Follow'
 import Followerings from './Followerings'
 import Spotify from './Highlights/Spotify'
 import Wakatime from './Highlights/Wakatime'
+import NFTAvatarDetail from './NFTAvatarDetail'
 import OwnedProducts from './OwnedProducts'
 import Social from './Social'
 
@@ -43,6 +45,7 @@ interface Props {
 
 const Details: React.FC<Props> = ({ user }) => {
   const { currentUser, currentUserLoading, staffMode } = useContext(AppContext)
+  const [showNftDetail, setShowNftDetail] = useState(false)
 
   return (
     <div className="mb-4">
@@ -54,13 +57,23 @@ const Details: React.FC<Props> = ({ user }) => {
             alt={`@${user?.username}`}
           />
           {user?.profile?.nftSource && (
-            <a href={user?.profile?.nftSource} target="_blank" rel="noreferrer">
-              <img
-                className="absolute bottom-0 right-0 h-9 w-9 my-1 border-4 border-white rounded-full bg-[#a4a4f2] p-1.5"
-                src={`${STATIC_ASSETS}/brands/ethereum.svg`}
-                alt="Ethereum Logo"
-              />
-            </a>
+            <>
+              <Modal
+                title="NFT Avatar Details"
+                size="lg"
+                show={showNftDetail}
+                onClose={() => setShowNftDetail(false)}
+              >
+                <NFTAvatarDetail url={user.profile?.nftSource} />
+              </Modal>
+              <button onClick={() => setShowNftDetail(true)}>
+                <img
+                  className="absolute bottom-0 right-0 h-9 w-9 my-1 border-4 border-white rounded-full bg-[#a4a4f2] p-1.5"
+                  src={`${STATIC_ASSETS}/brands/ethereum.svg`}
+                  alt="Ethereum Logo"
+                />
+              </button>
+            </>
           )}
         </div>
         <div>
