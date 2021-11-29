@@ -37,3 +37,7 @@ prisma/giraphql-types.ts
 # Next PWA
 public/workbox*
 public/sw*
+
+# Hardhat files
+cache
+artifacts

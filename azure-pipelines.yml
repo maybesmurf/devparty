@@ -17,5 +17,8 @@ steps:
   - script: 'yarn generate && yarn typecheck'
     displayName: 'Typecheck'
 
+  - script: 'yarn generate && npx hardhat test'
+    displayName: 'Hardhat Test'
+
   - script: 'yarn build'
     displayName: 'Build'

@@ -63,6 +63,11 @@ typecheck:
 #     - npx playwright test --list
 #     - npx playwright test
 
+hardhat-test:
+  stage: test
+  script:
+    - npx hardhat test
+
 build:
   stage: test
   script:
