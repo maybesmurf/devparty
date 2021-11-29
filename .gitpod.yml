@@ -29,6 +29,8 @@ ports:
     onOpen: ignore
   - port: 3306 # MySQL
     onOpen: ignore
+  - port: 8548 # Hardhat
+    onOpen: ignore
 
 vscode:
   extensions:
