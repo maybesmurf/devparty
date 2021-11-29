@@ -65,6 +65,20 @@ CREATE TABLE `status` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `pro` (
+    `id` VARCHAR(191) NOT NULL,
+    `fromAddress` VARCHAR(191) NOT NULL,
+    `txHash` VARCHAR(191) NOT NULL,
+    `tier` ENUM('ONE_MONTH', 'SIX_MONTHS', 'ONE_YEAR') NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `endsAt` DATETIME(3) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `pro_userId_key`(`userId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `invites` (
     `id` VARCHAR(191) NOT NULL,
     `code` VARCHAR(191) NULL,
