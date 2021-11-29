@@ -1,4 +1,5 @@
 import {
+  DEV_CONTRACT_ADDRESS,
   MAINET_CONTRACT_ADDRESS,
   MATIC_CONTRACT_ADDRESS,
   MUMBAI_CONTRACT_ADDRESS,
@@ -19,5 +20,7 @@ export const getContractAddress = (network: string) => {
     return MATIC_CONTRACT_ADDRESS
   } else if (network === 'maticmum') {
     return MUMBAI_CONTRACT_ADDRESS
+  } else if (network === 'unknown') {
+    return DEV_CONTRACT_ADDRESS
   }
 }

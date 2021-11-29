@@ -13,5 +13,7 @@ export const getTransactionURL = (network: string, txid: string) => {
     return `https://polygonscan.com/tx/${txid}`
   } else if (network === 'maticmum') {
     return `https://mumbai.polygonscan.com/tx/${txid}`
+  } else if (network === 'unknown') {
+    return `https://rinkeby.etherscan.io/tx/${txid}`
   }
 }

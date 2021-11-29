@@ -69,6 +69,8 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           : setError('You are in wrong network, switch to testnet!')
       }
 
+      console.log(getContractAddress(network))
+
       // Sponsor the user
       const contract = new ethers.Contract(
         getContractAddress(network) as string,
@@ -102,6 +104,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       setProgressStatus('COMPLETED')
       toast.success('Sponsor Transaction completed!')
     } catch (error: any) {
+      console.log(error)
       setProgressStatus('NOTSTARTED')
       setTxURL('')
       setError(

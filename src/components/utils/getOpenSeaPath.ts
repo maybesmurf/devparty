@@ -18,5 +18,7 @@ export const getOpenSeaPath = (
     return `assets/matic/${contract}/${token}`
   } else if (network === 'maticmum') {
     return `assets/mumbai/${contract}/${token}`
+  } else if (network === 'unknown') {
+    return `assets/rinkeby/${contract}/${token}`
   }
 }

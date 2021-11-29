@@ -18,7 +18,9 @@ const ViewNFT: React.FC<Props> = ({ nft }) => {
           target="_blank"
           rel="noreferrer"
         >
-          {nft?.network === 'homestead' || nft?.network === 'rinkeby' ? (
+          {nft?.network === 'homestead' ||
+          nft?.network === 'rinkeby' ||
+          nft?.network === 'unknown' ? (
             <img
               className="h-[22px] w-[22px] rounded-full bg-[#a4a4f2] p-1"
               src={`${STATIC_ASSETS}/brands/ethereum.svg`}

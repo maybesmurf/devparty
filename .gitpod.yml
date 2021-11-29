@@ -10,6 +10,9 @@ tasks:
       export BASE_URL=`gp url 3000`
       yarn dev
 
+  - name: Hardhat
+    command: npx hardhat node
+
   - command: |
       clear
       echo "Waiting for server to start 🕒"

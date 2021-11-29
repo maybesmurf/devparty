@@ -3,7 +3,7 @@ import React from 'react'
 // Environments
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 export const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
-export const IS_MAINNET = process.env.IS_MAINNET
+export const IS_MAINNET = process.env.IS_MAINNET === 'true'
 
 // Versions
 export const REACT_VERSION = React.version
@@ -34,10 +34,11 @@ export const MAINET_CONTRACT_ADDRESS = process.env.MAINET_CONTRACT_ADDRESS
 export const RINKEBY_CONTRACT_ADDRESS = process.env.RINKEBY_CONTRACT_ADDRESS
 export const MATIC_CONTRACT_ADDRESS = process.env.MATIC_CONTRACT_ADDRESS
 export const MUMBAI_CONTRACT_ADDRESS = process.env.MUMBAI_CONTRACT_ADDRESS
+export const DEV_CONTRACT_ADDRESS = process.env.DEV_CONTRACT_ADDRESS
 export const INFURA_ID = '3d19324a72854976a7160e0e2ebc9c2b'
 export const EXPECTED_NETWORK = IS_MAINNET
   ? ['homestead', 'matic']
-  : ['rinkeby', 'maticmum']
+  : ['rinkeby', 'maticmum', 'unknown']
 
 // Misc
 export const GRAPHCDN_ENABLED =
