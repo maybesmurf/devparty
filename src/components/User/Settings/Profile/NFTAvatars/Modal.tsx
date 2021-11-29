@@ -73,7 +73,7 @@ const NFTAvatarsModal: React.FC<Props> = ({ ethAddress }) => {
     )
 
   return (
-    <div className="p-5 space-y-2">
+    <div className="p-5 space-y-2 max-h-[80vh] overflow-y-auto">
       <div className="grid gap-3 md:grid-cols-3 grid-cols-2">
         {data?.assets?.map((asset: Record<string, never>) => (
           <div key={asset?.id}>
