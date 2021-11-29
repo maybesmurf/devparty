@@ -45,6 +45,7 @@ model User {
   profile                Profile?
   tip                    Tip?
   invite                 Invite?
+  pro                    Pro?
   status                 Status?
   integrations           Integration?
   likes                  Like[]
@@ -118,6 +119,24 @@ model Status {
 
   // Attributes
   @@map("status")
+}
+
+model Pro {
+  id          String   @id @default(uuid())
+  fromAddress String
+  txHash      String
+  tier        TierType
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  endsAt    DateTime
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  // Attributes
+  @@map("pro")
 }
 
 model Invite {
@@ -545,4 +564,10 @@ enum ReportType {
   USER
   PRODUCT
   COMMUNITY
+}
+
+enum TierType {
+  ONE_MONTH
+  SIX_MONTHS
+  ONE_YEAR
 }

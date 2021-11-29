@@ -3283,7 +3283,15 @@ export type TogglePostLikeMutationVariables = Exact<{
 
 export type TogglePostLikeMutation = {
   __typename?: 'Mutation'
-  togglePostLike?: { __typename?: 'Post'; id: string } | null | undefined
+  togglePostLike?:
+    | {
+        __typename?: 'Post'
+        id: string
+        hasLiked: boolean
+        likes: { __typename?: 'PostLikesConnection'; totalCount: number }
+      }
+    | null
+    | undefined
 }
 
 export type GetPostQueryVariables = Exact<{

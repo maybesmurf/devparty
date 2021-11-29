@@ -146,9 +146,12 @@ const SinglePost: React.FC<Props> = ({
       mutation TogglePostLike($input: TogglePostLikeInput!) {
         togglePostLike(input: $input) {
           id
+          hasLiked
+          likes {
+            totalCount
+          }
         }
       }
-      ${PostFragment}
     `,
     {
       onError(error) {

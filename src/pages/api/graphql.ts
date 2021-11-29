@@ -10,9 +10,10 @@ import {
 } from 'graphql-helix'
 import { IncomingHttpHeaders } from 'http'
 import { NextApiHandler } from 'next'
+import { ERROR_MESSAGE } from 'src/constants'
 
 function getGraphQLCode(error: Error & { code?: number }) {
-  return error.code ?? error.name === 'NotFoundError' ? 404 : null
+  return error?.code ?? error?.name === 'NotFoundError' ? 404 : null
 }
 
 function formatResult(result: ExecutionResult) {
@@ -86,8 +87,8 @@ const handler: NextApiHandler = async (req, res) => {
       res.json(formatResult(result.payload))
     }
   } catch (error: any) {
-    res.status(500)
-    res.end(String(error))
+    console.log(error)
+    res.status(500).json({ message: ERROR_MESSAGE })
   }
 }
 
