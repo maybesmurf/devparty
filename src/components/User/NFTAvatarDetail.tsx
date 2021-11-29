@@ -1,6 +1,7 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Spinner } from '@components/UI/Spinner'
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
+import { ExternalLinkIcon } from '@heroicons/react/outline'
 import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
 import { OPENSEA_API_URL } from 'src/constants'
@@ -78,7 +79,15 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
             )}
             <div className="text-sm opacity-50">{nft?.collection?.name}</div>
           </div>
-          <h1 className="text-2xl font-semibold">{nft?.name}</h1>
+          <a
+            className="flex items-center space-x-3"
+            href={nft?.permalink}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="text-2xl font-semibold">{nft?.name}</div>
+            <ExternalLinkIcon className="h-5 w-5" />
+          </a>
         </div>
         {nft?.description && (
           <div className="space-y-2 linkify">
