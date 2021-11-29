@@ -1,3 +1,4 @@
+import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
 import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -36,7 +37,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
 
   const fetchNftDetail = useCallback(async () => {
     const response = await fetch(
-      `https://api.opensea.io/api/v1/asset/${'0xec9c519d49856fd2f8133a0741b4dbe002ce211b'}/${'6554'}`
+      `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`
     )
     const data = await response.json()
     setNft(data)
@@ -47,38 +48,41 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
   }, [fetchNftDetail])
 
   return (
-    <div className="p-5">
-      <div className="flex flex-row">
-        <div className="h-[350px]">
-          <img
-            src={nft?.image_url}
-            className="object-cover h-[350px] rounded-lg"
-            alt={nft?.name}
-            loading="eager"
-          />
-        </div>
-        <div className="flex-1 space-y-5 px-5">
-          <div className="flex flex-col space-y-2">
-            <div className="flex items-center space-x-2">
-              <img
-                src={nft?.collection?.image_url}
-                className="object-cover h-5 w-5 rounded-lg"
-                alt=""
-              />
-              <h6 className="text-sm opacity-50">{nft?.collection?.name}</h6>
-            </div>
-            <h1 className="text-2xl font-semibold">{nft?.name}</h1>
+    <GridLayout className="!p-5 max-h-[80vh] overflow-y-auto">
+      <GridItemFour className="h-[350px] mb-5 sm:mb-0">
+        <img
+          src={nft?.image_url}
+          className="object-cover h-[350px] rounded-lg"
+          alt={nft?.name}
+        />
+      </GridItemFour>
+      <GridItemEight className="flex-1 space-y-5">
+        <div className="flex flex-col space-y-2">
+          <div className="flex items-center space-x-2">
+            <img
+              src={nft?.collection?.image_url}
+              className="object-cover h-5 w-5 rounded-lg"
+              alt={nft?.collection?.name}
+            />
+            <div className="text-sm opacity-50">{nft?.collection?.name}</div>
           </div>
-          {nft?.description && (
-            <div className="space-y-2 linkify">
-              <h5 className="font-bold opacity-80">Description</h5>
-              <Markdown options={{ wrapper: 'article' }}>
-                {nft?.description}
-              </Markdown>
+          <h1 className="text-2xl font-semibold">{nft?.name}</h1>
+        </div>
+        {nft?.description && (
+          <div className="space-y-2 linkify">
+            <div className="text-lg text-gray-700 dark:text-gray-300 font-bold">
+              Description
             </div>
-          )}
+            <Markdown options={{ wrapper: 'article' }}>
+              {nft?.description}
+            </Markdown>
+          </div>
+        )}
+        {(nft?.traits.length as number) > 0 && (
           <div className="space-y-2">
-            <h5 className="font-bold opacity-80">Attributes</h5>
+            <div className="text-lg text-gray-700 dark:text-gray-300 font-bold">
+              Attributes
+            </div>
             <div className="gap-3 flex flex-wrap">
               {nft?.traits.map((trait, idx) => (
                 <div
@@ -95,9 +99,9 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </GridItemEight>
+    </GridLayout>
   )
 }
 
