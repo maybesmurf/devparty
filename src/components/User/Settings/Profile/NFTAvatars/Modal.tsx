@@ -22,7 +22,7 @@ interface Props {
 const NFTAvatarsModal: React.FC<Props> = ({ ethAddress }) => {
   const router = useRouter()
   const { data, error } = useSWR(
-    `${OPENSEA_API_URL}/assets?format=json&limit=9&offset=0&order_direction=desc&owner=${ethAddress}`,
+    `${OPENSEA_API_URL}/assets?format=json&limit=50&offset=0&order_direction=desc&owner=${ethAddress}`,
     fetcher
   )
   const [editNFTAvatar] = useMutation<

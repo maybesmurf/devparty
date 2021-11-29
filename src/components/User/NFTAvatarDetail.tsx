@@ -69,11 +69,13 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
       <GridItemEight className="flex-1 space-y-5">
         <div className="flex flex-col space-y-2">
           <div className="flex items-center space-x-2">
-            <img
-              src={nft?.collection?.image_url}
-              className="object-cover h-5 w-5 rounded-lg"
-              alt={nft?.collection?.name}
-            />
+            {nft?.collection?.image_url && (
+              <img
+                src={nft?.collection?.image_url}
+                className="object-cover h-5 w-5 rounded-lg"
+                alt={nft?.collection?.name}
+              />
+            )}
             <div className="text-sm opacity-50">{nft?.collection?.name}</div>
           </div>
           <h1 className="text-2xl font-semibold">{nft?.name}</h1>
