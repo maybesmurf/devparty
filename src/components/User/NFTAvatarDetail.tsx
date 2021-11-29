@@ -48,7 +48,7 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
   }, [fetchNftDetail])
 
   return (
-    <div>
+    <div className="p-5">
       <div className="flex flex-row">
         <div className="h-[350px]">
           <img

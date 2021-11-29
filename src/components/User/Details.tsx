@@ -59,14 +59,12 @@ const Details: React.FC<Props> = ({ user }) => {
           {user?.profile?.nftSource && (
             <>
               <Modal
-                title="NFT Details"
+                title="NFT Avatar Details"
                 size="lg"
                 show={showNftDetail}
                 onClose={() => setShowNftDetail(false)}
               >
-                <div className="p-5">
-                  <NFTAvatarDetail url={user.profile?.nftSource} />
-                </div>
+                <NFTAvatarDetail url={user.profile?.nftSource} />
               </Modal>
               <button onClick={() => setShowNftDetail(true)}>
                 <img
