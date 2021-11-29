@@ -1,6 +1,4 @@
 import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
-import { ExternalLinkIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 
 type Props = {
@@ -59,36 +57,30 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
           />
         </div>
         <div className="flex-1 space-y-5 px-5">
-          <div className="flex justify-between">
-            <div className="flex flex-col">
-              <h5 className="text-sm opacity-80">About</h5>
-              <h1 className="text-2xl font-semibold">{nft?.name}</h1>
-              <div className="flex items-center space-x-2">
-                <img
-                  src={nft?.collection?.image_url}
-                  className="object-cover h-5 w-5 rounded-lg"
-                  alt=""
-                />
-                <h6 className="text-sm opacity-50">{nft?.collection?.name}</h6>
-              </div>
+          <div className="flex flex-col space-y-2">
+            <div className="flex items-center space-x-2">
+              <img
+                src={nft?.collection?.image_url}
+                className="object-cover h-5 w-5 rounded-lg"
+                alt=""
+              />
+              <h6 className="text-sm opacity-50">{nft?.collection?.name}</h6>
             </div>
-            <button>
-              <ExternalLinkIcon className="opacity-60 hover:opacity-100 w-5 h-5" />
-            </button>
+            <h1 className="text-2xl font-semibold">{nft?.name}</h1>
           </div>
           {nft?.description && (
             <div className="space-y-1">
-              <h5 className="text-sm opacity-80">Description</h5>
+              <h5 className="font-bold opacity-80">Description</h5>
               <p className="opacity-70">{nft?.description || '~'}</p>
             </div>
           )}
           <div className="space-y-1">
-            <h5 className="text-sm opacity-80">Attributes</h5>
-            <div className="opacity-70 space-x-2 flex flex-wrap">
+            <h5 className="font-bold opacity-80">Attributes</h5>
+            <div className="opacity-70 gap-8 flex flex-wrap">
               {nft?.traits.map((trait, idx) => (
                 <div
                   key={idx}
-                  className="py-2 px-4 bg-gray-100 rounded-lg dark:bg-gray-900"
+                  className="bg-gray-100 rounded-lg dark:bg-gray-900"
                 >
                   <div>
                     <span className="text-xs opacity-80">
@@ -101,15 +93,6 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
             </div>
           </div>
         </div>
-        <Link href={`https://etherscan/token/${nft?.asset_contract.address}`}>
-          <a
-            target="_blank"
-            className="flex items-center space-x-2 hover:underline"
-          >
-            <span>View the transaction</span>
-            <ExternalLinkIcon className="opacity-60 hover:opacity-100 w-5 h-5" />
-          </a>
-        </Link>
       </div>
     </div>
   )
