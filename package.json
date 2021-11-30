@@ -54,7 +54,7 @@
     "linkify-react": "^3.0.4",
     "linkifyjs": "^3.0.4",
     "markdown-to-jsx": "^7.1.5",
-    "next": "^12.0.5-canary.10",
+    "next": "^12.0.5-canary.11",
     "next-iron-session": "^4.2.0",
     "next-pwa": "^5.4.1",
     "next-themes": "^0.0.15",
