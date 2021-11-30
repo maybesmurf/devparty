@@ -26,7 +26,7 @@
     "@ensdomains/ensjs": "^2.0.1",
     "@giraphql/core": "^2.19.0",
     "@giraphql/plugin-directives": "^2.10.1",
-    "@giraphql/plugin-prisma": "^0.13.1",
+    "@giraphql/plugin-prisma": "^0.13.2",
     "@giraphql/plugin-relay": "^2.18.2",
     "@giraphql/plugin-scope-auth": "^2.13.1",
     "@giraphql/plugin-simple-objects": "^2.12.0",
