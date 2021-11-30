@@ -1682,10 +1682,10 @@
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-simple-objects/-/plugin-simple-objects-2.12.0.tgz#17cd632066061112bea27b88106b7683dfe28ac4"
   integrity sha512-YuY5RUw8sYXgW3LBldjSmWxvsdEch9t2ZCe4G3ky0YDIWKgd4F0/p4h80iyl5S8k7sVexvohBwwdxcPFkujxJQ==
 
-"@giraphql/plugin-validation@^2.15.0":
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-validation/-/plugin-validation-2.15.0.tgz#151d1ed5f72267d71e1636130897000773d1a2c7"
-  integrity sha512-1LJUQB5ulx6cJWwXgaU9Gw1LKy4Wjc/ZGTGVFS1qI9o7sQ3EbJPVjcOjZvfe8NGjmQlvK3OVSX/1RPfRC34wyw==
+"@giraphql/plugin-validation@^2.15.1":
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-validation/-/plugin-validation-2.15.1.tgz#bd87675ca4a9505ec3c0fcbda9355f87581f83eb"
+  integrity sha512-FR+qEtw+RuISSC7mKcpvkYSe1K40u2tOfuu5+pGFU25zJSgVXsJQzhiUWjbh1z0OGhrCOoYnHa/LGoUoxh3HSw==
 
 "@graphql-codegen/cli@^2.3.0":
   version "2.3.0"
