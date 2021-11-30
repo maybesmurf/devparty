@@ -1,6 +1,6 @@
 import { Tooltip } from '@components/UI/Tooltip'
-import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
 import { Nft } from '@graphql/types.generated'
+import { getOpenSeaPath } from '@lib/getOpenSeaPath'
 import { IS_MAINNET, STATIC_ASSETS } from 'src/constants'
 
 interface Props {

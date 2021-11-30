@@ -8,14 +8,14 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import Details from '@components/User/Details'
 import AppContext from '@components/utils/AppContext'
-import { formatUsername } from '@components/utils/formatUsername'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import {
   GetProfileReadmeQuery,
   GetUserQuery,
   User
 } from '@graphql/types.generated'
 import { DocumentTextIcon, PencilIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
+import { imagekitURL } from '@lib/imagekitURL'
 import Markdown from 'markdown-to-jsx'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'

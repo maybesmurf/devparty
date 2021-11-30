@@ -1,6 +1,6 @@
 import Join from '@components/Community/Join'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { Community } from '@graphql/types.generated'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 import React from 'react'
 

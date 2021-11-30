@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@components/UI/Card'
-import { formatIPFSHash } from '@components/utils/formatIPFSHash'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
+import { formatIPFSHash } from '@lib/formatIPFSHash'
 import React from 'react'
 
 interface Props {

@@ -1,7 +1,7 @@
 import { Spinner } from '@components/UI/Spinner'
 import { Tooltip } from '@components/UI/Tooltip'
-import { uploadToIPFS } from '@components/utils/uploadToIPFS'
 import { PhotographIcon } from '@heroicons/react/outline'
+import { uploadToIPFS } from '@lib/uploadToIPFS'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 

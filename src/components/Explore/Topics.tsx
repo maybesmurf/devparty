@@ -4,15 +4,15 @@ import { Button } from '@components/UI/Button'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Tooltip } from '@components/UI/Tooltip'
-import { formatUsername } from '@components/utils/formatUsername'
-import { humanize } from '@components/utils/humanize'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetExploreUserQuery } from '@graphql/types.generated'
 import {
   BadgeCheckIcon,
   LoginIcon,
   UserAddIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
+import { humanize } from '@lib/humanize'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 import React from 'react'
 

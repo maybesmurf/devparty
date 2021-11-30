@@ -2,10 +2,7 @@ import 'linkify-plugin-hashtag'
 import 'linkify-plugin-mention'
 
 import { Tooltip } from '@components/UI/Tooltip'
-import { getTextColor } from '@components/utils/getTextColor'
 import { useIssue } from '@components/utils/hooks/useIssue'
-import { humanize } from '@components/utils/humanize'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { Post } from '@graphql/types.generated'
 import {
   CheckCircleIcon,
@@ -13,6 +10,9 @@ import {
   FlagIcon
 } from '@heroicons/react/outline'
 import { CheckCircleIcon as CheckCircleIconSolid } from '@heroicons/react/solid'
+import { getTextColor } from '@lib/getTextColor'
+import { humanize } from '@lib/humanize'
+import { imagekitURL } from '@lib/imagekitURL'
 import Markdown from 'markdown-to-jsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

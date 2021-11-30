@@ -1,7 +1,7 @@
-import { formatUsername } from '@components/utils/formatUsername'
 import Davatar from '@davatar/react'
 import { User } from '@graphql/types.generated'
 import { DuplicateIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 

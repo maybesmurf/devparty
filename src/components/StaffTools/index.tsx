@@ -3,7 +3,6 @@ import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
-import { humanize } from '@components/utils/humanize'
 import { GetStaffStatsQuery } from '@graphql/types.generated'
 import {
   BellIcon,
@@ -22,6 +21,7 @@ import {
   UserIcon,
   UsersIcon
 } from '@heroicons/react/outline'
+import { humanize } from '@lib/humanize'
 import React from 'react'
 
 import Sidebar from './Sidebar'

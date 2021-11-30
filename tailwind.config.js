@@ -9,7 +9,7 @@ module.exports = {
         gray: colors.zinc,
         green: colors.emerald,
         purple: colors.violet,
-        yellow: colors.amber,
+        yellow: colors.yellow,
         brand: colors.violet
       },
       typography(theme) {

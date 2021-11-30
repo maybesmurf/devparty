@@ -7,13 +7,13 @@ import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
 import { TextArea } from '@components/UI/TextArea'
 import ChooseFile from '@components/User/ChooseFile'
-import { uploadToIPFS } from '@components/utils/uploadToIPFS'
 import {
   EditProfileMutation,
   EditProfileMutationVariables,
   User
 } from '@graphql/types.generated'
 import { CheckCircleIcon } from '@heroicons/react/outline'
+import { uploadToIPFS } from '@lib/uploadToIPFS'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'

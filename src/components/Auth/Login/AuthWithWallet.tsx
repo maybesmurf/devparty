@@ -1,11 +1,11 @@
 import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
-import getWeb3Modal from '@components/utils/getWeb3Modal'
 import { useAuthRedirect } from '@components/utils/hooks/useAuthRedirect'
 import {
   AuthWithWalletMutation,
   AuthWithWalletMutationVariables
 } from '@graphql/types.generated'
+import getWeb3Modal from '@lib/getWeb3Modal'
 import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'

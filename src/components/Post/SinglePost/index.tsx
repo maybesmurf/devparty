@@ -4,10 +4,7 @@ import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/UI/Card'
 import { Spinner } from '@components/UI/Spinner'
 import AppContext from '@components/utils/AppContext'
-import { formatUsername } from '@components/utils/formatUsername'
 import { useOembed } from '@components/utils/hooks/useOembed'
-import { humanize } from '@components/utils/humanize'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import {
   Post,
   TogglePostLikeMutation,
@@ -15,6 +12,9 @@ import {
   User
 } from '@graphql/types.generated'
 import { ChatAlt2Icon, SparklesIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
+import { humanize } from '@lib/humanize'
+import { imagekitURL } from '@lib/imagekitURL'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'

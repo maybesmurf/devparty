@@ -3,20 +3,20 @@ import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
 import AppContext from '@components/utils/AppContext'
-import { getContractAddress } from '@components/utils/getContractAddress'
-import { getTransactionURL } from '@components/utils/getTransactionURL'
-import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   TipTier,
   TipUserMutation,
   TipUserMutationVariables
 } from '@graphql/types.generated'
 import { HeartIcon } from '@heroicons/react/outline'
+import { getTransactionURL } from '@lib/getTransactionURL'
+import getWeb3Modal from '@lib/getWeb3Modal'
 import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
+import { getContractAddress } from 'src/lib/getContractAddress'
 
 import Sponsor from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'

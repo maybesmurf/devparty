@@ -1,12 +1,12 @@
 import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
-import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   Integration,
   WalletSettingsMutation,
   WalletSettingsMutationVariables
 } from '@graphql/types.generated'
+import getWeb3Modal from '@lib/getWeb3Modal'
 import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
@@ -20,6 +20,11 @@ interface Props {
 
 const ConnectWallet: React.FC<Props> = ({ integration }) => {
   const { resolvedTheme } = useTheme()
+  const [buttonText, setButtonText] = useState<string>(
+    integration?.ethAddress
+      ? 'Disconnect Ethereum Wallet'
+      : 'Connect Ethereum Wallet'
+  )
   const [error, setError] = useState<boolean>(false)
   const [editWallet] = useMutation<
     WalletSettingsMutation,
@@ -45,28 +50,24 @@ const ConnectWallet: React.FC<Props> = ({ integration }) => {
   )
 
   const connectWallet = async () => {
+    setButtonText('Connecting Wallet...')
     const web3Modal = getWeb3Modal(resolvedTheme || 'light')
     const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
     const address = await web3.getSigner().getAddress()
-
-    editWallet({
-      variables: {
-        input: {
-          ethAddress: address
-        }
-      }
-    })
-
+    await editWallet({ variables: { input: { ethAddress: address } } })
     web3Modal.clearCachedProvider()
+    setButtonText('Disconnect Ethereum Wallet')
     setError(false)
   }
 
-  const disconnectWallet = () => {
-    editWallet({
+  const disconnectWallet = async () => {
+    setButtonText('Disconnecting Wallet...')
+    await editWallet({
       variables: {
         input: { ethAddress: null }
       }
     })
+    setButtonText('Connect Ethereum Wallet')
   }
 
   return (
@@ -86,20 +87,24 @@ const ConnectWallet: React.FC<Props> = ({ integration }) => {
       {integration?.ethAddress ? (
         <Button
           className="w-full"
-          variant="danger"
+          variant={
+            buttonText === 'Disconnecting Wallet...' ? 'warning' : 'danger'
+          }
           type="button"
           onClick={disconnectWallet}
         >
-          Disconnect Wallet
+          {buttonText}
         </Button>
       ) : (
         <Button
           className="w-full"
-          variant="success"
+          variant={
+            buttonText === 'Connecting Wallet...' ? 'warning' : 'success'
+          }
           type="button"
           onClick={connectWallet}
         >
-          Connect Wallet
+          {buttonText}
         </Button>
       )}
     </>

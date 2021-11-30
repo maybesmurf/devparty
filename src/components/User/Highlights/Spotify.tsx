@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import { Card } from '@components/UI/Card'
 import { Tooltip } from '@components/UI/Tooltip'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetSpotifyQuery, User } from '@graphql/types.generated'
+import { imagekitURL } from '@lib/imagekitURL'
 import { STATIC_ASSETS } from 'src/constants'
 
 const GET_SPOTIFY_QUERY = gql`

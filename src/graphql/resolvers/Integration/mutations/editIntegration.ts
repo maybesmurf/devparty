@@ -1,4 +1,5 @@
 import { EditIntegrationInput } from '@graphql/types.generated'
+import getENS from '@lib/getENS'
 import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 
@@ -16,7 +17,10 @@ export const editIntegration = async (
   const data = {
     wakatimeAPIKey: input.wakatimeAPIKey,
     spotifyRefreshToken: input.spotifyRefreshToken,
-    ethAddress: input.ethAddress
+    ethAddress: input.ethAddress,
+    ensAddress: input.ethAddress
+      ? await getENS(input.ethAddress as string)
+      : null
   }
 
   return await db.integration.upsert({

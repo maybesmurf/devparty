@@ -1,9 +1,11 @@
-import { formatUsername } from '@components/utils/formatUsername'
+// @ts-ignore
 import { getRandomCover } from '@graphql/utils/getRandomCover'
+import { formatUsername } from '@lib/formatUsername'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
 import { AUTH_SIGNING_MESSAGE } from 'src/constants'
+import getENS from 'src/lib/getENS'
 
 /**
  * Authenticate a user with Wallet
@@ -21,18 +23,11 @@ export const authWithWallet = async (
     .verifyMessage(`${AUTH_SIGNING_MESSAGE} ${nonce}`, signature)
     .toString()
     .toLowerCase()
-
   const user = await db.user.findFirst({
     ...query,
     where: { integrations: { ethAddress: address } }
   })
-
-  const response = await fetch(
-    `https://deep-index.moralis.io/api/v2/resolve/${address}/reverse`,
-    { headers: { 'X-API-Key': process.env.MORALIS_API_KEY as string } }
-  )
-  const result = await response.json()
-  const ens = result?.name ? result?.name : address
+  const ens = await getENS(address)
 
   if (user) {
     return await db.user.update({

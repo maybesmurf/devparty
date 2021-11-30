@@ -7,12 +7,12 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import { Spinner } from '@components/UI/Spinner'
 import { Tooltip } from '@components/UI/Tooltip'
-import { humanize } from '@components/utils/humanize'
 import {
   GetStaffUsersQuery,
   OnboardUserMutation,
   OnboardUserMutationVariables
 } from '@graphql/types.generated'
+import { humanize } from '@lib/humanize'
 import React from 'react'
 import useInView from 'react-cool-inview'
 import toast from 'react-hot-toast'
