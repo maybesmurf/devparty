@@ -1,4 +1,6 @@
 import { formatUsername } from '@components/utils/formatUsername'
+// @ts-ignore
+import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import { getRandomCover } from '@graphql/utils/getRandomCover'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
@@ -27,12 +29,12 @@ export const authWithWallet = async (
     where: { integrations: { ethAddress: address } }
   })
 
-  const response = await fetch(
-    `https://deep-index.moralis.io/api/v2/resolve/${address}/reverse`,
-    { headers: { 'X-API-Key': process.env.MORALIS_API_KEY as string } }
+  const provider = new ethers.providers.JsonRpcProvider(
+    'https://cloudflare-eth.com'
   )
-  const result = await response.json()
-  const ens = result?.name ? result?.name : address
+  const ensClient = new ENS({ provider, ensAddress: getEnsAddress('1') })
+  const ensData = await ensClient.getName(address)
+  const ens = ensData?.name ? ensData?.name : address
 
   if (user) {
     return await db.user.update({
