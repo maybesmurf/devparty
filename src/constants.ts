@@ -42,9 +42,9 @@ export const EXPECTED_NETWORK = IS_MAINNET
 
 // RPC URLs
 export const MAINET_RPC =
-  'https://mainnet.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b'
+  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet'
 export const RINKEBY_RPC =
-  'https://rinkeby.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b'
+  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby'
 
 // Misc
 export const GRAPHCDN_ENABLED =

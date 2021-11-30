@@ -10,21 +10,21 @@ module.exports = {
 
     // Ethereum Chains
     ethMainnet: {
-      url: 'https://mainnet.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet',
       accounts: [privateKey]
     },
     ethTestnet: {
-      url: 'https://rinkeby.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby',
       accounts: [privateKey]
     },
 
     // Polygon Chains
     polygonMainnet: {
-      url: 'https://polygon-mumbai.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mainnet',
       accounts: [privateKey]
     },
     polygonTestnet: {
-      url: 'https://rpc-matic.maticvigil.com',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mumbai',
       accounts: [privateKey]
     }
   },
