@@ -40,6 +40,20 @@ export const EXPECTED_NETWORK = IS_MAINNET
   ? ['homestead', 'matic']
   : ['rinkeby', 'maticmum', 'unknown']
 
+// RPC URLs
+export const MAINET_RPC =
+  'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+export const RINKEBY_RPC =
+  'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+export const ROPSTEN_RPC =
+  'https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+export const GOERLI_RPC =
+  'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+export const KOVAN_RPC =
+  'https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+export const MUMBAI_RPC = 'https://rpc-mumbai.maticvigil.com'
+export const MATIC_RPC = 'https://rpc-matic.maticvigil.com'
+
 // Misc
 export const GRAPHCDN_ENABLED =
   IS_PRODUCTION && process.env.VERCEL_ENV !== 'preview'
