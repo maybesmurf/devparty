@@ -1,11 +1,11 @@
 import { formatUsername } from '@components/utils/formatUsername'
 // @ts-ignore
-import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import { getRandomCover } from '@graphql/utils/getRandomCover'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
 import { AUTH_SIGNING_MESSAGE } from 'src/constants'
+import getENS from 'src/lib/getENS'
 
 /**
  * Authenticate a user with Wallet
@@ -23,18 +23,11 @@ export const authWithWallet = async (
     .verifyMessage(`${AUTH_SIGNING_MESSAGE} ${nonce}`, signature)
     .toString()
     .toLowerCase()
-
   const user = await db.user.findFirst({
     ...query,
     where: { integrations: { ethAddress: address } }
   })
-
-  const provider = new ethers.providers.JsonRpcProvider(
-    'https://cloudflare-eth.com'
-  )
-  const ensClient = new ENS({ provider, ensAddress: getEnsAddress('1') })
-  const ensData = await ensClient.getName(address)
-  const ens = ensData?.name ? ensData?.name : address
+  const ens = await getENS(address)
 
   if (user) {
     return await db.user.update({
