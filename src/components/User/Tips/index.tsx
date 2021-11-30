@@ -7,7 +7,6 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { PageLoading } from '@components/UI/PageLoading'
 import Details from '@components/User/Details'
 import { formatUsername } from '@components/utils/formatUsername'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import {
   GetUserQuery,
   GetUserTipsQuery,
@@ -15,6 +14,7 @@ import {
   User
 } from '@graphql/types.generated'
 import { CashIcon } from '@heroicons/react/outline'
+import { imagekitURL } from '@lib/imagekitURL'
 import { useRouter } from 'next/router'
 import React from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'

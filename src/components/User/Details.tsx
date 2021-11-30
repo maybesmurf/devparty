@@ -8,7 +8,6 @@ import { Modal } from '@components/UI/Modal'
 import { Tooltip } from '@components/UI/Tooltip'
 import AppContext from '@components/utils/AppContext'
 import { formatUsername } from '@components/utils/formatUsername'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
 import { Profile, User } from '@graphql/types.generated'
 import {
@@ -20,6 +19,7 @@ import {
   SupportIcon
 } from '@heroicons/react/outline'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
+import { imagekitURL } from '@lib/imagekitURL'
 import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'

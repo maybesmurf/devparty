@@ -1,9 +1,9 @@
 import AppContext from '@components/utils/AppContext'
-import { humanize } from '@components/utils/humanize'
 import { Post } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
 import { HeartIcon } from '@heroicons/react/outline'
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid'
+import { humanize } from '@lib/humanize'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 

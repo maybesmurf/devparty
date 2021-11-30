@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import { Spinner } from '@components/UI/Spinner'
-import { humanize } from '@components/utils/humanize'
 import { Community, GetTargetsQuery, Product } from '@graphql/types.generated'
 import { GlobeIcon } from '@heroicons/react/outline'
+import { humanize } from '@lib/humanize'
 
 export const GET_TARGETS_QUERY = gql`
   query GetTargets {

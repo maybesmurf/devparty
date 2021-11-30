@@ -1,6 +1,6 @@
 import Subscribe from '@components/Product/Subscribe'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { Product } from '@graphql/types.generated'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 import React from 'react'
 

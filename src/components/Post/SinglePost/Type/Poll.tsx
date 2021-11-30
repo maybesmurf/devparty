@@ -3,7 +3,6 @@ import 'linkify-plugin-mention'
 
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { Card, CardBody } from '@components/UI/Card'
-import { humanize } from '@components/utils/humanize'
 import { linkifyOptions } from '@components/utils/linkifyOptions'
 import {
   AnswerPollMutation,
@@ -11,6 +10,7 @@ import {
   Post,
   PostPollQuery
 } from '@graphql/types.generated'
+import { humanize } from '@lib/humanize'
 import Linkify from 'linkify-react'
 import React from 'react'
 import toast from 'react-hot-toast'

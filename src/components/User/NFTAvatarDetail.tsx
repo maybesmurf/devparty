@@ -1,7 +1,7 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import { Spinner } from '@components/UI/Spinner'
-import getNFTAddressFromUrl from '@components/utils/getNFTAddressFromUrl'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
+import getNFTAddressFromUrl from '@lib/getNFTAddressFromUrl'
 import Markdown from 'markdown-to-jsx'
 import React, { useCallback, useEffect, useState } from 'react'
 import { OPENSEA_API_URL } from 'src/constants'

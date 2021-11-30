@@ -8,13 +8,13 @@ import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
 import { SuccessMessage } from '@components/UI/SuccessMessage'
 import { TextArea } from '@components/UI/TextArea'
-import { uploadToIPFS } from '@components/utils/uploadToIPFS'
 import {
   EditProductProfileMutation,
   EditProductProfileMutationVariables,
   Product
 } from '@graphql/types.generated'
 import { CheckCircleIcon } from '@heroicons/react/outline'
+import { uploadToIPFS } from '@lib/uploadToIPFS'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'

@@ -1,7 +1,7 @@
 import { Tooltip } from '@components/UI/Tooltip'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { Community } from '@graphql/types.generated'
 import { UsersIcon } from '@heroicons/react/solid'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 import React from 'react'
 

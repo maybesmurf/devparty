@@ -5,10 +5,6 @@ import { Checkbox } from '@components/UI/Checkbox'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
-import getNFTData from '@components/utils/getNFTData'
-import { getOpenSeaPath } from '@components/utils/getOpenSeaPath'
-import { getTransactionURL } from '@components/utils/getTransactionURL'
-import getWeb3Modal from '@components/utils/getWeb3Modal'
 import {
   MintNftMutation,
   MintNftMutationVariables,
@@ -16,6 +12,10 @@ import {
 } from '@graphql/types.generated'
 import { Switch } from '@headlessui/react'
 import { FingerPrintIcon } from '@heroicons/react/outline'
+import getNFTData from '@lib/getNFTData'
+import { getOpenSeaPath } from '@lib/getOpenSeaPath'
+import { getTransactionURL } from '@lib/getTransactionURL'
+import getWeb3Modal from '@lib/getWeb3Modal'
 import clsx from 'clsx'
 import { ethers } from 'ethers'
 import { create, urlSource } from 'ipfs-http-client'

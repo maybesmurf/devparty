@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import { Tooltip } from '@components/UI/Tooltip'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetUserProductsQuery, Product, User } from '@graphql/types.generated'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 
 export const GET_USER_PRODUCTS_QUERY = gql`

@@ -1,9 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
 import { Card, CardBody } from '@components/UI/Card'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
-import { imagekitURL } from '@components/utils/imagekitURL'
 import { GetMorePostsByUserQuery, Post } from '@graphql/types.generated'
 import { CollectionIcon } from '@heroicons/react/outline'
+import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
 import React from 'react'
 

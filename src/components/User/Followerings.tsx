@@ -1,5 +1,5 @@
-import { humanize } from '@components/utils/humanize'
 import { User } from '@graphql/types.generated'
+import { humanize } from '@lib/humanize'
 import Link from 'next/link'
 import React from 'react'
 
