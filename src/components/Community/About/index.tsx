@@ -12,7 +12,6 @@ import Slug from '@components/shared/Slug'
 import { Card } from '@components/UI/Card'
 import { PageLoading } from '@components/UI/PageLoading'
 import AppContext from '@components/utils/AppContext'
-import { formatUsername } from '@components/utils/formatUsername'
 import {
   AddCommunityModeratorMutation,
   AddCommunityModeratorMutationVariables,
@@ -21,6 +20,7 @@ import {
   User
 } from '@graphql/types.generated'
 import { CalendarIcon, GlobeIcon, UsersIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'

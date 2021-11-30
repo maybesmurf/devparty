@@ -1,5 +1,4 @@
 import Slug from '@components/shared/Slug'
-import { formatUsername } from '@components/utils/formatUsername'
 import { Log } from '@graphql/types.generated'
 import {
   CogIcon,
@@ -7,6 +6,7 @@ import {
   LoginIcon,
   LogoutIcon
 } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
 import React from 'react'
 import * as timeago from 'timeago.js'
 

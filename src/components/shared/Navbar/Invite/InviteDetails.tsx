@@ -2,13 +2,13 @@ import { gql, useMutation, useQuery } from '@apollo/client'
 import Slug from '@components/shared/Slug'
 import { Button } from '@components/UI/Button'
 import { Spinner } from '@components/UI/Spinner'
-import { formatUsername } from '@components/utils/formatUsername'
 import {
   GetInviteCodeQuery,
   RegenerateInviteMutation,
   RegenerateInviteMutationVariables
 } from '@graphql/types.generated'
 import { CursorClickIcon, RefreshIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 import { STATIC_ASSETS } from 'src/constants'

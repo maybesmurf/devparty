@@ -1,9 +1,9 @@
 import Slug from '@components/shared/Slug'
 import UserProfileLarge from '@components/shared/UserProfileLarge'
 import { Card, CardBody } from '@components/UI/Card'
-import { formatUsername } from '@components/utils/formatUsername'
 import { Notification } from '@graphql/types.generated'
 import { UserAddIcon } from '@heroicons/react/outline'
+import { formatUsername } from '@lib/formatUsername'
 import React from 'react'
 import * as timeago from 'timeago.js'
 

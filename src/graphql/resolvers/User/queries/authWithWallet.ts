@@ -1,6 +1,6 @@
-import { formatUsername } from '@components/utils/formatUsername'
 // @ts-ignore
 import { getRandomCover } from '@graphql/utils/getRandomCover'
+import { formatUsername } from '@lib/formatUsername'
 import { db } from '@utils/prisma'
 import { ethers } from 'ethers'
 import { md5 } from 'hash-wasm'
