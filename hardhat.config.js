@@ -9,21 +9,21 @@ module.exports = {
     hardhat: { chainId: 1337 },
 
     // Ethereum Chains
-    ethMainnet: {
+    mainnet: {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet',
       accounts: [privateKey]
     },
-    ethTestnet: {
+    testnet: {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby',
       accounts: [privateKey]
     },
 
     // Polygon Chains
-    polygonMainnet: {
+    matic: {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mainnet',
       accounts: [privateKey]
     },
-    polygonTestnet: {
+    mumbai: {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mumbai',
       accounts: [privateKey]
     }
