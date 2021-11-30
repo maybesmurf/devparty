@@ -13,7 +13,7 @@ module.exports = {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet',
       accounts: [privateKey]
     },
-    testnet: {
+    rinkeby: {
       url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby',
       accounts: [privateKey]
     },
