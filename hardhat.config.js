@@ -10,21 +10,21 @@ module.exports = {
 
     // Ethereum Chains
     mainnet: {
-      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet',
+      url: 'https://eth-mainnet.alchemyapi.io/v2/YrakKL9PgzgkHkmGh6Pb6lLQyEITVk4n',
       accounts: [privateKey]
     },
     rinkeby: {
-      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby',
+      url: 'https://eth-rinkeby.alchemyapi.io/v2/M2Al2afJT67g7lHHgJ9q159VFLt_JVNQ',
       accounts: [privateKey]
     },
 
     // Polygon Chains
     matic: {
-      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mainnet',
+      url: 'https://polygon-mainnet.g.alchemy.com/v2/B5oillnkGtn6oiDPI3pOeYpxTvPjzn9C',
       accounts: [privateKey]
     },
     mumbai: {
-      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mumbai',
+      url: 'https://polygon-mumbai.g.alchemy.com/v2/l2CAYeON7QrCZGPU8wbGPoeT0GOxwbJ_',
       accounts: [privateKey]
     }
   },

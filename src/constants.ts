@@ -42,9 +42,9 @@ export const EXPECTED_NETWORK = IS_MAINNET
 
 // RPC URLs
 export const MAINET_RPC =
-  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet'
+  'https://eth-mainnet.alchemyapi.io/v2/YrakKL9PgzgkHkmGh6Pb6lLQyEITVk4n'
 export const RINKEBY_RPC =
-  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby'
+  'https://eth-rinkeby.alchemyapi.io/v2/M2Al2afJT67g7lHHgJ9q159VFLt_JVNQ'
 
 // Misc
 export const GRAPHCDN_ENABLED =
