@@ -9,21 +9,21 @@ module.exports = {
     hardhat: { chainId: 1337 },
 
     // Ethereum Chains
-    mainet: {
-      url: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+    ethMainnet: {
+      url: 'https://mainnet.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
       accounts: [privateKey]
     },
-    rinkeby: {
-      url: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+    ethTestnet: {
+      url: 'https://rinkeby.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
       accounts: [privateKey]
     },
 
     // Polygon Chains
-    mumbai: {
-      url: 'https://rpc-mumbai.maticvigil.com',
+    polygonMainnet: {
+      url: 'https://polygon-mumbai.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b',
       accounts: [privateKey]
     },
-    matic: {
+    polygonTestnet: {
       url: 'https://rpc-matic.maticvigil.com',
       accounts: [privateKey]
     }

@@ -42,11 +42,9 @@ export const EXPECTED_NETWORK = IS_MAINNET
 
 // RPC URLs
 export const MAINET_RPC =
-  'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+  'https://mainnet.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b'
 export const RINKEBY_RPC =
-  'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
-export const MUMBAI_RPC = 'https://rpc-mumbai.maticvigil.com'
-export const MATIC_RPC = 'https://rpc-matic.maticvigil.com'
+  'https://rinkeby.infura.io/v3/3d19324a72854976a7160e0e2ebc9c2b'
 
 // Misc
 export const GRAPHCDN_ENABLED =
