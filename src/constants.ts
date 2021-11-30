@@ -40,6 +40,12 @@ export const EXPECTED_NETWORK = IS_MAINNET
   ? ['homestead', 'matic']
   : ['rinkeby', 'maticmum', 'unknown']
 
+// RPC URLs
+export const MAINET_RPC =
+  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet'
+export const RINKEBY_RPC =
+  'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby'
+
 // Misc
 export const GRAPHCDN_ENABLED =
   IS_PRODUCTION && process.env.VERCEL_ENV !== 'preview'

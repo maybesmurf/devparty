@@ -5,17 +5,26 @@ const privateKey = process.env.METAMASK_PRIVATE_KEY || '01234567890123456789'
 module.exports = {
   defaultNetwork: 'hardhat',
   networks: {
+    // Local Chain
     hardhat: { chainId: 1337 },
+
+    // Ethereum Chains
+    mainnet: {
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/mainnet',
+      accounts: [privateKey]
+    },
     rinkeby: {
-      url: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/eth/rinkeby',
+      accounts: [privateKey]
+    },
+
+    // Polygon Chains
+    matic: {
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mainnet',
       accounts: [privateKey]
     },
     mumbai: {
-      url: 'https://rpc-mumbai.maticvigil.com',
-      accounts: [privateKey]
-    },
-    matic: {
-      url: 'https://rpc-matic.maticvigil.com',
+      url: 'https://speedy-nodes-nyc.moralis.io/ff1274045f2cabf446cb8753/polygon/mumbai',
       accounts: [privateKey]
     }
   },
