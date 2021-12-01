@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write \"./src/**/*.{ts,tsx}\"",
     "prettier:check": "prettier --check \"./src/**/*.{ts,tsx}\"",
-    "generate": "prisma generate && yarn codegen && npx hardhat compile",
+    "generate": "prisma generate && yarn codegen && hardhat compile",
     "prisma:migrate": "prisma migrate dev --preview-feature",
     "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:testseed": "ts-node prisma/testseed.ts",
