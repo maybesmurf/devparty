@@ -39,7 +39,7 @@
     "@tailwindcss/line-clamp": "^0.2.2",
     "@walletconnect/web3-provider": "^1.6.6",
     "clsx": "^1.1.1",
-    "date-fns": "^2.26.0",
+    "date-fns": "^2.27.0",
     "dotenv": "^10.0.0",
     "emoji-mart": "^3.0.1",
     "ethereum-waffle": "^3.4.0",
