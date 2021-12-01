@@ -1,6 +1,6 @@
 require('@nomiclabs/hardhat-waffle')
 
-const privateKey = process.env.METAMASK_PRIVATE_KEY || '01234567890123456789'
+const privateKey = process.env.METAMASK_PRIVATE_KEY || 'ab0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
 
 module.exports = {
   defaultNetwork: 'hardhat',
