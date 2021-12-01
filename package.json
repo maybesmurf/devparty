@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.5",
+    "@chainlink/contracts": "^0.2.2",
     "@davatar/react": "^1.8.1",
     "@ensdomains/ensjs": "^2.0.1",
     "@giraphql/core": "^2.19.1",
