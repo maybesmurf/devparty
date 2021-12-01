@@ -119,7 +119,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
         variant="danger"
         icon={<HeartIcon className="h-5 2-5" />}
         outline
-        disabled={progressStatus === 'PROCESSING'}
+        disabled={progressStatus === 'PROCESSING' || !eth}
         onClick={() => sponsorUser()}
       >
         {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
