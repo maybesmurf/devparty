@@ -30,7 +30,7 @@ const Pro: React.FC = () => {
                   backgroundImage:
                     'url(https://assets.devparty.io/images/patterns/1.svg)'
                 }}
-                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 1
@@ -54,7 +54,7 @@ const Pro: React.FC = () => {
                   backgroundImage:
                     'url(https://assets.devparty.io/images/patterns/2.svg)'
                 }}
-                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 2
@@ -72,8 +72,8 @@ const Pro: React.FC = () => {
                 </p>
               </div>
               <img
-                className="absolute bottom-0 right-0 -mb-5 -mr-5"
-                src="/blob.svg"
+                className="absolute bottom-0 right-0 -mb-3 -mr-3"
+                src="/eth.svg"
                 alt=""
                 width={50}
                 height={50}
@@ -86,7 +86,7 @@ const Pro: React.FC = () => {
                   backgroundImage:
                     'url(https://assets.devparty.io/images/patterns/1.svg)'
                 }}
-                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 3
