@@ -6,8 +6,8 @@ import React from 'react'
 
 const Pro: React.FC = () => {
   return (
-    <div className="onboarding-bg">
-      <section className="px-2 pt-20 bg-white dark:bg-black dark:text-white md:px-0">
+    <div className="bg-gray-100 dark:bg-gray-900">
+      <section className="px-2 pt-20 dark:text-white md:px-0">
         <div className="container items-center max-w-6xl px-5 mx-auto space-y-6 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-left sm:text-5xl md:text-6xl md:text-center">
             <span className="block">
@@ -24,19 +24,19 @@ const Pro: React.FC = () => {
         </div>
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex md:justify-between items-center gap-5">
-            <div className="relative flex flex-col items-center w-full p-2 overflow-hidden bg-gray-800 rounded-lg lg:items-start">
+            <div className="relative flex flex-col max-w-xs items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
-                    'url(https://assets.devparty.io/images/patterns/2.svg)'
+                    'url(https://assets.devparty.io/images/patterns/1.svg)'
                 }}
-                className="flex object-cover bg-brand-500/90 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 1
                 </h1>
               </div>
-              <div className="text-left p-6 text-gray-400">
+              <div className="text-left p-4 text-gray-400">
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
@@ -48,19 +48,19 @@ const Pro: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="relative scale-120 flex flex-col items-center w-full p-2 overflow-hidden text-left md:py-4 md:px-6 bg-gray-900 rounded-lg lg:items-start">
+            <div className="relative transform max-w-xs scale-110 flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-900 rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
                     'url(https://assets.devparty.io/images/patterns/2.svg)'
                 }}
-                className="flex object-cover bg-brand-500/90 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 2
                 </h1>
               </div>
-              <div className="text-left p-6 text-gray-400">
+              <div className="text-left p-4 text-gray-400">
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
@@ -80,19 +80,19 @@ const Pro: React.FC = () => {
                 draggable={false}
               />
             </div>
-            <div className="relative flex flex-col items-center w-full p-2 overflow-hidden text-left md:py-4 md:px-6 bg-gray-900 rounded-lg lg:items-start">
+            <div className="relative max-w-xs flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-900 rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
-                    'url(https://assets.devparty.io/images/patterns/2.svg)'
+                    'url(https://assets.devparty.io/images/patterns/1.svg)'
                 }}
-                className="flex object-cover bg-brand-500/90 rounded-t-lg p-5 flex-row justify-center w-full items-center"
+                className="flex object-cover bg-brand-500/70 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
                 <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
                   Plan 3
                 </h1>
               </div>
-              <div className="text-left p-6 text-gray-400">
+              <div className="text-left p-4 text-gray-400">
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
