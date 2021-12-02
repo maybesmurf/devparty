@@ -1,10 +1,10 @@
 import { TipTier } from '@graphql/types.generated'
-import React from 'react'
-import useSWR from 'swr'
+import { aggregatorV3InterfaceABI } from '@lib/abis/aggregatorV3InterfaceABI'
+import { BigNumber, ethers } from 'ethers'
+import React, { useEffect, useState } from 'react'
+import { MAINNET_RPC } from 'src/constants'
 
 import SingleTier from './SingleTier'
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 interface Props {
   tiers: TipTier[]
@@ -12,10 +12,26 @@ interface Props {
 }
 
 const TipTiers: React.FC<Props> = ({ tiers, address }) => {
-  const { data } = useSWR(
-    'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=eth',
-    fetcher
-  )
+  const [ethPrice, setEthPrice] = useState<string>('')
+
+  useEffect(() => {
+    loadPriceOracle()
+  })
+
+  const loadPriceOracle = () => {
+    const provider = new ethers.providers.JsonRpcProvider(MAINNET_RPC)
+    const addr = 'eth-usd.data.eth'
+    const priceFeed = new ethers.Contract(
+      addr,
+      aggregatorV3InterfaceABI,
+      provider
+    )
+    priceFeed.latestRoundData().then((roundData: any) => {
+      setEthPrice(
+        (BigNumber.from(roundData[1]).toNumber() / 10 ** 8).toString()
+      )
+    })
+  }
 
   return (
     <div className="mt-5">
@@ -24,7 +40,7 @@ const TipTiers: React.FC<Props> = ({ tiers, address }) => {
       <div className="!mt-0 divide-y">
         {tiers?.map((tier) => (
           <SingleTier
-            convData={data}
+            ethPrice={ethPrice}
             key={tier?.id}
             tier={tier as TipTier}
             address={address}

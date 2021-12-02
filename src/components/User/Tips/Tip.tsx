@@ -80,7 +80,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           .parseEther(
             ['matic', 'maticmum'].includes(network)
               ? tier?.amount?.toString()
-              : eth.toString()
+              : eth.toFixed(5)
           )
           // @ts-ignore
           .toString(10)
@@ -102,6 +102,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       setProgressStatus('COMPLETED')
       toast.success('Sponsor Transaction completed!')
     } catch (error: any) {
+      console.log(error)
       setProgressStatus('NOTSTARTED')
       setTxURL('')
       setError(
@@ -118,7 +119,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
         variant="danger"
         icon={<HeartIcon className="h-5 2-5" />}
         outline
-        disabled={progressStatus === 'PROCESSING'}
+        disabled={progressStatus === 'PROCESSING' || !eth}
         onClick={() => sponsorUser()}
       >
         {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
