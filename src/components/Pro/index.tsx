@@ -24,52 +24,56 @@ const Pro: React.FC = () => {
         </div>
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex md:justify-between items-center gap-5">
-            <div className="relative flex flex-col max-w-xs items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start">
+            <div className="relative flex flex-col max-w-xs w-full items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
-                    'url(https://assets.devparty.io/images/patterns/1.svg)'
+                    'url(https://assets.devparty.io/images/patterns/1.svg)',
+                  backgroundSize: '200%'
                 }}
                 className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
-                <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
-                  Plan 1
+                <h1 className="text-lg text-center text-black leading-snug text-light md:text-2xl">
+                  1 Month
                 </h1>
               </div>
-              <div className="text-left p-4 text-gray-400">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever.Lorem Ipsum is simply dummy text of
-                  the printing and typesetting industry. Lorem Ipsum has been
-                  the industry's standard dummy text ever.Lorem Ipsum is simply
-                  dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever.
-                </p>
+              <div className="text-left p-4 dark:bg-black w-full text-gray-400">
+                <h1 className="text-center p-5 text-4xl dark:text-white font-bold">
+                  Ξ 0.05
+                </h1>
+                <ul className="!list-disc !list-inside space-y-2">
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                </ul>
               </div>
             </div>
-            <div className="relative transform max-w-xs scale-110 flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-900 rounded-lg lg:items-start">
+            <div className="relative transform max-w-xs scale-110 flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-800 rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
-                    'url(https://assets.devparty.io/images/patterns/2.svg)'
+                    'url(https://assets.devparty.io/images/patterns/2.svg)',
+                  backgroundSize: '200%'
                 }}
                 className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
-                <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
-                  Plan 2
+                <h1 className="text-lg text-center leading-snug text-black text-light md:text-2xl">
+                  6 Month
                 </h1>
               </div>
-              <div className="text-left p-4 text-gray-400">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever.Lorem Ipsum is simply dummy text of
-                  the printing and typesetting industry. Lorem Ipsum has been
-                  the industry's standard dummy text ever.Lorem Ipsum is simply
-                  dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever.
-                </p>
+              <div className="text-left p-4 w-full dark:bg-black text-gray-400">
+                <h1 className="text-center p-5 text-4xl dark:text-white font-bold">
+                  Ξ 0.1
+                </h1>
+                <ul className="!list-disc !list-inside space-y-2">
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                </ul>
               </div>
               <img
                 className="absolute bottom-0 right-0 -mb-3 -mr-3"
@@ -80,28 +84,30 @@ const Pro: React.FC = () => {
                 draggable={false}
               />
             </div>
-            <div className="relative max-w-xs flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-900 rounded-lg lg:items-start">
+            <div className="relative max-w-xs flex flex-col items-center w-full p-2 overflow-hidden text-left bg-white dark:bg-gray-800 rounded-lg lg:items-start">
               <div
                 style={{
                   backgroundImage:
-                    'url(https://assets.devparty.io/images/patterns/1.svg)'
+                    'url(https://assets.devparty.io/images/patterns/1.svg)',
+                  backgroundSize: '200%'
                 }}
                 className="flex object-cover shadow bg-indigo-300 rounded-t-lg p-5 flex-row justify-center w-full items-center"
               >
-                <h1 className="text-lg text-center leading-snug text-light md:text-2xl">
-                  Plan 3
+                <h1 className="text-lg text-center leading-snug text-black text-light md:text-2xl">
+                  1 Year
                 </h1>
               </div>
-              <div className="text-left p-4 text-gray-400">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever.Lorem Ipsum is simply dummy text of
-                  the printing and typesetting industry. Lorem Ipsum has been
-                  the industry's standard dummy text ever.Lorem Ipsum is simply
-                  dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever.
-                </p>
+              <div className="text-left p-4 w-full dark:bg-black text-gray-400">
+                <h1 className="text-center p-5 text-4xl dark:text-white font-bold">
+                  Ξ 0.2
+                </h1>
+                <ul className="!list-disc !list-inside space-y-2">
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                  <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+                </ul>
               </div>
             </div>
           </div>
