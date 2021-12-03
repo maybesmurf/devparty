@@ -43,10 +43,8 @@ const Pro: React.FC = () => {
               <div
                 key={idx}
                 className={clsx(
-                  'relative mx-auto flex flex-col max-w-xs w-full items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start',
-                  {
-                    'transform md:scale-110': prefered
-                  }
+                  'relative mx-auto flex flex-col max-w-xs w-full items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start border',
+                  { 'transform md:scale-110': prefered }
                 )}
               >
                 {prefered && (
@@ -96,8 +94,8 @@ const Pro: React.FC = () => {
           <h1 className="text-2xl font-extrabold tracking-tight text-left sm:text-3xl md:text-4xl md:text-center">
             what people frequently ask about us?
           </h1>
-          <div className="flex flex-wrap items-center -mx-3 py-16">
-            <div className="w-full max-w-xl p-2 mx-auto bg-white dark:bg-black rounded-lg">
+          <div className="flex flex-wrap items-center py-16">
+            <div className="w-full max-w-xl p-2 mx-auto rounded-lg border">
               <Disclosure>
                 {({ open }) => (
                   <>
