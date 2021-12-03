@@ -6,6 +6,27 @@ import clsx from 'clsx'
 import React from 'react'
 
 const Pro: React.FC = () => {
+  const tiers = [
+    {
+      validity: '1 Month',
+      amount: 0.05,
+      preferred: false,
+      bgImage: '1'
+    },
+    {
+      validity: '6 Month',
+      amount: 0.1,
+      preferred: true,
+      bgImage: '2'
+    },
+    {
+      validity: '1 Year',
+      amount: 0.2,
+      preferred: false,
+      bgImage: '1'
+    }
+  ]
+
   return (
     <div className="bg-gray-100 dark:bg-gray-900">
       <section className="px-2 pt-20 dark:text-white md:px-0">
@@ -25,26 +46,7 @@ const Pro: React.FC = () => {
         </div>
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between items-center gap-5">
-            {[
-              {
-                validity: '1 Month',
-                amount: 0.05,
-                preferred: false,
-                bgImage: '1'
-              },
-              {
-                validity: '6 Month',
-                amount: 0.1,
-                preferred: true,
-                bgImage: '2'
-              },
-              {
-                validity: '1 Year',
-                amount: 0.2,
-                preferred: false,
-                bgImage: '1'
-              }
-            ].map(({ validity, amount, preferred, bgImage }, idx) => (
+            {tiers.map(({ validity, amount, preferred, bgImage }, idx) => (
               <div
                 key={idx}
                 className={clsx(
