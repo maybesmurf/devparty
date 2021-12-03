@@ -65,11 +65,11 @@ const Pro: React.FC = () => {
                     {validity}
                   </div>
                 </div>
-                <div className="text-left p-4 space-y-5 dark:bg-black w-full text-gray-400">
-                  <div className="text-center p-5 text-5xl text-black dark:text-white font-bold">
+                <div className="p-4 space-y-5">
+                  <div className="text-center text-5xl font-bold">
                     <span className="text-3xl">Ξ</span> {amount}
                   </div>
-                  <ul className="!list-disc !list-inside space-y-2">
+                  <ul className="text-left !list-disc !list-inside space-y-2 w-full text-gray-400">
                     <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
                     <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
                     <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
