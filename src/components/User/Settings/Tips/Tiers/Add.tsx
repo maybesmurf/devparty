@@ -93,10 +93,10 @@ const AddTier: React.FC<Props> = ({
           </div>
           <div>
             <Input
-              label="Amount in MATIC"
+              label="Amount in USD"
               type="number"
               placeholder="5"
-              prefix="MATIC"
+              prefix="USD"
               {...form.register('amount')}
             />
           </div>
