@@ -42,6 +42,10 @@ builder.mutationField('tipUser', (t) =>
         .toString()
         .toLowerCase()
 
+      if (address.toLowerCase() !== input.dispatcherAddress.toLowerCase()) {
+        throw new Error('Address mismatch')
+      }
+
       return await db.tipping.create({
         ...query,
         data: {
