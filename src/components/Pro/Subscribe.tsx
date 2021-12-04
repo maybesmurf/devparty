@@ -7,7 +7,12 @@ import { providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, IS_MAINNET, OWNER_ADDRESS } from 'src/constants'
+import {
+  ERROR_MESSAGE,
+  IS_MAINNET,
+  OWNER_ADDRESS,
+  SIGNING_MESSAGE
+} from 'src/constants'
 
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
@@ -36,7 +41,7 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
 
       // Get tx confirmation from the user
       setShowTxModal(true)
-      setProgressStatusText('Please confirm the transaction in wallet')
+      setProgressStatusText('Generating unique signature')
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
       const EXPECTED_NETWORK = IS_MAINNET ? ['matic'] : ['maticmum']
@@ -48,7 +53,20 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
           : setError('You are in wrong network, switch to mumbai testnet!')
       }
 
+      // Get signature from the user
+      const address = await web3.getSigner().getAddress()
+      const response = await fetch(`/api/auth/getNonce?address=${address}`)
+      const data = await response.json()
+      setProgressStatusText('Please sign to confirm ownership')
+      const signature = await web3
+        .getSigner()
+        .provider.send('personal_sign', [
+          `${SIGNING_MESSAGE} ${data?.nonce}`,
+          address
+        ])
+
       // Subscribe to Devparty
+      setProgressStatusText('Please confirm the transaction in wallet')
       const transaction = await signer.sendTransaction({
         to: OWNER_ADDRESS,
         value: utils
