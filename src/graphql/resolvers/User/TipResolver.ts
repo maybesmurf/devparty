@@ -18,7 +18,7 @@ builder.prismaObject('Tip', {
       cursor: 'id',
       totalCount: true,
       query: () => ({
-        orderBy: { createdAt: 'desc' }
+        orderBy: { amount: 'asc' }
       })
     })
   })
