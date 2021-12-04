@@ -66,9 +66,8 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
      * @param recipient - Recipient address to be tipped
      */
     function tipUser(address payable recipient) external payable nonReentrant {
-        (bool tipSuccess, ) = recipient.call{value: msg.value}("");
-        (bool feeSuccess, ) = devparty.call{value: 10000}("");
-        require(tipSuccess || feeSuccess, "Tip Transfer failed.");
+        (bool success, ) = recipient.call{value: msg.value}("");
+        require(success, "Tip Transfer failed.");
     }
 
     /**
