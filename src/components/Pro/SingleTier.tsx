@@ -1,9 +1,8 @@
-import { Button } from '@components/UI/Button'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
-const Tip = dynamic(() => import('./Tip'), {
+const Subscribe = dynamic(() => import('./Subscribe'), {
   loading: () => <div className="w-20 h-9 rounded-lg shimmer" />
 })
 
@@ -49,9 +48,7 @@ const SingleTier: React.FC<Props> = ({
           <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
           <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
         </ul>
-        <Button className="w-full" size="lg">
-          Try it
-        </Button>
+        <Subscribe amount={amount} eth={1.0} />
       </div>
     </div>
   )

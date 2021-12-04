@@ -1,14 +1,7 @@
-import { gql, useMutation } from '@apollo/client'
 import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
 import AppContext from '@components/utils/AppContext'
-import {
-  TipTier,
-  TipUserMutation,
-  TipUserMutationVariables
-} from '@graphql/types.generated'
-import { HeartIcon } from '@heroicons/react/outline'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
 import { ethers } from 'ethers'
@@ -18,17 +11,16 @@ import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 import { getContractAddress } from 'src/lib/getContractAddress'
 
-import Sponsor from '../../../artifacts/contracts/Devparty.sol/Devparty.json'
+import SubscribeTier from '../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
 interface Props {
-  tier: TipTier
-  address: string
+  amount: string
   eth: number
 }
 
-const Tip: React.FC<Props> = ({ tier, address, eth }) => {
+const Subscribe: React.FC<Props> = ({ amount, eth }) => {
   const { currentUser } = useContext(AppContext)
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
@@ -38,17 +30,8 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   const [txURL, setTxURL] = useState<string>()
   const [error, setError] = useState<string | undefined>()
   const { resolvedTheme } = useTheme()
-  const [tipUser] = useMutation<TipUserMutation, TipUserMutationVariables>(
-    gql`
-      mutation TipUser($input: TipUserInput!) {
-        tipUser(input: $input) {
-          id
-        }
-      }
-    `
-  )
 
-  const sponsorUser = async () => {
+  const subscribe = async () => {
     try {
       setProgressStatus('PROCESSING')
       setTxURL('')
@@ -69,38 +52,25 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           : setError('You are in wrong network, switch to testnet!')
       }
 
-      // Sponsor the user
+      // Subscribe to Devparty
       const contract = new ethers.Contract(
         getContractAddress(network) as string,
-        Sponsor.abi,
+        SubscribeTier.abi,
         signer
       )
-      const transaction = await contract.tipUser(address, {
+      const transaction = await contract.subscribeToPro({
         value: ethers.utils
           .parseEther(
-            ['matic', 'maticmum'].includes(network)
-              ? tier?.amount?.toString()
-              : eth.toFixed(5)
+            ['matic', 'maticmum'].includes(network) ? amount : eth.toFixed(5)
           )
           // @ts-ignore
           .toString(10)
       })
       setProgressStatusText('Transaction is being processed')
       setTxURL(getTransactionURL(network, transaction.hash))
-      tipUser({
-        variables: {
-          input: {
-            txHash: transaction.hash,
-            tierId: tier?.id,
-            receiverAddress: address,
-            dispatcherAddress: transaction.from,
-            userId: currentUser?.id as string
-          }
-        }
-      })
       await transaction.wait()
       setProgressStatus('COMPLETED')
-      toast.success('Sponsor Transaction completed!')
+      toast.success('Subscribe Transaction completed!')
     } catch (error: any) {
       console.log(error)
       setProgressStatus('NOTSTARTED')
@@ -116,17 +86,16 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   return (
     <div>
       <Button
-        variant="danger"
-        icon={<HeartIcon className="h-5 2-5" />}
-        outline
+        className="w-full"
+        size="lg"
         disabled={progressStatus === 'PROCESSING' || !eth}
-        onClick={() => sponsorUser()}
+        onClick={() => subscribe()}
       >
-        {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
+        {progressStatus === 'PROCESSING' ? 'Processing' : 'Try now'}
       </Button>
       <Modal
         onClose={() => setShowTxModal(!showTxModal)}
-        title="Sponsor Progress"
+        title="Subscription Progress"
         show={showTxModal}
       >
         <div className="p-5">
@@ -151,4 +120,4 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   )
 }
 
-export default Tip
+export default Subscribe

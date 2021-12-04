@@ -18,7 +18,7 @@ import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
 import { getContractAddress } from 'src/lib/getContractAddress'
 
-import Sponsor from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
+import TipUser from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
@@ -48,7 +48,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
     `
   )
 
-  const sponsorUser = async () => {
+  const handleTipUser = async () => {
     try {
       setProgressStatus('PROCESSING')
       setTxURL('')
@@ -69,10 +69,10 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           : setError('You are in wrong network, switch to testnet!')
       }
 
-      // Sponsor the user
+      // Tip the user
       const contract = new ethers.Contract(
         getContractAddress(network) as string,
-        Sponsor.abi,
+        TipUser.abi,
         signer
       )
       const transaction = await contract.tipUser(address, {
@@ -100,7 +100,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       })
       await transaction.wait()
       setProgressStatus('COMPLETED')
-      toast.success('Sponsor Transaction completed!')
+      toast.success('Tip Transaction completed!')
     } catch (error: any) {
       console.log(error)
       setProgressStatus('NOTSTARTED')
@@ -120,13 +120,13 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
         icon={<HeartIcon className="h-5 2-5" />}
         outline
         disabled={progressStatus === 'PROCESSING' || !eth}
-        onClick={() => sponsorUser()}
+        onClick={() => handleTipUser()}
       >
         {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
       </Button>
       <Modal
         onClose={() => setShowTxModal(!showTxModal)}
-        title="Sponsor Progress"
+        title="Tipping Progress"
         show={showTxModal}
       >
         <div className="p-5">
