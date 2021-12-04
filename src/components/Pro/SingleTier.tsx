@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import Markdown from 'markdown-to-jsx'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -7,19 +8,23 @@ const Subscribe = dynamic(() => import('./Subscribe'), {
 })
 
 interface Props {
+  name: string
   amount: string
   usdPrice: string
   validity: string
   preferred: boolean
   bgImage: string
+  tiers: string[]
 }
 
 const SingleTier: React.FC<Props> = ({
+  name,
   amount,
   usdPrice,
   validity,
   preferred,
-  bgImage
+  bgImage,
+  tiers
 }) => {
   const usd = (parseFloat(usdPrice) * parseFloat(amount)).toFixed(2)
 
@@ -38,10 +43,13 @@ const SingleTier: React.FC<Props> = ({
         className="flex object-cover shadow bg-brand-300 rounded-t-lg p-6 flex-row justify-center w-full items-center"
       >
         <div className="text-lg text-center text-black leading-snug text-light md:text-2xl">
+          {name}
+        </div>
+        <div className="text-lg text-center text-black leading-snug text-light md:text-2xl">
           {validity}
         </div>
       </div>
-      <div className="p-4 space-y-5">
+      <div className="p-4 space-y-5 w-full">
         <div className="font-bold space-y-2">
           <div className="text-3xl inline-flex items-center space-x-2">
             <img
@@ -49,7 +57,12 @@ const SingleTier: React.FC<Props> = ({
               src="https://assets.devparty.io/images/brands/polygon.svg"
               alt="Polygon Logo"
             />
-            <span>{amount}</span>
+            <span>
+              {amount}{' '}
+              <span className="text-sm font-normal text-gray-500">
+                one time
+              </span>
+            </span>
           </div>
           {usdPrice ? (
             <div className="text-gray-500">{usd} USD</div>
@@ -57,10 +70,13 @@ const SingleTier: React.FC<Props> = ({
             <div className="shimmer h-4 w-10 rounded mx-auto" />
           )}
         </div>
-        <ul className="text-left !list-disc !list-inside space-y-2 w-full text-gray-400">
-          <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-          <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-          <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
+
+        <ul className="space-y-2 text-gray-500">
+          {tiers.map((tier) => (
+            <li key={Math.random()}>
+              <Markdown options={{ wrapper: 'article' }}>{tier}</Markdown>
+            </li>
+          ))}
         </ul>
         <Subscribe amount={amount} />
       </div>

@@ -29,6 +29,27 @@ const Pro: React.FC = () => {
     })
   }
 
+  const ONE_MONTH = [
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!'
+  ]
+
+  const SIX_MONTHS = [
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!'
+  ]
+
+  const ONE_YEAR = [
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!',
+    'Hello, World!'
+  ]
+
   return (
     <div className="bg-gray-100 dark:bg-gray-900">
       <section className="px-2 pt-20 dark:text-white md:px-0">
@@ -49,25 +70,31 @@ const Pro: React.FC = () => {
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between items-center gap-5">
             <SingleTier
+              name="Yoginth"
               validity="1 Month"
               amount="20"
               usdPrice={usdPrice}
               preferred={false}
               bgImage="1"
+              tiers={ONE_MONTH}
             />
             <SingleTier
+              name="Yoginth"
               validity="6 Months"
               amount="50"
               usdPrice={usdPrice}
               preferred={true}
               bgImage="1"
+              tiers={SIX_MONTHS}
             />
             <SingleTier
+              name="Yoginth"
               validity="1 Year"
               amount="100"
               usdPrice={usdPrice}
               preferred={false}
               bgImage="1"
+              tiers={ONE_YEAR}
             />
           </div>
         </section>
