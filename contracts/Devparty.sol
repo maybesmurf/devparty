@@ -12,9 +12,6 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
     mapping(uint256 => string) private _tokenURIs;
     address payable devparty = payable(0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3);
 
-    event TipUser(address indexed from, address indexed to, uint value);
-    event Subscribe(address indexed from, uint value);
-
     constructor() ERC1155("") {}
 
     function contractURI() public pure returns (string memory) {
@@ -61,28 +58,5 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
         _setTokenURI(newItemId, uri);
 
         return newItemId;
-    }
-
-    /**
-     * Tip a user
-     *
-     * @param recipient - Recipient address to be tipped
-     */
-    function tipUser(address payable recipient) external payable nonReentrant {
-        require(msg.value > 0, 'Tip should be greater than 0');
-        recipient.transfer(msg.value);
-
-        emit TipUser(msg.sender, recipient, msg.value);
-    }
-
-    /**
-     * Subscribe to Devparty Pro
-     *
-     */
-    function subscribeToPro() external payable nonReentrant {
-        require(msg.value > 0, 'Amount should be greater than 0');
-        devparty.transfer(msg.value);
-
-        emit Subscribe(msg.sender, msg.value);
     }
 }
