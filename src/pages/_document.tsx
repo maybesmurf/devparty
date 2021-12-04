@@ -1,20 +1,7 @@
-import Document, {
-  DocumentContext,
-  DocumentProps,
-  Head,
-  Html,
-  Main,
-  NextScript
-} from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 
-type Props = Record<string, unknown> & DocumentProps
-
-class DevpartyDocument extends Document<Props> {
-  static async getInitialProps(context: DocumentContext) {
-    const initialProps = await Document.getInitialProps(context)
-    return { ...initialProps }
-  }
-
+// @ts-ignore
+class DevpartyDocument extends Document {
   render() {
     return (
       <Html lang="en">
