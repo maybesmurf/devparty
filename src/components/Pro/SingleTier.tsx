@@ -1,10 +1,13 @@
+import { Button } from '@components/UI/Button'
+import AppContext from '@components/utils/AppContext'
 import clsx from 'clsx'
 import Markdown from 'markdown-to-jsx'
 import dynamic from 'next/dynamic'
-import React from 'react'
+import Link from 'next/link'
+import React, { useContext } from 'react'
 
 const Subscribe = dynamic(() => import('./Subscribe'), {
-  loading: () => <div className="w-20 h-9 rounded-lg shimmer" />
+  loading: () => <div className="w-full h-9 rounded-lg shimmer" />
 })
 
 interface Props {
@@ -26,6 +29,7 @@ const SingleTier: React.FC<Props> = ({
   bgImage,
   tiers
 }) => {
+  const { currentUser, currentUserLoading } = useContext(AppContext)
   const usd = (parseFloat(usdPrice) * parseFloat(amount)).toFixed(2)
 
   return (
@@ -74,7 +78,21 @@ const SingleTier: React.FC<Props> = ({
             </li>
           ))}
         </ul>
-        <Subscribe amount={amount} />
+        {currentUserLoading ? (
+          <div className="w-full h-9 rounded-lg shimmer" />
+        ) : currentUser ? (
+          <Subscribe amount={amount} />
+        ) : (
+          <div>
+            <Link href="/login" passHref>
+              <a href="/login">
+                <Button className="w-full" size="lg">
+                  Login to continue
+                </Button>
+              </a>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )
