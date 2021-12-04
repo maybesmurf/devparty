@@ -61,7 +61,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
 
       // Get tx confirmation from the user
       setShowTxModal(true)
-      setProgressStatusText('Please sign to confirm ownership')
+      setProgressStatusText('Generating unique signature')
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
 
@@ -76,6 +76,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       const address = await web3.getSigner().getAddress()
       const response = await fetch(`/api/auth/getNonce?address=${address}`)
       const data = await response.json()
+      setProgressStatusText('Please sign to confirm ownership')
       const signature = await web3
         .getSigner()
         .provider.send('personal_sign', [
