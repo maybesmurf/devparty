@@ -11,14 +11,12 @@ import {
 import { HeartIcon } from '@heroicons/react/outline'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
-import { Contract, providers, utils } from 'ethers'
+import { providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
-import { getContractAddress } from 'src/lib/getContractAddress'
 
-import TipUser from '../../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
@@ -70,12 +68,8 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       }
 
       // Tip the user
-      const contract = new Contract(
-        getContractAddress(network) as string,
-        TipUser.abi,
-        signer
-      )
-      const transaction = await contract.tipUser(address, {
+      const transaction = await signer.sendTransaction({
+        to: address,
         value: utils
           .parseEther(
             ['matic', 'maticmum'].includes(network)

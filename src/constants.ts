@@ -29,12 +29,13 @@ export const OPENSEA_API_URL = `https://${
   IS_MAINNET ? 'api' : 'testnets-api'
 }.opensea.io/api/v1`
 
-// NFT
+// Webb3
 export const MAINET_CONTRACT_ADDRESS = process.env.MAINET_CONTRACT_ADDRESS
 export const RINKEBY_CONTRACT_ADDRESS = process.env.RINKEBY_CONTRACT_ADDRESS
 export const MATIC_CONTRACT_ADDRESS = process.env.MATIC_CONTRACT_ADDRESS
 export const MUMBAI_CONTRACT_ADDRESS = process.env.MUMBAI_CONTRACT_ADDRESS
 export const DEV_CONTRACT_ADDRESS = process.env.DEV_CONTRACT_ADDRESS
+export const OWNER_ADDRESS = '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
 export const INFURA_ID = '3d19324a72854976a7160e0e2ebc9c2b'
 export const EXPECTED_NETWORK = IS_MAINNET
   ? ['homestead', 'matic']

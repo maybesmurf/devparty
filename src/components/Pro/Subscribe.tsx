@@ -3,14 +3,12 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
-import { Contract, providers, utils } from 'ethers'
+import { providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, IS_MAINNET } from 'src/constants'
-import { getContractAddress } from 'src/lib/getContractAddress'
+import { ERROR_MESSAGE, IS_MAINNET, OWNER_ADDRESS } from 'src/constants'
 
-import SubscribeTier from '../../../artifacts/contracts/Devparty.sol/Devparty.json'
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
@@ -51,12 +49,8 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
       }
 
       // Subscribe to Devparty
-      const contract = new Contract(
-        getContractAddress(network) as string,
-        SubscribeTier.abi,
-        signer
-      )
-      const transaction = await contract.subscribeToPro({
+      const transaction = await signer.sendTransaction({
+        to: OWNER_ADDRESS,
         value: utils
           .parseEther(amount)
           // @ts-ignore
