@@ -10,7 +10,6 @@ contract Devparty is Ownable, ERC1155Supply, ReentrancyGuard {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     mapping(uint256 => string) private _tokenURIs;
-    address payable devparty = payable(0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3);
 
     constructor() ERC1155("") {}
 
