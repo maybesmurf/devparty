@@ -1,11 +1,34 @@
 import Footer from '@components/shared/Footer'
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
-import React from 'react'
+import { aggregatorV3InterfaceABI } from '@lib/abis/aggregatorV3InterfaceABI'
+import { BigNumber, ethers } from 'ethers'
+import React, { useEffect, useState } from 'react'
+import { MAINNET_RPC } from 'src/constants'
 
 import SingleTier from './SingleTier'
 
 const Pro: React.FC = () => {
+  const [usdPrice, setUsdPrice] = useState<string>('')
+
+  useEffect(() => {
+    loadPriceOracle()
+  })
+
+  const loadPriceOracle = () => {
+    const provider = new ethers.providers.JsonRpcProvider(MAINNET_RPC)
+    const priceFeed = new ethers.Contract(
+      'matic-usd.data.eth',
+      aggregatorV3InterfaceABI,
+      provider
+    )
+    priceFeed.latestRoundData().then((roundData: any) => {
+      setUsdPrice(
+        (BigNumber.from(roundData[1]).toNumber() / 10 ** 8).toString()
+      )
+    })
+  }
+
   return (
     <div className="bg-gray-100 dark:bg-gray-900">
       <section className="px-2 pt-20 dark:text-white md:px-0">
@@ -27,19 +50,22 @@ const Pro: React.FC = () => {
           <div className="md:flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between items-center gap-5">
             <SingleTier
               validity="1 Month"
-              amount="0.05"
+              amount="20"
+              usdPrice={usdPrice}
               preferred={false}
               bgImage="1"
             />
             <SingleTier
               validity="6 Months"
-              amount="0.1"
+              amount="50"
+              usdPrice={usdPrice}
               preferred={true}
               bgImage="1"
             />
             <SingleTier
               validity="1 Year"
-              amount="0.3"
+              amount="100"
+              usdPrice={usdPrice}
               preferred={false}
               bgImage="1"
             />

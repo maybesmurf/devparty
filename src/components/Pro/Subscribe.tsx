@@ -1,14 +1,13 @@
 import { Button } from '@components/UI/Button'
 import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
-import AppContext from '@components/utils/AppContext'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
 import { ethers } from 'ethers'
 import { useTheme } from 'next-themes'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
+import { ERROR_MESSAGE, IS_MAINNET } from 'src/constants'
 import { getContractAddress } from 'src/lib/getContractAddress'
 
 import SubscribeTier from '../../../artifacts/contracts/Devparty.sol/Devparty.json'
@@ -17,11 +16,9 @@ import TXProcessing from './Processing'
 
 interface Props {
   amount: string
-  eth: number
 }
 
-const Subscribe: React.FC<Props> = ({ amount, eth }) => {
-  const { currentUser } = useContext(AppContext)
+const Subscribe: React.FC<Props> = ({ amount }) => {
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
     'NOTSTARTED' | 'PROCESSING' | 'COMPLETED'
@@ -44,6 +41,7 @@ const Subscribe: React.FC<Props> = ({ amount, eth }) => {
       setProgressStatusText('Please confirm the transaction in wallet')
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
+      const EXPECTED_NETWORK = IS_MAINNET ? ['matic'] : ['maticmum']
 
       if (!EXPECTED_NETWORK.includes(network)) {
         setProgressStatus('NOTSTARTED')
@@ -60,9 +58,7 @@ const Subscribe: React.FC<Props> = ({ amount, eth }) => {
       )
       const transaction = await contract.subscribeToPro({
         value: ethers.utils
-          .parseEther(
-            ['matic', 'maticmum'].includes(network) ? amount : eth.toFixed(5)
-          )
+          .parseEther(amount)
           // @ts-ignore
           .toString(10)
       })
@@ -88,7 +84,7 @@ const Subscribe: React.FC<Props> = ({ amount, eth }) => {
       <Button
         className="w-full"
         size="lg"
-        disabled={progressStatus === 'PROCESSING' || !eth}
+        disabled={progressStatus === 'PROCESSING'}
         onClick={() => subscribe()}
       >
         {progressStatus === 'PROCESSING' ? 'Processing' : 'Try now'}

@@ -7,18 +7,22 @@ const Subscribe = dynamic(() => import('./Subscribe'), {
 })
 
 interface Props {
+  amount: string
+  usdPrice: string
+  validity: string
   preferred: boolean
   bgImage: string
-  validity: string
-  amount: string
 }
 
 const SingleTier: React.FC<Props> = ({
-  preferred,
-  bgImage,
+  amount,
+  usdPrice,
   validity,
-  amount
+  preferred,
+  bgImage
 }) => {
+  const usd = (parseFloat(usdPrice) * parseFloat(amount)).toFixed(2)
+
   return (
     <div
       className={clsx(
@@ -38,17 +42,27 @@ const SingleTier: React.FC<Props> = ({
         </div>
       </div>
       <div className="p-4 space-y-5">
-        <div className="text-center text-5xl font-bold">
-          <span className="text-3xl">Ξ</span> {amount}
+        <div className="font-bold space-y-2">
+          <div className="text-3xl inline-flex items-center space-x-2">
+            <img
+              className="h-5 w-5"
+              src="https://assets.devparty.io/images/brands/polygon.svg"
+              alt="Polygon Logo"
+            />
+            <span>{amount}</span>
+          </div>
+          {usdPrice ? (
+            <div className="text-gray-500">{usd} USD</div>
+          ) : (
+            <div className="shimmer h-4 w-10 rounded mx-auto" />
+          )}
         </div>
         <ul className="text-left !list-disc !list-inside space-y-2 w-full text-gray-400">
           <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
           <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
           <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-          <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-          <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
         </ul>
-        <Subscribe amount={amount} eth={1.0} />
+        <Subscribe amount={amount} />
       </div>
     </div>
   )

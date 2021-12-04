@@ -20,9 +20,8 @@ const TipTiers: React.FC<Props> = ({ tiers, address }) => {
 
   const loadPriceOracle = () => {
     const provider = new ethers.providers.JsonRpcProvider(MAINNET_RPC)
-    const addr = 'eth-usd.data.eth'
     const priceFeed = new ethers.Contract(
-      addr,
+      'eth-usd.data.eth',
       aggregatorV3InterfaceABI,
       provider
     )
