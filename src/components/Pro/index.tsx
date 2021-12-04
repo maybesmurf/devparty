@@ -1,32 +1,11 @@
 import Footer from '@components/shared/Footer'
-import { Button } from '@components/UI/Button'
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
-import clsx from 'clsx'
 import React from 'react'
 
-const Pro: React.FC = () => {
-  const tiers = [
-    {
-      validity: '1 Month',
-      amount: 0.05,
-      preferred: false,
-      bgImage: '1'
-    },
-    {
-      validity: '6 Month',
-      amount: 0.1,
-      preferred: true,
-      bgImage: '2'
-    },
-    {
-      validity: '1 Year',
-      amount: 0.2,
-      preferred: false,
-      bgImage: '1'
-    }
-  ]
+import SingleTier from './SingleTier'
 
+const Pro: React.FC = () => {
   return (
     <div className="bg-gray-100 dark:bg-gray-900">
       <section className="px-2 pt-20 dark:text-white md:px-0">
@@ -46,42 +25,24 @@ const Pro: React.FC = () => {
         </div>
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between items-center gap-5">
-            {tiers.map(({ validity, amount, preferred, bgImage }, idx) => (
-              <div
-                key={idx}
-                className={clsx(
-                  'relative mx-auto flex flex-col max-w-xs w-full items-center p-2 overflow-hidden dark:bg-gray-800 bg-white rounded-lg lg:items-start border',
-                  { 'transform md:scale-110': preferred }
-                )}
-              >
-                <div
-                  style={{
-                    backgroundImage: `url(https://assets.devparty.io/images/patterns/${bgImage}.svg)`,
-                    backgroundSize: '200%'
-                  }}
-                  className="flex object-cover shadow bg-brand-300 rounded-t-lg p-6 flex-row justify-center w-full items-center"
-                >
-                  <div className="text-lg text-center text-black leading-snug text-light md:text-2xl">
-                    {validity}
-                  </div>
-                </div>
-                <div className="p-4 space-y-5">
-                  <div className="text-center text-5xl font-bold">
-                    <span className="text-3xl">Ξ</span> {amount}
-                  </div>
-                  <ul className="text-left !list-disc !list-inside space-y-2 w-full text-gray-400">
-                    <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-                    <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-                    <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-                    <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-                    <li>Lorem Ipsum is simply Ipsum is simply Ipsum simply</li>
-                  </ul>
-                  <Button className="w-full" size="lg">
-                    Try it
-                  </Button>
-                </div>
-              </div>
-            ))}
+            <SingleTier
+              validity="1 Month"
+              amount="0.05"
+              preferred={false}
+              bgImage="1"
+            />
+            <SingleTier
+              validity="6 Months"
+              amount="0.1"
+              preferred={true}
+              bgImage="1"
+            />
+            <SingleTier
+              validity="1 Year"
+              amount="0.3"
+              preferred={false}
+              bgImage="1"
+            />
           </div>
         </section>
       </section>

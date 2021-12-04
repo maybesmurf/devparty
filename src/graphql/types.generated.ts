@@ -3393,6 +3393,15 @@ export type GetPostQuery = {
   }
 }
 
+export type TipUserMutationVariables = Exact<{
+  input: TipUserInput
+}>
+
+export type TipUserMutation = {
+  __typename?: 'Mutation'
+  tipUser: { __typename?: 'Tipping'; id: string }
+}
+
 export type GetProductFeedQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
@@ -5078,15 +5087,6 @@ export type GetTipsQuery = {
       }
     | null
     | undefined
-}
-
-export type TipUserMutationVariables = Exact<{
-  input: TipUserInput
-}>
-
-export type TipUserMutation = {
-  __typename?: 'Mutation'
-  tipUser: { __typename?: 'Tipping'; id: string }
 }
 
 export type GetUserTipsQueryVariables = Exact<{
