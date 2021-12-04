@@ -29,26 +29,9 @@ const Pro: React.FC = () => {
     })
   }
 
-  const ONE_MONTH = [
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!'
-  ]
-
-  const SIX_MONTHS = [
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!'
-  ]
-
-  const ONE_YEAR = [
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!',
-    'Hello, World!'
-  ]
+  const ONE_MONTH = ['TBD', 'TBD', 'TBD', 'TBD', 'TBD']
+  const SIX_MONTHS = ['TBD', 'TBD', 'TBD', 'TBD', 'TBD']
+  const ONE_YEAR = ['TBD', 'TBD', 'TBD', 'TBD', 'TBD']
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900">
