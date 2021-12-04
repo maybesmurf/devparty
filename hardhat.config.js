@@ -12,7 +12,7 @@ module.exports = {
 
     // Ethereum Chains
     mainnet: {
-      url: 'https://eth-mainnet.alchemyapi.io/v2/YrakKL9PgzgkHkmGh6Pb6lLQyEITVk4n',
+      url: 'https://cloudflare-eth.com',
       accounts: [privateKey]
     },
     rinkeby: {

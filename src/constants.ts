@@ -41,8 +41,7 @@ export const EXPECTED_NETWORK = IS_MAINNET
   : ['rinkeby', 'maticmum', 'unknown']
 
 // RPC URLs
-export const MAINNET_RPC =
-  'https://eth-mainnet.alchemyapi.io/v2/YrakKL9PgzgkHkmGh6Pb6lLQyEITVk4n'
+export const MAINNET_RPC = 'https://cloudflare-eth.com'
 export const RINKEBY_RPC =
   'https://eth-rinkeby.alchemyapi.io/v2/M2Al2afJT67g7lHHgJ9q159VFLt_JVNQ'
 
