@@ -46,8 +46,8 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
       if (!EXPECTED_NETWORK.includes(network)) {
         setProgressStatus('NOTSTARTED')
         return IS_MAINNET
-          ? setError('You are in wrong network, switch to mainnet!')
-          : setError('You are in wrong network, switch to testnet!')
+          ? setError('You are in wrong network, switch to polygon mainnet!')
+          : setError('You are in wrong network, switch to mumbai testnet!')
       }
 
       // Subscribe to Devparty
