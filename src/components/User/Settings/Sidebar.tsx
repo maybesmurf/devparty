@@ -7,6 +7,7 @@ import {
   LockClosedIcon,
   PuzzleIcon,
   ShareIcon,
+  SparklesIcon,
   UserIcon
 } from '@heroicons/react/outline'
 import clsx from 'clsx'
@@ -56,6 +57,10 @@ const Sidebar: React.FC = () => {
       <Menu current={router.pathname == '/settings/tips'} url="/settings/tips">
         <CashIcon className="h-4 w-4" />
         <div>Tips</div>
+      </Menu>
+      <Menu current={router.pathname == '/settings/pro'} url="/settings/pro">
+        <SparklesIcon className="h-4 w-4" />
+        <div>Pro</div>
       </Menu>
       <Menu
         current={router.pathname == '/settings/security'}
