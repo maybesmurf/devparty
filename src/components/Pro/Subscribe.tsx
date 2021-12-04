@@ -3,7 +3,7 @@ import { ErrorMessage } from '@components/UI/ErrorMessage'
 import { Modal } from '@components/UI/Modal'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
-import { ethers } from 'ethers'
+import { Contract, providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -34,7 +34,7 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
       setTxURL('')
       // Connect to Wallet
       const web3Modal = getWeb3Modal(resolvedTheme || 'light')
-      const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
+      const web3 = new providers.Web3Provider(await web3Modal.connect())
 
       // Get tx confirmation from the user
       setShowTxModal(true)
@@ -51,13 +51,13 @@ const Subscribe: React.FC<Props> = ({ amount }) => {
       }
 
       // Subscribe to Devparty
-      const contract = new ethers.Contract(
+      const contract = new Contract(
         getContractAddress(network) as string,
         SubscribeTier.abi,
         signer
       )
       const transaction = await contract.subscribeToPro({
-        value: ethers.utils
+        value: utils
           .parseEther(amount)
           // @ts-ignore
           .toString(10)

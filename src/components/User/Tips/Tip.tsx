@@ -11,7 +11,7 @@ import {
 import { HeartIcon } from '@heroicons/react/outline'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
-import { ethers } from 'ethers'
+import { Contract, providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -54,7 +54,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       setTxURL('')
       // Connect to Wallet
       const web3Modal = getWeb3Modal(resolvedTheme || 'light')
-      const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
+      const web3 = new providers.Web3Provider(await web3Modal.connect())
 
       // Get tx confirmation from the user
       setShowTxModal(true)
@@ -70,13 +70,13 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       }
 
       // Tip the user
-      const contract = new ethers.Contract(
+      const contract = new Contract(
         getContractAddress(network) as string,
         TipUser.abi,
         signer
       )
       const transaction = await contract.tipUser(address, {
-        value: ethers.utils
+        value: utils
           .parseEther(
             ['matic', 'maticmum'].includes(network)
               ? tier?.amount?.toString()
