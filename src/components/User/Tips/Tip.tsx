@@ -15,7 +15,12 @@ import { providers, utils } from 'ethers'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
-import { ERROR_MESSAGE, EXPECTED_NETWORK, IS_MAINNET } from 'src/constants'
+import {
+  ERROR_MESSAGE,
+  EXPECTED_NETWORK,
+  IS_MAINNET,
+  SIGNING_MESSAGE
+} from 'src/constants'
 
 import TXCompleted from './Completed'
 import TXProcessing from './Processing'
@@ -56,7 +61,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
 
       // Get tx confirmation from the user
       setShowTxModal(true)
-      setProgressStatusText('Please confirm the transaction in wallet')
+      setProgressStatusText('Please sign to confirm ownership')
       const signer = await web3.getSigner()
       const { name: network } = await web3.getNetwork()
 
@@ -67,7 +72,19 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           : setError('You are in wrong network, switch to testnet!')
       }
 
+      // Get signature from the user
+      const address = await web3.getSigner().getAddress()
+      const response = await fetch(`/api/auth/getNonce?address=${address}`)
+      const data = await response.json()
+      const signature = await web3
+        .getSigner()
+        .provider.send('personal_sign', [
+          `${SIGNING_MESSAGE} ${data?.nonce}`,
+          address
+        ])
+
       // Tip the user
+      setProgressStatusText('Please confirm the transaction in wallet')
       const transaction = await signer.sendTransaction({
         to: address,
         value: utils
@@ -84,6 +101,8 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       tipUser({
         variables: {
           input: {
+            signature: signature as string,
+            nonce: data?.nonce,
             txHash: transaction.hash,
             tierId: tier?.id,
             receiverAddress: address,

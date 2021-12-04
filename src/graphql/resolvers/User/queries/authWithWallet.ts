@@ -4,7 +4,7 @@ import { formatUsername } from '@lib/formatUsername'
 import { db } from '@utils/prisma'
 import { utils } from 'ethers'
 import { md5 } from 'hash-wasm'
-import { AUTH_SIGNING_MESSAGE } from 'src/constants'
+import { SIGNING_MESSAGE } from 'src/constants'
 import getENS from 'src/lib/getENS'
 
 /**
@@ -20,7 +20,10 @@ export const authWithWallet = async (
   signature: string
 ) => {
   const address = utils
-    .verifyMessage(`${AUTH_SIGNING_MESSAGE} ${nonce}`, signature)
+    .verifyMessage(
+      `Welcome to Devparty 👋\n\n${SIGNING_MESSAGE} ${nonce}`,
+      signature
+    )
     .toString()
     .toLowerCase()
   const user = await db.user.findFirst({

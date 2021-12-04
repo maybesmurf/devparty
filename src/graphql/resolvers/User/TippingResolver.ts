@@ -1,5 +1,7 @@
 import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
+import { utils } from 'ethers'
+import { SIGNING_MESSAGE } from 'src/constants'
 
 builder.prismaObject('Tipping', {
   findUnique: (tipping) => ({ id: tipping.id }),
@@ -18,6 +20,8 @@ builder.prismaObject('Tipping', {
 
 const TipUserInput = builder.inputType('TipUserInput', {
   fields: (t) => ({
+    signature: t.string(),
+    nonce: t.string(),
     dispatcherAddress: t.string(),
     receiverAddress: t.string(),
     txHash: t.string(),
@@ -33,6 +37,11 @@ builder.mutationField('tipUser', (t) =>
     args: { input: t.arg({ type: TipUserInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
+      const address = utils
+        .verifyMessage(`${SIGNING_MESSAGE} ${input.nonce}`, input.signature)
+        .toString()
+        .toLowerCase()
+
       return await db.tipping.create({
         ...query,
         data: {

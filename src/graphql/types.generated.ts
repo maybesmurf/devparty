@@ -1341,7 +1341,9 @@ export type TipTiersConnectionEdge = {
 
 export type TipUserInput = {
   dispatcherAddress: Scalars['String']
+  nonce: Scalars['String']
   receiverAddress: Scalars['String']
+  signature: Scalars['String']
   tierId: Scalars['ID']
   txHash: Scalars['String']
   userId: Scalars['ID']
