@@ -53,8 +53,8 @@ const Pro: React.FC = () => {
         <section className="container items-center max-w-6xl py-20 px-5 mx-auto text-center">
           <div className="md:flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between items-center gap-5">
             <SingleTier
-              name="Yoginth"
-              validity="1 Month"
+              name="Baby Party"
+              validity="1 month"
               amount="20"
               usdPrice={usdPrice}
               preferred={false}
@@ -62,21 +62,21 @@ const Pro: React.FC = () => {
               tiers={ONE_MONTH}
             />
             <SingleTier
-              name="Yoginth"
-              validity="6 Months"
+              name="Papa Party"
+              validity="6 months"
               amount="50"
               usdPrice={usdPrice}
               preferred={true}
-              bgImage="1"
+              bgImage="2"
               tiers={SIX_MONTHS}
             />
             <SingleTier
-              name="Yoginth"
-              validity="1 Year"
+              name="Mama Party"
+              validity="1 year"
               amount="100"
               usdPrice={usdPrice}
               preferred={false}
-              bgImage="1"
+              bgImage="4"
               tiers={ONE_YEAR}
             />
           </div>

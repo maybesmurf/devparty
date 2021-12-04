@@ -40,14 +40,10 @@ const SingleTier: React.FC<Props> = ({
           backgroundImage: `url(https://assets.devparty.io/images/patterns/${bgImage}.svg)`,
           backgroundSize: '200%'
         }}
-        className="flex object-cover shadow bg-brand-300 rounded-t-lg p-6 flex-row justify-center w-full items-center"
+        className="object-cover shadow bg-brand-300 rounded-t-lg p-5 w-full"
       >
-        <div className="text-lg text-center text-black leading-snug text-light md:text-2xl">
-          {name}
-        </div>
-        <div className="text-lg text-center text-black leading-snug text-light md:text-2xl">
-          {validity}
-        </div>
+        <div className="text-lg font-bold text-black md:text-2xl">{name}</div>
+        <div className="text-lg text-black">{validity}</div>
       </div>
       <div className="p-4 space-y-5 w-full">
         <div className="font-bold space-y-2">
