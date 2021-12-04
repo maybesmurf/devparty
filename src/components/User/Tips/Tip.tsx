@@ -85,27 +85,14 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
         ])
 
       // Tip the user
-      console.log(
-        utils
-          .parseEther(
-            ['matic', 'maticmum'].includes(network)
-              ? tier?.amount?.toString()
-              : eth.toFixed(5)
-          )
-          // @ts-ignore
-          .toString(10)
-      )
       setProgressStatusText('Please confirm the transaction in wallet')
       const transaction = await signer.sendTransaction({
         to: address,
-        value: utils
-          .parseEther(
-            ['matic', 'maticmum'].includes(network)
-              ? tier?.amount?.toString()
-              : eth.toFixed(5)
-          )
-          // @ts-ignore
-          .toString(10)
+        value: utils.parseEther(
+          ['matic', 'maticmum'].includes(network)
+            ? tier?.amount?.toString()
+            : eth.toFixed(5)
+        )
       })
       setProgressStatusText('Transaction is being processed')
       setTxURL(getTransactionURL(network, transaction.hash))
