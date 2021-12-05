@@ -59,7 +59,7 @@ async function main() {
         profile: {
           create: {
             name: faker.name.firstName(),
-            avatar: faker.internet.avatar(),
+            avatar: `https://avatar.tobi.sh/${await md5(username)}.svg?text=👦`,
             cover: getRandomCover().image,
             coverBg: getRandomCover().color,
             bio: faker.commerce.productDescription()
@@ -124,7 +124,7 @@ async function main() {
       data: {
         name: product.name,
         slug: product.slug,
-        avatar: product.avatar,
+        avatar: `https://avatar.tobi.sh/${await md5(product.name)}.svg?text=🚀`,
         description: product.description,
         owner: { connect: { username: product.username } }
       }

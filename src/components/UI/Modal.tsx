@@ -18,6 +18,8 @@ export const Modal: React.FC<Props> = ({
   children,
   onClose
 }) => {
+  if (!show) return null
+
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog

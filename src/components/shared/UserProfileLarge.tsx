@@ -27,7 +27,7 @@ const UserProfileLarge: React.FC<Props> = ({
 
   return (
     <div className="flex justify-between items-center space-x-5">
-      <div className="flex space-x-4 items-center">
+      <div className="flex gap-4 items-center">
         <img
           src={imagekitURL(user?.profile?.avatar as string, 100, 100)}
           className="h-14 w-14 rounded-full bg-gray-200"
