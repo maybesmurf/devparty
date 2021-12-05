@@ -1,51 +1,43 @@
-import { createLog } from '@graphql/resolvers/Log/mutations/createLog'
-import { EditUserInput } from '@graphql/types.generated'
+import { TipUserInput } from '@graphql/types.generated'
 import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
-import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
+import { utils } from 'ethers'
+import { ERROR_MESSAGE, IS_PRODUCTION, SIGNING_MESSAGE } from 'src/constants'
 
 /**
- * Add user to the waitlist
+ * Tip a user
  * @param query - Contains an include object to pre-load data needed to resolve nested parts.
- * @param input - EditUserInput
+ * @param input - TipUserInput
  * @param session - Current user's session
- * @returns the user in the waitlist
+ * @returns tipping
  */
-export const editUser = async (
+export const tipUser = async (
   query: Record<string, unknown>,
-  input: EditUserInput,
+  input: TipUserInput,
   session: Session | null | undefined
 ) => {
+  const address = utils
+    .verifyMessage(`${SIGNING_MESSAGE} ${input.nonce}`, input.signature)
+    .toString()
+    .toLowerCase()
+
+  if (address.toLowerCase() !== input.dispatcherAddress.toLowerCase()) {
+    throw new Error('Address mismatch')
+  }
+
   try {
-    const user = await db.user.update({
+    return await db.tipping.create({
       ...query,
-      where: { id: session!.userId },
       data: {
-        username: input.username,
-        email: input.email,
-        profile: {
-          update: {
-            name: input.name,
-            bio: input.bio,
-            location: input.location,
-            avatar: input.avatar,
-            cover: input.cover
-          }
-        }
+        dispatcherAddress: input.dispatcherAddress,
+        txHash: input.txHash,
+        receiverAddress: input.receiverAddress,
+        tier: { connect: { id: input.tierId } },
+        receiver: { connect: { id: input.userId } },
+        dispatcher: { connect: { id: session?.userId } }
       }
     })
-    createLog(session!.userId, user?.id, 'SETTINGS_UPDATE')
-
-    return user
   } catch (error: any) {
-    if (error.code === 'P2002' && error.meta.target === 'users_username_key') {
-      throw new Error('Username is already taken!')
-    }
-
-    if (error.code === 'P2002' && error.meta.target === 'users_email_key') {
-      throw new Error('Email is already taken!')
-    }
-
     throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
   }
 }

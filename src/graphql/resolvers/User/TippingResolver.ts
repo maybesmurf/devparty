@@ -1,7 +1,6 @@
 import { builder } from '@graphql/builder'
-import { db } from '@utils/prisma'
-import { utils } from 'ethers'
-import { SIGNING_MESSAGE } from 'src/constants'
+
+import { tipUser } from '../Tip/mutations/tipUser'
 
 builder.prismaObject('Tipping', {
   findUnique: (tipping) => ({ id: tipping.id }),
@@ -37,26 +36,7 @@ builder.mutationField('tipUser', (t) =>
     args: { input: t.arg({ type: TipUserInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      const address = utils
-        .verifyMessage(`${SIGNING_MESSAGE} ${input.nonce}`, input.signature)
-        .toString()
-        .toLowerCase()
-
-      if (address.toLowerCase() !== input.dispatcherAddress.toLowerCase()) {
-        throw new Error('Address mismatch')
-      }
-
-      return await db.tipping.create({
-        ...query,
-        data: {
-          dispatcherAddress: input.dispatcherAddress,
-          txHash: input.txHash,
-          receiverAddress: input.receiverAddress,
-          tier: { connect: { id: input.tierId } },
-          receiver: { connect: { id: input.userId } },
-          dispatcher: { connect: { id: session?.userId } }
-        }
-      })
+      return await tipUser(query, input, session)
     }
   })
 )
