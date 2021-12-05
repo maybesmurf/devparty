@@ -1,6 +1,9 @@
+import { Modal } from '@components/UI/Modal'
 import { Tooltip } from '@components/UI/Tooltip'
+import NFTDetail from '@components/User/NFTDetail'
 import { Nft } from '@graphql/types.generated'
 import { getOpenSeaPath } from '@lib/getOpenSeaPath'
+import { useState } from 'react'
 import { IS_MAINNET, STATIC_ASSETS } from 'src/constants'
 
 interface Props {
@@ -8,16 +11,24 @@ interface Props {
 }
 
 const ViewNFT: React.FC<Props> = ({ nft }) => {
+  const [showNftDetail, setShowNftDetail] = useState(false)
+
+  const nftUrl = `https://${
+    IS_MAINNET ? 'opensea.io' : 'testnets.opensea.io'
+  }/${getOpenSeaPath(nft?.network, nft?.address, nft?.tokenId)}`
+
   return (
     <div>
-      <Tooltip content="View in Opensea">
-        <a
-          href={`https://${
-            IS_MAINNET ? 'opensea.io' : 'testnets.opensea.io'
-          }/${getOpenSeaPath(nft?.network, nft?.address, nft?.tokenId)}`}
-          target="_blank"
-          rel="noreferrer"
-        >
+      <Modal
+        title="NFT Post Details"
+        size="lg"
+        show={showNftDetail}
+        onClose={() => setShowNftDetail(false)}
+      >
+        <NFTDetail url={nftUrl} />
+      </Modal>
+      <Tooltip content="View NFT Details">
+        <button className="outline-none" onClick={() => setShowNftDetail(true)}>
           {nft?.network === 'homestead' ||
           nft?.network === 'rinkeby' ||
           nft?.network === 'unknown' ? (
@@ -33,7 +44,7 @@ const ViewNFT: React.FC<Props> = ({ nft }) => {
               alt="Polygon Logo"
             />
           )}
-        </a>
+        </button>
       </Tooltip>
     </div>
   )

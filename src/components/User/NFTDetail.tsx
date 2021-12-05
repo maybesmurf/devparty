@@ -34,7 +34,7 @@ export type Trait = {
   value: number
 }
 
-const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
+const NFTDetail: React.FC<Props> = ({ url }) => {
   const { contractAddress, tokenId } = getNFTAddressFromUrl(url)
   const [nft, setNft] = useState<NFT>()
 
@@ -126,4 +126,4 @@ const NFTAvatarDetail: React.FC<Props> = ({ url }) => {
   )
 }
 
-export default NFTAvatarDetail
+export default NFTDetail
