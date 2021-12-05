@@ -1,6 +1,6 @@
 import { builder } from '@graphql/builder'
-import { db } from '@utils/prisma'
 
+import { editProfileReadme } from './mutations/editProfileReadme'
 import { editUserSocial } from './mutations/editUserSocial'
 import { hasReadme } from './queries/hasReadme'
 
@@ -60,18 +60,13 @@ const EditProfileReadmeInput = builder.inputType('EditProfileReadmeInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editProfileReadme', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditProfileReadmeInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      return await db.user.update({
-        ...query,
-        where: { id: session!.userId },
-        data: { profile: { update: { readme: input.readme } } }
-      })
+      return await editProfileReadme(query, input, session)
     }
   })
 )

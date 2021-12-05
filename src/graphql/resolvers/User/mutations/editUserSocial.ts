@@ -5,11 +5,11 @@ import { db } from '@utils/prisma'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
 /**
- * Add user to the waitlist
+ * Edit user's social profiles
  * @param query - Contains an include object to pre-load data needed to resolve nested parts.
  * @param input - EditUserSocialInput
  * @param session - Current user's session
- * @returns the user in the waitlist
+ * @returns the user
  */
 export const editUserSocial = async (
   query: Record<string, unknown>,
