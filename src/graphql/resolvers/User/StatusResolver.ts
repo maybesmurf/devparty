@@ -2,6 +2,7 @@ import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 
 import { Result } from '../ResultResolver'
+import { editStatus } from './mutations/editStatus'
 
 builder.prismaObject('Status', {
   findUnique: (status) => ({ id: status.id }),
@@ -28,20 +29,7 @@ builder.mutationField('editStatus', (t) =>
     args: { input: t.arg({ type: EditStatusInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      const data = {
-        emoji: input.emoji,
-        text: input.text
-      }
-
-      return await db.status.upsert({
-        ...query,
-        where: { userId: session!.userId },
-        update: data,
-        create: {
-          ...data,
-          user: { connect: { id: session!.userId } }
-        }
-      })
+      return await editStatus(query, input, session)
     }
   })
 )
