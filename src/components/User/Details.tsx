@@ -35,6 +35,7 @@ import Wakatime from './Highlights/Wakatime'
 import NFTAvatarDetail from './NFTAvatarDetail'
 import OwnedProducts from './OwnedProducts'
 import Social from './Social'
+import Tippings from './Tippings'
 
 const UserMod = dynamic(() => import('./Mod'))
 const ETHAddress = dynamic(() => import('./ETHAddress'))
@@ -170,6 +171,7 @@ const Details: React.FC<Props> = ({ user }) => {
         </div>
         <Social profile={user?.profile as Profile} />
         <OwnedProducts user={user} />
+        <Tippings user={user} />
         {user?.hasWakatimeIntegration && <Wakatime user={user} />}
         {user?.hasSpotifyIntegration && <Spotify user={user} />}
         <Badges user={user} />

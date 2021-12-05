@@ -936,6 +936,7 @@ type User {
   ownedProducts(after: String, before: String, first: Int, last: Int): UserOwnedProductsConnection!
   posts(after: String, before: String, first: Int, last: Int): UserPostsConnection!
   profile: Profile!
+  receivedTips(after: String, before: String, first: Int, last: Int): UserReceivedTipsConnection!
   spammy: Boolean!
   status: Status
   tip: Tip
@@ -1019,6 +1020,17 @@ type UserPostsConnection {
 type UserPostsConnectionEdge {
   cursor: String!
   node: Post!
+}
+
+type UserReceivedTipsConnection {
+  edges: [UserReceivedTipsConnectionEdge]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserReceivedTipsConnectionEdge {
+  cursor: String!
+  node: Tipping!
 }
 
 type UserTopicsConnection {
