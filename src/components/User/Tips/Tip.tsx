@@ -12,6 +12,7 @@ import { HeartIcon } from '@heroicons/react/outline'
 import { getTransactionURL } from '@lib/getTransactionURL'
 import getWeb3Modal from '@lib/getWeb3Modal'
 import { providers, utils } from 'ethers'
+import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -126,38 +127,54 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
 
   return (
     <div>
-      <Button
-        variant="danger"
-        icon={<HeartIcon className="h-5 2-5" />}
-        outline
-        disabled={progressStatus === 'PROCESSING' || !eth}
-        onClick={() => handleTipUser()}
-      >
-        {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
-      </Button>
-      <Modal
-        onClose={() => setShowTxModal(!showTxModal)}
-        title="Tipping Progress"
-        show={showTxModal}
-      >
-        <div className="p-5">
-          {progressStatus === 'NOTSTARTED' && error && (
-            <ErrorMessage
-              title={ERROR_MESSAGE}
-              error={{ name: error, message: error }}
-            />
-          )}
-          {progressStatus === 'PROCESSING' && (
-            <TXProcessing
-              txURL={txURL as string}
-              progressStatusText={progressStatusText}
-            />
-          )}
-          {progressStatus === 'COMPLETED' && (
-            <TXCompleted txURL={txURL as string} />
-          )}
-        </div>
-      </Modal>
+      {currentUser ? (
+        <>
+          <Button
+            variant="danger"
+            icon={<HeartIcon className="h-5 2-5" />}
+            outline
+            disabled={progressStatus === 'PROCESSING' || !eth}
+            onClick={() => handleTipUser()}
+          >
+            {progressStatus === 'PROCESSING' ? 'Processing' : 'Tip'}
+          </Button>
+          <Modal
+            onClose={() => setShowTxModal(!showTxModal)}
+            title="Tipping Progress"
+            show={showTxModal}
+          >
+            <div className="p-5">
+              {progressStatus === 'NOTSTARTED' && error && (
+                <ErrorMessage
+                  title={ERROR_MESSAGE}
+                  error={{ name: error, message: error }}
+                />
+              )}
+              {progressStatus === 'PROCESSING' && (
+                <TXProcessing
+                  txURL={txURL as string}
+                  progressStatusText={progressStatusText}
+                />
+              )}
+              {progressStatus === 'COMPLETED' && (
+                <TXCompleted txURL={txURL as string} />
+              )}
+            </div>
+          </Modal>
+        </>
+      ) : (
+        <Link href="/login">
+          <a href="/login">
+            <Button
+              variant="danger"
+              icon={<HeartIcon className="h-5 2-5" />}
+              outline
+            >
+              Tip
+            </Button>
+          </a>
+        </Link>
+      )}
     </div>
   )
 }
