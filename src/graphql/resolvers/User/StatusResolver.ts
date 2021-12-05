@@ -22,7 +22,6 @@ const EditStatusInput = builder.inputType('EditStatusInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editStatus', (t) =>
   t.prismaField({
     type: 'Status',
