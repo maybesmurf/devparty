@@ -1,16 +1,11 @@
 import { builder } from '@graphql/builder'
-import { Prisma } from '@prisma/client'
 import { db } from '@utils/prisma'
-import {
-  BASE_URL,
-  ERROR_MESSAGE,
-  IS_PRODUCTION,
-  RESERVED_SLUGS
-} from 'src/constants'
+import { BASE_URL } from 'src/constants'
 
 import { Result } from '../ResultResolver'
 import { createProduct } from './mutations/createProduct'
 import { deleteProduct } from './mutations/deleteProduct'
+import { editProductProfile } from './mutations/editProductProfile'
 import { editProductSocial } from './mutations/editProductSocial'
 import { toggleSubscribe } from './mutations/toggleSubscribe'
 import { getProducts } from './queries/getProducts'
@@ -123,7 +118,6 @@ const EditProductProfileInput = builder.inputType('EditProductProfileInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editProductProfile', (t) =>
   t.prismaField({
     type: 'Product',
@@ -131,30 +125,7 @@ builder.mutationField('editProductProfile', (t) =>
     authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }) => {
-      if (RESERVED_SLUGS.includes(input.slug)) {
-        throw new Error(`Product slug "${input.slug}" is reserved by Devparty.`)
-      }
-
-      try {
-        return await db.product.update({
-          ...query,
-          where: { id: input?.id },
-          data: {
-            slug: input.slug,
-            name: input.name,
-            description: input.description,
-            avatar: input.avatar
-          }
-        })
-      } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-          if (error.code === 'P2002') {
-            throw new Error('Product slug is already taken!')
-          }
-
-          throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-        }
-      }
+      return await editProductProfile(query, input)
     }
   })
 )

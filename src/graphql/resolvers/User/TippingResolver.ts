@@ -29,7 +29,6 @@ const TipUserInput = builder.inputType('TipUserInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('tipUser', (t) =>
   t.prismaField({
     type: 'Tipping',
