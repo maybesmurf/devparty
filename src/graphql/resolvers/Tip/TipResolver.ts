@@ -1,5 +1,6 @@
 import { builder } from '@graphql/builder'
-import { db } from '@utils/prisma'
+
+import { editTips } from './mutations/editTips'
 
 builder.prismaObject('Tip', {
   findUnique: (tip) => ({ id: tip.id }),
@@ -35,31 +36,13 @@ const EditTipsInput = builder.inputType('EditTipsInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editTips', (t) =>
   t.prismaField({
     type: 'Tip',
     args: { input: t.arg({ type: EditTipsInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      const data = {
-        cash: input.cash,
-        paypal: input.paypal,
-        github: input.github,
-        buymeacoffee: input.buymeacoffee,
-        bitcoin: input.bitcoin,
-        ethereum: input.ethereum
-      }
-
-      return await db.tip.upsert({
-        ...query,
-        where: { userId: session!.userId },
-        update: data,
-        create: {
-          ...data,
-          user: { connect: { id: session!.userId } }
-        }
-      })
+      return await editTips(query, input, session)
     }
   })
 )
