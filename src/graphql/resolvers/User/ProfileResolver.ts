@@ -1,7 +1,7 @@
 import { builder } from '@graphql/builder'
 import { db } from '@utils/prisma'
 
-import { createLog } from '../Log/mutations/createLog'
+import { editUserSocial } from './mutations/editUserSocial'
 import { hasReadme } from './queries/hasReadme'
 
 builder.prismaObject('Profile', {
@@ -43,32 +43,13 @@ const EditUserSocialInput = builder.inputType('EditUserSocialInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editUserSocial', (t) =>
   t.prismaField({
     type: 'User',
     args: { input: t.arg({ type: EditUserSocialInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (query, parent, { input }, { session }) => {
-      const user = await db.user.update({
-        ...query,
-        where: {
-          id: session!.userId
-        },
-        data: {
-          profile: {
-            update: {
-              website: input.website,
-              twitter: input.twitter,
-              github: input.github,
-              discord: input.discord
-            }
-          }
-        }
-      })
-      createLog(session!.userId, user?.id, 'SETTINGS_UPDATE')
-
-      return user
+      return await editUserSocial(query, input, session)
     }
   })
 )
