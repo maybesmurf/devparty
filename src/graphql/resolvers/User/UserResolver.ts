@@ -1,10 +1,10 @@
 import { builder } from '@graphql/builder'
-import { Prisma } from '@prisma/client'
 import { db } from '@utils/prisma'
-import { BASE_URL, ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
+import { BASE_URL } from 'src/constants'
 
 import { Result } from '../ResultResolver'
 import { deleteAccount } from './mutations/deleteAccount'
+import { editNFTAvatar } from './mutations/editNFTAvatar'
 import { editUser } from './mutations/editUser'
 import { modUser } from './mutations/modUser'
 import { toggleFollow } from './mutations/toggleFollow'
@@ -231,7 +231,6 @@ const EditNFTAvatarInput = builder.inputType('EditNFTAvatarInput', {
   })
 })
 
-// TODO: Split to function
 builder.mutationField('editNFTAvatar', (t) =>
   t.prismaField({
     type: 'User',
@@ -239,21 +238,7 @@ builder.mutationField('editNFTAvatar', (t) =>
     authScopes: { user: true, $granted: 'currentUser' },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
-      try {
-        return await db.user.update({
-          ...query,
-          where: { id: session!.userId },
-          data: {
-            profile: {
-              update: { avatar: input.avatar, nftSource: input.nftSource }
-            }
-          }
-        })
-      } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-          throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
-        }
-      }
+      return await editNFTAvatar(query, input, session)
     }
   })
 )
