@@ -1,8 +1,8 @@
 import { builder } from '@graphql/builder'
-import { db } from '@utils/prisma'
 
 import { Result } from '../ResultResolver'
 import { addTipTier } from './mutations/addTipTier'
+import { deleteTipTier } from './mutations/deleteTipTier'
 
 builder.prismaObject('TipTier', {
   findUnique: (tip_tier) => ({ id: tip_tier.id }),
@@ -40,29 +40,16 @@ builder.mutationField('addTipTier', (t) =>
 )
 
 const DeleteTipTierInput = builder.inputType('DeleteTipTierInput', {
-  fields: (t) => ({
-    id: t.string()
-  })
+  fields: (t) => ({ id: t.string() })
 })
 
-// TODO: Split to function
 builder.mutationField('deleteTipTier', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeleteTipTierInput }) },
     authScopes: { user: true, $granted: 'currentUser' },
     resolve: async (parent, { input }, { session }) => {
-      const tip = await db.tip.findUnique({
-        where: { userId: session?.userId }
-      })
-
-      if (tip?.userId !== session?.userId) {
-        throw new Error("You don't have permission to delete others tip tier!")
-      }
-
-      await db.tipTier.delete({ where: { id: input?.id } })
-
-      return Result.SUCCESS
+      return await deleteTipTier(input, session)
     }
   })
 )
