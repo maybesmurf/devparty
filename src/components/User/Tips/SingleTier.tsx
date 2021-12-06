@@ -1,4 +1,4 @@
-import { TipTier } from '@graphql/types.generated'
+import { TipTier, User } from '@graphql/types.generated'
 import Markdown from 'markdown-to-jsx'
 import dynamic from 'next/dynamic'
 import React from 'react'
@@ -8,12 +8,13 @@ const Tip = dynamic(() => import('./Tip'), {
 })
 
 interface Props {
+  user: User
   tier: TipTier
   address: string
   ethPrice: string
 }
 
-const SingleTier: React.FC<Props> = ({ tier, address, ethPrice }) => {
+const SingleTier: React.FC<Props> = ({ user, tier, address, ethPrice }) => {
   return (
     <div className="py-5 space-y-3 flex items-start justify-between space-x-5">
       <div className="space-y-3">
@@ -36,6 +37,7 @@ const SingleTier: React.FC<Props> = ({ tier, address, ethPrice }) => {
         </div>
       </div>
       <Tip
+        user={user}
         tier={tier}
         tipaddress={address}
         eth={ethPrice && ((tier?.amount / parseInt(ethPrice)) as any)}
