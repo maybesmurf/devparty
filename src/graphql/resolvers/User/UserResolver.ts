@@ -119,6 +119,10 @@ builder.prismaObject('User', {
       nullable: true,
       authScopes: { staff: true, $granted: 'currentUser' }
     }),
+    receivedTips: t.relatedConnection('receivedTips', {
+      cursor: 'id',
+      totalCount: true
+    }),
     ownedProducts: t.relatedConnection('ownedProducts', {
       cursor: 'id',
       totalCount: true,

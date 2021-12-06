@@ -32,7 +32,7 @@ const Followerings: React.FC<Props> = ({ user }) => {
       </div>
       <Modal
         title="Following"
-        size="lg"
+        size="md"
         show={showFollowingModal}
         onClose={() => setShowFollowingModal(!showFollowingModal)}
       >
@@ -40,7 +40,7 @@ const Followerings: React.FC<Props> = ({ user }) => {
       </Modal>
       <Modal
         title="Followers"
-        size="lg"
+        size="md"
         show={showFollowersModal}
         onClose={() => setShowFollowersModal(!showFollowersModal)}
       >

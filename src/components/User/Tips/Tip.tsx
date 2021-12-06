@@ -6,7 +6,8 @@ import AppContext from '@components/utils/AppContext'
 import {
   TipTier,
   TipUserMutation,
-  TipUserMutationVariables
+  TipUserMutationVariables,
+  User
 } from '@graphql/types.generated'
 import { HeartIcon } from '@heroicons/react/outline'
 import { getTransactionURL } from '@lib/getTransactionURL'
@@ -27,12 +28,13 @@ import TXCompleted from './Completed'
 import TXProcessing from './Processing'
 
 interface Props {
+  user: User
   tier: TipTier
-  address: string
+  tipaddress: string
   eth: number
 }
 
-const Tip: React.FC<Props> = ({ tier, address, eth }) => {
+const Tip: React.FC<Props> = ({ user, tier, tipaddress, eth }) => {
   const { currentUser } = useContext(AppContext)
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
@@ -53,6 +55,11 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
   )
 
   const handleTipUser = async () => {
+    // Self tip check
+    if (currentUser?.id === user?.id) {
+      return toast.error("You can't tip youself!")
+    }
+
     try {
       setProgressStatus('PROCESSING')
       setTxURL('')
@@ -88,7 +95,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
       // Tip the user
       setProgressStatusText('Please confirm the transaction in wallet')
       const transaction = await signer.sendTransaction({
-        to: address,
+        to: tipaddress,
         value: utils.parseEther(
           ['matic', 'maticmum'].includes(network)
             ? tier?.amount?.toString()
@@ -106,7 +113,7 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
             tierId: tier?.id,
             receiverAddress: address,
             dispatcherAddress: transaction.from,
-            userId: currentUser?.id as string
+            userId: user?.id as string
           }
         }
       })

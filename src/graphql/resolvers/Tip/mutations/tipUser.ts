@@ -16,6 +16,10 @@ export const tipUser = async (
   input: TipUserInput,
   session: Session | null | undefined
 ) => {
+  if (input.userId === session?.userId) {
+    throw new Error("You can't tip yourself!")
+  }
+
   const address = utils
     .verifyMessage(`${SIGNING_MESSAGE} ${input.nonce}`, input.signature)
     .toString()
@@ -29,8 +33,8 @@ export const tipUser = async (
     return await db.tipping.create({
       ...query,
       data: {
-        dispatcherAddress: input.dispatcherAddress,
         txHash: input.txHash,
+        dispatcherAddress: input.dispatcherAddress,
         receiverAddress: input.receiverAddress,
         tier: { connect: { id: input.tierId } },
         receiver: { connect: { id: input.userId } },

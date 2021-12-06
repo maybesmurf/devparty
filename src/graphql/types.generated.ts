@@ -1463,6 +1463,7 @@ export type User = {
   ownedProducts: UserOwnedProductsConnection
   posts: UserPostsConnection
   profile: Profile
+  receivedTips: UserReceivedTipsConnection
   spammy: Scalars['Boolean']
   status?: Maybe<Status>
   tip?: Maybe<Tip>
@@ -1514,6 +1515,13 @@ export type UserOwnedProductsArgs = {
 }
 
 export type UserPostsArgs = {
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+}
+
+export type UserReceivedTipsArgs = {
   after?: InputMaybe<Scalars['String']>
   before?: InputMaybe<Scalars['String']>
   first?: InputMaybe<Scalars['Int']>
@@ -1616,6 +1624,19 @@ export type UserPostsConnectionEdge = {
   __typename?: 'UserPostsConnectionEdge'
   cursor: Scalars['String']
   node: Post
+}
+
+export type UserReceivedTipsConnection = {
+  __typename?: 'UserReceivedTipsConnection'
+  edges: Array<Maybe<UserReceivedTipsConnectionEdge>>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']
+}
+
+export type UserReceivedTipsConnectionEdge = {
+  __typename?: 'UserReceivedTipsConnectionEdge'
+  cursor: Scalars['String']
+  node: Tipping
 }
 
 export type UserTopicsConnection = {
@@ -4118,6 +4139,59 @@ export type GetTopicQuery = {
   }
 }
 
+export type GetTippingsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>
+  username: Scalars['String']
+}>
+
+export type GetTippingsQuery = {
+  __typename?: 'Query'
+  user?:
+    | {
+        __typename?: 'User'
+        receivedTips: {
+          __typename?: 'UserReceivedTipsConnection'
+          totalCount: number
+          pageInfo: {
+            __typename?: 'PageInfo'
+            endCursor?: string | null | undefined
+            hasNextPage: boolean
+          }
+          edges: Array<
+            | {
+                __typename?: 'UserReceivedTipsConnectionEdge'
+                node: {
+                  __typename?: 'Tipping'
+                  id: string
+                  dispatcher: {
+                    __typename?: 'User'
+                    username: string
+                    isVerified: boolean
+                    isFollowing: boolean
+                    hasFollowed: boolean
+                    profile: {
+                      __typename?: 'Profile'
+                      id: string
+                      name: string
+                      avatar: string
+                      bio?: string | null | undefined
+                    }
+                    status?:
+                      | { __typename?: 'Status'; emoji: string; text: string }
+                      | null
+                      | undefined
+                  }
+                }
+              }
+            | null
+            | undefined
+          >
+        }
+      }
+    | null
+    | undefined
+}
+
 export type GetUserBadgesQueryVariables = Exact<{
   username: Scalars['String']
 }>
@@ -5077,6 +5151,47 @@ export type GetTipsQuery = {
             }
           | null
           | undefined
+      }
+    | null
+    | undefined
+}
+
+export type GetUserTippingsQueryVariables = Exact<{
+  username: Scalars['String']
+}>
+
+export type GetUserTippingsQuery = {
+  __typename?: 'Query'
+  user?:
+    | {
+        __typename?: 'User'
+        id: string
+        receivedTips: {
+          __typename?: 'UserReceivedTipsConnection'
+          totalCount: number
+          edges: Array<
+            | {
+                __typename?: 'UserReceivedTipsConnectionEdge'
+                node: {
+                  __typename?: 'Tipping'
+                  id: string
+                  dispatcher: {
+                    __typename?: 'User'
+                    id: string
+                    username: string
+                    profile: {
+                      __typename?: 'Profile'
+                      id: string
+                      name: string
+                      avatar: string
+                    }
+                  }
+                }
+              }
+            | null
+            | undefined
+          >
+        }
       }
     | null
     | undefined
