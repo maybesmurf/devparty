@@ -19,7 +19,7 @@ export const POLLING_INTERVAL = 1000 * 60 // 1 minute
 export const ERROR_MESSAGE = 'Something went wrong!'
 export const RESERVED_SLUGS = ['admin', 'discover', 'products', 'new']
 export const SIGNING_MESSAGE =
-  'Devparty uses this cryptographic signature in place of a password, verifying that you are the owner of this Ethereum address.\n\nNonce:'
+  "Devparty uses this cryptographic signature in place of a password, verifying that you are the owner of this Ethereum address.\n\nThis won't cost you anything!\n\nNonce:"
 
 // URLs
 export const BASE_URL = process.env.BASE_URL
