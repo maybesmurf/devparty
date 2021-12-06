@@ -4139,6 +4139,56 @@ export type GetTopicQuery = {
   }
 }
 
+export type GetFollowersQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>
+  username: Scalars['String']
+}>
+
+export type GetFollowersQuery = {
+  __typename?: 'Query'
+  user?:
+    | {
+        __typename?: 'User'
+        followers: {
+          __typename?: 'UserFollowersConnection'
+          totalCount: number
+          pageInfo: {
+            __typename?: 'PageInfo'
+            endCursor?: string | null | undefined
+            hasNextPage: boolean
+          }
+          edges: Array<
+            | {
+                __typename?: 'UserFollowersConnectionEdge'
+                node: {
+                  __typename?: 'User'
+                  id: string
+                  username: string
+                  isVerified: boolean
+                  isFollowing: boolean
+                  hasFollowed: boolean
+                  profile: {
+                    __typename?: 'Profile'
+                    id: string
+                    name: string
+                    avatar: string
+                    bio?: string | null | undefined
+                  }
+                  status?:
+                    | { __typename?: 'Status'; emoji: string; text: string }
+                    | null
+                    | undefined
+                }
+              }
+            | null
+            | undefined
+          >
+        }
+      }
+    | null
+    | undefined
+}
+
 export type GetUserBadgesQueryVariables = Exact<{
   username: Scalars['String']
 }>
@@ -4476,56 +4526,6 @@ export type GetUserFeedQuery = {
                         tokenId: string
                         network: string
                       }
-                    | null
-                    | undefined
-                }
-              }
-            | null
-            | undefined
-          >
-        }
-      }
-    | null
-    | undefined
-}
-
-export type GetFollowersQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']>
-  username: Scalars['String']
-}>
-
-export type GetFollowersQuery = {
-  __typename?: 'Query'
-  user?:
-    | {
-        __typename?: 'User'
-        followers: {
-          __typename?: 'UserFollowersConnection'
-          totalCount: number
-          pageInfo: {
-            __typename?: 'PageInfo'
-            endCursor?: string | null | undefined
-            hasNextPage: boolean
-          }
-          edges: Array<
-            | {
-                __typename?: 'UserFollowersConnectionEdge'
-                node: {
-                  __typename?: 'User'
-                  id: string
-                  username: string
-                  isVerified: boolean
-                  isFollowing: boolean
-                  hasFollowed: boolean
-                  profile: {
-                    __typename?: 'Profile'
-                    id: string
-                    name: string
-                    avatar: string
-                    bio?: string | null | undefined
-                  }
-                  status?:
-                    | { __typename?: 'Status'; emoji: string; text: string }
                     | null
                     | undefined
                 }

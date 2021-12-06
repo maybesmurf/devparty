@@ -1,8 +1,12 @@
 import { gql, useQuery } from '@apollo/client'
+import { Modal } from '@components/UI/Modal'
 import { Tooltip } from '@components/UI/Tooltip'
 import { GetUserTippingsQuery, User } from '@graphql/types.generated'
 import { imagekitURL } from '@lib/imagekitURL'
 import Link from 'next/link'
+import { useState } from 'react'
+
+import AllTippings from './AllTippings'
 
 export const GET_USER_TIPPINGS_QUERY = gql`
   query GetUserTippings($username: String!) {
@@ -33,6 +37,7 @@ interface Props {
 }
 
 const Tippings: React.FC<Props> = ({ user }) => {
+  const [showTippingsModal, setShowTippingsModal] = useState<boolean>(false)
   const { data, loading } = useQuery<GetUserTippingsQuery>(
     GET_USER_TIPPINGS_QUERY,
     { variables: { username: user?.username } }
@@ -60,9 +65,9 @@ const Tippings: React.FC<Props> = ({ user }) => {
       <div className="space-y-2">
         <div className="font-bold">Tippings</div>
         <div className="flex flex-wrap gap-1.5 w-3/4">
-          <div className="shimmer h-9 w-9 rounded-lg" />
-          <div className="shimmer h-9 w-9 rounded-lg" />
-          <div className="shimmer h-9 w-9 rounded-lg" />
+          <div className="shimmer h-9 w-9 rounded-full" />
+          <div className="shimmer h-9 w-9 rounded-full" />
+          <div className="shimmer h-9 w-9 rounded-full" />
         </div>
       </div>
     )
@@ -74,7 +79,21 @@ const Tippings: React.FC<Props> = ({ user }) => {
         {tippings?.map((tip) => (
           <User user={tip?.dispatcher as User} key={user?.id} />
         ))}
+        <button
+          className="rounded-full h-9 w-9 flex items-center justify-center text-sm bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+          onClick={() => setShowTippingsModal(!showTippingsModal)}
+        >
+          +5
+        </button>
       </div>
+      <Modal
+        title="All Tippings"
+        size="md"
+        show={showTippingsModal}
+        onClose={() => setShowTippingsModal(!showTippingsModal)}
+      >
+        <AllTippings />
+      </Modal>
     </div>
   )
 }
