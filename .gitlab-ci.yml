@@ -61,7 +61,6 @@ typecheck:
 #   script:
 #     - yarn prisma:migrate
 #     - yarn prisma:seed
-#     - yarn prisma:testseed
 #     - npx playwright test --list
 #     - npx playwright test
 
@@ -108,7 +107,6 @@ seed:
     DATABASE_URL: $PROD_DATABASE_URL
   script:
     - yarn prisma:seed
-    - yarn prisma:testseed
   only:
     - main
   when: manual
