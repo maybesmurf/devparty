@@ -80,12 +80,12 @@ const Tippings: React.FC<Props> = ({ user }) => {
         {tippings?.map((tip) => (
           <User user={tip?.dispatcher as User} key={user?.id} />
         ))}
-        {(data?.user?.receivedTips?.totalCount as number) > 1 && (
+        {(data?.user?.receivedTips?.totalCount as number) > 10 && (
           <button
             className="rounded-full h-9 w-9 flex items-center justify-center text-sm bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
             onClick={() => setShowTippingsModal(!showTippingsModal)}
           >
-            +{(data?.user?.receivedTips?.totalCount as number) - 1}
+            +{(data?.user?.receivedTips?.totalCount as number) - 10}
           </button>
         )}
       </div>
