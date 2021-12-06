@@ -28,11 +28,11 @@ import TXProcessing from './Processing'
 
 interface Props {
   tier: TipTier
-  address: string
+  tipaddress: string
   eth: number
 }
 
-const Tip: React.FC<Props> = ({ tier, address, eth }) => {
+const Tip: React.FC<Props> = ({ tier, tipaddress, eth }) => {
   const { currentUser } = useContext(AppContext)
   const [showTxModal, setShowTxModal] = useState<boolean>(false)
   const [progressStatus, setProgressStatus] = useState<
@@ -85,10 +85,17 @@ const Tip: React.FC<Props> = ({ tier, address, eth }) => {
           address
         ])
 
+      // Self address check
+      if (address === tipaddress) {
+        setShowTxModal(false)
+        setProgressStatus('NOTSTARTED')
+        return toast.error("You can't tip to the same address!")
+      }
+
       // Tip the user
       setProgressStatusText('Please confirm the transaction in wallet')
       const transaction = await signer.sendTransaction({
-        to: address,
+        to: tipaddress,
         value: utils.parseEther(
           ['matic', 'maticmum'].includes(network)
             ? tier?.amount?.toString()

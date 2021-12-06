@@ -37,7 +37,7 @@ const SingleTier: React.FC<Props> = ({ tier, address, ethPrice }) => {
       </div>
       <Tip
         tier={tier}
-        address={address}
+        tipaddress={address}
         eth={ethPrice && ((tier?.amount / parseInt(ethPrice)) as any)}
       />
     </div>
