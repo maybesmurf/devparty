@@ -30,11 +30,6 @@ export const tipUser = async (
   }
 
   try {
-    db.tipTier.update({
-      where: { id: input.tierId },
-      data: { tip: { update: { tippedAmount: { increment: input.amount } } } }
-    })
-
     return await db.tipping.create({
       ...query,
       data: {

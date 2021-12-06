@@ -24,7 +24,6 @@ const TipUserInput = builder.inputType('TipUserInput', {
     dispatcherAddress: t.string(),
     receiverAddress: t.string(),
     txHash: t.string(),
-    amount: t.int(),
     tierId: t.id({ validate: { uuid: true } }),
     userId: t.id({ validate: { uuid: true } })
   })

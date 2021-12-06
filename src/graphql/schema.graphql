@@ -810,7 +810,6 @@ type Tip {
   id: ID!
   paypal: String
   tiers(after: String, before: String, first: Int, last: Int): TipTiersConnection!
-  tippedAmount: Int
   user: User!
 }
 
@@ -835,7 +834,6 @@ type TipTiersConnectionEdge {
 }
 
 input TipUserInput {
-  amount: Int!
   dispatcherAddress: String!
   nonce: String!
   receiverAddress: String!
