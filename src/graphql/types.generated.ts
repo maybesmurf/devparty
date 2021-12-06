@@ -1306,6 +1306,7 @@ export type Tip = {
   id: Scalars['ID']
   paypal?: Maybe<Scalars['String']>
   tiers: TipTiersConnection
+  tippedAmount?: Maybe<Scalars['Int']>
   user: User
 }
 
@@ -1340,6 +1341,7 @@ export type TipTiersConnectionEdge = {
 }
 
 export type TipUserInput = {
+  amount: Scalars['Int']
   dispatcherAddress: Scalars['String']
   nonce: Scalars['String']
   receiverAddress: Scalars['String']

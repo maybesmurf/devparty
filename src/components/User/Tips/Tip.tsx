@@ -110,6 +110,7 @@ const Tip: React.FC<Props> = ({ user, tier, tipaddress, eth }) => {
             signature: signature as string,
             nonce: data?.nonce,
             txHash: transaction.hash,
+            amount: tier?.amount,
             tierId: tier?.id,
             receiverAddress: address,
             dispatcherAddress: transaction.from,

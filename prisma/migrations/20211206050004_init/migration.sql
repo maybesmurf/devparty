@@ -98,6 +98,7 @@ CREATE TABLE `tips` (
     `buymeacoffee` VARCHAR(32) NULL,
     `bitcoin` VARCHAR(64) NULL,
     `ethereum` VARCHAR(64) NULL,
+    `tippedAmount` INTEGER NOT NULL DEFAULT 0,
     `userId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `tips_userId_key`(`userId`),
@@ -122,7 +123,6 @@ CREATE TABLE `tippings` (
     `dispatcherAddress` VARCHAR(191) NOT NULL,
     `receiverAddress` VARCHAR(191) NOT NULL,
     `txHash` VARCHAR(191) NOT NULL,
-    `totalTips` BIGINT NOT NULL DEFAULT 0,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `tierId` VARCHAR(191) NOT NULL,
     `receiverId` VARCHAR(191) NOT NULL,

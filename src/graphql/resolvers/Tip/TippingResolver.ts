@@ -9,7 +9,6 @@ builder.prismaObject('Tipping', {
     dispatcherAddress: t.exposeString('dispatcherAddress'),
     receiverAddress: t.exposeString('receiverAddress'),
     txHash: t.exposeString('txHash'),
-    totalTips: t.exposeInt('totalTips'),
 
     // Relations
     tier: t.relation('tier'),
@@ -25,6 +24,7 @@ const TipUserInput = builder.inputType('TipUserInput', {
     dispatcherAddress: t.string(),
     receiverAddress: t.string(),
     txHash: t.string(),
+    amount: t.int(),
     tierId: t.id({ validate: { uuid: true } }),
     userId: t.id({ validate: { uuid: true } })
   })

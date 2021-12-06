@@ -12,6 +12,7 @@ builder.prismaObject('Tip', {
     buymeacoffee: t.exposeString('buymeacoffee', { nullable: true }),
     bitcoin: t.exposeString('bitcoin', { nullable: true }),
     ethereum: t.exposeString('ethereum', { nullable: true }),
+    tippedAmount: t.exposeInt('tippedAmount'),
 
     // Relations
     user: t.relation('user'),
