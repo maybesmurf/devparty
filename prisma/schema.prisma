@@ -193,6 +193,7 @@ model Tipping {
   dispatcherAddress String
   receiverAddress   String
   txHash            String
+  totalTips         BigInt @default(0)
 
   // Timestamps
   createdAt DateTime @default(now())
