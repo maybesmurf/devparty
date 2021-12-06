@@ -9,6 +9,7 @@ builder.prismaObject('Tipping', {
     dispatcherAddress: t.exposeString('dispatcherAddress'),
     receiverAddress: t.exposeString('receiverAddress'),
     txHash: t.exposeString('txHash'),
+    totalTips: t.exposeInt('totalTips'),
 
     // Relations
     tier: t.relation('tier'),
