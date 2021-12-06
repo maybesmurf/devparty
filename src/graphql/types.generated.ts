@@ -4139,18 +4139,18 @@ export type GetTopicQuery = {
   }
 }
 
-export type GetFollowersQueryVariables = Exact<{
+export type GetTippingsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>
   username: Scalars['String']
 }>
 
-export type GetFollowersQuery = {
+export type GetTippingsQuery = {
   __typename?: 'Query'
   user?:
     | {
         __typename?: 'User'
-        followers: {
-          __typename?: 'UserFollowersConnection'
+        receivedTips: {
+          __typename?: 'UserReceivedTipsConnection'
           totalCount: number
           pageInfo: {
             __typename?: 'PageInfo'
@@ -4159,25 +4159,28 @@ export type GetFollowersQuery = {
           }
           edges: Array<
             | {
-                __typename?: 'UserFollowersConnectionEdge'
+                __typename?: 'UserReceivedTipsConnectionEdge'
                 node: {
-                  __typename?: 'User'
+                  __typename?: 'Tipping'
                   id: string
-                  username: string
-                  isVerified: boolean
-                  isFollowing: boolean
-                  hasFollowed: boolean
-                  profile: {
-                    __typename?: 'Profile'
-                    id: string
-                    name: string
-                    avatar: string
-                    bio?: string | null | undefined
+                  dispatcher: {
+                    __typename?: 'User'
+                    username: string
+                    isVerified: boolean
+                    isFollowing: boolean
+                    hasFollowed: boolean
+                    profile: {
+                      __typename?: 'Profile'
+                      id: string
+                      name: string
+                      avatar: string
+                      bio?: string | null | undefined
+                    }
+                    status?:
+                      | { __typename?: 'Status'; emoji: string; text: string }
+                      | null
+                      | undefined
                   }
-                  status?:
-                    | { __typename?: 'Status'; emoji: string; text: string }
-                    | null
-                    | undefined
                 }
               }
             | null
@@ -4526,6 +4529,56 @@ export type GetUserFeedQuery = {
                         tokenId: string
                         network: string
                       }
+                    | null
+                    | undefined
+                }
+              }
+            | null
+            | undefined
+          >
+        }
+      }
+    | null
+    | undefined
+}
+
+export type GetFollowersQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>
+  username: Scalars['String']
+}>
+
+export type GetFollowersQuery = {
+  __typename?: 'Query'
+  user?:
+    | {
+        __typename?: 'User'
+        followers: {
+          __typename?: 'UserFollowersConnection'
+          totalCount: number
+          pageInfo: {
+            __typename?: 'PageInfo'
+            endCursor?: string | null | undefined
+            hasNextPage: boolean
+          }
+          edges: Array<
+            | {
+                __typename?: 'UserFollowersConnectionEdge'
+                node: {
+                  __typename?: 'User'
+                  id: string
+                  username: string
+                  isVerified: boolean
+                  isFollowing: boolean
+                  hasFollowed: boolean
+                  profile: {
+                    __typename?: 'Profile'
+                    id: string
+                    name: string
+                    avatar: string
+                    bio?: string | null | undefined
+                  }
+                  status?:
+                    | { __typename?: 'Status'; emoji: string; text: string }
                     | null
                     | undefined
                 }
@@ -5115,6 +5168,7 @@ export type GetUserTippingsQuery = {
         id: string
         receivedTips: {
           __typename?: 'UserReceivedTipsConnection'
+          totalCount: number
           edges: Array<
             | {
                 __typename?: 'UserReceivedTipsConnectionEdge'
