@@ -121,7 +121,8 @@ builder.prismaObject('User', {
     }),
     receivedTips: t.relatedConnection('receivedTips', {
       cursor: 'id',
-      totalCount: true
+      totalCount: true,
+      query: () => ({ distinct: ['dispatcherId'] })
     }),
     ownedProducts: t.relatedConnection('ownedProducts', {
       cursor: 'id',
