@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `users` (
+CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
     `username` VARCHAR(64) NOT NULL,
     `email` VARCHAR(191) NULL,
@@ -13,13 +13,13 @@ CREATE TABLE `users` (
     `updatedAt` DATETIME(3) NOT NULL,
     `featuredAt` DATETIME(3) NULL,
 
-    UNIQUE INDEX `users_username_key`(`username`),
-    UNIQUE INDEX `users_email_key`(`email`),
+    UNIQUE INDEX `User_username_key`(`username`),
+    UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `sessions` (
+CREATE TABLE `Session` (
     `id` VARCHAR(191) NOT NULL,
     `isStaff` BOOLEAN NOT NULL DEFAULT false,
     `masquerading` BOOLEAN NOT NULL DEFAULT false,
@@ -33,7 +33,7 @@ CREATE TABLE `sessions` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `profiles` (
+CREATE TABLE `Profile` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `avatar` VARCHAR(191) NOT NULL,
@@ -49,23 +49,23 @@ CREATE TABLE `profiles` (
     `readme` TEXT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `profiles_userId_key`(`userId`),
+    UNIQUE INDEX `Profile_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `status` (
+CREATE TABLE `Status` (
     `id` VARCHAR(191) NOT NULL,
     `emoji` VARCHAR(191) NOT NULL,
     `text` VARCHAR(64) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `status_userId_key`(`userId`),
+    UNIQUE INDEX `Status_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `pro` (
+CREATE TABLE `Pro` (
     `id` VARCHAR(191) NOT NULL,
     `fromAddress` VARCHAR(191) NOT NULL,
     `txHash` VARCHAR(191) NOT NULL,
@@ -74,23 +74,23 @@ CREATE TABLE `pro` (
     `endsAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `pro_userId_key`(`userId`),
+    UNIQUE INDEX `Pro_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `invites` (
+CREATE TABLE `Invite` (
     `id` VARCHAR(191) NOT NULL,
     `code` VARCHAR(191) NULL,
     `usedTimes` INTEGER NOT NULL DEFAULT 0,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `invites_userId_key`(`userId`),
+    UNIQUE INDEX `Invite_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `tips` (
+CREATE TABLE `Tip` (
     `id` VARCHAR(191) NOT NULL,
     `cash` VARCHAR(32) NULL,
     `paypal` VARCHAR(32) NULL,
@@ -100,12 +100,12 @@ CREATE TABLE `tips` (
     `ethereum` VARCHAR(64) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `tips_userId_key`(`userId`),
+    UNIQUE INDEX `Tip_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `tip_tiers` (
+CREATE TABLE `TipTier` (
     `id` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
     `name` VARCHAR(64) NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE `tip_tiers` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `tippings` (
+CREATE TABLE `Tipping` (
     `id` VARCHAR(191) NOT NULL,
     `dispatcherAddress` VARCHAR(191) NOT NULL,
     `receiverAddress` VARCHAR(191) NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE `tippings` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `posts` (
+CREATE TABLE `Post` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(280) NULL,
     `body` TEXT NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `posts` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `attachments` (
+CREATE TABLE `Attachment` (
     `id` VARCHAR(191) NOT NULL,
     `index` INTEGER NOT NULL,
     `type` VARCHAR(191) NOT NULL,
@@ -161,28 +161,28 @@ CREATE TABLE `attachments` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `nfts` (
+CREATE TABLE `NFT` (
     `id` VARCHAR(191) NOT NULL,
     `tokenId` VARCHAR(191) NOT NULL,
     `address` VARCHAR(191) NOT NULL,
     `network` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `nfts_postId_key`(`postId`),
+    UNIQUE INDEX `NFT_postId_key`(`postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `poll` (
+CREATE TABLE `Poll` (
     `id` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `poll_postId_key`(`postId`),
+    UNIQUE INDEX `Poll_postId_key`(`postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `poll_answers` (
+CREATE TABLE `PollAnswer` (
     `id` VARCHAR(191) NOT NULL,
     `index` INTEGER NOT NULL,
     `title` VARCHAR(64) NOT NULL,
@@ -193,18 +193,18 @@ CREATE TABLE `poll_answers` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `bookmarks` (
+CREATE TABLE `Bookmark` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `postId` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `bookmarks_userId_postId_key`(`userId`, `postId`),
+    UNIQUE INDEX `Bookmark_userId_postId_key`(`userId`, `postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `post_topics` (
+CREATE TABLE `PostTopic` (
     `id` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191) NULL,
     `topicId` VARCHAR(191) NULL,
@@ -213,29 +213,29 @@ CREATE TABLE `post_topics` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `topics` (
+CREATE TABLE `Topic` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(64) NOT NULL,
     `image` VARCHAR(191) NULL,
     `description` VARCHAR(280) NULL,
     `featuredAt` DATETIME(3) NULL,
 
-    UNIQUE INDEX `topics_name_key`(`name`),
+    UNIQUE INDEX `Topic_name_key`(`name`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `likes` (
+CREATE TABLE `Like` (
     `id` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `likes_userId_postId_key`(`userId`, `postId`),
+    UNIQUE INDEX `Like_userId_postId_key`(`userId`, `postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `products` (
+CREATE TABLE `Product` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(64) NOT NULL,
     `slug` VARCHAR(32) NOT NULL,
@@ -251,12 +251,12 @@ CREATE TABLE `products` (
     `updatedAt` DATETIME(3) NOT NULL,
     `ownerId` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `products_slug_key`(`slug`),
+    UNIQUE INDEX `Product_slug_key`(`slug`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `communities` (
+CREATE TABLE `Community` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(64) NOT NULL,
     `slug` VARCHAR(32) NOT NULL,
@@ -266,12 +266,12 @@ CREATE TABLE `communities` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `ownerId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `communities_slug_key`(`slug`),
+    UNIQUE INDEX `Community_slug_key`(`slug`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `community_rules` (
+CREATE TABLE `Rule` (
     `id` VARCHAR(191) NOT NULL,
     `index` INTEGER NOT NULL,
     `name` VARCHAR(64) NOT NULL,
@@ -282,7 +282,7 @@ CREATE TABLE `community_rules` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `badges` (
+CREATE TABLE `Badge` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(64) NOT NULL,
     `image` VARCHAR(191) NOT NULL,
@@ -293,7 +293,7 @@ CREATE TABLE `badges` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `notifications` (
+CREATE TABLE `Notification` (
     `id` VARCHAR(191) NOT NULL,
     `message` VARCHAR(280) NULL,
     `isRead` BOOLEAN NOT NULL DEFAULT false,
@@ -307,12 +307,12 @@ CREATE TABLE `notifications` (
     `productId` VARCHAR(191) NULL,
     `postId` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `notifications_entityId_key`(`entityId`),
+    UNIQUE INDEX `Notification_entityId_key`(`entityId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `integrations` (
+CREATE TABLE `Integration` (
     `id` VARCHAR(191) NOT NULL,
     `wakatimeAPIKey` VARCHAR(191) NULL,
     `spotifyRefreshToken` VARCHAR(191) NULL,
@@ -322,14 +322,14 @@ CREATE TABLE `integrations` (
     `ethNonce` VARCHAR(6) NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `integrations_githubId_key`(`githubId`),
-    UNIQUE INDEX `integrations_ethAddress_key`(`ethAddress`),
-    UNIQUE INDEX `integrations_userId_key`(`userId`),
+    UNIQUE INDEX `Integration_githubId_key`(`githubId`),
+    UNIQUE INDEX `Integration_ethAddress_key`(`ethAddress`),
+    UNIQUE INDEX `Integration_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `logs` (
+CREATE TABLE `Log` (
     `id` VARCHAR(191) NOT NULL,
     `action` ENUM('LOGIN', 'LOGOUT', 'SETTINGS_UPDATE', 'PASSWORD_UPDATE') NOT NULL,
     `entityId` VARCHAR(191) NULL,
@@ -340,7 +340,7 @@ CREATE TABLE `logs` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `reports` (
+CREATE TABLE `Report` (
     `id` VARCHAR(191) NOT NULL,
     `message` TEXT NOT NULL,
     `type` ENUM('POST', 'USER', 'PRODUCT', 'COMMUNITY') NOT NULL,
