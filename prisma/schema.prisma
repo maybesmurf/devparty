@@ -61,6 +61,9 @@ model User {
   dispatchedNotification Notification[] @relation("notificationDispatcher")
   receivedTips           Tipping[]      @relation("tipReceiver")
   dispatchedTips         Tipping[]      @relation("tipDispatcher")
+
+  // Attributes
+  @@map("users")
 }
 
 model Session {
@@ -77,6 +80,9 @@ model Session {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+
+  // Attributes
+  @@map("sessions")
 }
 
 model Profile {
@@ -97,6 +103,9 @@ model Profile {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+
+  // Attributes
+  @@map("profiles")
 }
 
 model Status {
@@ -107,6 +116,9 @@ model Status {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+
+  // Attributes
+  @@map("status")
 }
 
 model Pro {
@@ -122,6 +134,9 @@ model Pro {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+
+  // Attributes
+  @@map("pro")
 }
 
 model Invite {
@@ -132,6 +147,9 @@ model Invite {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+
+  // Attributes
+  @@map("invites")
 }
 
 model Tip {
@@ -147,6 +165,9 @@ model Tip {
   user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String    @unique
   tiers  TipTier[]
+
+  // Attributes
+  @@map("tips")
 }
 
 model TipTier {
@@ -162,6 +183,9 @@ model TipTier {
   tip      Tip       @relation(fields: [tipId], references: [id], onDelete: Cascade)
   tipId    String
   tippings Tipping[]
+
+  // Attributes
+  @@map("tip_tiers")
 }
 
 model Tipping {
@@ -180,6 +204,9 @@ model Tipping {
   receiverId   String
   dispatcher   User    @relation("tipDispatcher", fields: [dispatcherId], references: [id], onDelete: Cascade)
   dispatcherId String
+
+  // Attributes
+  @@map("tippings")
 }
 
 model Post {
@@ -213,6 +240,9 @@ model Post {
   replies      Post[]         @relation("replies")
   notification Notification[] @relation("post")
   report       Report[]       @relation("report")
+
+  // Attributes
+  @@map("posts")
 }
 
 model Attachment {
@@ -224,6 +254,9 @@ model Attachment {
   // Relations
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
+
+  // Attributes
+  @@map("attachments")
 }
 
 model NFT {
@@ -235,6 +268,9 @@ model NFT {
   // Relations
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String @unique
+
+  // Attributes
+  @@map("nfts")
 }
 
 model Poll {
@@ -244,6 +280,9 @@ model Poll {
   post    Post?        @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId  String?      @unique
   answers PollAnswer[]
+
+  // Attributes
+  @@map("poll")
 }
 
 model PollAnswer {
@@ -258,6 +297,9 @@ model PollAnswer {
 
   // Timestamps
   createdAt DateTime @default(now())
+
+  // Attributes
+  @@map("poll_answers")
 }
 
 model Bookmark {
@@ -274,6 +316,7 @@ model Bookmark {
 
   // Attributes
   @@unique([userId, postId], name: "bookmarkIdentifier")
+  @@map("bookmarks")
 }
 
 model PostTopic {
@@ -284,6 +327,9 @@ model PostTopic {
   postId  String?
   topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId String?
+
+  // Attributes
+  @@map("post_topics")
 }
 
 model Topic {
@@ -298,6 +344,9 @@ model Topic {
   // Relations
   posts    PostTopic[]
   starrers User[]
+
+  // Attributes
+  @@map("topics")
 }
 
 model Like {
@@ -312,6 +361,7 @@ model Like {
 
   // Attributes
   @@unique([userId, postId], name: "likeIdentifier")
+  @@map("likes")
 }
 
 model Product {
@@ -339,6 +389,9 @@ model Product {
   subscribers  User[]
   posts        Post[]
   notification Notification[] @relation("product")
+
+  // Attributes
+  @@map("products")
 }
 
 model Community {
@@ -359,6 +412,9 @@ model Community {
   members    User[] @relation("communityMember")
   posts      Post[]
   rules      Rule[]
+
+  // Attributes
+  @@map("communities")
 }
 
 model Rule {
@@ -370,6 +426,9 @@ model Rule {
   // Relations
   community   Community? @relation(fields: [communityId], references: [id])
   communityId String?
+
+  // Attributes
+  @@map("community_rules")
 }
 
 model Badge {
@@ -383,6 +442,9 @@ model Badge {
 
   // Relations
   users User[]
+
+  // Attributes
+  @@map("badges")
 }
 
 model Notification {
@@ -407,6 +469,9 @@ model Notification {
   productId    String?
   post         Post?    @relation("post", fields: [postId], references: [id], onDelete: Cascade)
   postId       String?
+
+  // Attributes
+  @@map("notifications")
 }
 
 model Integration {
@@ -421,6 +486,9 @@ model Integration {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+
+  // Attributes
+  @@map("integrations")
 }
 
 model Log {
@@ -434,6 +502,9 @@ model Log {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: SetNull)
   userId String
+
+  // Attributes
+  @@map("logs")
 }
 
 model Report {
@@ -449,6 +520,9 @@ model Report {
   userId String
   post   Post?   @relation("report", fields: [postId], references: [id], onDelete: Cascade)
   postId String?
+
+  // Attributes
+  @@map("reports")
 }
 
 // Types
