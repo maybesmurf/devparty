@@ -27,7 +27,7 @@ const MarkAsRead: React.FC<Props> = ({ notification }) => {
       }
     `,
     {
-      refetchQueries: [{ query: GET_NOTIFICATIONS_QUERY }],
+      refetchQueries: [GET_NOTIFICATIONS_QUERY, 'GetNotifications'],
       onCompleted() {
         toast.success('Notification marked as read!')
       }
