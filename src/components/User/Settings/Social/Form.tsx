@@ -32,7 +32,7 @@ const editUserSocialSchema = object({
     .nullable(),
   discord: string()
     .max(50, { message: '👤 Username should be within 50 characters' })
-    .regex(/^[a-z0-9_\.]+$/, { message: '👤 Invalid Discord username' })
+    .regex(/^.{3,32}#[0-9]{4}$/, { message: '👤 Invalid Discord username' })
     .nullable()
 })
 
