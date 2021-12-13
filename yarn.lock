@@ -1582,10 +1582,10 @@
     "@ethersproject/properties" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
 
-"@giraphql/core@^2.19.1":
-  version "2.19.1"
-  resolved "https://registry.yarnpkg.com/@giraphql/core/-/core-2.19.1.tgz#65baf0079d96b05fb7183f37592854027224c4a1"
-  integrity sha512-CFJr6nOe+Pd6Sx6pPn3vztNCQoGNpyXbdKC1W6C1fZ+OaQbTW0ZwDJIusOWIFlUVZ8P78FigA4N9ODAgS895fQ==
+"@giraphql/core@^2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@giraphql/core/-/core-2.20.0.tgz#250de7d2f6e5881984d16032f83a512e2b734e6f"
+  integrity sha512-8/GmSEpFjj2p3uDNuzBuavZ5jC3JHoqRuuucL74ZDtf60LiAuQlWDB0+QA/KWjT5hPOz5VW06sU8ZUyk6PceYA==
 
 "@giraphql/plugin-directives@^2.10.2":
   version "2.10.2"
