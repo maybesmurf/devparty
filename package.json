@@ -44,7 +44,7 @@
     "ethers": "^5.5.2",
     "framer-motion": "^5.4.5",
     "graphql": "16.1.0",
-    "graphql-helix": "1.10.3",
+    "graphql-helix": "1.11.0",
     "hash-wasm": "^4.9.0",
     "ioredis": "^4.28.2",
     "ipfs-http-client": "^54.0.2",
