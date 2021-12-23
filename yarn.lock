@@ -1592,12 +1592,12 @@
   resolved "https://registry.yarnpkg.com/@giraphql/plugin-directives/-/plugin-directives-2.10.2.tgz#f3295bdb67c031a55d0913247bf083ccf7627439"
   integrity sha512-0RWzGXSLqo6odaxI5l9j6OUHGoOLpWnk0lnCfd+S8Ow7WprMBhcp+obVKyzdo3fnHmsRks4Kw5Msgx8+HbTeJA==
 
-"@giraphql/plugin-prisma@^0.13.2":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.13.2.tgz#8638009a1afcbe11151b37a44c300f3399b71655"
-  integrity sha512-x1VEyCF4KwZ85wTOeJoJOnaepTQxKtgL6/KeQBbO0z4h2MrEyGn0PzYqgvkf5dXgP6t8NBghH0tXoruvXJ/mzg==
+"@giraphql/plugin-prisma@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-prisma/-/plugin-prisma-0.14.0.tgz#9e6b7f72d18dffc7b4b34328c58466a6966dbc49"
+  integrity sha512-XdjwRnDbIbvL0ImOEGytrf6f2CegQPzSPVmByH8feMN+5qEba0dx8bIspnRJ2WcTOV0mjVmmaeSeg31Nmj8sig==
   dependencies:
-    "@prisma/generator-helper" "^3.5.0"
+    "@prisma/generator-helper" "^3.6.0"
 
 "@giraphql/plugin-relay@^2.18.3":
   version "2.18.3"
@@ -2508,7 +2508,7 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e.tgz#1873885836294060239f8a887452fd429dc03ae1"
   integrity sha512-MqZUrxuLlIbjB3wu8LrRJOKcvR4k3dunKoI4Q2bPfAwLQY0XlpsLZ3TRVW1c32ooVk939p6iGNkaCUo63Et36g==
 
-"@prisma/generator-helper@^3.5.0":
+"@prisma/generator-helper@^3.6.0":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@prisma/generator-helper/-/generator-helper-3.6.0.tgz#38ade00bd9dc25a252bdb0ea0dc83d49533a2585"
   integrity sha512-/mwQvnTbuiZjVmLtCBuOK+Tz2+HLYjqOCCvsEH0LMxHQBtzVSG4/LhVHMYxs/4du8TdgpnguMh4wtRWJ9Ow/DQ==
