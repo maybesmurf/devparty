@@ -53,17 +53,6 @@ typecheck:
     - yarn generate
     - yarn typecheck
 
-# test:
-#   stage: test
-#   image: mcr.microsoft.com/playwright:focal
-#   variables:
-#     DATABASE_URL: 'mysql://root:root@mysql:3306/devparty'
-#   script:
-#     - yarn prisma:migrate
-#     - yarn prisma:seed
-#     - npx playwright test --list
-#     - npx playwright test
-
 hardhat-test:
   stage: test
   script:
@@ -98,17 +87,6 @@ migrate:
     DATABASE_URL: $DEV_DATABASE_URL
   script:
     - npx prisma migrate reset --force
-  when: manual
-
-# Remove after Devparty release
-seed:
-  stage: deploy
-  variables:
-    DATABASE_URL: $PROD_DATABASE_URL
-  script:
-    - yarn prisma:seed
-  only:
-    - main
   when: manual
 
 housekeeping:
