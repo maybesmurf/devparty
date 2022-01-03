@@ -105,7 +105,7 @@
     "hardhat": "^2.7.1",
     "hplipsum": "^1.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.4",
+    "lint-staged": "^12.1.5",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "prisma": "3.5.0",
