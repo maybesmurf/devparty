@@ -51,7 +51,7 @@
     "linkify-plugin-hashtag": "^3.0.4",
     "linkify-plugin-mention": "^3.0.4",
     "linkify-react": "^3.0.4",
-    "linkifyjs": "^3.0.4",
+    "linkifyjs": "^3.0.5",
     "markdown-to-jsx": "^7.1.5",
     "next": "^12.0.7",
     "next-iron-session": "^4.2.0",
