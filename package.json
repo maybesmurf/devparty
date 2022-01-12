@@ -26,7 +26,7 @@
     "@giraphql/plugin-directives": "^2.10.2",
     "@giraphql/plugin-prisma": "^0.14.0",
     "@giraphql/plugin-relay": "^2.18.3",
-    "@giraphql/plugin-scope-auth": "^2.14.0",
+    "@giraphql/plugin-scope-auth": "^2.15.0",
     "@giraphql/plugin-simple-objects": "^2.12.1",
     "@giraphql/plugin-validation": "^2.16.0",
     "@headlessui/react": "^1.4.2",
