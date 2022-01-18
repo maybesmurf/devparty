@@ -31,7 +31,7 @@
     "@giraphql/plugin-validation": "^2.16.0",
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
-    "@hookform/resolvers": "^2.8.5",
+    "@hookform/resolvers": "^2.8.7",
     "@prisma/client": "3.5.0",
     "@rehooks/online-status": "^1.1.2",
     "@tailwindcss/line-clamp": "^0.3.1",
