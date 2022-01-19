@@ -79,7 +79,7 @@
     "@graphql-codegen/typescript": "^2.4.0",
     "@graphql-codegen/typescript-operations": "^2.2.2",
     "@nomiclabs/hardhat-ethers": "^2.0.3",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.2",
     "@openzeppelin/contracts": "^4.4.2",
     "@playwright/test": "^1.17.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
