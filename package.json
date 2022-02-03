@@ -60,7 +60,7 @@
     "nextjs-progressbar": "^0.0.13",
     "octokit": "^1.7.1",
     "react": "^17.0.2",
-    "react-cool-inview": "^2.0.8",
+    "react-cool-inview": "^2.0.9",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
     "react-hook-form": "7.23.0",
