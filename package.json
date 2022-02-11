@@ -102,7 +102,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "faker": "^5.5.3",
-    "hardhat": "^2.8.2",
+    "hardhat": "^2.8.4",
     "hplipsum": "^1.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.3",
