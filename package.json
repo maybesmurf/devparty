@@ -29,7 +29,7 @@
     "@giraphql/plugin-scope-auth": "^2.15.0",
     "@giraphql/plugin-simple-objects": "^2.12.1",
     "@giraphql/plugin-validation": "^2.16.0",
-    "@headlessui/react": "^1.4.2",
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@hookform/resolvers": "^2.8.5",
     "@prisma/client": "3.5.0",
