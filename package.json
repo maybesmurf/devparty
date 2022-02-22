@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
-    "@davatar/react": "^1.8.1",
+    "@davatar/react": "^1.9.0",
     "@giraphql/core": "^2.22.0",
     "@giraphql/plugin-directives": "^2.10.2",
     "@giraphql/plugin-prisma": "^0.14.0",
