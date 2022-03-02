@@ -30,7 +30,7 @@
     "@giraphql/plugin-simple-objects": "^2.12.1",
     "@giraphql/plugin-validation": "^2.16.0",
     "@headlessui/react": "^1.4.2",
-    "@heroicons/react": "^1.0.5",
+    "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.8.5",
     "@prisma/client": "3.5.0",
     "@rehooks/online-status": "^1.1.2",
